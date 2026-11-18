@@ -25,6 +25,7 @@ import { sentenceMiddle } from './topics/sentence-middle';
 import { separableVerbs } from './topics/separable-verbs';
 import { tellingTime } from './topics/telling-time';
 import { twoWayPrepositions } from './topics/two-way-prepositions';
+import { weakNouns } from './topics/weak-nouns';
 import { wordOrder } from './topics/word-order';
 import { zuInfinitive } from './topics/zu-infinitive';
 import type { GameMode, Level, Topic } from './types';
@@ -47,6 +48,7 @@ export const TOPICS: readonly Topic[] = [
   prepositionsPlaceTime,
   tellingTime,
   // A2
+  weakNouns,
   adjectiveEndings,
   dativeVerbs,
   twoWayPrepositions,

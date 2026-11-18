@@ -29,6 +29,8 @@ export interface SessionResult {
   mode: GameMode | MixedMode;
   /** Daily mix only: the day it was played for (see dailyKey). */
   dailyDate?: string;
+  /** Blitz without the clock: its bests are kept apart from timed Blitz. */
+  untimed?: boolean;
   /** Grid rounds only: which table was played. */
   gridId?: string;
   /** Grid rounds only, and only when every cell was solved: time to complete. */

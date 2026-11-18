@@ -22,13 +22,24 @@ interface UseGameSessionOptions {
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   /** Builds the round's questions from current progress when the learner presses start. */
   buildItems: (progress: Progress) => SessionItem[];
+  /** Blitz without the clock: recorded under its own bests. */
+  untimed?: boolean;
+  /** Show each question's hint up front. */
+  autoHint?: boolean;
 }
 
 /**
  * Runs one game round. The result is recorded to progress in the same transition
  * that ends the round — not in an effect — so it is written exactly once.
  */
-export function useGameSession({ mode, topicId, modesByTopic, buildItems }: UseGameSessionOptions) {
+export function useGameSession({
+  mode,
+  topicId,
+  modesByTopic,
+  buildItems,
+  untimed = false,
+  autoHint = false,
+}: UseGameSessionOptions) {
   const [state, setState] = useState<GameState>(INITIAL_GAME_STATE);
   const [outcome, setOutcome] = useState<SessionOutcome | null>(null);
   const stateRef = useRef<GameState>(INITIAL_GAME_STATE);
@@ -45,6 +56,7 @@ export function useGameSession({ mode, topicId, modesByTopic, buildItems }: UseG
         const result = {
           ...toSessionResult(next, mode, topicId),
           ...(mode === 'daily' ? { dailyDate: dailyKey(new Date()) } : {}),
+          ...(mode === 'sort' && untimed ? { untimed: true } : {}),
         };
         const now = new Date().toISOString();
         let recorded: SessionOutcome | null = null;
@@ -55,14 +67,14 @@ export function useGameSession({ mode, topicId, modesByTopic, buildItems }: UseG
         setOutcome(recorded);
       }
     },
-    [mode, topicId, modesByTopic],
+    [mode, topicId, modesByTopic, untimed],
   );
 
   const start = useCallback(() => {
     setOutcome(null);
     stateRef.current = INITIAL_GAME_STATE;
-    dispatch({ type: 'start', items: buildItems(getSnapshot()) });
-  }, [buildItems, dispatch]);
+    dispatch({ type: 'start', items: buildItems(getSnapshot()), autoHint });
+  }, [buildItems, dispatch, autoHint]);
 
   const answer = useCallback(
     (isCorrect: boolean, given: string) => dispatch({ type: 'answer', isCorrect, given }),

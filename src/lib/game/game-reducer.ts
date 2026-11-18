@@ -4,6 +4,8 @@
 
 import type { GameMode, MixedMode } from '@/content/types';
 
+import { hintFor } from './hint';
+
 import {
   pointsForCorrect,
   pointsForHinted,
@@ -37,11 +39,13 @@ export interface GameState {
   bestCombo: number;
   /** A hint has been shown for the current question. */
   hinted: boolean;
+  /** Show each question's hint up front (an option in Settings). */
+  autoHint: boolean;
   last?: LastAnswer;
 }
 
 export type GameAction =
-  | { type: 'start'; items: SessionItem[] }
+  | { type: 'start'; items: SessionItem[]; autoHint?: boolean }
   | { type: 'answer'; isCorrect: boolean; given: string }
   | { type: 'hint' }
   | { type: 'next' }
@@ -57,7 +61,13 @@ export const INITIAL_GAME_STATE: GameState = {
   combo: 0,
   bestCombo: 0,
   hinted: false,
+  autoHint: false,
 };
+
+/** Whether a question starts with its hint showing: only if hints are up front and it has one. */
+function startsHinted(item: SessionItem | undefined, autoHint: boolean): boolean {
+  return autoHint && item !== undefined && hintFor(item.question) !== undefined;
+}
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
@@ -66,6 +76,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...INITIAL_GAME_STATE,
         items: action.items,
         phase: action.items.length > 0 ? 'playing' : 'finished',
+        autoHint: action.autoHint ?? false,
+        hinted: startsHinted(action.items[0], action.autoHint ?? false),
       };
 
     case 'hint':
@@ -110,7 +122,13 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.phase !== 'feedback') return state;
       const index = state.index + 1;
       if (index >= state.items.length) return { ...state, phase: 'finished' };
-      return { ...state, index, phase: 'playing', hinted: false, last: undefined };
+      return {
+        ...state,
+        index,
+        phase: 'playing',
+        hinted: startsHinted(state.items[index], state.autoHint),
+        last: undefined,
+      };
     }
 
     case 'finish':

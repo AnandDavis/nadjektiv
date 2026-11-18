@@ -70,7 +70,7 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
           </span>
           {question.after}
         </p>
-        <p className="mt-2 text-sm text-muted">{question.translation}</p>
+        <p className="translation mt-2 text-sm text-muted">{question.translation}</p>
       </div>
 
       <form id="typed-form" onSubmit={submit} className="flex flex-col gap-3">

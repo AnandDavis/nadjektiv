@@ -97,7 +97,8 @@ function requirementsFor(
     for (const mode of required) {
       requirements.push({
         label: { de: `${MODE_NAMES[mode]} spielen`, en: `Play ${MODE_NAMES[mode]}` },
-        isMet: Boolean(progress?.modes[mode]),
+        // Blitz counts as played with or without the clock.
+        isMet: Boolean(progress?.modes[mode] ?? (mode === 'sort' && progress?.modes.sortUntimed)),
       });
     }
   }

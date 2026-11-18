@@ -38,6 +38,8 @@ export const topicProgressSchema = z.object({
     // Added without a version bump: an optional key reads fine in older saves, and an
     // older cached app version drops it instead of rejecting the whole progress.
     type: modeBestSchema.optional(),
+    /** Untimed Blitz (an option), kept apart: a round without the clock isn't comparable. */
+    sortUntimed: modeBestSchema.optional(),
   }),
 });
 

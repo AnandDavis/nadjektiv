@@ -7,7 +7,9 @@ import { Ui } from '@/components/ui';
 
 import type { GameMode, Question, RoundMode, Topic } from '@/content/types';
 import { isMixedMode } from '@/lib/game/modes';
+import { GAME_CONFIG } from '@/config/game';
 import { useGameSession } from '@/hooks/useGameSession';
+import { useOption } from '@/hooks/useOption';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
 import { buildDailySession, dailyKey } from '@/lib/game/daily';
@@ -24,6 +26,7 @@ import {
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
+import { OPTIONS } from '@/lib/storage/options';
 
 import { FeedbackPanel } from './FeedbackPanel';
 import { GameHeader } from './GameHeader';
@@ -67,6 +70,10 @@ export function GameScreen(props: GameScreenProps) {
   const { mode, topics, title, modeName, description, exitHref, exitLabel } = props;
   const progress = useProgress();
   const topicId = isMixedMode(mode) ? undefined : topics[0]?.id;
+  const [blitzClock] = useOption(OPTIONS.blitzClock);
+  const [hintsOption] = useOption(OPTIONS.hints);
+  const [autoAdvance] = useOption(OPTIONS.autoAdvance);
+  const untimed = mode === 'sort' && blitzClock === 'untimed';
 
   const buildItems = useCallback(
     (current: Progress): SessionItem[] => {
@@ -81,9 +88,9 @@ export function GameScreen(props: GameScreenProps) {
           rng,
         );
       }
-      return buildTopicSession(topics[0], mode, current.questions, rng);
+      return buildTopicSession(topics[0], mode, current.questions, rng, { untimed });
     },
-    [mode, topics],
+    [mode, topics, untimed],
   );
 
   const { state, outcome, start, answer, next, finish, hint } = useGameSession({
@@ -91,16 +98,20 @@ export function GameScreen(props: GameScreenProps) {
     topicId,
     modesByTopic: props.modesByTopic,
     buildItems,
+    untimed,
+    autoHint: hintsOption === 'shown',
   });
   const item = currentItem(state);
-  const isTimed = mode === 'sort';
-  const hintText = item ? hintFor(item.question) : undefined;
+  const isTimed = mode === 'sort' && !untimed;
+  const hintText = item && hintsOption !== 'hidden' ? hintFor(item.question) : undefined;
 
   const isShowingFeedback = state.phase === 'feedback' && state.last !== undefined;
-  // A wrong answer always stops for its explanation (and, in Blitz, stops the clock);
-  // only a right answer in a timed round moves on by itself.
-  const isAutoAdvancing = isTimed && isShowingFeedback && state.last?.isCorrect === true;
+  // A wrong answer always stops for its explanation (and, in Blitz, stops the clock).
+  // A right answer moves on by itself in timed Blitz, or anywhere if the learner asked.
+  const isAutoAdvancing =
+    (isTimed || autoAdvance === 'on') && isShowingFeedback && state.last?.isCorrect === true;
   const isWaitingOnLearner = isShowingFeedback && !isAutoAdvancing;
+  const advanceMs = isTimed ? SORT_CORRECT_ADVANCE_MS : GAME_CONFIG.autoAdvanceMs;
 
   const nextRef = useRef(next);
   useEffect(() => {
@@ -108,9 +119,9 @@ export function GameScreen(props: GameScreenProps) {
   }, [next]);
   useEffect(() => {
     if (!isAutoAdvancing) return;
-    const id = window.setTimeout(() => nextRef.current(), SORT_CORRECT_ADVANCE_MS);
+    const id = window.setTimeout(() => nextRef.current(), advanceMs);
     return () => window.clearTimeout(id);
-  }, [isAutoAdvancing]);
+  }, [isAutoAdvancing, advanceMs]);
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -121,9 +132,15 @@ export function GameScreen(props: GameScreenProps) {
           <GameIntro
             title={title}
             modeName={modeName}
-            description={description}
+            description={
+              untimed
+                ? `${GAME_CONFIG.untimedSortLength} prompts and no clock: take your time over each one.`
+                : description
+            }
             best={
-              topicId && !isMixedMode(mode) ? progress?.topics[topicId]?.modes[mode] : undefined
+              topicId && !isMixedMode(mode)
+                ? progress?.topics[topicId]?.modes[untimed ? 'sortUntimed' : mode]
+                : undefined
             }
             isReady={progress !== null}
             shape={isMixedMode(mode) ? undefined : MODE_SHAPES[mode]}

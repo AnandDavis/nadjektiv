@@ -27,7 +27,7 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
           <p lang="de" className="text-xl leading-tight font-black break-words text-ink">
             {card.correct}
           </p>
-          {card.translation && <p className="text-sm text-muted">{card.translation}</p>}
+          {card.translation && <p className="translation text-sm text-muted">{card.translation}</p>}
         </div>
         {misses > 0 && (
           <Badge className="shrink-0">

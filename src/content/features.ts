@@ -69,6 +69,11 @@ export const FEATURES: readonly Feature[] = [
       'A round across all the topics you’ve played, starting with your “to revise” questions, then the ones you miss most.',
   },
   {
+    title: 'Settings that suit you',
+    description:
+      'Play Blitz without the clock, keep hints out of sight or always showing, move straight on after a right answer, make the text bigger, turn off movement, hide the English translations, or empty your revise list.',
+  },
+  {
     title: 'Works offline',
     description:
       'Add it to your home screen and use it anywhere, even without a connection. Your progress stays on your device.',

@@ -213,6 +213,46 @@ export const COPY = {
     themeSystem: { de: 'System', en: 'System' },
     themeLight: { de: 'Hell', en: 'Light' },
     themeDark: { de: 'Dunkel', en: 'Dark' },
+    playing: { de: 'Spielen', en: 'Playing' },
+    blitzClock: { de: 'Blitz-Uhr', en: 'Blitz clock' },
+    blitzTimed: { de: 'Mit Uhr', en: 'Timed' },
+    blitzUntimed: { de: 'Ohne Uhr', en: 'Untimed' },
+    hints: { de: 'Hinweise', en: 'Hints' },
+    hintsButton: { de: 'Auf Knopfdruck', en: 'On request' },
+    hintsShown: { de: 'Immer zeigen', en: 'Always show' },
+    hintsHidden: { de: 'Aus', en: 'Off' },
+    hintsHint: {
+      de: 'Ein Hinweis halbiert die Punkte und zählt nicht für Medaillen.',
+      en: 'A hint halves the points and doesn’t count towards medals.',
+    },
+    autoAdvance: { de: 'Nach einer richtigen Antwort', en: 'After a right answer' },
+    autoAdvanceOff: { de: 'Warten', en: 'Wait' },
+    autoAdvanceOn: { de: 'Weitergehen', en: 'Move on' },
+    autoAdvanceHint: {
+      de: 'Falsche Antworten werden immer erklärt, bevor es weitergeht.',
+      en: 'Wrong answers are always explained before you move on.',
+    },
+    textSize: { de: 'Textgröße', en: 'Text size' },
+    textNormal: { de: 'Normal', en: 'Normal' },
+    textLarge: { de: 'Groß', en: 'Large' },
+    textLarger: { de: 'Größer', en: 'Larger' },
+    motion: { de: 'Bewegung', en: 'Motion' },
+    motionSystem: { de: 'Wie das Gerät', en: 'Like my device' },
+    motionReduce: { de: 'Reduziert', en: 'Reduced' },
+    translations: { de: 'Englische Übersetzungen', en: 'English translations' },
+    translationsShown: { de: 'Zeigen', en: 'Show' },
+    translationsHidden: { de: 'Ausblenden', en: 'Hide' },
+    translationsHint: {
+      de: 'Ohne Englisch übst du noch mehr Deutsch. Regeln und Erklärungen bleiben auf Englisch.',
+      en: 'Without English you practise even more German. Rules and explanations stay in English.',
+    },
+    clearRevise: { de: 'Wiederholungsliste leeren', en: 'Empty the revise list' },
+    confirmClearRevise: {
+      de: 'Alle Fragen von der Wiederholungsliste entfernen? Dein übriger Fortschritt bleibt.',
+      en: 'Remove every question from the revise list? The rest of your progress stays.',
+    },
+    confirmClearReviseButton: { de: 'Ja, leeren', en: 'Yes, empty it' },
+    reviseCleared: { de: 'Wiederholungsliste geleert.', en: 'Revise list emptied.' },
     language: { de: 'Sprache der Oberfläche', en: 'Interface language' },
     languageHint: {
       de: 'Überschriften und Knöpfe. Die Grammatik bleibt auf Deutsch.',
@@ -263,4 +303,12 @@ export function dailyHint(length: number, hasProgress: boolean): Bilingual {
 /** "Gebaut von Nad in London" / "Built by Nad in London" */
 export function builtBy(name: string, place: string): Bilingual {
   return { de: `Gebaut von ${name} in ${place}`, en: `Built by ${name} in ${place}` };
+}
+
+/** "Ohne Uhr hat Blitz 20 Wörter …" with the configured round length. */
+export function untimedBlitzHint(length: number): Bilingual {
+  return {
+    de: `Ohne Uhr hat Blitz ${length} Wörter und eigene Rekorde.`,
+    en: `Untimed Blitz has ${length} words and its own bests.`,
+  };
 }

@@ -6,7 +6,10 @@ import { Card, SegmentedControl, Ui } from '@/components/ui';
 import { useTheme } from '@/hooks/useTheme';
 import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { COPY } from '@/lib/i18n/copy';
+import { OPTIONS } from '@/lib/storage/options';
 import type { ThemePreference, UiLanguage } from '@/lib/storage/preferences';
+
+import { OptionControl } from './OptionControl';
 
 const THEME_OPTIONS: ReadonlyArray<{ value: ThemePreference; label: ReactNode }> = [
   { value: 'system', label: <Ui {...COPY.settings.themeSystem} /> },
@@ -39,6 +42,29 @@ export function DisplaySettings() {
         value={theme}
         options={THEME_OPTIONS}
         onChange={setTheme}
+      />
+      <OptionControl
+        option={OPTIONS.textSize}
+        legend={COPY.settings.textSize}
+        labels={{
+          normal: COPY.settings.textNormal,
+          large: COPY.settings.textLarge,
+          larger: COPY.settings.textLarger,
+        }}
+      />
+      <OptionControl
+        option={OPTIONS.motion}
+        legend={COPY.settings.motion}
+        labels={{ system: COPY.settings.motionSystem, reduce: COPY.settings.motionReduce }}
+      />
+      <OptionControl
+        option={OPTIONS.translations}
+        legend={COPY.settings.translations}
+        hint={COPY.settings.translationsHint}
+        labels={{
+          shown: COPY.settings.translationsShown,
+          hidden: COPY.settings.translationsHidden,
+        }}
       />
     </Card>
   );

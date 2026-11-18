@@ -190,3 +190,27 @@
 summary::-webkit-details-marker {
   display: none;
 }
+
+/* Learner options set on <html> (src/lib/storage/options.ts). Sizes are in rem, so
+   scaling the root scales the whole app. */
+:root[data-text-size='large'] {
+  font-size: 112.5%;
+}
+
+:root[data-text-size='larger'] {
+  font-size: 125%;
+}
+
+:root[data-motion='reduce'] *,
+:root[data-motion='reduce'] *::before,
+:root[data-motion='reduce'] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+/* English lines under German questions; the sentence builder's prompt is the task
+   itself, so it isn't marked. */
+:root[data-translations='hidden'] .translation {
+  display: none;
+}

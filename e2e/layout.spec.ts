@@ -20,11 +20,23 @@ const PAGES = [
   '/about',
 ];
 
-for (const language of ['de', 'en'] as const) {
+// German and English labels, and German at the largest text size (an option in Settings).
+const VARIANTS = [
+  { language: 'de', size: 'normal' },
+  { language: 'en', size: 'normal' },
+  { language: 'de', size: 'larger' },
+] as const;
+
+for (const { language, size } of VARIANTS) {
   for (const path of PAGES) {
-    test(`${path} fits the screen width (${language})`, async ({ page }) => {
+    test(`${path} fits the screen width (${language}, ${size} text)`, async ({ page }) => {
       if (language === 'en') {
         await page.addInitScript(() => window.localStorage.setItem('grammatik:ui-language', 'en'));
+      }
+      if (size === 'larger') {
+        await page.addInitScript(() =>
+          window.localStorage.setItem('grammatik:text-size', 'larger'),
+        );
       }
       await page.goto(path);
       await page.evaluate(() => document.fonts.ready);

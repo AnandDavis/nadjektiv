@@ -111,11 +111,16 @@ export function buildTopicSession(
   mode: QuestionMode,
   stats: Readonly<Record<string, QuestionStats>>,
   rng: Rng,
+  { untimed = false }: { untimed?: boolean } = {},
 ): SessionItem[] {
   const pool = topicItems(topic, mode);
   if (pool.length === 0) return [];
-  const length = SESSION_LENGTH[mode];
   const weight = (item: SessionItem) => questionWeight(stats[item.question.id]);
+  // Untimed Blitz is a fixed round, so each prompt comes up at most once.
+  if (mode === 'sort' && untimed) {
+    return pickWeighted(pool, Math.min(GAME_CONFIG.untimedSortLength, pool.length), weight, rng);
+  }
+  const length = SESSION_LENGTH[mode];
 
   if (mode !== 'sort') return pickWeighted(pool, Math.min(length, pool.length), weight, rng);
 

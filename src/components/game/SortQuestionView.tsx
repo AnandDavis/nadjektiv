@@ -66,7 +66,12 @@ export function SortQuestionView({
           <PromptText prompt={question.prompt} />
         </p>
         {question.gloss && (
-          <p className={cn('mt-2 font-semibold', last?.isCorrect ? 'text-canvas' : 'text-muted')}>
+          <p
+            className={cn(
+              'translation mt-2 font-semibold',
+              last?.isCorrect ? 'text-canvas' : 'text-muted',
+            )}
+          >
             {question.gloss}
           </p>
         )}

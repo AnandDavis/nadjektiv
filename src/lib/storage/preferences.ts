@@ -1,5 +1,6 @@
 /**
- * Display preferences (theme, interface language). Kept separate from progress
+ * Display preferences (theme, interface language; the learner's other options are in
+ * ./options). Kept separate from progress
  * because an inline script in the root layout applies them before first paint
  * (see PREFERENCES_SCRIPT), which avoids a flash of the wrong theme or language.
  */
@@ -7,6 +8,14 @@
 import { APP_CONFIG, STORAGE_CONFIG } from '@/config/app';
 
 import { PROGRESS_KEY } from './keys';
+import { optionAttributesScript } from './options';
+import {
+  notifyPreferences as notify,
+  readPreference as read,
+  writePreference as write,
+} from './pref-store';
+
+export { subscribePreferences } from './pref-store';
 
 export type ThemePreference = 'system' | 'light' | 'dark';
 /** Language of headings and labels. Grammar content is always German. */
@@ -33,40 +42,12 @@ export const THEME_COLORS = {
 export const THEME_COLOR_OVERRIDE_ID = 'theme-color-override';
 
 /**
- * Runs in <head> before paint; must stay dependency-free ES5. Applies the theme and
- * language, and sends a first-time visitor from the home page to the welcome intro
+ * Runs in <head> before paint; must stay dependency-free ES5. Applies the theme,
+ * language and layout options (text size, motion, translations), and sends a first-time visitor from the home page to the welcome intro
  * before the home page can show. Anyone with progress already saved counts as having
  * seen it, so existing learners are never sent there, even after resetting progress.
  */
-export const PREFERENCES_SCRIPT = `(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem("${THEME_KEY}"),l=s.getItem("${UI_LANGUAGE_KEY}");if(!s.getItem("${WELCOME_KEY}")){if(s.getItem("${PROGRESS_KEY}"))s.setItem("${WELCOME_KEY}","1");else if(location.pathname==="/"){location.replace("${WELCOME_PATH}");return}}if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);var m=document.createElement("meta");m.id="${THEME_COLOR_OVERRIDE_ID}";m.name="theme-color";m.content=t==="dark"?"${THEME_COLORS.dark}":"${THEME_COLORS.light}";document.head.insertBefore(m,document.head.firstChild)}if(l==="en")d.setAttribute("data-ui-lang","en")}catch(e){}})()`;
-
-const listeners = new Set<() => void>();
-
-export function subscribePreferences(listener: () => void): () => void {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
-
-function notify(): void {
-  for (const listener of listeners) listener();
-}
-
-function read(key: string): string | null {
-  try {
-    return window.localStorage.getItem(key);
-  } catch {
-    return null;
-  }
-}
-
-function write(key: string, value: string | null): void {
-  try {
-    if (value === null) window.localStorage.removeItem(key);
-    else window.localStorage.setItem(key, value);
-  } catch (error) {
-    console.warn(`Could not save preference ${key}.`, error);
-  }
-}
+export const PREFERENCES_SCRIPT = `(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem("${THEME_KEY}"),l=s.getItem("${UI_LANGUAGE_KEY}");if(!s.getItem("${WELCOME_KEY}")){if(s.getItem("${PROGRESS_KEY}"))s.setItem("${WELCOME_KEY}","1");else if(location.pathname==="/"){location.replace("${WELCOME_PATH}");return}}if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);var m=document.createElement("meta");m.id="${THEME_COLOR_OVERRIDE_ID}";m.name="theme-color";m.content=t==="dark"?"${THEME_COLORS.dark}":"${THEME_COLORS.light}";document.head.insertBefore(m,document.head.firstChild)}if(l==="en")d.setAttribute("data-ui-lang","en");var v;${optionAttributesScript()}}catch(e){}})()`;
 
 export function readTheme(): ThemePreference {
   const value = read(THEME_KEY);

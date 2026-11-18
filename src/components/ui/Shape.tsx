@@ -5,6 +5,7 @@ const FILL: Record<ShapeColor, string> = {
   blue: 'fill-blue',
   red: 'fill-red',
   yellow: 'fill-yellow',
+  violet: 'fill-violet',
   ink: 'fill-ink',
   primaries: 'fill-ink',
 };

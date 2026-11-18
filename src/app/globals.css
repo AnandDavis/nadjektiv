@@ -26,6 +26,8 @@
   --blue: light-dark(#1f4fd1, #6b92ff);
   --red: light-dark(#d62b23, #ff5d52);
   --yellow: light-dark(#d9a400, #e6a800);
+  /* A fifth colour, only for marks that need their own (Tippen): never a der/die/das. */
+  --violet: light-dark(#6d3fc8, #b49bff);
   --on-blue: light-dark(#ffffff, #141414);
   --on-red: light-dark(#ffffff, #141414);
   --on-yellow: #151515;
@@ -71,6 +73,7 @@
   --color-blue: var(--blue);
   --color-red: var(--red);
   --color-yellow: var(--yellow);
+  --color-violet: var(--violet);
   --color-on-blue: var(--on-blue);
   --color-on-red: var(--on-red);
   --color-on-yellow: var(--on-yellow);

@@ -6,7 +6,8 @@
  *   npx playwright test visual --update-snapshots
  *
  * Baselines are per platform (the file name ends in -darwin or -linux), because font
- * rendering differs between operating systems.
+ * rendering differs between operating systems. Only -darwin baselines are committed,
+ * so the spec skips itself elsewhere (CI runs on Linux).
  */
 import { expect, test, type Page } from '@playwright/test';
 
@@ -17,6 +18,7 @@ test.describe.configure({ mode: 'parallel' });
 
 test.beforeEach(async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== 'mobile', 'Visual baselines are taken at phone size only.');
+  test.skip(process.platform !== 'darwin', 'Baselines are committed for macOS only.');
   await page.clock.setFixedTime(FIXED_TIME);
   await page.emulateMedia({ reducedMotion: 'reduce' });
 });

@@ -36,7 +36,7 @@ Every wrong answer, in every mode, shows what you chose, the right answer and th
 
 ## Getting started
 
-Requires Node.js 22 (22.12 or later recommended).
+Requires Node.js 22 (22.12 or later recommended; `.nvmrc` pins the major version).
 
 ```bash
 npm install
@@ -68,7 +68,7 @@ npm run build && npm run start
 
 - **German spellcheck:** `src/content/spelling.test.ts` checks every correct German sentence, prompt and example against a Hunspell German dictionary, splitting compound nouns automatically. Distractors are deliberately wrong, so they're skipped. Names and the occasional missing word go in `src/content/spelling-allowlist.ts`, with a reason. The dictionary (`dictionary-de`) is GPL-licensed. It's a dev-only dependency used in tests and is never shipped in the app.
 - **Content rules:** `src/content/content.test.ts` checks IDs, answer keys, accepted word orders, real umlauts and ß, whitespace, and that every filled-in gap is a capitalised, punctuated sentence.
-- **Visual regression:** `e2e/visual.spec.ts` compares the key screens in light and dark against the baselines in `e2e/visual.spec.ts-snapshots/`. After an intended design change, review the diff and update them with `npx playwright test visual --update-snapshots`. Baselines are per platform (`-darwin`, `-linux`), so CI on Linux needs its own set, generated there.
+- **Visual regression:** `e2e/visual.spec.ts` compares the key screens in light and dark against the baselines in `e2e/visual.spec.ts-snapshots/`. After an intended design change, review the diff and update them with `npx playwright test visual --update-snapshots`. Baselines are per platform (`-darwin`, `-linux`). Only macOS baselines are committed, so the spec skips itself on Linux, including in CI.
 - **Budgets:** `e2e/budgets.spec.ts` caps the compressed JavaScript each page downloads and checks the app stays installable (manifest, icons, service worker). Lighthouse budgets live in `scripts/lighthouse-budget.mjs`. Raise a budget only deliberately, in the commit that needs it.
 
 ## Tech

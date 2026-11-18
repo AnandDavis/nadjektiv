@@ -32,6 +32,8 @@ export const OPTIONS = {
   hints: option('hints', ['button', 'shown', 'hidden']),
   /** After a right answer outside Blitz: wait for Weiter, or move on by itself. */
   autoAdvance: option('auto-advance', ['off', 'on']),
+  /** Typing in Tippen and Tabelle on a touch screen: the app's own keyboard, or the device's. */
+  keyboard: option('keyboard', ['app', 'device']),
   /** Follow the phone's reduced-motion setting, or turn this app's motion off. */
   motion: option('motion', ['system', 'reduce'], 'data-motion'),
   textSize: option('text-size', ['normal', 'large', 'larger'], 'data-text-size'),

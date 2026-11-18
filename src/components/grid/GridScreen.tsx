@@ -4,20 +4,20 @@ import { useCallback, useRef, type ReactNode } from 'react';
 
 import { SortTimer } from '@/components/game/SortTimer';
 import { AppHeader } from '@/components/layout/AppHeader';
-import { Button, CrossIcon, KeyboardDock, Ui } from '@/components/ui';
+import { Button, CrossIcon, OnScreenKeyboard, Ui } from '@/components/ui';
 import type { GameMode, GridPuzzle, Topic } from '@/content/types';
 import { useGridRound } from '@/hooks/useGridRound';
 import { useProgress } from '@/hooks/useProgress';
+import { useAppKeyboard } from '@/hooks/useAppKeyboard';
 import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { isCellCorrect } from '@/lib/grid/check-cell';
 import { blankCells, type CellKey } from '@/lib/grid/grid-round';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
-import { insertAtCaret } from '@/lib/ui/insert-at-caret';
+import { applyKey, type KeyAction } from '@/lib/text/caret-edit';
 
 import { GridBoard } from './GridBoard';
 import { GridPicker } from './GridPicker';
 import { GridResults } from './GridResults';
-import { UmlautKeys } from './UmlautKeys';
 
 interface GridScreenProps {
   topic: Topic;
@@ -38,6 +38,7 @@ export function GridScreen({
   topicTitles,
 }: GridScreenProps) {
   const progress = useProgress();
+  const appKeyboard = useAppKeyboard();
   const [language] = useUiLanguage();
   const { grid, state, outcome, start, type, finish, leave } = useGridRound({
     topicId: topic.id,
@@ -78,12 +79,28 @@ export function GridScreen({
     [grid, state, type, focusNext],
   );
 
-  const handleInsert = useCallback((character: string) => {
-    const key = activeKey.current;
-    const input = key ? inputs.current.get(key) : undefined;
-    if (!key || !input) return;
-    insertAtCaret(input, character);
-  }, []);
+  /** A key on the app's keyboard, applied to the focused cell like a typed key. */
+  const handleKey = useCallback(
+    (action: KeyAction) => {
+      const key = activeKey.current;
+      const input = key ? inputs.current.get(key) : undefined;
+      if (!key || !input) return;
+      const edit = applyKey(
+        {
+          value: input.value,
+          start: input.selectionStart ?? input.value.length,
+          end: input.selectionEnd ?? input.value.length,
+        },
+        action,
+      );
+      handleType(key, edit.value);
+      // Put the caret back after React has re-rendered the cell (if it's still open).
+      requestAnimationFrame(() => {
+        if (document.activeElement === input) input.setSelectionRange(edit.caret, edit.caret);
+      });
+    },
+    [handleType],
+  );
 
   const startGrid = useCallback(
     (next: GridPuzzle) => {
@@ -153,13 +170,23 @@ export function GridScreen({
               }}
               onEnter={(key) => focusNext(key, state.solved)}
               registerInput={registerInput}
+              noSystemKeyboard={appKeyboard}
             />
-            <KeyboardDock className="mt-auto flex flex-col gap-2 pt-2 pb-safe">
-              <UmlautKeys label={COPY.grid.specialCharacters[language]} onInsert={handleInsert} />
+            <div className="sticky bottom-0 z-10 mt-auto flex flex-col gap-2 bg-canvas py-2">
+              {appKeyboard && (
+                <OnScreenKeyboard
+                  onKey={handleKey}
+                  onEnter={() => {
+                    if (activeKey.current) focusNext(activeKey.current, state.solved);
+                  }}
+                  enterLabel={<span className="text-xl">↵</span>}
+                  enterName={COPY.keys.next[language]}
+                />
+              )}
               <Button size="lg" variant="secondary" onClick={finish}>
                 <Ui {...COPY.grid.done} />
               </Button>
-            </KeyboardDock>
+            </div>
           </>
         ) : (
           <GridResults

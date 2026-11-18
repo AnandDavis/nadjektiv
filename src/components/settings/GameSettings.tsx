@@ -27,6 +27,12 @@ export function GameSettings() {
         labels={{ button: S.hintsButton, shown: S.hintsShown, hidden: S.hintsHidden }}
       />
       <OptionControl
+        option={OPTIONS.keyboard}
+        legend={S.keyboard}
+        hint={S.keyboardHint}
+        labels={{ app: S.keyboardApp, device: S.keyboardDevice }}
+      />
+      <OptionControl
         option={OPTIONS.autoAdvance}
         legend={S.autoAdvance}
         hint={S.autoAdvanceHint}

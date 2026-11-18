@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, ProgressBar } from '@/components/ui';
+import { Card, ProgressBar, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { levelForXp } from '@/lib/progress/level';
 
@@ -17,7 +17,9 @@ export function LevelCard() {
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
-          <p className="truncate font-display text-lg font-bold text-ink">{info.title}</p>
+          <p className="truncate font-display text-lg font-bold text-ink">
+            <Ui {...info.title} />
+          </p>
           <p className="text-sm text-muted tabular-nums">
             {progress.xp - info.floorXp} / {info.nextXp - info.floorXp} XP
           </p>

@@ -8,6 +8,7 @@
 import type { GameMode } from '@/content/types';
 
 import { RECENT_WINDOW, type TopicProgress } from './types';
+import type { Bilingual } from '../i18n/copy';
 
 export const TIERS = ['new', 'bronze', 'silver', 'gold', 'mastered'] as const;
 export type Tier = (typeof TIERS)[number];
@@ -26,12 +27,12 @@ export const TIER_RULES: readonly TierRule[] = [
   { tier: 'mastered', minAnswered: 100, minAccuracy: 0.92, needsAllModes: true },
 ];
 
-export const TIER_LABELS: Record<Tier, string> = {
-  new: 'Not started',
-  bronze: 'Bronze',
-  silver: 'Silber',
-  gold: 'Gold',
-  mastered: 'Gemeistert',
+export const TIER_LABELS: Record<Tier, Bilingual> = {
+  new: { de: 'Neu', en: 'Not started' },
+  bronze: { de: 'Bronze', en: 'Bronze' },
+  silver: { de: 'Silber', en: 'Silver' },
+  gold: { de: 'Gold', en: 'Gold' },
+  mastered: { de: 'Gemeistert', en: 'Mastered' },
 };
 
 export interface Requirement {

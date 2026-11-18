@@ -1,8 +1,10 @@
-import { Button, ButtonLink, Card, TrophyIcon } from '@/components/ui';
+import { Button, ButtonLink, Card, TrophyIcon, Ui } from '@/components/ui';
 import { TierBadge } from '@/components/progress/TierBadge';
 import type { Mistake } from '@/lib/game/game-reducer';
+import { resultHeadline } from '@/lib/game/result-headline';
 import { accuracy, type AnswerRecord } from '@/lib/game/scoring';
 import type { BestKind, SessionOutcome } from '@/lib/progress/apply-session';
+import { COPY } from '@/lib/i18n/copy';
 import { levelForXp } from '@/lib/progress/level';
 
 import { MistakeList } from './MistakeList';
@@ -41,13 +43,7 @@ export function ResultsScreen({
     <div className="flex flex-col gap-5 motion-safe:animate-rise">
       <div className="text-center">
         <h2 className="font-display text-3xl font-bold text-ink">
-          {answers.length === 0
-            ? 'Zeit ist um!'
-            : percent === 100
-              ? 'Perfekt!'
-              : percent >= 70
-                ? 'Gut gemacht!'
-                : 'Weiter üben!'}
+          <Ui {...resultHeadline(answers)} />
         </h2>
         <p className="mt-1 text-muted">
           {correct} of {answers.length} correct · {percent}%
@@ -95,7 +91,11 @@ function Celebrations({
     const { level, title } = levelForXp(outcome.progress.xp);
     items.push(
       <li key="level">
-        Level up! You’re now level {level}, <strong>{title}</strong>.
+        Level up! You’re now level {level},{' '}
+        <strong>
+          <Ui {...title} />
+        </strong>
+        .
       </li>,
     );
   }
@@ -113,7 +113,7 @@ function Celebrations({
   return (
     <Card className="border-brand bg-sunken" role="status">
       <p className="mb-2 flex items-center gap-2 font-bold text-ink">
-        <TrophyIcon className="text-brand-strong" /> Erfolge
+        <TrophyIcon className="text-brand-strong" /> <Ui {...COPY.game.achievements} />
       </p>
       <ul className="flex flex-col gap-1 text-ink">{items}</ul>
     </Card>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useMemo } from 'react';
 
-import { Card, ProgressBar } from '@/components/ui';
+import { Card, ProgressBar, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import { useProgress } from '@/hooks/useProgress';
 import { MODE_INFO } from '@/lib/game/modes';
@@ -11,6 +11,7 @@ import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
 
 import { TierBadge } from './TierBadge';
+import { COPY } from '@/lib/i18n/copy';
 
 export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
   const progress = useProgress();
@@ -31,7 +32,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
 
       <section aria-labelledby="tiers-heading">
         <h2 id="tiers-heading" className="mb-3 font-display text-xl font-bold text-ink">
-          Medaillen
+          <Ui {...COPY.progress.medals} />
         </h2>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {TIERS.filter((t) => t !== 'new').map((tier) => (
@@ -41,7 +42,9 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
                 <span className="text-2xl font-bold text-ink tabular-nums">
                   {summary.tierCounts[tier]}
                 </span>
-                <span className="sr-only">{TIER_LABELS[tier]} topics</span>
+                <span className="sr-only">
+                  <Ui {...TIER_LABELS[tier]} />
+                </span>
               </Card>
             </li>
           ))}

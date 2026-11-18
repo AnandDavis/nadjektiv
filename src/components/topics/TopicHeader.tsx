@@ -3,11 +3,12 @@
 import Link from 'next/link';
 
 import { TierBadge } from '@/components/progress/TierBadge';
-import { ArrowLeftIcon, Badge, CheckIcon, Card } from '@/components/ui';
+import { ArrowLeftIcon, Badge, CheckIcon, Card, Ui } from '@/components/ui';
 import type { GameMode, Level } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { cn } from '@/lib/utils/cn';
+import { COPY } from '@/lib/i18n/copy';
 
 interface TopicHeaderProps {
   topicId: string;
@@ -39,7 +40,9 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
       </div>
       {mastery?.next && (
         <Card className="p-3">
-          <p className="text-sm font-bold text-ink">Next: {TIER_LABELS[mastery.next.tier]}</p>
+          <p className="text-sm font-bold text-ink">
+            <Ui {...COPY.topic.next} />: <Ui {...TIER_LABELS[mastery.next.tier]} />
+          </p>
           <ul className="mt-1 flex flex-col gap-1">
             {mastery.next.requirements.map((req) => (
               <li

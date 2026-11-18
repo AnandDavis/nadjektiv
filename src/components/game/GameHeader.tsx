@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/cn';
 
 interface GameHeaderProps {
   exitHref: string;
-  title: string;
+  title: React.ReactNode;
   score: number;
   combo: number;
   /** Untimed rounds show question progress; timed rounds pass their own timer. */

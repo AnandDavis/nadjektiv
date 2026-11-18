@@ -14,8 +14,8 @@ describe('levels', () => {
   });
 
   it('gives titles by level', () => {
-    expect(titleForLevel(1)).toBe('Anfänger');
-    expect(titleForLevel(4)).toBe('Lernender');
-    expect(titleForLevel(40)).toBe('Grammatik-Profi');
+    expect(titleForLevel(1)).toEqual({ de: 'Anfänger', en: 'Beginner' });
+    expect(titleForLevel(4).de).toBe('Lernender');
+    expect(titleForLevel(40).en).toBe('Grammar pro');
   });
 });

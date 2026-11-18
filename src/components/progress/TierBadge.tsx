@@ -1,3 +1,4 @@
+import { Ui } from '@/components/ui/Ui';
 import { TIER_LABELS, type Tier } from '@/lib/progress/mastery';
 import { cn } from '@/lib/utils/cn';
 
@@ -28,7 +29,7 @@ export function TierBadge({ tier, className }: { tier: Tier; className?: string 
       )}
     >
       <span aria-hidden="true">{TIER_MARKS[tier]}</span>
-      {TIER_LABELS[tier]}
+      <Ui {...TIER_LABELS[tier]} />
     </span>
   );
 }

@@ -4,12 +4,12 @@ import { useSyncExternalStore } from 'react';
 
 import {
   readTheme,
-  subscribeTheme,
+  subscribePreferences,
   writeTheme,
   type ThemePreference,
-} from '@/lib/storage/theme-store';
+} from '@/lib/storage/preferences';
 
 export function useTheme(): [ThemePreference, (theme: ThemePreference) => void] {
-  const theme = useSyncExternalStore(subscribeTheme, readTheme, () => 'system' as const);
+  const theme = useSyncExternalStore(subscribePreferences, readTheme, () => 'system' as const);
   return [theme, writeTheme];
 }

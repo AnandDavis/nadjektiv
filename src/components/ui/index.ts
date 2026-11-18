@@ -4,3 +4,5 @@ export { ButtonLink } from './ButtonLink';
 export { Card } from './Card';
 export { ProgressBar } from './ProgressBar';
 export * from './icons';
+export { Ui } from './Ui';
+export { SegmentedControl } from './SegmentedControl';

@@ -1,8 +1,11 @@
-import { Button, Card } from '@/components/ui';
+import type { ReactNode } from 'react';
+
+import { Button, Card, Ui } from '@/components/ui';
+import { COPY } from '@/lib/i18n/copy';
 import type { ModeBest } from '@/lib/progress/types';
 
 interface GameIntroProps {
-  title: string;
+  title: ReactNode;
   modeName: string;
   description: string;
   best?: ModeBest;
@@ -33,7 +36,7 @@ export function GameIntro({
         </Card>
       )}
       <Button size="lg" onClick={onStart} disabled={!isReady} className="w-full">
-        Los geht’s!
+        <Ui {...COPY.game.start} />
       </Button>
     </div>
   );

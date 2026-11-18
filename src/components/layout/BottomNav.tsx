@@ -3,13 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ChartIcon, HomeIcon, SettingsIcon } from '@/components/ui';
+import { ChartIcon, HomeIcon, SettingsIcon, Ui } from '@/components/ui';
 import { cn } from '@/lib/utils/cn';
+import { COPY } from '@/lib/i18n/copy';
 
 const LINKS = [
-  { href: '/', label: 'Lernen', icon: HomeIcon },
-  { href: '/progress', label: 'Fortschritt', icon: ChartIcon },
-  { href: '/settings', label: 'Einstellungen', icon: SettingsIcon },
+  { href: '/', label: COPY.nav.learn, icon: HomeIcon },
+  { href: '/progress', label: COPY.nav.progress, icon: ChartIcon },
+  { href: '/settings', label: COPY.nav.settings, icon: SettingsIcon },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {
@@ -39,7 +40,9 @@ export function BottomNav() {
                 )}
               >
                 <Icon className={cn('text-xl', active && 'text-brand-strong')} />
-                {label}
+                <span>
+                  <Ui {...label} />
+                </span>
               </Link>
             </li>
           );

@@ -137,6 +137,13 @@
   }
 }
 
+/* Interface language: see components/ui/Ui.tsx. Unlayered + important so utility
+   display classes on a parent can't reveal the hidden copy. */
+:root:not([data-ui-lang='en']) .ui-en,
+:root[data-ui-lang='en'] .ui-de {
+  display: none !important;
+}
+
 @utility pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }

@@ -1,5 +1,6 @@
-import { BookIcon, Card } from '@/components/ui';
+import { BookIcon, Card, Ui } from '@/components/ui';
 import type { RuleCard } from '@/content/types';
+import { COPY } from '@/lib/i18n/copy';
 
 export function RuleCards({ rules }: { rules: RuleCard[] }) {
   return (
@@ -8,7 +9,7 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
         id="rules-heading"
         className="mb-3 flex items-center gap-2 font-display text-xl font-bold text-ink"
       >
-        <BookIcon /> Die Regeln
+        <BookIcon /> <Ui {...COPY.topic.rules} />
       </h2>
       <div className="flex flex-col gap-3">
         {rules.map((rule) => (

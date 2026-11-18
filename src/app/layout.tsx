@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Inter } from 'next/font/google';
 
 import { BRAND_COLORS } from '@/lib/pwa/brand';
 import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
-import { THEME_SCRIPT } from '@/lib/storage/theme-store';
+import { PREFERENCES_SCRIPT } from '@/lib/storage/preferences';
 
 import './globals.css';
 
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: PREFERENCES_SCRIPT }} />
       </head>
       <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
         {children}

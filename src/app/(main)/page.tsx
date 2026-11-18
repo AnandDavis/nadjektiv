@@ -2,6 +2,8 @@ import { LevelCard } from '@/components/progress/LevelCard';
 import { ReviewCallout } from '@/components/progress/ReviewCallout';
 import { TopicList } from '@/components/topics/TopicList';
 import { getTopicSummaries } from '@/content/summaries';
+import { Ui } from '@/components/ui';
+import { COPY } from '@/lib/i18n/copy';
 
 export default function HomePage() {
   const topics = getTopicSummaries();
@@ -11,7 +13,9 @@ export default function HomePage() {
         <p className="text-sm font-bold tracking-wide text-brand-strong uppercase">
           Grammatik Games
         </p>
-        <h1 className="font-display text-3xl font-bold text-ink">Was üben wir heute?</h1>
+        <h1 className="font-display text-3xl font-bold text-ink">
+          <Ui {...COPY.home.heading} />
+        </h1>
       </header>
       <LevelCard />
       <ReviewCallout />

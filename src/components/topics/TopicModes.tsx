@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 
-import { BlocksIcon, BoltIcon, GapIcon } from '@/components/ui';
+import { BlocksIcon, BoltIcon, GapIcon, Ui } from '@/components/ui';
 import type { GameMode } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { MODE_INFO } from '@/lib/game/modes';
+import { COPY } from '@/lib/i18n/copy';
 
 const MODE_ICONS: Record<GameMode, typeof BoltIcon> = {
   sort: BoltIcon,
@@ -18,7 +19,7 @@ export function TopicModes({ topicId, modes }: { topicId: string; modes: GameMod
   return (
     <section aria-labelledby="play-heading">
       <h2 id="play-heading" className="mb-3 font-display text-xl font-bold text-ink">
-        Spielen
+        <Ui {...COPY.topic.play} />
       </h2>
       <ul className="flex flex-col gap-3">
         {modes.map((mode) => {

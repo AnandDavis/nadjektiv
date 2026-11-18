@@ -14,12 +14,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** a Blitz-style round showing a noun and asking for both gender and plural form. Needs a checked noun list with plurals (reuse noun-gender and plurals content where it overlaps, and check every plural against `docs/grammar/`). New question ids are permanent once shipped.
 
-## Topic graduation
-
-**Why:** reaching Gemeistert passes with a small call-out; it deserves a moment.
-
-**Notes:** a celebration screen after the round that reaches Gemeistert: what the topic covered, the learner's stats, and a suggested next topic. Shown once per topic (remember it in progress, as an optional field). Respect reduced motion.
-
 ## Speed Insights
 
 **Why:** Lighthouse measures a lab machine. Speed Insights reports real Core Web Vitals from learners' phones.

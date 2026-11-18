@@ -89,6 +89,11 @@ export const progressSchema = z.object({
    * daily mix leans towards. Added without a version bump (optional).
    */
   comboBreaks: z.optional(z.array(z.object({ questionId: z.string(), at: z.string() }))),
+  /**
+   * When each topic first reached Gemeistert, so its celebration shows once. Added
+   * without a version bump (optional).
+   */
+  graduated: z.optional(z.record(z.string(), z.string())),
 });
 
 export const COMBO_BREAKS_KEPT = 10;

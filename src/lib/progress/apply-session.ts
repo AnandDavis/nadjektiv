@@ -31,6 +31,8 @@ export interface SessionOutcome {
   addedToRevise: number;
   /** Questions taken off the list because they were answered correctly. */
   clearedFromRevise: number;
+  /** Topics that reached Gemeistert for the first time in this round. */
+  graduations: string[];
 }
 
 function updateTopic(topic: TopicProgress, results: readonly boolean[]): TopicProgress {
@@ -175,6 +177,20 @@ export function applySessionResult(
     if (tierRank(to) > tierRank(from)) tierUps.push({ topicId, from, to });
   }
 
+  // Celebrate a topic's first Gemeistert only once, even if it drops and climbs back.
+  const graduations = tierUps
+    .filter((up) => up.to === 'mastered' && !progress.graduated?.[up.topicId])
+    .map((up) => up.topicId);
+  const graduated =
+    graduations.length > 0
+      ? {
+          graduated: {
+            ...progress.graduated,
+            ...Object.fromEntries(graduations.map((id) => [id, now])),
+          },
+        }
+      : {};
+
   const xp = progress.xp + xpGained;
   const levelBefore = levelForXp(progress.xp).level;
   const levelAfter = levelForXp(xp).level;
@@ -190,6 +206,7 @@ export function applySessionResult(
       startedAt: progress.startedAt ?? now,
       ...(result.dailyDate ? { daily: { lastDone: result.dailyDate } } : {}),
       ...withComboBreaks(progress, runBreakers(result.answers), now),
+      ...graduated,
     },
     xpGained,
     newBests,
@@ -197,6 +214,7 @@ export function applySessionResult(
     tierUps,
     addedToRevise,
     clearedFromRevise,
+    graduations,
   };
 }
 

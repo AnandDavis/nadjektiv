@@ -238,3 +238,31 @@ describe('combo breaks', () => {
     expect(breaks.at(-1)).toEqual({ questionId: 't-gap-99', at: NOW });
   });
 });
+
+describe('graduation', () => {
+  it('marks a topic’s first Gemeistert once, never again after a drop', async () => {
+    const { createEmptyTopicProgress } = await import('./types');
+    const nearly = {
+      ...createEmptyProgress(),
+      topics: {
+        t: { ...createEmptyTopicProgress(), answered: 99, correct: 99, recent: Array(40).fill(1) },
+      },
+    };
+    const first = applySessionResult(nearly, result(1, 0), modes, NOW);
+    expect(first.graduations).toEqual(['t']);
+    expect(first.progress.graduated).toEqual({ t: NOW });
+
+    const again = applySessionResult(first.progress, result(1, 0), modes, NOW);
+    expect(again.graduations).toEqual([]);
+    // Even a fresh tier-up to Gemeistert after a drop doesn't celebrate twice.
+    const dropped = {
+      ...first.progress,
+      topics: { t: { ...first.progress.topics.t, recent: Array(40).fill(0) } },
+    };
+    const back = {
+      ...dropped,
+      topics: { t: { ...dropped.topics.t, recent: Array(39).fill(1).concat([0]) } },
+    };
+    expect(applySessionResult(back, result(1, 0), modes, NOW).graduations).toEqual([]);
+  });
+});

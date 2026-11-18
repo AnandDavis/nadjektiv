@@ -33,6 +33,7 @@ import { updateProgress } from '@/lib/storage/progress-client';
 import { FeedbackPanel } from './FeedbackPanel';
 import { GameHeader } from './GameHeader';
 import { GameIntro } from './GameIntro';
+import type { GraduationInfo } from './GraduationPanel';
 import { HintControl } from './HintControl';
 import { QuestionView } from './QuestionView';
 import { ResultsScreen } from './ResultsScreen';
@@ -52,6 +53,8 @@ interface GameScreenProps {
   exitLabel: ReactNode;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   topicTitles: Readonly<Record<string, Bilingual>>;
+  /** About this round's topic, for a Gemeistert celebration (topic rounds only). */
+  graduation?: GraduationInfo;
 }
 
 function correctAnswerText(question: Question): string {
@@ -229,6 +232,7 @@ export function GameScreen(props: GameScreenProps) {
             exitHref={exitHref}
             exitLabel={exitLabel}
             topicTitles={props.topicTitles}
+            graduation={props.graduation}
             onPlayAgain={start}
           />
         )}

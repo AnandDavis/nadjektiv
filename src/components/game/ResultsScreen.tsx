@@ -11,6 +11,7 @@ import { COPY, correctCount, type Bilingual } from '@/lib/i18n/copy';
 
 import { MistakeList } from './MistakeList';
 import { Celebrations, ResultStat, ReviseNote } from './RoundOutcome';
+import { GraduationPanel, type GraduationInfo } from './GraduationPanel';
 
 interface ResultsScreenProps {
   score: number;
@@ -24,6 +25,8 @@ interface ResultsScreenProps {
   exitHref: string;
   exitLabel: ReactNode;
   topicTitles: Readonly<Record<string, Bilingual>>;
+  /** About this round's topic, for a Gemeistert celebration. */
+  graduation?: GraduationInfo;
   onPlayAgain: () => void;
 }
 
@@ -37,6 +40,7 @@ export function ResultsScreen({
   exitHref,
   exitLabel,
   topicTitles,
+  graduation,
   onPlayAgain,
 }: ResultsScreenProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -89,6 +93,8 @@ export function ResultsScreen({
           </span>
         )}
       </p>
+
+      {outcome && <GraduationPanel outcome={outcome} topicTitles={topicTitles} info={graduation} />}
 
       {outcome && <Celebrations outcome={outcome} topicTitles={topicTitles} />}
 

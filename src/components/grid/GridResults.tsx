@@ -13,6 +13,7 @@ import type { SessionOutcome } from '@/lib/progress/apply-session';
 import { formatDuration } from '@/lib/utils/format-duration';
 
 import { GridBoard } from './GridBoard';
+import { GraduationPanel, type GraduationInfo } from '../game/GraduationPanel';
 
 interface GridResultsProps {
   grid: GridPuzzle;
@@ -21,6 +22,8 @@ interface GridResultsProps {
   exitHref: string;
   exitLabel: ReactNode;
   topicTitles: Readonly<Record<string, Bilingual>>;
+  /** About this round's topic, for a Gemeistert celebration. */
+  graduation?: GraduationInfo;
   onPlayAgain: () => void;
   onOtherTable: () => void;
 }
@@ -32,6 +35,7 @@ export function GridResults({
   exitHref,
   exitLabel,
   topicTitles,
+  graduation,
   onPlayAgain,
   onOtherTable,
 }: GridResultsProps) {
@@ -80,6 +84,8 @@ export function GridResults({
           className="bg-yellow text-on-yellow"
         />
       </div>
+
+      {outcome && <GraduationPanel outcome={outcome} topicTitles={topicTitles} info={graduation} />}
 
       {outcome && <Celebrations outcome={outcome} topicTitles={topicTitles} />}
       {outcome && <ReviseNote added={outcome.addedToRevise} cleared={outcome.clearedFromRevise} />}

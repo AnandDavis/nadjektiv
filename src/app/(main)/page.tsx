@@ -15,8 +15,8 @@ export default function HomePage() {
           <Ui {...COPY.home.heading} />
         </h1>
       </header>
+      <DailyCallout show="pending" />
       <LevelCard />
-      <DailyCallout />
       <ReviewCallout />
       <TopicList topics={topics} />
     </div>

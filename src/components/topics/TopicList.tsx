@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
+import { DailyCallout } from '@/components/progress/DailyCallout';
 import { Button, SearchField, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
@@ -47,20 +48,24 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
 
   return (
     <div className="flex flex-col gap-10">
-      <div role="search">
-        <SearchField
-          value={query}
-          onChange={setQuery}
-          label={COPY.search.label[language]}
-          placeholder={COPY.search.placeholder[language]}
-          clearLabel={COPY.search.clear[language]}
-        />
-        <p
-          aria-live="polite"
-          className="mt-2 text-xs font-extrabold tracking-widest text-muted uppercase"
-        >
-          {isSearching && <Ui {...topicCount(matches.length)} />}
-        </p>
+      <div className="flex flex-col gap-4">
+        {/* Once today's mix is done it shrinks to a line here, out of the way. */}
+        <DailyCallout show="done" />
+        <div role="search">
+          <SearchField
+            value={query}
+            onChange={setQuery}
+            label={COPY.search.label[language]}
+            placeholder={COPY.search.placeholder[language]}
+            clearLabel={COPY.search.clear[language]}
+          />
+          <p
+            aria-live="polite"
+            className="mt-2 text-xs font-extrabold tracking-widest text-muted uppercase"
+          >
+            {isSearching && <Ui {...topicCount(matches.length)} />}
+          </p>
+        </div>
       </div>
 
       {isSearching && matches.length === 0 && (
@@ -95,12 +100,12 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
             </div>
             {groupTopics(levelTopics).map(({ group, label, items }) => (
               <div key={group}>
-                <h3 className="mt-5 mb-1 text-xs font-extrabold tracking-widest text-muted uppercase">
+                <h3 className="mt-10 mb-2 text-xs font-extrabold tracking-widest text-muted uppercase">
                   <Ui {...label} />
                 </h3>
-                <ul className="border-t-2 border-ink">
+                <ul className="border-t-2 border-line">
                   {items.map((topic) => (
-                    <li key={topic.id} className="border-b-2 border-ink">
+                    <li key={topic.id} className="border-b-2 border-line">
                       <TopicCard
                         topic={topic}
                         index={topics.indexOf(topic) + 1}

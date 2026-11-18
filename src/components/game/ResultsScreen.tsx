@@ -8,6 +8,7 @@ import { accuracy, type AnswerRecord } from '@/lib/game/scoring';
 import type { BestKind, SessionOutcome } from '@/lib/progress/apply-session';
 import { COPY } from '@/lib/i18n/copy';
 import { levelForXp } from '@/lib/progress/level';
+import { cn } from '@/lib/utils/cn';
 
 import { MistakeList } from './MistakeList';
 
@@ -43,27 +44,24 @@ export function ResultsScreen({
 
   return (
     <div className="flex flex-col gap-5 motion-safe:animate-rise">
-      <div className="text-center">
-        <h2 className="font-display text-3xl font-bold text-ink">
+      <div>
+        <h2 className="text-5xl leading-none font-black text-ink uppercase">
           <Ui {...resultHeadline(answers)} />
         </h2>
-        <p className="mt-1 text-muted">
-          {correct} of {answers.length} correct · {percent}%
+        <p className="mt-2 text-sm font-extrabold tracking-widest text-muted uppercase">
+          {correct} of {answers.length} correct
         </p>
       </div>
 
-      <Card className="grid grid-cols-2 gap-4 text-center">
-        <div>
-          <p className="text-3xl font-bold text-ink tabular-nums">{score}</p>
-          <p className="text-sm text-muted">points</p>
-        </div>
-        <div>
-          <p className="text-3xl font-bold text-brand-strong tabular-nums">
-            +{outcome?.xpGained ?? 0}
-          </p>
-          <p className="text-sm text-muted">XP</p>
-        </div>
-      </Card>
+      <div className="grid grid-cols-3 border-2 border-ink">
+        <ResultStat label="Correct" value={`${percent}%`} />
+        <ResultStat label="Points" value={String(score)} />
+        <ResultStat
+          label="XP"
+          value={`+${outcome?.xpGained ?? 0}`}
+          className="bg-yellow text-on-yellow"
+        />
+      </div>
 
       {outcome && <Celebrations outcome={outcome} topicTitles={topicTitles} />}
 
@@ -89,9 +87,9 @@ function ReviseNote({ added, cleared }: { added: number; cleared: number }) {
   return (
     <Link
       href="/revise"
-      className="flex min-h-11 items-center gap-3 rounded-3xl border-2 border-line bg-surface p-3 text-sm text-ink hover:bg-sunken"
+      className="flex min-h-11 items-center gap-3 border-2 border-ink bg-surface p-3 text-sm text-ink transition-colors hover:bg-ink hover:text-canvas"
     >
-      <RepeatIcon className="shrink-0 text-xl text-brand-strong" />
+      <RepeatIcon className="shrink-0 text-xl" />
       <span className="flex-1">
         {added > 0 && (
           <span className="block">
@@ -141,11 +139,28 @@ function Celebrations({
   }
   if (items.length === 0) return null;
   return (
-    <Card className="border-brand bg-sunken" role="status">
-      <p className="mb-2 flex items-center gap-2 font-bold text-ink">
-        <TrophyIcon className="text-brand-strong" /> <Ui {...COPY.game.achievements} />
+    <Card className="p-0" role="status">
+      <p className="flex items-center gap-2 bg-blue px-3 py-1.5 text-sm font-extrabold tracking-widest text-on-blue uppercase">
+        <TrophyIcon /> <Ui {...COPY.game.achievements} />
       </p>
-      <ul className="flex flex-col gap-1 text-ink">{items}</ul>
+      <ul className="flex flex-col gap-1 p-3 font-semibold text-ink">{items}</ul>
     </Card>
+  );
+}
+
+function ResultStat({
+  label,
+  value,
+  className,
+}: {
+  label: string;
+  value: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn('border-l-2 border-ink p-3 first:border-l-0', className)}>
+      <p className="text-3xl leading-none font-black tabular-nums">{value}</p>
+      <p className="mt-1 text-xs font-extrabold tracking-widest uppercase">{label}</p>
+    </div>
   );
 }

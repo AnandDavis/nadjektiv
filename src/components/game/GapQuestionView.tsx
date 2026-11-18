@@ -4,9 +4,11 @@ import { useMemo } from 'react';
 
 import type { GapQuestion } from '@/content/types';
 import { createRng, shuffle } from '@/lib/game/rng';
+import { Shape } from '@/components/ui';
+import { genderShape } from '@/lib/ui/shapes';
 import { cn } from '@/lib/utils/cn';
 
-import { optionTextClass } from './bin-styles';
+import { optionKey, optionTextClass } from './bin-styles';
 import type { LastAnswer } from '@/lib/game/game-reducer';
 
 interface GapQuestionViewProps {
@@ -35,26 +37,27 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <p className="font-display text-2xl leading-relaxed font-semibold text-ink">
+        <p lang="de" className="text-3xl leading-snug font-extrabold text-ink">
           {question.before}
           <span
             className={cn(
-              'mx-0.5 inline-block min-w-16 rounded-lg border-b-4 px-1 text-center',
-              !last && 'border-brand bg-sunken text-muted',
-              last?.isCorrect && 'border-correct bg-correct-soft text-correct',
-              last && !last.isCorrect && 'border-wrong bg-wrong-soft text-wrong line-through',
+              'mx-1 inline-block min-w-20 px-2 text-center align-baseline',
+              !last && 'bg-ink text-ink',
+              last?.isCorrect && 'bg-correct text-canvas',
+              last && !last.isCorrect && 'bg-red text-on-red line-through',
             )}
           >
-            {filled ?? ' '}
+            {filled ?? '\u00a0'}
           </span>
           {question.after}
         </p>
         <p className="mt-2 text-sm text-muted">{question.translation}</p>
       </div>
-      <div className="grid grid-cols-2 gap-3" role="group" aria-label="Answer options">
-        {options.map((option) => {
+      <div className="flex flex-col gap-2" role="group" aria-label="Answer options">
+        {options.map((option, index) => {
           const isAnswer = option === question.answer;
           const isChosen = last?.given === option;
+          const shape = genderShape(option);
           return (
             <button
               key={option}
@@ -62,18 +65,24 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
               disabled={Boolean(last)}
               onClick={() => onAnswer(isAnswer, option)}
               className={cn(
-                'min-h-14 rounded-2xl border-2 bg-surface px-3 text-lg font-semibold shadow-raised transition motion-safe:active:translate-y-px',
-                optionTextClass(option),
-                !last && 'border-line hover:bg-sunken',
-                last && isAnswer && 'border-correct bg-correct-soft',
+                'flex min-h-14 items-center gap-3 border-2 border-ink px-4 text-left text-xl font-extrabold transition-colors motion-safe:active:translate-y-px',
+                !last && 'bg-surface hover:bg-yellow hover:text-on-yellow',
+                !last && optionTextClass(option),
+                last && isAnswer && 'bg-correct text-canvas',
                 last &&
                   isChosen &&
                   !isAnswer &&
-                  'border-wrong bg-wrong-soft motion-safe:animate-shake',
-                last && !isAnswer && !isChosen && 'border-line opacity-50',
+                  'bg-red text-on-red line-through motion-safe:animate-shake',
+                last && !isAnswer && !isChosen && 'bg-surface text-ink opacity-40',
               )}
             >
-              {ending ? `-${option}` : option}
+              {shape && <Shape kind={shape.kind} color={shape.color} className="text-base" />}
+              <span lang="de" className="flex-1">
+                {ending ? `-${option}` : option}
+              </span>
+              <span className="text-sm font-black opacity-60" aria-hidden="true">
+                {optionKey(index)}
+              </span>
             </button>
           );
         })}

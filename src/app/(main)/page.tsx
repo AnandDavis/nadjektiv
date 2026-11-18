@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col gap-6">
       <header>
-        <h1 className="font-display text-3xl font-bold text-ink">
+        <h1 className="text-4xl leading-none font-black text-ink">
           <Ui {...COPY.home.heading} />
         </h1>
       </header>

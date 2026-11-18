@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { DropdownMenu, InfoIcon, MenuIcon, SettingsIcon, Ui } from '@/components/ui';
+import { DropdownMenu, InfoIcon, MenuIcon, SettingsIcon, Shape, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { COPY } from '@/lib/i18n/copy';
 
@@ -9,18 +9,25 @@ const MENU_ITEMS = [
   { href: '/about', label: <Ui {...COPY.header.about} />, icon: <InfoIcon /> },
 ] as const;
 
-/** The persistent top bar: app name (home link) and the Settings / About menu. */
+/** The persistent top bar: wordmark (home link), the three shapes, and the menu. */
 export function AppHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b border-line bg-canvas/95 pt-safe backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-xl items-center justify-between px-4">
+    <header className="sticky top-0 z-10 bg-ink pt-safe text-canvas">
+      <div className="mx-auto flex h-14 w-full max-w-xl items-center gap-3 px-4">
         <Link
           href="/"
-          className="-ml-2 flex min-h-11 items-center rounded-xl px-2 font-display text-xl font-bold text-ink"
+          className="-ml-1 flex min-h-11 items-center px-1 text-xl font-black uppercase font-stretch-semi-expanded"
         >
           {APP_CONFIG.name}
         </Link>
-        <DropdownMenu label="Menu" trigger={<MenuIcon />} items={MENU_ITEMS} />
+        <span className="flex items-center gap-1 text-sm" aria-hidden="true">
+          <Shape kind="square" color="blue" />
+          <Shape kind="circle" color="red" />
+          <Shape kind="triangle" color="yellow" />
+        </span>
+        <span className="ml-auto">
+          <DropdownMenu label="Menu" trigger={<MenuIcon />} items={MENU_ITEMS} />
+        </span>
       </div>
     </header>
   );

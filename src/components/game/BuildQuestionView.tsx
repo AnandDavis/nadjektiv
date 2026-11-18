@@ -42,7 +42,7 @@ function shuffledTiles(question: BuildQuestion): Tile[] {
 }
 
 const TILE_CLASS =
-  'min-h-11 rounded-xl border-2 border-line bg-surface px-3 text-lg font-semibold text-ink shadow-raised transition motion-safe:active:translate-y-px';
+  'min-h-12 border-2 border-ink bg-surface px-3 text-lg font-extrabold text-ink transition-colors hover:bg-yellow hover:text-on-yellow motion-safe:active:translate-y-px';
 
 export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionViewProps) {
   const pool = useMemo(() => shuffledTiles(question), [question]);
@@ -60,21 +60,23 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
 
   return (
     <div className="flex flex-col gap-5">
-      <p className="text-lg text-ink">
-        <span className="text-sm font-semibold text-muted">Say in German: </span>
-        {question.translation}
-      </p>
+      <div>
+        <p className="text-xs font-extrabold tracking-widest text-muted uppercase">Say in German</p>
+        <p className="mt-1 text-2xl leading-snug font-extrabold text-ink">{question.translation}</p>
+      </div>
 
       <div
         aria-label="Your sentence"
         className={cn(
-          'flex min-h-28 flex-wrap content-start items-start gap-2 rounded-3xl border-2 border-dashed p-3',
-          !last && 'border-line bg-sunken',
+          'flex min-h-28 flex-wrap content-start items-start gap-2 border-4 p-3',
+          !last && 'border-ink bg-sunken',
           last?.isCorrect && 'border-correct bg-correct-soft',
-          last && !last.isCorrect && 'border-wrong bg-wrong-soft',
+          last && !last.isCorrect && 'border-red bg-wrong-soft',
         )}
       >
-        {chosenTiles.length === 0 && <p className="p-2 text-muted">Tap the words below in order</p>}
+        {chosenTiles.length === 0 && (
+          <p className="p-2 text-sm font-bold text-muted">Tap the words below in order</p>
+        )}
         {chosenTiles.map((tile, i) => (
           <button
             key={tile.key}
@@ -88,7 +90,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
           </button>
         ))}
         {isComplete && (
-          <span className="self-center text-2xl font-bold text-muted">{question.punctuation}</span>
+          <span className="self-center text-3xl font-black text-ink">{question.punctuation}</span>
         )}
       </div>
 

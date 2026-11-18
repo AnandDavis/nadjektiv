@@ -8,7 +8,7 @@ import { COPY } from '@/lib/i18n/copy';
 import { reviseCount } from '@/lib/revise/revise-groups';
 
 const CALLOUT_CLASS =
-  'flex min-h-16 items-center gap-3 rounded-3xl bg-brand p-4 text-on-brand shadow-raised transition hover:brightness-105 motion-safe:active:translate-y-px';
+  'flex min-h-16 items-center gap-3 border-2 border-ink bg-yellow p-4 text-on-yellow transition-colors hover:bg-ink hover:text-canvas';
 
 /** Points at the revise list when there's something on it, otherwise at mixed review. */
 export function ReviewCallout() {
@@ -21,7 +21,7 @@ export function ReviewCallout() {
       <Link href="/revise" className={CALLOUT_CLASS}>
         <RepeatIcon className="text-2xl" />
         <span className="flex-1">
-          <span className="block font-display text-lg font-bold">
+          <span className="block text-lg font-black uppercase">
             <Ui {...COPY.revise.title} />: {count}
           </span>
           <span className="block text-sm">
@@ -36,7 +36,7 @@ export function ReviewCallout() {
     <Link href="/play/review" className={CALLOUT_CLASS}>
       <ShuffleIcon className="text-2xl" />
       <span className="flex-1">
-        <span className="block font-display text-lg font-bold">
+        <span className="block text-lg font-black uppercase">
           <Ui {...COPY.home.review} />
         </span>
         <span className="block text-sm">

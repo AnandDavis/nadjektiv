@@ -18,6 +18,7 @@ import {
   type SessionItem,
 } from '@/lib/game/session';
 import { COPY } from '@/lib/i18n/copy';
+import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
 
 import { FeedbackPanel } from './FeedbackPanel';
@@ -116,6 +117,7 @@ export function GameScreen(props: GameScreenProps) {
             description={description}
             best={topicId && mode !== 'review' ? progress?.topics[topicId]?.modes[mode] : undefined}
             isReady={progress !== null}
+            shape={mode === 'review' ? undefined : MODE_SHAPES[mode]}
             exitHref={exitHref}
             onStart={start}
           />

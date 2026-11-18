@@ -26,47 +26,51 @@ export function FeedbackPanel({
   onContinue,
 }: FeedbackPanelProps) {
   return (
-    <div
-      className={cn(
-        'rounded-3xl border-2 p-4 motion-safe:animate-rise',
-        isCorrect ? 'border-correct bg-correct-soft' : 'border-wrong bg-wrong-soft',
-      )}
-    >
+    <div className="border-2 border-ink bg-surface motion-safe:animate-rise">
       <p
         className={cn(
-          'flex items-center gap-2 text-lg font-bold',
-          isCorrect ? 'text-correct' : 'text-wrong',
+          'flex items-center gap-2 px-4 py-2 text-lg font-black tracking-wide uppercase',
+          isCorrect ? 'bg-correct text-canvas' : 'bg-red text-on-red',
         )}
       >
         {isCorrect ? <CheckIcon /> : <CrossIcon />}
         <Ui {...(isCorrect ? COPY.game.correct : COPY.game.wrong)} />
-        {isCorrect && <span>+{points}</span>}
+        {isCorrect && <span className="ml-auto tabular-nums">+{points}</span>}
       </p>
-      {!isCorrect && (
-        <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-ink">
-          <dt className="text-sm text-muted">
-            <Ui {...COPY.game.youChose} />
-          </dt>
-          <dd lang="de" className="font-semibold line-through decoration-wrong">
-            {given}
-          </dd>
-          <dt className="text-sm text-muted">
-            <Ui {...COPY.game.answer} />
-          </dt>
-          <dd lang="de" className="font-semibold">
-            {correctAnswer}
-          </dd>
-        </dl>
-      )}
-      <p className="mt-3 text-sm text-ink">
-        <span className="font-semibold">
-          <Ui {...COPY.game.why} />{' '}
-        </span>
-        {explanation}
-      </p>
-      <Button className="mt-4 w-full" size="lg" onClick={onContinue} autoFocus>
-        <Ui {...COPY.game.next} />
-      </Button>
+      <div className="p-4">
+        {!isCorrect && (
+          <dl className="mb-3 flex flex-col gap-1 border-b-2 border-ink pb-3 text-ink">
+            <div className="flex items-baseline gap-4">
+              <dt className="w-24 shrink-0 text-xs font-extrabold tracking-widest text-muted uppercase">
+                <Ui {...COPY.game.youChose} />
+              </dt>
+              <dd
+                lang="de"
+                className="text-lg font-extrabold line-through decoration-red decoration-2"
+              >
+                {given}
+              </dd>
+            </div>
+            <div className="flex items-baseline gap-4">
+              <dt className="w-24 shrink-0 text-xs font-extrabold tracking-widest text-muted uppercase">
+                <Ui {...COPY.game.answer} />
+              </dt>
+              <dd lang="de" className="text-lg font-extrabold">
+                {correctAnswer}
+              </dd>
+            </div>
+          </dl>
+        )}
+        <p className="text-sm text-ink">
+          <span className="font-extrabold">
+            <Ui {...COPY.game.why} />{' '}
+          </span>
+          {explanation}
+        </p>
+        <Button className="mt-4 w-full" size="lg" onClick={onContinue} autoFocus>
+          <Ui {...COPY.game.next} />
+        </Button>
+      </div>
     </div>
   );
 }

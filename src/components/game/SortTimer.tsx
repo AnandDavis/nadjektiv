@@ -45,7 +45,7 @@ export function SortTimer({ seconds, isPaused, onExpire }: SortTimerProps) {
     <div className="flex items-center gap-2">
       <span
         className={cn(
-          'flex w-14 items-center gap-1 font-bold tabular-nums',
+          'flex w-16 items-center gap-1 text-2xl font-black tabular-nums',
           isLow ? 'text-wrong' : 'text-ink',
         )}
       >
@@ -55,7 +55,7 @@ export function SortTimer({ seconds, isPaused, onExpire }: SortTimerProps) {
       <ProgressBar
         value={remainingMs / (seconds * 1000)}
         label={isPaused ? 'Time left (paused)' : 'Time left'}
-        fillClassName={isLow ? 'bg-wrong' : 'bg-brand'}
+        fillClassName={isLow ? 'bg-red' : 'bg-ink'}
       />
     </div>
   );

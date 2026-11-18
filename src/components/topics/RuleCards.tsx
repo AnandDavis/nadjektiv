@@ -1,23 +1,30 @@
-import { BookIcon, Card, Ui } from '@/components/ui';
+import { BookIcon, Card, SectionHeading, Ui } from '@/components/ui';
 import type { RuleCard } from '@/content/types';
 import { COPY } from '@/lib/i18n/copy';
 
 export function RuleCards({ rules }: { rules: RuleCard[] }) {
   return (
     <section aria-labelledby="rules-heading">
-      <h2
-        id="rules-heading"
-        className="mb-3 flex items-center gap-2 font-display text-xl font-bold text-ink"
-      >
-        <BookIcon /> <Ui {...COPY.topic.rules} />
-      </h2>
-      <div className="flex flex-col gap-3">
-        {rules.map((rule) => (
+      <SectionHeading id="rules-heading" mark={<BookIcon />}>
+        <Ui {...COPY.topic.rules} />
+      </SectionHeading>
+      <div className="flex flex-col gap-4">
+        {rules.map((rule, index) => (
           <Card key={rule.heading}>
-            <h3 className="font-display text-lg font-bold text-ink">{rule.heading}</h3>
+            <h3 className="flex items-baseline gap-2 text-lg leading-tight font-black text-ink">
+              <span className="text-sm text-muted tabular-nums">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              {rule.heading}
+            </h3>
             {rule.body && <p className="mt-1 text-ink">{rule.body}</p>}
             {rule.table && (
-              <div className="-mx-1 mt-3 overflow-x-auto">
+              <div
+                className="-mx-1 mt-3 overflow-x-auto"
+                role="region"
+                aria-label={`${rule.heading} (table)`}
+                tabIndex={0}
+              >
                 <table className="w-full border-collapse text-left text-sm">
                   <thead>
                     <tr>
@@ -25,7 +32,7 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
                         <th
                           key={i}
                           scope="col"
-                          className="border-b-2 border-line px-1 py-1.5 font-semibold text-muted"
+                          className="bg-ink px-2 py-1.5 text-xs font-extrabold tracking-wider text-canvas uppercase"
                         >
                           {cell}
                         </th>
@@ -34,14 +41,14 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
                   </thead>
                   <tbody>
                     {rule.table.rows.map((row, r) => (
-                      <tr key={r} className="border-b border-line last:border-0">
+                      <tr key={r} className="border-b-2 border-ink last:border-0">
                         {row.map((cell, c) =>
                           c === 0 ? (
-                            <th key={c} scope="row" className="px-1 py-1.5 font-semibold text-ink">
+                            <th key={c} scope="row" className="px-2 py-1.5 font-extrabold text-ink">
                               {cell}
                             </th>
                           ) : (
-                            <td key={c} className="px-1 py-1.5 text-ink">
+                            <td key={c} className="px-2 py-1.5 text-ink">
                               {cell}
                             </td>
                           ),
@@ -53,9 +60,9 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
               </div>
             )}
             {rule.examples && (
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-3 border-t-2 border-ink">
                 {rule.examples.map((example) => (
-                  <li key={example.de} className="rounded-2xl bg-sunken px-3 py-2">
+                  <li key={example.de} className="border-b border-line py-2 last:border-b-0">
                     <p lang="de" className="font-semibold text-ink">
                       {example.de}
                     </p>

@@ -1,4 +1,4 @@
-import { Card, Ui } from '@/components/ui';
+import { Card, SectionHeading, Ui } from '@/components/ui';
 import { LAST_TITLE_LEVEL, PERFECT_BONUS_XP, comboSteps, levelTable } from '@/lib/about/levels';
 import { COPY } from '@/lib/i18n/copy';
 import { cn } from '@/lib/utils/cn';
@@ -12,12 +12,12 @@ export function LevelsExplainer() {
 
   return (
     <section aria-labelledby="levels-heading" className="flex flex-col gap-3">
-      <h2 id="levels-heading" className="font-display text-xl font-bold text-ink">
+      <SectionHeading id="levels-heading">
         <Ui {...COPY.about.levels} />
-      </h2>
+      </SectionHeading>
 
       <Card>
-        <h3 className="font-display font-bold text-ink">Earning XP</h3>
+        <h3 className="text-lg leading-tight font-black text-ink uppercase">Earning XP</h3>
         <ul className="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-ink">
           <li>
             Every right answer earns {steps[0].pointsPerAnswer} XP. Wrong answers never cost XP.
@@ -35,16 +35,21 @@ export function LevelsExplainer() {
       </Card>
 
       <Card>
-        <h3 className="font-display font-bold text-ink">Levels</h3>
+        <h3 className="text-lg leading-tight font-black text-ink uppercase">Levels</h3>
         <p className="mt-1 text-sm text-ink">
           Each level needs {third.stepXp - second.stepXp} XP more than the one before:{' '}
           {second.stepXp} XP to reach level 2, then {third.stepXp} more for level 3, and so on. New
           titles unlock along the way.
         </p>
-        <div className="-mx-1 mt-3 overflow-x-auto">
+        <div
+          className="-mx-1 mt-3 overflow-x-auto"
+          role="region"
+          aria-label="Levels table"
+          tabIndex={0}
+        >
           <table className="w-full border-collapse text-left text-sm tabular-nums">
             <thead>
-              <tr className="border-b-2 border-line text-muted">
+              <tr className="bg-ink text-canvas">
                 <th scope="col" className={CELL}>
                   Level
                 </th>

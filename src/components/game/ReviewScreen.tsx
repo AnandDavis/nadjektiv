@@ -18,7 +18,7 @@ export function ReviewScreen(props: ReviewScreenProps) {
       <div className="flex min-h-dvh flex-col">
         <AppHeader />
         <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
-          <h1 className="font-display text-2xl font-bold text-ink">Nothing to review yet</h1>
+          <h1 className="text-4xl leading-none font-black text-ink">Nothing to review yet</h1>
           <p className="text-muted">
             Play a topic first — review then mixes in the questions you find hardest.
           </p>

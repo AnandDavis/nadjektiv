@@ -6,32 +6,42 @@ import type { MasteryInfo } from '@/lib/progress/mastery';
 
 interface TopicCardProps {
   topic: TopicSummary;
+  /** Position in the learning order, shown as 01, 02 … */
+  index: number;
   /** Undefined while progress is loading. */
   mastery?: MasteryInfo;
 }
 
-export function TopicCard({ topic, mastery }: TopicCardProps) {
+/** One row of the topic index. */
+export function TopicCard({ topic, index, mastery }: TopicCardProps) {
   return (
     <Link
       href={`/topics/${topic.id}`}
-      className="flex min-h-20 items-center gap-3 rounded-3xl border border-line bg-surface p-4 shadow-card transition hover:bg-sunken motion-safe:active:translate-y-px"
+      className="group flex min-h-20 items-start gap-3 py-3 transition-colors hover:bg-yellow hover:text-on-yellow"
     >
-      <div className="min-w-0 flex-1">
-        <p className="font-display text-lg leading-tight font-bold text-ink">{topic.title}</p>
-        <p className="mt-0.5 line-clamp-2 text-sm text-muted">{topic.tagline}</p>
-      </div>
-      <div className="flex shrink-0 flex-col items-end gap-1">
+      <span className="w-9 shrink-0 pt-0.5 text-right text-lg font-black text-muted tabular-nums group-hover:text-on-yellow">
+        {String(index).padStart(2, '0')}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-lg leading-tight font-extrabold text-ink group-hover:text-on-yellow">
+          {topic.title}
+        </span>
+        <span className="mt-0.5 line-clamp-2 block text-sm text-muted group-hover:text-on-yellow">
+          {topic.tagline}
+        </span>
+      </span>
+      <span className="flex shrink-0 flex-col items-end gap-1 pt-0.5 pr-1">
         {mastery ? (
           <TierBadge tier={mastery.tier} />
         ) : (
-          <span className="h-6 w-20 animate-pulse rounded-full bg-sunken" aria-hidden="true" />
+          <span className="h-6 w-16 animate-pulse bg-sunken" aria-hidden="true" />
         )}
         {mastery && mastery.tier !== 'new' && (
-          <span className="text-xs text-muted tabular-nums">
-            {Math.round(mastery.recentAccuracy * 100)}% recently
+          <span className="text-xs font-bold text-muted tabular-nums group-hover:text-on-yellow">
+            {Math.round(mastery.recentAccuracy * 100)}%
           </span>
         )}
-      </div>
+      </span>
     </Link>
   );
 }

@@ -1,4 +1,3 @@
-import { Card } from '@/components/ui';
 import type { Question } from '@/content/types';
 import { formatSentence } from '@/lib/game/check-answer';
 import type { Mistake } from '@/lib/game/game-reducer';
@@ -25,17 +24,24 @@ export function MistakeList({ mistakes }: { mistakes: Mistake[] }) {
   );
   return (
     <section aria-labelledby="mistakes-heading">
-      <h3 id="mistakes-heading" className="mb-2 font-display text-lg font-bold text-ink">
+      <h3
+        id="mistakes-heading"
+        className="mb-2 border-b-4 border-ink pb-1 text-lg font-black text-ink uppercase"
+      >
         Review your mistakes
       </h3>
-      <ul className="flex flex-col gap-3">
+      <ul>
         {unique.map(({ item, given }) => (
           <li key={item.question.id}>
-            <Card className="p-3">
-              <p className="font-semibold text-ink">{correctText(item.question)}</p>
-              <p className="mt-1 text-sm text-wrong">You said: {given}</p>
-              <p className="mt-1 text-sm text-muted">{item.question.explanation}</p>
-            </Card>
+            <div className="border-b-2 border-ink py-3">
+              <p lang="de" className="text-lg font-extrabold text-ink">
+                {correctText(item.question)}
+              </p>
+              <p className="mt-1 text-sm font-bold text-wrong">
+                <span className="line-through decoration-2">{given}</span>
+              </p>
+              <p className="mt-1 text-sm text-ink">{item.question.explanation}</p>
+            </div>
           </li>
         ))}
       </ul>

@@ -26,7 +26,7 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
     <header className="flex flex-col gap-4">
       <Link
         href="/"
-        className="-ml-2 flex min-h-11 w-fit items-center gap-1 rounded-xl px-2 font-semibold text-muted hover:bg-sunken"
+        className="-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas"
       >
         <ArrowLeftIcon /> All topics
       </Link>
@@ -35,15 +35,15 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
           <Badge>{level}</Badge>
           {mastery && <TierBadge tier={mastery.tier} />}
         </div>
-        <h1 className="mt-2 font-display text-3xl font-bold text-ink">{title}</h1>
-        <p className="mt-1 text-muted">{tagline}</p>
+        <h1 className="mt-3 text-5xl leading-none font-black text-ink">{title}</h1>
+        <p className="mt-3 text-lg text-ink">{tagline}</p>
       </div>
       {mastery?.next && (
-        <Card className="p-3">
-          <p className="text-sm font-bold text-ink">
+        <Card className="p-0">
+          <p className="bg-ink px-3 py-1.5 text-xs font-extrabold tracking-widest text-canvas uppercase">
             <Ui {...COPY.topic.next} />: <Ui {...TIER_LABELS[mastery.next.tier]} />
           </p>
-          <ul className="mt-1 flex flex-col gap-1">
+          <ul className="flex flex-col gap-1 p-3">
             {mastery.next.requirements.map((req) => (
               <li
                 key={req.label}

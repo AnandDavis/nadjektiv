@@ -27,18 +27,20 @@ export function SegmentedControl<T extends string>({
 }: SegmentedControlProps<T>) {
   return (
     <fieldset>
-      <legend className="font-display text-lg font-bold text-ink">{legend}</legend>
+      <legend className="text-xs font-extrabold tracking-widest text-ink uppercase">
+        {legend}
+      </legend>
       {hint && <p className="mt-1 text-sm text-muted">{hint}</p>}
       <div
-        className="mt-3 grid gap-2"
+        className="mt-3 grid border-2 border-ink"
         style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}
       >
         {options.map((option) => (
           <label
             key={option.value}
             className={cn(
-              'flex min-h-11 cursor-pointer items-center justify-center rounded-2xl border-2 px-2 text-center font-semibold has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-focus',
-              value === option.value ? 'border-brand bg-sunken text-ink' : 'border-line text-muted',
+              'flex min-h-11 cursor-pointer items-center justify-center border-l-2 border-ink px-2 text-center text-sm font-extrabold uppercase first:border-l-0 has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-focus',
+              value === option.value ? 'bg-ink text-canvas' : 'text-ink hover:bg-sunken',
             )}
           >
             <input

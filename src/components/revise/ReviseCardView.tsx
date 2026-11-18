@@ -16,7 +16,7 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
       <div className="flex items-start gap-2">
         <CheckIcon className="mt-1 shrink-0 text-correct" />
         <div className="min-w-0 flex-1">
-          <p lang="de" className="font-display text-lg font-bold break-words text-ink">
+          <p lang="de" className="text-xl leading-tight font-black break-words text-ink">
             {card.correct}
           </p>
           {card.translation && <p className="text-sm text-muted">{card.translation}</p>}
@@ -64,8 +64,8 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
 
 function ExampleList({ label, items }: { label: React.ReactNode; items: string[] }) {
   return (
-    <div className="rounded-2xl bg-sunken px-3 py-2">
-      <p className="text-xs font-bold tracking-wide text-muted uppercase">{label}</p>
+    <div className="border-2 border-ink px-3 py-2">
+      <p className="text-xs font-extrabold tracking-widest text-muted uppercase">{label}</p>
       <ul className="mt-1 flex flex-col gap-0.5">
         {items.map((item) => (
           <li key={item} lang="de" className="text-ink">

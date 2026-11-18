@@ -14,7 +14,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col gap-8">
       <header>
-        <h1 className="font-display text-3xl font-bold text-ink">
+        <h1 className="text-4xl leading-none font-black text-ink">
           <Ui {...COPY.header.about} />
         </h1>
         <p className="mt-1 text-muted">

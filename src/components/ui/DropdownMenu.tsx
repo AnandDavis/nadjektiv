@@ -86,8 +86,8 @@ export function DropdownMenu({ label, trigger, items }: DropdownMenuProps) {
           }
         }}
         className={cn(
-          'flex size-11 items-center justify-center rounded-full text-xl text-ink transition hover:bg-sunken',
-          isOpen && 'bg-sunken',
+          'flex size-11 items-center justify-center text-xl text-canvas transition-colors hover:bg-canvas hover:text-ink',
+          isOpen && 'bg-canvas text-ink',
         )}
       >
         {trigger}
@@ -98,7 +98,7 @@ export function DropdownMenu({ label, trigger, items }: DropdownMenuProps) {
           role="menu"
           aria-label={label}
           onKeyDown={handleMenuKeyDown}
-          className="absolute top-full right-0 z-20 mt-2 min-w-48 rounded-2xl border border-line bg-surface p-1.5 shadow-card motion-safe:animate-rise"
+          className="absolute top-full right-0 z-20 mt-2 min-w-52 border-2 border-ink bg-surface motion-safe:animate-rise"
         >
           {items.map((item, i) => (
             <Link
@@ -109,9 +109,9 @@ export function DropdownMenu({ label, trigger, items }: DropdownMenuProps) {
               href={item.href}
               role="menuitem"
               onClick={() => close(false)}
-              className="flex min-h-11 items-center gap-3 rounded-xl px-3 font-semibold text-ink hover:bg-sunken focus-visible:bg-sunken"
+              className="flex min-h-12 items-center gap-3 border-b-2 border-ink px-4 text-sm font-extrabold tracking-wide text-ink uppercase last:border-b-0 hover:bg-yellow hover:text-on-yellow focus-visible:bg-yellow focus-visible:text-on-yellow"
             >
-              {item.icon && <span className="text-lg text-muted">{item.icon}</span>}
+              {item.icon && <span className="text-lg">{item.icon}</span>}
               {item.label}
             </Link>
           ))}

@@ -27,24 +27,33 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
   }, [progress, topics]);
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-10">
       {(['A1', 'A2'] as const).map((level) => {
         const levelTopics = topics.filter((t) => t.level === level);
         return (
           <section key={level} aria-labelledby={`level-${level}`}>
-            <h2 id={`level-${level}`} className="font-display text-2xl font-bold text-ink">
-              {level}
-            </h2>
-            <p className="mb-3 text-sm text-muted">{LEVEL_INTROS[level]}</p>
+            <div className="flex items-end gap-3 border-b-4 border-ink pb-2">
+              <h2
+                id={`level-${level}`}
+                className="text-6xl leading-none font-black tracking-tighter text-ink"
+              >
+                {level}
+              </h2>
+              <p className="pb-1 text-sm leading-snug text-muted">{LEVEL_INTROS[level]}</p>
+            </div>
             {groupTopics(levelTopics).map(({ group, label, items }) => (
-              <div key={group} className="mb-4">
-                <h3 className="mb-2 text-xs font-bold tracking-wide text-muted uppercase">
+              <div key={group}>
+                <h3 className="mt-5 mb-1 text-xs font-extrabold tracking-widest text-muted uppercase">
                   {label}
                 </h3>
-                <ul className="flex flex-col gap-3">
+                <ul className="border-t-2 border-ink">
                   {items.map((topic) => (
-                    <li key={topic.id}>
-                      <TopicCard topic={topic} mastery={mastery?.get(topic.id)} />
+                    <li key={topic.id} className="border-b-2 border-ink">
+                      <TopicCard
+                        topic={topic}
+                        index={topics.indexOf(topic) + 1}
+                        mastery={mastery?.get(topic.id)}
+                      />
                     </li>
                   ))}
                 </ul>

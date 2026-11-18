@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Inter } from 'next/font/google';
+import { Archivo } from 'next/font/google';
 
 import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
 import { APP_CONFIG } from '@/config/app';
@@ -7,10 +7,10 @@ import { PREFERENCES_SCRIPT } from '@/lib/storage/preferences';
 
 import './globals.css';
 
-const body = Inter({ variable: '--font-body', subsets: ['latin'], display: 'swap' });
-const heading = Bricolage_Grotesque({
-  variable: '--font-heading',
+const archivo = Archivo({
+  variable: '--font-archivo',
   subsets: ['latin'],
+  axes: ['wdth'],
   display: 'swap',
 });
 
@@ -34,7 +34,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${body.variable} ${heading.variable}`} suppressHydrationWarning>
+    <html lang="en" className={archivo.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFERENCES_SCRIPT }} />
       </head>

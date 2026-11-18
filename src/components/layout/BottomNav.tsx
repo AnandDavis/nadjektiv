@@ -26,10 +26,7 @@ export function BottomNav() {
   const progress = useProgress();
   const toRevise = progress ? reviseCount(progress.revise) : 0;
   return (
-    <nav
-      aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-surface pb-safe"
-    >
+    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-10 bg-ink pb-safe text-canvas">
       <ul className="mx-auto grid max-w-xl grid-cols-3">
         {LINKS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
@@ -40,14 +37,14 @@ export function BottomNav() {
                 href={href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-semibold',
-                  active ? 'text-ink' : 'text-muted hover:text-ink',
+                  'flex min-h-14 flex-col items-center justify-center gap-0.5 text-xs font-extrabold tracking-wider uppercase transition-colors',
+                  active ? 'bg-red text-on-red' : 'hover:bg-canvas hover:text-ink',
                 )}
               >
                 <span className="relative">
-                  <Icon className={cn('text-xl', active && 'text-brand-strong')} />
+                  <Icon className="text-xl" />
                   {count > 0 && (
-                    <span className="absolute -top-1.5 left-3.5 min-w-5 rounded-full bg-wrong px-1 text-center text-xs leading-5 font-bold text-surface tabular-nums">
+                    <span className="absolute -top-1.5 left-3.5 min-w-5 bg-yellow px-1 text-center text-xs leading-5 font-black text-on-yellow tabular-nums">
                       {count}
                       <span className="sr-only"> to revise</span>
                     </span>

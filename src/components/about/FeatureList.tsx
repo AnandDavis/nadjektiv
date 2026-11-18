@@ -1,23 +1,26 @@
-import { Card, Ui } from '@/components/ui';
+import { SectionHeading, Ui } from '@/components/ui';
 import { FEATURES } from '@/content/features';
 import { COPY } from '@/lib/i18n/copy';
 
 export function FeatureList() {
   return (
     <section aria-labelledby="features-heading">
-      <h2 id="features-heading" className="mb-3 font-display text-xl font-bold text-ink">
+      <SectionHeading id="features-heading">
         <Ui {...COPY.about.features} />
-      </h2>
-      <ul className="grid gap-3 sm:grid-cols-2">
-        {FEATURES.map((feature) => (
-          <li key={feature.title}>
-            <Card className="h-full">
-              <h3 className="font-display font-bold text-ink">{feature.title}</h3>
-              <p className="mt-1 text-sm text-muted">{feature.description}</p>
-            </Card>
+      </SectionHeading>
+      <ol>
+        {FEATURES.map((feature, index) => (
+          <li key={feature.title} className="flex gap-3 border-b-2 border-ink py-3">
+            <span className="w-7 shrink-0 text-right font-black text-muted tabular-nums">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3 className="leading-tight font-black text-ink uppercase">{feature.title}</h3>
+              <p className="mt-1 text-sm text-ink">{feature.description}</p>
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
     </section>
   );
 }

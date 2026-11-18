@@ -57,7 +57,7 @@ export function DataSettings() {
   return (
     <Card className="flex flex-col gap-4">
       <div>
-        <h2 className="font-display text-lg font-bold text-ink">Your progress</h2>
+        <h2 className="text-xs font-extrabold tracking-widest text-ink uppercase">Your progress</h2>
         <p className="mt-1 text-sm text-muted">
           Progress is saved on this device only. Export it to keep a backup or move to another
           device.
@@ -84,7 +84,7 @@ export function DataSettings() {
         />
       </div>
       {isConfirmingReset ? (
-        <div className="rounded-2xl border-2 border-wrong bg-wrong-soft p-3">
+        <div className="border-2 border-wrong bg-wrong-soft p-3">
           <p className="font-semibold text-ink">
             Delete all progress on this device? This can’t be undone.
           </p>

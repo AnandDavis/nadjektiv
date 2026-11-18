@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 
 /*
- * Design tokens. Every colour the UI uses is defined here once, with light and dark
- * values via light-dark(). Components use the semantic utilities (bg-surface,
- * text-muted, bg-correct-soft …) — never raw hues or hex codes.
+ * Design tokens: the Bauhaus system. Every colour the UI uses is defined here once,
+ * with light and dark values via light-dark(). Components use the semantic utilities
+ * (bg-surface, text-muted, bg-blue …), never raw hues or hex codes.
+ *
+ * Language: warm paper, ink-black rules, flat primary blocks. No rounded corners, no
+ * shadows. Blue ■, red ● and yellow ▲ carry meaning: der/die/das, the three game
+ * modes, and emphasis. See docs/DESIGN.md.
  *
  * Theme: follows the OS by default; data-theme on <html> forces light or dark.
  */
@@ -11,35 +15,42 @@
 :root {
   color-scheme: light dark;
 
-  --canvas: light-dark(#faf7f2, #121117);
-  --surface: light-dark(#ffffff, #1c1b23);
-  --sunken: light-dark(#f2eee7, #25242e);
-  --line: light-dark(#e4ded3, #363442);
-  --ink: light-dark(#1c1b22, #f3f1ec);
-  --muted: light-dark(#625f6b, #a7a3b3);
+  --canvas: light-dark(#efebe0, #141414);
+  --surface: light-dark(#f8f5ed, #1e1d1a);
+  --sunken: light-dark(#e3ded0, #2b2a26);
+  --line: light-dark(#cbc4b3, #3d3b35);
+  --ink: light-dark(#151515, #efebe0);
+  --muted: light-dark(#55524a, #aaa597);
 
-  --brand: light-dark(#e8a317, #f2b632);
-  --brand-strong: light-dark(#8a5d00, #f7c75a);
-  --on-brand: #1c1b22;
-  --focus: light-dark(#1c1b22, #f2b632);
+  /* Bauhaus primaries, as fills. Text on them uses the matching on-* token. */
+  --blue: light-dark(#1f4fd1, #6b92ff);
+  --red: light-dark(#d62b23, #ff5d52);
+  --yellow: light-dark(#f2c200, #ffd23a);
+  --on-blue: light-dark(#ffffff, #141414);
+  --on-red: light-dark(#ffffff, #141414);
+  --on-yellow: #151515;
 
-  --correct: light-dark(#13773e, #5ee08e);
-  --correct-soft: light-dark(#e3f5ea, #183424);
-  --wrong: light-dark(#b42318, #ff8a80);
-  --wrong-soft: light-dark(#fdebe9, #3a1d1c);
+  --brand: var(--red);
+  /* Red that is readable as text on paper. */
+  --brand-strong: light-dark(#b8241d, #ff6d63);
+  --on-brand: var(--on-red);
+  --focus: light-dark(#1f4fd1, #ffd23a);
 
-  --der: light-dark(#1d4ed8, #7aa2ff);
-  --die: light-dark(#be185d, #f78fc0);
-  --das: light-dark(#0f766e, #4fd1c5);
+  --correct: light-dark(#1b6e36, #6bd88b);
+  --correct-soft: light-dark(#d3e8d5, #16301d);
+  --wrong: light-dark(#b8241d, #ff6d63);
+  --wrong-soft: light-dark(#f3d2cc, #3b1a16);
 
-  --bronze: light-dark(#9a5b26, #d99a63);
-  --silver: light-dark(#5d6b7e, #b8c4d4);
-  --gold: light-dark(#8a6600, #f2c94c);
-  --mastered: light-dark(#6d28d9, #b794f6);
-  --tier-new: light-dark(#75727f, #8d8a98);
+  /* Gender as text colour; the yellow is darkened so "das" stays readable on paper. */
+  --der: light-dark(#1f4fd1, #6b92ff);
+  --die: light-dark(#b8241d, #ff6d63);
+  --das: light-dark(#7c6200, #ffd23a);
 
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 16px rgb(0 0 0 / 0.04);
-  --shadow-raised: 0 3px 0 rgb(0 0 0 / 0.14);
+  --bronze: light-dark(#9a5523, #e39a5f);
+  --silver: light-dark(#5c6470, #bcc4cf);
+  --gold: light-dark(#7c6200, #ffd23a);
+  --mastered: light-dark(#1f4fd1, #8eabff);
+  --tier-new: light-dark(#6f6b60, #8f8a7e);
 }
 
 :root[data-theme='light'] {
@@ -57,6 +68,12 @@
   --color-line: var(--line);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
+  --color-blue: var(--blue);
+  --color-red: var(--red);
+  --color-yellow: var(--yellow);
+  --color-on-blue: var(--on-blue);
+  --color-on-red: var(--on-red);
+  --color-on-yellow: var(--on-yellow);
   --color-brand: var(--brand);
   --color-brand-strong: var(--brand-strong);
   --color-on-brand: var(--on-brand);
@@ -74,15 +91,12 @@
   --color-mastered: var(--mastered);
   --color-tier-new: var(--tier-new);
 
-  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-card: var(--shadow-card);
-  --shadow-raised: var(--shadow-raised);
-
-  --animate-pop: pop 180ms ease-out;
+  --animate-pop: pop 160ms ease-out;
   --animate-shake: shake 320ms ease-in-out;
-  --animate-rise: rise 240ms ease-out;
+  --animate-rise: rise 200ms ease-out;
 }
 
 @keyframes pop {
@@ -134,6 +148,7 @@
   :focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 2px;
+    border-radius: 0;
   }
 }
 

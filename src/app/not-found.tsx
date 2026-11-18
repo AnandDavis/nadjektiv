@@ -7,8 +7,8 @@ export default function NotFound() {
     <div className="flex min-h-dvh flex-col">
       <AppHeader />
       <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
-        <p className="font-display text-6xl font-bold text-brand-strong">404</p>
-        <h1 className="font-display text-2xl font-bold text-ink">
+        <p className="text-9xl leading-none font-black tracking-tighter text-red">404</p>
+        <h1 className="text-4xl leading-none font-black text-ink">
           <Ui {...COPY.notFound.heading} />
         </h1>
         <ButtonLink href="/">Back to the topics</ButtonLink>

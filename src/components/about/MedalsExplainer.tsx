@@ -1,5 +1,5 @@
 import { TierBadge } from '@/components/progress/TierBadge';
-import { Card, Ui } from '@/components/ui';
+import { Card, SectionHeading, Ui } from '@/components/ui';
 import { MEDAL_RULES } from '@/lib/about/levels';
 import { RECENT_WINDOW } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
@@ -7,9 +7,9 @@ import { COPY } from '@/lib/i18n/copy';
 export function MedalsExplainer() {
   return (
     <section aria-labelledby="medals-heading">
-      <h2 id="medals-heading" className="mb-3 font-display text-xl font-bold text-ink">
+      <SectionHeading id="medals-heading">
         <Ui {...COPY.about.tiers} />
-      </h2>
+      </SectionHeading>
       <Card>
         <p className="text-sm text-ink">
           Each topic earns its own medal from your accuracy over your last {RECENT_WINDOW} answers

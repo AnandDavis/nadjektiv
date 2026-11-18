@@ -8,6 +8,8 @@ export const APP_CONFIG = {
   shortName: 'Nadjektiv',
   description:
     'Learn German A1–A2 grammar through quick games: sort, fill the gap, build sentences.',
+  /** Source code; the About page links the running build's commit here. */
+  repositoryUrl: 'https://github.com/AnandDavis/nadjektiv',
   /** File name prefix for progress exports (safe to change). */
   exportFilePrefix: 'nadjektiv-progress',
   /**

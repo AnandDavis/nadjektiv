@@ -36,6 +36,12 @@ describe('checkTyped', () => {
     expect(checkTyped(gap('gegessen'), 'gegesesn')).toBe('nearly');
   });
 
+  it('calls another option plainly wrong, however close: a wrong case is not a typo', () => {
+    expect(checkTyped(gap('dem', ['dem', 'den', 'der']), 'den')).toBe('wrong');
+    expect(checkTyped(gap('es', ['e', 'en', 'er', 'es']), 'en')).toBe('wrong');
+    expect(checkTyped(gap('dem', ['dem', 'den', 'der']), 'dme')).toBe('nearly');
+  });
+
   it('calls anything further off, or nothing, wrong', () => {
     expect(checkTyped(gap('dem'), 'der Mann')).toBe('wrong');
     expect(checkTyped(gap('dem'), '   ')).toBe('wrong');

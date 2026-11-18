@@ -60,8 +60,6 @@ export const COPY = {
     tiers: { de: 'Medaillen pro Thema', en: 'Medals for each topic' },
     changelog: { de: 'Neuigkeiten', en: 'What’s new' },
     version: { de: 'Version', en: 'Version' },
-    build: { de: 'Build', en: 'Build' },
-    builtAt: { de: 'Stand', en: 'Built' },
   },
   nav: {
     learn: { de: 'Lernen', en: 'Learn' },

@@ -39,6 +39,11 @@ export const FEATURES: readonly Feature[] = [
       'Tap words into the right order to build 8 sentences. Every correct German word order counts.',
   },
   {
+    title: 'Tippen',
+    description:
+      'Once you have a medal in a topic, type the missing word yourself instead of picking it, with ä ö ü ß keys built in. Case and extra spaces don’t matter, but spelling does: “ae” never counts for “ä”. If you’re one letter off, you’re told it was nearly right.',
+  },
+  {
     title: 'Tabelle',
     description:
       'Fill in a whole table against the clock, such as the article grid or the irregular verbs. Cells lock green when they’re right, and your best time is saved for each table.',

@@ -65,7 +65,7 @@ export function getTopic(id: string): Topic | undefined {
 
 export const LEVELS: readonly Level[] = ['A1', 'A2'];
 
-export const GAME_MODES: readonly GameMode[] = ['sort', 'gap', 'build', 'grid'];
+export const GAME_MODES: readonly GameMode[] = ['sort', 'gap', 'build', 'type', 'grid'];
 
 export function isGameMode(value: string): value is GameMode {
   return (GAME_MODES as readonly string[]).includes(value);

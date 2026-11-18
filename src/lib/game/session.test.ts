@@ -160,3 +160,22 @@ describe('buildReviewSession', () => {
     expect(new Set(session.map((item) => item.question.id)).size).toBe(12);
   });
 });
+
+describe('Type the answer', () => {
+  it('re-asks the typeable gap questions, marked as typed', () => {
+    const topic = makeTopic('t', 0, 3);
+    topic.gap![1] = { ...topic.gap![1], options: ['ich gehe', 'gehe ich'], answer: 'gehe ich' };
+    expect(availableModes(topic)).toContain('type');
+    const round = buildTopicSession(topic, 'type', {}, createRng(1));
+    expect(round.map((item) => item.question.id).sort()).toEqual(['t-gap-1', 't-gap-3']);
+    expect(round.every((item) => item.typed)).toBe(true);
+  });
+
+  it('is left out of mixed review, so no gap question comes up twice', () => {
+    const topic = makeTopic('t', 0, 20);
+    const round = buildReviewSession([topic], new Set(['t']), {}, {}, createRng(1));
+    const ids = round.map((item) => item.question.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(round.some((item) => item.typed)).toBe(false);
+  });
+});

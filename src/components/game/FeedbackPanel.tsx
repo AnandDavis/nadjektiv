@@ -1,11 +1,13 @@
 import { Button, CheckIcon, CrossIcon, Ui } from '@/components/ui';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { cn } from '@/lib/utils/cn';
 
 interface FeedbackPanelProps {
   isCorrect: boolean;
   /** What the learner chose, shown next to the right answer when they got it wrong. */
   given: string;
+  /** Label for `given`; "You chose" unless the answer was typed. */
+  givenLabel?: Bilingual;
   /** The right answer, shown when the learner got it wrong. */
   correctAnswer: string;
   explanation: string;
@@ -20,6 +22,7 @@ interface FeedbackPanelProps {
 export function FeedbackPanel({
   isCorrect,
   given,
+  givenLabel = COPY.game.youChose,
   correctAnswer,
   explanation,
   points,
@@ -42,7 +45,7 @@ export function FeedbackPanel({
           <dl className="mb-3 flex flex-col gap-1 border-b-2 border-ink pb-3 text-ink">
             <div className="flex items-baseline gap-4">
               <dt className="w-24 shrink-0 text-xs font-extrabold tracking-widest text-muted uppercase">
-                <Ui {...COPY.game.youChose} />
+                <Ui {...givenLabel} />
               </dt>
               <dd
                 lang="de"

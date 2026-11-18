@@ -7,8 +7,11 @@
 
 export type Level = 'A1' | 'A2';
 
-/** Modes that ask one question at a time. */
-export type QuestionMode = 'sort' | 'gap' | 'build';
+/**
+ * Modes that ask one question at a time. `type` asks a topic's gap questions with
+ * the answer typed instead of picked; it unlocks once the topic has a medal.
+ */
+export type QuestionMode = 'sort' | 'gap' | 'build' | 'type';
 
 /** Every game mode: the question modes plus grid fill, which shows a whole table. */
 export type GameMode = QuestionMode | 'grid';

@@ -6,6 +6,7 @@ import { SectionHeading, Shape, Ui } from '@/components/ui';
 import type { GameMode } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { MODE_INFO } from '@/lib/game/modes';
+import { isModeUnlocked } from '@/lib/game/unlock';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import { COPY } from '@/lib/i18n/copy';
 
@@ -21,6 +22,27 @@ export function TopicModes({ topicId, modes }: { topicId: string; modes: GameMod
           const info = MODE_INFO[mode];
           const shape = MODE_SHAPES[mode];
           const best = progress?.topics[topicId]?.modes[mode];
+          if (!isModeUnlocked(mode, progress?.topics[topicId], modes)) {
+            return (
+              <li
+                key={mode}
+                className="flex min-h-20 items-center gap-4 border-b-2 border-ink py-3 pr-2"
+              >
+                <Shape kind={shape.kind} color={shape.color} className="ml-1 text-4xl opacity-30" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xl leading-tight font-black text-muted uppercase">
+                    {info.name}
+                  </span>
+                  <span className="block text-xs font-extrabold tracking-widest text-muted uppercase">
+                    {info.english}
+                  </span>
+                  <span className="mt-1 block text-sm text-ink">
+                    <Ui {...COPY.typed.locked} />
+                  </span>
+                </span>
+              </li>
+            );
+          }
           return (
             <li key={mode} className="border-b-2 border-ink">
               <Link

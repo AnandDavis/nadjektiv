@@ -81,6 +81,13 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await snap(page, `gap-question-${colorScheme}`);
     });
 
+    test('type the answer', async ({ page }) => {
+      await page.goto('/play/articles/type');
+      await page.getByRole('button', { name: /Los geht/ }).click();
+      await page.getByRole('textbox', { name: 'Deine Antwort' }).fill('dem');
+      await snap(page, `type-question-${colorScheme}`);
+    });
+
     test('results, revise and progress after a round', async ({ page }) => {
       await playGapRound(page);
       await expect(page.getByRole('heading', { level: 2 })).toBeFocused();

@@ -27,6 +27,7 @@ export function Shape({ kind, color, className }: ShapeProps) {
       {kind === 'square' && <rect x="2" y="2" width="16" height="16" />}
       {kind === 'circle' && <circle cx="10" cy="10" r="8.5" />}
       {kind === 'triangle' && <polygon points="10,1.5 19,18.5 1,18.5" />}
+      {kind === 'bar' && <rect x="7" y="1" width="6" height="18" />}
       {kind === 'grid' && (
         <>
           <rect x="2" y="2" width="7" height="7" />

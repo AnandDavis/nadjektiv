@@ -9,6 +9,7 @@ import { GAME_CONFIG } from '@/config/game';
 import type { GameMode, Question, QuestionMode, Topic } from '@/content/types';
 
 import type { QuestionStats } from '../progress/types';
+import { isTypeable } from './check-typed';
 import type { Rng } from './rng';
 
 /** A question plus the context needed to render it outside its topic. */
@@ -18,6 +19,8 @@ export interface SessionItem {
   /** Sort bins, present only for sort questions. */
   bins?: string[];
   instruction?: string;
+  /** A gap question to be answered by typing (Type the answer mode). */
+  typed?: boolean;
 }
 
 export const SESSION_LENGTH: Readonly<Record<QuestionMode, number>> = GAME_CONFIG.sessionLength;
@@ -67,6 +70,10 @@ export function topicItems(topic: Topic, mode: QuestionMode): SessionItem[] {
       return (topic.gap ?? []).map((question) => ({ topicId: topic.id, question }));
     case 'build':
       return (topic.build ?? []).map((question) => ({ topicId: topic.id, question }));
+    case 'type':
+      return (topic.gap ?? [])
+        .filter(isTypeable)
+        .map((question) => ({ topicId: topic.id, question, typed: true }));
     /* v8 ignore next 4 -- exhaustive: the type system proves this is unreachable */
     default: {
       const exhaustive: never = mode;
@@ -75,15 +82,21 @@ export function topicItems(topic: Topic, mode: QuestionMode): SessionItem[] {
   }
 }
 
-/** The one-question-at-a-time modes a topic has (everything but grid fill). */
+/**
+ * The one-question-at-a-time modes a topic has, each question once: everything but
+ * grid fill, and not Type the answer, which re-asks the gap questions.
+ */
 export function questionModes(topic: Topic): QuestionMode[] {
-  return availableModes(topic).filter((mode): mode is QuestionMode => mode !== 'grid');
+  return availableModes(topic).filter(
+    (mode): mode is QuestionMode => mode !== 'grid' && mode !== 'type',
+  );
 }
 
 export function availableModes(topic: Topic): GameMode[] {
   const modes: GameMode[] = [];
   if (topic.sort?.questions.length) modes.push('sort');
   if (topic.gap?.length) modes.push('gap');
+  if (topic.gap?.some(isTypeable)) modes.push('type');
   if (topic.build?.length) modes.push('build');
   if (topic.grids?.length) modes.push('grid');
   return modes;

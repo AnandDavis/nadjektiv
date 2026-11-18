@@ -6,7 +6,17 @@ const FILL: Record<ShapeColor, string> = {
   red: 'fill-red',
   yellow: 'fill-yellow',
   ink: 'fill-ink',
+  primaries: 'fill-ink',
 };
+
+/** The grid mark's squares, top-left to bottom-right, when coloured as `primaries`. */
+const PRIMARY_CELLS = ['fill-blue', 'fill-red', 'fill-yellow', 'fill-ink'];
+const GRID_CELLS = [
+  { x: 2, y: 2 },
+  { x: 11, y: 2 },
+  { x: 2, y: 11 },
+  { x: 11, y: 11 },
+];
 
 interface ShapeProps {
   kind: ShapeKind;
@@ -28,14 +38,17 @@ export function Shape({ kind, color, className }: ShapeProps) {
       {kind === 'circle' && <circle cx="10" cy="10" r="8.5" />}
       {kind === 'triangle' && <polygon points="10,1.5 19,18.5 1,18.5" />}
       {kind === 'bar' && <rect x="7" y="1" width="6" height="18" />}
-      {kind === 'grid' && (
-        <>
-          <rect x="2" y="2" width="7" height="7" />
-          <rect x="11" y="2" width="7" height="7" />
-          <rect x="2" y="11" width="7" height="7" />
-          <rect x="11" y="11" width="7" height="7" />
-        </>
-      )}
+      {kind === 'grid' &&
+        GRID_CELLS.map(({ x, y }, i) => (
+          <rect
+            key={i}
+            x={x}
+            y={y}
+            width="7"
+            height="7"
+            className={color === 'primaries' ? PRIMARY_CELLS[i] : undefined}
+          />
+        ))}
     </svg>
   );
 }

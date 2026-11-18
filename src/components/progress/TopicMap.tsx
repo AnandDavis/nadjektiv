@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { SectionHeading, Ui } from '@/components/ui';
+import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
 import { TIERS, TIER_LABELS, masteryFor, type Tier } from '@/lib/progress/mastery';
@@ -37,12 +37,9 @@ interface TopicMapProps {
 export function TopicMap({ topics, progress }: TopicMapProps) {
   return (
     <section aria-labelledby="map-heading" className="flex flex-col gap-3">
-      <SectionHeading id="map-heading">
+      <h2 id="map-heading" className="sr-only">
         <Ui {...COPY.progress.map} />
-      </SectionHeading>
-      <p className="text-sm text-muted">
-        <Ui {...COPY.progress.mapHint} />
-      </p>
+      </h2>
 
       {LEVELS.map((level) => (
         <div key={level} className="flex flex-col gap-2">

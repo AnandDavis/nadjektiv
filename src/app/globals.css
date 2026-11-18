@@ -25,7 +25,7 @@
   /* Bauhaus primaries, as fills. Text on them uses the matching on-* token. */
   --blue: light-dark(#1f4fd1, #6b92ff);
   --red: light-dark(#d62b23, #ff5d52);
-  --yellow: light-dark(#f2c200, #ffd23a);
+  --yellow: light-dark(#d9a400, #e6a800);
   --on-blue: light-dark(#ffffff, #141414);
   --on-red: light-dark(#ffffff, #141414);
   --on-yellow: #151515;

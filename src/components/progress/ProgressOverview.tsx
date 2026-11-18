@@ -25,7 +25,8 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
   if (!progress || !summary) return <Card className="h-64 animate-pulse" aria-hidden="true" />;
 
   return (
-    <div className="flex flex-col gap-8">
+    // One gap between every block, matching the page's own (see the progress page).
+    <div className="flex flex-col gap-6">
       <div className="grid grid-cols-3 border-2 border-ink bg-surface">
         <Stat label={<Ui {...COPY.common.answers} />} value={String(summary.answered)} />
         <Stat
@@ -39,9 +40,10 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
       </div>
 
       <section aria-labelledby="tiers-heading">
-        <SectionHeading id="tiers-heading">
+        {/* The badges speak for themselves; the heading stays for screen readers. */}
+        <h2 id="tiers-heading" className="sr-only">
           <Ui {...COPY.progress.medals} />
-        </SectionHeading>
+        </h2>
         <ul className="grid grid-cols-2 gap-0.5 border-2 border-ink bg-ink sm:grid-cols-4">
           {TIERS.filter((t) => t !== 'new').map((tier) => (
             <li key={tier} className="flex flex-col items-start gap-2 bg-surface p-3">

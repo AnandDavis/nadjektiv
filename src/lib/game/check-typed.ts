@@ -38,12 +38,17 @@ export function editDistance(a: string, b: string, limit = Infinity): number {
   return prev[b.length];
 }
 
+/** Commas don't count when typing: "der Tisch die Tische" is "der Tisch, die Tische". */
+function typedForm(text: string): string {
+  return normaliseAnswer(text.replace(/,/g, ' '));
+}
+
 export function checkTyped(question: GapQuestion, typed: string): TypedVerdict {
-  const attempt = normaliseAnswer(typed);
-  const answer = normaliseAnswer(question.answer);
+  const attempt = typedForm(typed);
+  const answer = typedForm(question.answer);
   if (attempt === answer) return 'correct';
   if (attempt === '') return 'wrong';
-  if (question.options.some((option) => normaliseAnswer(option) === attempt)) return 'wrong';
+  if (question.options.some((option) => typedForm(option) === attempt)) return 'wrong';
   return editDistance(attempt, answer, 1) === 1 ? 'nearly' : 'wrong';
 }
 

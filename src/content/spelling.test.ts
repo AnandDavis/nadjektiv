@@ -9,6 +9,7 @@ import nspell from 'nspell';
 import { describe, expect, it } from 'vitest';
 
 import { GLOSSARY } from './glossary';
+import { NOUNS } from './nouns';
 import { TOPICS } from './index';
 import { SPELLING_ALLOWLIST } from './spelling-allowlist';
 
@@ -61,7 +62,11 @@ function correctTexts(): Array<{ id: string; text: string }> {
     { id: `glossary ${entry.id}`, text: entry.term },
     { id: `glossary ${entry.id}`, text: entry.example.de },
   ]);
-  return glossary.concat(
+  const nouns = [...NOUNS.values()].map((noun) => ({
+    id: `noun ${noun.word}`,
+    text: `${noun.word} ${noun.plural ?? ''}`,
+  }));
+  return [...glossary, ...nouns].concat(
     TOPICS.flatMap((topic) => [
       { id: `${topic.id} title`, text: topic.titleDe },
       ...(topic.grids ?? []).flatMap((grid) => [

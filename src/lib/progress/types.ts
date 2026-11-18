@@ -1,6 +1,8 @@
 /**
  * Persisted learner progress. The Zod schema is the source of truth; types are inferred.
- * Bump PROGRESS_VERSION and add a migration in ./migrate.ts when the shape changes.
+ * Bump PROGRESS_VERSION and add a migration in ./migrate.ts when existing saves no
+ * longer fit the shape. New optional fields need no bump (CLAUDE.md rule 5): they are
+ * marked "added without a version bump" below.
  */
 
 import { z } from 'zod';
@@ -35,8 +37,7 @@ export const topicProgressSchema = z.object({
     gap: modeBestSchema.optional(),
     build: modeBestSchema.optional(),
     grid: modeBestSchema.optional(),
-    // Added without a version bump: an optional key reads fine in older saves, and an
-    // older cached app version drops it instead of rejecting the whole progress.
+    // type and sortUntimed: added without a version bump (optional).
     type: modeBestSchema.optional(),
     /** Untimed Blitz (an option), kept apart: a round without the clock isn't comparable. */
     sortUntimed: modeBestSchema.optional(),
@@ -74,12 +75,12 @@ export const progressSchema = z.object({
   grids: z.record(z.string(), gridBestSchema),
   /** ISO timestamp of the first session. */
   startedAt: z.string().optional(),
-  /**
-   * The daily mix, for its "done today" mark. Optional and added without a version
-   * bump: older saves read unchanged, and an older cached app drops it harmlessly.
-   */
+  /** The daily mix, for its "done today" mark. Added without a version bump (optional). */
   daily: z.object({ lastDone: z.string() }).optional(),
-  /** Today's daily mix as built when first opened, so it stays the same all day. */
+  /**
+   * Today's daily mix as built when first opened, so it stays the same all day. Added
+   * without a version bump (optional).
+   */
   dailyMix: z.object({ day: z.string(), ids: z.array(z.string()) }).optional(),
 });
 

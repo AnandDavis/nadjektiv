@@ -12,6 +12,7 @@ import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { isCellCorrect } from '@/lib/grid/check-cell';
 import { blankCells, type CellKey } from '@/lib/grid/grid-round';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { insertAtCaret } from '@/lib/ui/insert-at-caret';
 
 import { GridBoard } from './GridBoard';
 import { GridPicker } from './GridPicker';
@@ -81,17 +82,7 @@ export function GridScreen({
     const key = activeKey.current;
     const input = key ? inputs.current.get(key) : undefined;
     if (!key || !input) return;
-    // Insert natively so the text and the caret move together, then let React see
-    // the change through a normal input event. Moving the caret later (after
-    // React re-renders) races with fast typing.
-    input.focus();
-    input.setRangeText(
-      character,
-      input.selectionStart ?? input.value.length,
-      input.selectionEnd ?? input.value.length,
-      'end',
-    );
-    input.dispatchEvent(new Event('input', { bubbles: true }));
+    insertAtCaret(input, character);
   }, []);
 
   const startGrid = useCallback(

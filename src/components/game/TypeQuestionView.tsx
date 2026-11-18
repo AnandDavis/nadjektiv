@@ -7,19 +7,16 @@ import { Button, KeyboardDock, Ui } from '@/components/ui';
 import type { GapQuestion } from '@/content/types';
 import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { checkTyped } from '@/lib/game/check-typed';
+import { isEndingGap } from '@/lib/game/gap';
 import type { LastAnswer } from '@/lib/game/game-reducer';
 import { COPY } from '@/lib/i18n/copy';
+import { insertAtCaret } from '@/lib/ui/insert-at-caret';
 import { cn } from '@/lib/utils/cn';
 
 interface TypeQuestionViewProps {
   question: GapQuestion;
   last?: LastAnswer;
   onAnswer: (isCorrect: boolean, given: string) => void;
-}
-
-/** Ending gaps (no space before the gap) are typed as the ending alone: "es". */
-function isEndingGap(question: GapQuestion): boolean {
-  return question.before.length > 0 && !/\s$/.test(question.before);
 }
 
 /** A gap question answered by typing, with ä ö ü ß keys for keyboards without them. */
@@ -40,15 +37,7 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
   const insert = (character: string) => {
     const field = input.current;
     if (!field || last) return;
-    // Insert natively so text and caret move together, then let React see the change.
-    field.focus();
-    field.setRangeText(
-      character,
-      field.selectionStart ?? field.value.length,
-      field.selectionEnd ?? field.value.length,
-      'end',
-    );
-    field.dispatchEvent(new Event('input', { bubbles: true }));
+    insertAtCaret(field, character);
   };
 
   // `contents` makes these direct children of the page column, so the key dock can

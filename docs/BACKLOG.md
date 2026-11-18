@@ -2,29 +2,11 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Speed Insights
-
-**Why:** Lighthouse measures a lab machine. Speed Insights reports real Core Web Vitals from learners' phones.
-
-**Notes:** Vercel's `@vercel/speed-insights`. It sends anonymous performance data, so mention it on the About page and decide on consent first.
-
-## Web Analytics
-
-**Why:** see which games and topics are actually used, to decide what to build next.
-
-**Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
-
 ## Content review tooling
 
 **Why:** German correctness matters most, and proofreading 1,400 questions in code is hard.
 
 **Notes:** a script that exports every correct sentence per topic (gap, build, sort, examples, glossary) to a readable file a native speaker can review and annotate.
-
-## Analytics without tracking
-
-**Why:** knowing which topics get played would guide new content.
-
-**Notes:** anonymous, cookieless counts only (e.g. Vercel Analytics): page views and rounds per topic and mode. No personal data, no consent banner needed; mention it on the About page.
 
 ## Audio
 

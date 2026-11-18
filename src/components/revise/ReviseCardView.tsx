@@ -35,7 +35,7 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
           <Ui {...COPY.game.youChose} />:
         </span>
         {given.trim() ? (
-          <span lang="de" className="font-semibold line-through decoration-wrong">
+          <span lang="de" className="font-semibold line-through decoration-wrong decoration-4">
             {given}
           </span>
         ) : (

@@ -44,7 +44,7 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
               'mx-1 inline-block min-w-20 px-2 text-center align-baseline',
               !last && 'bg-ink text-ink',
               last?.isCorrect && 'bg-correct text-canvas',
-              last && !last.isCorrect && 'bg-red text-on-red line-through',
+              last && !last.isCorrect && 'bg-red text-on-red line-through decoration-4',
             )}
           >
             {filled ?? '\u00a0'}
@@ -72,7 +72,7 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
                 last &&
                   isChosen &&
                   !isAnswer &&
-                  'bg-red text-on-red line-through motion-safe:animate-shake',
+                  'bg-red text-on-red line-through decoration-4 motion-safe:animate-shake',
                 last && !isAnswer && !isChosen && 'bg-surface text-ink opacity-40',
               )}
             >

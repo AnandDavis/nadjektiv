@@ -75,6 +75,17 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await snap(page, `blitz-feedback-${colorScheme}`);
     });
 
+    test('sentence builder wrong-answer feedback', async ({ page }) => {
+      await page.goto('/play/word-order/build');
+      await page.getByRole('button', { name: /Los geht/ }).click();
+      // Tiles are never handed out in a correct order, so placing them as dealt is wrong.
+      const pool = page.getByRole('group', { name: 'Words to place' }).getByRole('button');
+      while ((await pool.count()) > 0) await pool.first().click();
+      await page.getByRole('button', { name: 'Prüfen' }).click();
+      await expect(page.getByRole('button', { name: 'Weiter' })).toBeVisible();
+      await snap(page, `build-feedback-${colorScheme}`);
+    });
+
     test('gap question', async ({ page }) => {
       await page.goto('/play/articles/gap');
       await page.getByRole('button', { name: /Los geht/ }).click();

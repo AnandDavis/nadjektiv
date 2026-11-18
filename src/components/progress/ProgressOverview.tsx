@@ -9,6 +9,7 @@ import { MODE_INFO } from '@/lib/game/modes';
 import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
 
+import { HistoryCharts } from './HistoryCharts';
 import { TierBadge } from './TierBadge';
 import { TopicMap } from './TopicMap';
 import { COPY } from '@/lib/i18n/copy';
@@ -37,6 +38,8 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
           value={`${summary.started}/${topics.length}`}
         />
       </div>
+
+      <HistoryCharts progress={progress} />
 
       <section aria-labelledby="tiers-heading">
         {/* The badges speak for themselves; the heading stays for screen readers. */}

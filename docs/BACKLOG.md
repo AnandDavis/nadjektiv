@@ -14,12 +14,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
 
-## Stats over time
-
-**Why:** a sense of improvement, without streak pressure.
-
-**Notes:** on the Progress page, a simple chart of answers per day and accuracy per week. Needs a small daily history in progress (schema change). No streaks or "days in a row".
-
 ## Content review tooling
 
 **Why:** German correctness matters most, and proofreading 1,400 questions in code is hard.

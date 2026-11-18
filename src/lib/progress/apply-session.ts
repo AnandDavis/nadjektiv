@@ -10,6 +10,7 @@ import { examPercent, withExamResult } from '../exam/exam';
 import { afterMiss, afterRight } from '../revise/schedule';
 import { dailyKey } from '../utils/day';
 import { accuracy, runBreakers, xpForSession, type SessionResult } from '../game/scoring';
+import { withHistory } from './history';
 import { levelForXp } from './level';
 import { masteryFor, tierRank, type Tier } from './mastery';
 import {
@@ -225,6 +226,7 @@ export function applySessionResult(
       ...withComboBreaks(progress, runBreakers(result.answers), now),
       ...graduated,
       ...(exam ? { exams: exam.exams } : {}),
+      history: withHistory(progress.history, today, result.answers),
     },
     xpGained,
     newBests,

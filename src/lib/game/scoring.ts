@@ -3,7 +3,7 @@
  */
 
 import { GAME_CONFIG } from '@/config/game';
-import type { GameMode } from '@/content/types';
+import type { GameMode, MixedMode } from '@/content/types';
 
 export const POINTS_PER_CORRECT = GAME_CONFIG.points.perCorrect;
 /** Every COMBO_STEP correct answers in a row raises the multiplier by one. */
@@ -26,7 +26,9 @@ export interface AnswerRecord {
 export interface SessionResult {
   /** Undefined for mixed review sessions, which don't set personal bests. */
   topicId?: string;
-  mode: GameMode | 'review';
+  mode: GameMode | MixedMode;
+  /** Daily mix only: the day it was played for (see dailyKey). */
+  dailyDate?: string;
   /** Grid rounds only: which table was played. */
   gridId?: string;
   /** Grid rounds only, and only when every cell was solved: time to complete. */

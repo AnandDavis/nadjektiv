@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T18:30Z',
+    title: 'Daily mix',
+    description:
+      'The home page now has a Tagesmix: ten questions from your revise list and the topics you find hardest, the same all day and new each morning. It shows “done today” once you’ve played it. No streaks, so missing a day never costs you anything.',
+  },
+  {
     date: '2026-11-18T17:45Z',
     title: 'Hints',
     description:

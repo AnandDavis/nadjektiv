@@ -5,10 +5,12 @@ import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Ui } from '@/components/ui';
 
-import type { GameMode, Question, QuestionMode, Topic } from '@/content/types';
+import type { GameMode, Question, RoundMode, Topic } from '@/content/types';
+import { isMixedMode } from '@/lib/game/modes';
 import { useGameSession } from '@/hooks/useGameSession';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
+import { buildDailySession, dailyKey } from '@/lib/game/daily';
 import { currentItem } from '@/lib/game/game-reducer';
 import { hintFor } from '@/lib/game/hint';
 import { createRng } from '@/lib/game/rng';
@@ -34,8 +36,8 @@ import { SortTimer } from './SortTimer';
 const SORT_CORRECT_ADVANCE_MS = 250;
 
 interface GameScreenProps {
-  mode: QuestionMode | 'review';
-  /** One topic for a topic round; every topic for a mixed review. */
+  mode: RoundMode;
+  /** One topic for a topic round; every topic for mixed review and the daily mix. */
   topics: Topic[];
   title: ReactNode;
   modeName: ReactNode;
@@ -63,10 +65,11 @@ function correctAnswerText(question: Question): string {
 export function GameScreen(props: GameScreenProps) {
   const { mode, topics, title, modeName, description, exitHref, exitLabel } = props;
   const progress = useProgress();
-  const topicId = mode === 'review' ? undefined : topics[0]?.id;
+  const topicId = isMixedMode(mode) ? undefined : topics[0]?.id;
 
   const buildItems = useCallback(
     (current: Progress): SessionItem[] => {
+      if (mode === 'daily') return buildDailySession(topics, current, dailyKey(new Date()));
       const rng = createRng(Date.now());
       if (mode === 'review') {
         return buildReviewSession(
@@ -118,9 +121,11 @@ export function GameScreen(props: GameScreenProps) {
             title={title}
             modeName={modeName}
             description={description}
-            best={topicId && mode !== 'review' ? progress?.topics[topicId]?.modes[mode] : undefined}
+            best={
+              topicId && !isMixedMode(mode) ? progress?.topics[topicId]?.modes[mode] : undefined
+            }
             isReady={progress !== null}
-            shape={mode === 'review' ? undefined : MODE_SHAPES[mode]}
+            shape={isMixedMode(mode) ? undefined : MODE_SHAPES[mode]}
             exitHref={exitHref}
             onStart={start}
           />

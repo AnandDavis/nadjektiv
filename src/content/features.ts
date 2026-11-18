@@ -20,6 +20,11 @@ export const FEATURES: readonly Feature[] = [
       'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to adjective endings, the past tense and connectors. Each topic has a short summary of the rules.',
   },
   {
+    title: 'Daily mix',
+    description:
+      'Ten ready-made questions a day, from your revise list and your weakest topics. It’s the same mix all day, a new one tomorrow, and marked done once you’ve played it. There’s no streak: skipping a day costs nothing.',
+  },
+  {
     title: 'Search',
     description:
       'Find any topic from the home page by its German or English name, or by a word it covers, such as “Dativ” or “weil”.',

@@ -13,6 +13,7 @@ const STATIC_ROUTES = [
   '/settings',
   '/about',
   '/play/review',
+  '/play/daily',
 ];
 const ASSETS = [
   '/manifest.webmanifest',
@@ -29,9 +30,5 @@ export function precacheUrls(): string[] {
   return [...STATIC_ROUTES, ...topicRoutes, ...ASSETS];
 }
 
-/** Small stable hash so a content or route change rotates the page cache. */
-export function hashString(input: string): string {
-  let hash = 5381;
-  for (let i = 0; i < input.length; i++) hash = ((hash << 5) + hash + input.charCodeAt(i)) >>> 0;
-  return hash.toString(36);
-}
+// Rotates the page cache when content or routes change.
+export { hashString } from '@/lib/utils/hash';

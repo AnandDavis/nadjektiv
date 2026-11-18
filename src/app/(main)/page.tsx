@@ -1,3 +1,4 @@
+import { DailyCallout } from '@/components/progress/DailyCallout';
 import { LevelCard } from '@/components/progress/LevelCard';
 import { ReviewCallout } from '@/components/progress/ReviewCallout';
 import { TopicList } from '@/components/topics/TopicList';
@@ -15,6 +16,7 @@ export default function HomePage() {
         </h1>
       </header>
       <LevelCard />
+      <DailyCallout />
       <ReviewCallout />
       <TopicList topics={topics} />
     </div>

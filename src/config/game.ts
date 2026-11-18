@@ -9,6 +9,8 @@ export const GAME_CONFIG = {
   sortRoundSeconds: 60,
   /** Questions in a mixed review round. */
   reviewLength: 12,
+  /** Questions in the daily mix. */
+  dailyLength: 10,
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

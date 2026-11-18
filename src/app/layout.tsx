@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { ViewTransition } from 'react';
 import { Archivo } from 'next/font/google';
 
+import { SiteAnalytics } from '@/components/layout/SiteAnalytics';
 import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
 import { APP_CONFIG } from '@/config/app';
 import { PREFERENCES_SCRIPT } from '@/lib/storage/preferences';
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         {/* Navigations cross-fade (short, and off with reduced motion: globals.css). */}
         <ViewTransition>{children}</ViewTransition>
         <ServiceWorkerRegistration />
+        <SiteAnalytics />
       </body>
     </html>
   );

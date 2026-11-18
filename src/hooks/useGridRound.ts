@@ -12,6 +12,7 @@ import {
   type GridRoundState,
 } from '@/lib/grid/grid-round';
 import { applySessionResult, type SessionOutcome } from '@/lib/progress/apply-session';
+import { trackRound } from '@/lib/analytics/track';
 import { requestPersistence } from '@/lib/storage/persistence';
 import { updateProgress } from '@/lib/storage/progress-client';
 
@@ -49,6 +50,7 @@ export function useGridRound({ topicId, modesByTopic }: UseGridRoundOptions) {
         setOutcome(recorded);
         // A finished round is real use: ask the browser to keep this site's storage.
         void requestPersistence();
+        trackRound('grid', topicId);
       }
     },
     [topicId, modesByTopic],

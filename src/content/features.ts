@@ -79,6 +79,11 @@ export const FEATURES: readonly Feature[] = [
       'Every grammar term the app uses, from Akkusativ to Wechselpräposition, explained in plain English with a German example and links to the topics that teach it.',
   },
   {
+    title: 'No tracking',
+    description:
+      'No account, no cookies, no ads. To see which topics and games get used and how fast pages load, the app counts anonymous page views, finished rounds (just the topic and game) and loading times with Vercel Web Analytics and Speed Insights, which set no cookies and record nothing that identifies you. Your progress itself never leaves your device.',
+  },
+  {
     title: 'Works offline',
     description:
       'Add it to your home screen and use it anywhere, even without a connection. Your progress stays on your device.',

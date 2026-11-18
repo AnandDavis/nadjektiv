@@ -23,6 +23,18 @@ export const nounGender: Topic = {
       },
     },
     {
+      heading: 'Compound nouns: the last part decides',
+      body: 'German joins nouns into one word. The whole word takes the gender and plural of its last part.',
+      examples: [
+        {
+          de: 'die Tür → die Haustür, die Haustüren',
+          en: 'the door → the front door, the front doors',
+        },
+        { de: 'der Tisch → der Schreibtisch', en: 'the table → the desk' },
+        { de: 'das Zimmer → das Schlafzimmer', en: 'the room → the bedroom' },
+      ],
+    },
+    {
       heading: 'Learn every noun with its article and plural',
       body: 'Say it as one unit: der Tisch, die Tische. The plural article is always die.',
       examples: [
@@ -324,6 +336,148 @@ export const nounGender: Topic = {
         gloss: 'name',
         answer: 'der',
         explanation: 'An exception to -e = feminine: der Name. Learn it with the article.',
+      },
+      {
+        id: 'noun-gender-sort-37',
+        kind: 'sort',
+        prompt: 'Kinderzimmer',
+        gloss: 'children’s room',
+        answer: 'das',
+        explanation:
+          'A compound noun takes the gender of its last part: das Zimmer, so das Kinderzimmer.',
+      },
+      {
+        id: 'noun-gender-sort-38',
+        kind: 'sort',
+        prompt: 'Hausaufgabe',
+        gloss: 'homework task',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Aufgabe, so die Hausaufgabe.',
+      },
+      {
+        id: 'noun-gender-sort-39',
+        kind: 'sort',
+        prompt: 'Haustür',
+        gloss: 'front door',
+        answer: 'die',
+        explanation: 'A compound noun takes the gender of its last part: die Tür, so die Haustür.',
+      },
+      {
+        id: 'noun-gender-sort-40',
+        kind: 'sort',
+        prompt: 'Schreibtisch',
+        gloss: 'desk',
+        answer: 'der',
+        explanation:
+          'A compound noun takes the gender of its last part: der Tisch, so der Schreibtisch.',
+      },
+      {
+        id: 'noun-gender-sort-41',
+        kind: 'sort',
+        prompt: 'Fußball',
+        gloss: 'football',
+        answer: 'der',
+        explanation: 'A compound noun takes the gender of its last part: der Ball, so der Fußball.',
+      },
+      {
+        id: 'noun-gender-sort-42',
+        kind: 'sort',
+        prompt: 'Handschuh',
+        gloss: 'glove',
+        answer: 'der',
+        explanation:
+          'A compound noun takes the gender of its last part: der Schuh, so der Handschuh.',
+      },
+      {
+        id: 'noun-gender-sort-43',
+        kind: 'sort',
+        prompt: 'Bücherregal',
+        gloss: 'bookshelf',
+        answer: 'das',
+        explanation:
+          'A compound noun takes the gender of its last part: das Regal, so das Bücherregal.',
+      },
+      {
+        id: 'noun-gender-sort-44',
+        kind: 'sort',
+        prompt: 'Briefmarke',
+        gloss: 'stamp',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Marke, so die Briefmarke.',
+      },
+      {
+        id: 'noun-gender-sort-45',
+        kind: 'sort',
+        prompt: 'Tomatensuppe',
+        gloss: 'tomato soup',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Suppe, so die Tomatensuppe.',
+      },
+      {
+        id: 'noun-gender-sort-46',
+        kind: 'sort',
+        prompt: 'Hauptbahnhof',
+        gloss: 'main station',
+        answer: 'der',
+        explanation:
+          'A compound noun takes the gender of its last part: der Bahnhof, so der Hauptbahnhof.',
+      },
+      {
+        id: 'noun-gender-sort-47',
+        kind: 'sort',
+        prompt: 'Zahnbürste',
+        gloss: 'toothbrush',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Bürste, so die Zahnbürste.',
+      },
+      {
+        id: 'noun-gender-sort-48',
+        kind: 'sort',
+        prompt: 'Schlafzimmer',
+        gloss: 'bedroom',
+        answer: 'das',
+        explanation:
+          'A compound noun takes the gender of its last part: das Zimmer, so das Schlafzimmer.',
+      },
+      {
+        id: 'noun-gender-sort-49',
+        kind: 'sort',
+        prompt: 'Sonnenbrille',
+        gloss: 'sunglasses',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Brille, so die Sonnenbrille.',
+      },
+      {
+        id: 'noun-gender-sort-50',
+        kind: 'sort',
+        prompt: 'Kaffeetasse',
+        gloss: 'coffee cup',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Tasse, so die Kaffeetasse.',
+      },
+      {
+        id: 'noun-gender-sort-51',
+        kind: 'sort',
+        prompt: 'Stadtplan',
+        gloss: 'street map',
+        answer: 'der',
+        explanation:
+          'A compound noun takes the gender of its last part: der Plan, so der Stadtplan.',
+      },
+      {
+        id: 'noun-gender-sort-52',
+        kind: 'sort',
+        prompt: 'Lieblingsfarbe',
+        gloss: 'favourite colour',
+        answer: 'die',
+        explanation:
+          'A compound noun takes the gender of its last part: die Farbe, so die Lieblingsfarbe.',
       },
     ],
   },

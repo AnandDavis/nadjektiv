@@ -2,6 +2,24 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## Combo feedback
+
+**Why:** the combo multiplier works, but it's easy to miss when it rises or breaks.
+
+**Notes:** a ×2 or ×3 badge that pops beside the score when the multiplier goes up, and a short "Kombo verloren" when a wrong answer breaks it. Announce both through the existing `aria-live` region, keep the text bilingual in `COPY`, and respect reduced motion (the phone's and the app's own setting).
+
+## Best combo on the results screen
+
+**Why:** the best combo for each topic and mode is already saved, but barely shown.
+
+**Notes:** on the results screen, show this round's best run next to the all-time best for that topic and mode, with the existing "new best" call-out when it's beaten.
+
+## Combo-aware daily mix
+
+**Why:** where a run breaks is a clue to a rule that isn't solid yet.
+
+**Notes:** record the question (and so the rule) that broke each long run. The next daily mix leans towards questions on that rule. "Rule" could start as the question's topic and mode, refined later if questions get rule tags. Needs a small addition to saved progress (schema change with a migration).
+
 ## Mistake patterns
 
 **Why:** the revise list shows single questions, but mistakes often share a cause across topics, such as picking Akkusativ after mit.
@@ -31,24 +49,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** on a laptop, reaching for the mouse slows the games down.
 
 **Notes:** 1–4 (or the shown A/B/C letters) for options and bins, Enter for Prüfen/Weiter, H for a hint, Backspace to remove the last tile in Satzbau. Never steal keys while typing in Tippen or Tabelle. List the shortcuts somewhere discoverable (e.g. a "?" overlay or the About page).
-
-## Ask the browser to keep progress
-
-**Why:** browsers can evict localStorage and the offline cache under storage pressure, losing a learner's progress.
-
-**Notes:** call `navigator.storage.persist()` (after the first round, so it's tied to real use). Show in Settings whether storage is persistent. Handle browsers that refuse or don't support it.
-
-## Update-available prompt
-
-**Why:** a new version installs silently in the service worker, and learners may keep using the old one until they happen to reload.
-
-**Notes:** when a new service worker is waiting, show a small "Neue Version: neu laden" bar; tapping it activates the new worker and reloads. Never interrupt a round in progress: show it on the next non-game screen. Bilingual label in `COPY`.
-
-## Install prompt
-
-**Why:** few learners know the app can be installed. Android only offers it from the browser menu, and iPhone never prompts.
-
-**Notes:** on Android, capture `beforeinstallprompt` and show our own "Installieren" button (e.g. in Settings or once on home). On iPhone, show a one-time hint: Share → Add to Home Screen. Never show either once installed (`display-mode: standalone`). Bilingual labels in `COPY`.
 
 ## Speed Insights
 

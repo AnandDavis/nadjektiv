@@ -10,6 +10,29 @@ export type { Bilingual } from './bilingual';
 export * from './copy-lines';
 
 export const COPY = {
+  app: {
+    updateAvailable: { de: 'Neue Version verfügbar.', en: 'A new version is available.' },
+    reload: { de: 'Neu laden', en: 'Reload' },
+    installTitle: { de: 'App installieren', en: 'Install the app' },
+    installHint: {
+      de: 'Vom Startbildschirm aus startet die App sofort und funktioniert auch offline.',
+      en: 'From your home screen it opens straight away and works offline too.',
+    },
+    install: { de: 'Installieren', en: 'Install' },
+    iosSteps: {
+      de: 'Tippe in Safari auf „Teilen“ und dann auf „Zum Home-Bildschirm“.',
+      en: 'In Safari, tap Share, then Add to Home Screen.',
+    },
+    dismiss: { de: 'Schließen', en: 'Dismiss' },
+    storagePersisted: {
+      de: 'Dein Fortschritt ist vor dem automatischen Löschen durch den Browser geschützt.',
+      en: 'Your progress is protected from being cleared by the browser.',
+    },
+    storageAtRisk: {
+      de: 'Der Browser darf deinen Fortschritt löschen, wenn der Speicher knapp wird. Exportiere ihn zur Sicherheit.',
+      en: 'The browser may clear your progress if storage runs low. Export it to be safe.',
+    },
+  },
   daily: {
     title: { de: 'Tagesmix', en: 'Daily mix' },
     done: { de: 'Heute erledigt', en: 'Done today' },

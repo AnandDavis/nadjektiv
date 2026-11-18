@@ -2,6 +2,9 @@
 
 import { useEffect } from 'react';
 
+import { captureInstallPrompt } from '@/lib/pwa/install';
+import { watchForUpdates } from '@/lib/pwa/updates';
+
 /**
  * Production: registers the offline service worker.
  * Development: removes any service worker (and its caches) left on this origin by an
@@ -9,6 +12,7 @@ import { useEffect } from 'react';
  */
 export function ServiceWorkerRegistration() {
   useEffect(() => {
+    captureInstallPrompt();
     if (!('serviceWorker' in navigator)) return;
 
     if (process.env.NODE_ENV !== 'production') {
@@ -18,6 +22,7 @@ export function ServiceWorkerRegistration() {
 
     navigator.serviceWorker
       .register('/sw.js', { scope: '/', updateViaCache: 'none' })
+      .then(watchForUpdates)
       .catch((error: unknown) => console.warn('Service worker registration failed.', error));
   }, []);
   return null;

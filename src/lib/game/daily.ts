@@ -21,10 +21,8 @@ import {
 } from './session';
 
 export const DAILY_LENGTH = GAME_CONFIG.dailyLength;
-/** How many of the weakest started topics the mix draws from. */
-const WEAK_TOPICS = 3;
-/** With nothing played yet, the mix comes from the first topics of the syllabus. */
-const STARTER_TOPICS = 3;
+const WEAK_TOPICS = GAME_CONFIG.dailyWeakTopics;
+const STARTER_TOPICS = GAME_CONFIG.dailyStarterTopics;
 
 /** The learner's own calendar day, "2026-11-18": the mix changes at local midnight. */
 export function dailyKey(date: Date): string {
@@ -91,4 +89,31 @@ export function buildDailySession(
     for (const item of take(rest, DAILY_LENGTH - chosen.size, weight, rng)) chosen.add(item);
   }
   return shuffle([...chosen], rng);
+}
+
+/**
+ * Today's mix: the one saved when it was first built today, or a new one. Reopening
+ * gives the same questions even after playing changes the learner's stats; a saved
+ * question that has since been retired is simply left out.
+ */
+export function todaysMix(
+  topics: readonly Topic[],
+  progress: Progress,
+  key: string,
+): { items: SessionItem[]; isNew: boolean } {
+  if (progress.dailyMix?.day === key) {
+    const byId = new Map(poolOf(topics).map((item) => [item.question.id, item]));
+    const items = progress.dailyMix.ids.flatMap((id) => byId.get(id) ?? []);
+    if (items.length > 0) return { items, isNew: false };
+  }
+  return { items: buildDailySession(topics, progress, key), isNew: true };
+}
+
+/** Remember today's mix in progress, so the same questions come back all day. */
+export function withDailyMix(
+  progress: Progress,
+  key: string,
+  items: readonly SessionItem[],
+): Progress {
+  return { ...progress, dailyMix: { day: key, ids: items.map((item) => item.question.id) } };
 }

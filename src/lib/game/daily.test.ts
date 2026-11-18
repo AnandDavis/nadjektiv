@@ -74,3 +74,28 @@ describe('isDailyDone', () => {
     expect(isDailyDone(createEmptyProgress(), DAY)).toBe(false);
   });
 });
+
+describe('todaysMix', () => {
+  it('keeps the day’s questions once built, even after progress changes', async () => {
+    const { todaysMix, withDailyMix } = await import('./daily');
+    const progress = played({ articles: 0.5, cases: 0.9 });
+    const first = todaysMix(TOPICS, progress, DAY);
+    expect(first.isNew).toBe(true);
+    const saved = withDailyMix(progress, DAY, first.items);
+
+    // Play changes stats and the revise list, which would change a fresh draw.
+    const after = played({ articles: 1, cases: 0.1, plurals: 0.2 });
+    const reopened = todaysMix(TOPICS, { ...after, dailyMix: saved.dailyMix }, DAY);
+    expect(reopened.isNew).toBe(false);
+    expect(reopened.items.map((i) => i.question.id)).toEqual(first.items.map((i) => i.question.id));
+
+    // A new day builds a new mix.
+    expect(todaysMix(TOPICS, saved, '2026-11-19').isNew).toBe(true);
+  });
+
+  it('skips saved questions that no longer exist, and rebuilds if none are left', async () => {
+    const { todaysMix } = await import('./daily');
+    const progress = { ...played({ articles: 0.5 }), dailyMix: { day: DAY, ids: ['gone-1'] } };
+    expect(todaysMix(TOPICS, progress, DAY).isNew).toBe(true);
+  });
+});

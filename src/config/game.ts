@@ -15,6 +15,10 @@ export const GAME_CONFIG = {
   reviewLength: 12,
   /** Questions in the daily mix. */
   dailyLength: 10,
+  /** How many of the learner's weakest started topics the daily mix draws from. */
+  dailyWeakTopics: 3,
+  /** With nothing played yet, the daily mix comes from this many first topics. */
+  dailyStarterTopics: 3,
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

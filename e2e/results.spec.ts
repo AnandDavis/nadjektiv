@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 const headline = /Zeit ist um|Perfekt|Gut gemacht|Weiter üben/;
 

@@ -10,6 +10,9 @@
  * so the spec skips itself elsewhere (CI runs on Linux).
  */
 import { expect, test, type Page } from '@playwright/test';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 // Freezing time also freezes question order: sessions are seeded from the clock.
 const FIXED_TIME = new Date('2026-11-18T10:00:00Z');

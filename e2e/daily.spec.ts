@@ -1,4 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 /** Answer whatever the question is (sort or gap), then continue. */
 async function answerAnything(page: Page) {

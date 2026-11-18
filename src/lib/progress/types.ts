@@ -101,6 +101,11 @@ export const progressSchema = z.object({
    * without a version bump (optional).
    */
   graduated: z.optional(z.record(z.string(), z.string())),
+  /**
+   * Nouns already introduced on a "new word" card, so each is shown once. Added
+   * without a version bump (optional).
+   */
+  seenNouns: z.optional(z.array(z.string())),
 });
 
 export const COMBO_BREAKS_KEPT = 10;

@@ -1,6 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 
 import { getTopic } from '../src/content';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 async function choose(page: Page, label: string) {
   await page.getByText(label, { exact: true }).filter({ visible: true }).click();

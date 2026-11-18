@@ -1,4 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 async function answerGapRound(page: Page) {
   await page.getByRole('button', { name: /Los geht/ }).click();

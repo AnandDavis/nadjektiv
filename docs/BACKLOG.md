@@ -62,12 +62,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** add Speculation Rules (prerender on hover or tap for `/topics/*` and `/play/*`), checking how they interact with Next's own prefetching and with the service worker. Measure before and after.
 
-## Load heavy screens on demand
-
-**Why:** the home page's JavaScript grows with every feature, and the budget is 230 KB.
-
-**Notes:** split grid fill, the topic map and the glossary with `next/dynamic` or route-level splitting so they load only when opened. Keep offline working: the service worker must still precache the chunks.
-
 ## React Compiler
 
 **Why:** game screens re-render on every answer. The compiler memoises components automatically.

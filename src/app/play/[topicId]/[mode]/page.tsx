@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { GameScreen } from '@/components/game/GameScreen';
-import { GridScreen } from '@/components/grid/GridScreen';
+import { PlayScreen } from '@/components/game/PlayScreen';
 import { TOPICS, getTopic, isGameMode } from '@/content';
 import { getTopicSummaries, modesByTopic, topicTitles } from '@/content/summaries';
 import { MODE_INFO } from '@/lib/game/modes';
@@ -35,28 +34,32 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
 
   if (mode === 'grid') {
     return (
-      <GridScreen
-        topic={topic}
-        title={<Ui de={topic.titleDe} en={topic.title} />}
-        exitHref={topicHref(topic.id)}
-        exitLabel={<Ui {...COPY.common.topic} />}
-        modesByTopic={modesByTopic(summaries)}
-        topicTitles={topicTitles(summaries)}
+      <PlayScreen
+        grid={{
+          topic,
+          title: <Ui de={topic.titleDe} en={topic.title} />,
+          exitHref: topicHref(topic.id),
+          exitLabel: <Ui {...COPY.common.topic} />,
+          modesByTopic: modesByTopic(summaries),
+          topicTitles: topicTitles(summaries),
+        }}
       />
     );
   }
 
   return (
-    <GameScreen
-      mode={mode}
-      topics={[topic]}
-      title={<Ui de={topic.titleDe} en={topic.title} />}
-      modeName={`${info.name} · ${info.english}`}
-      description={info.description}
-      exitHref={topicHref(topic.id)}
-      exitLabel={<Ui {...COPY.common.topic} />}
-      modesByTopic={modesByTopic(summaries)}
-      topicTitles={topicTitles(summaries)}
+    <PlayScreen
+      game={{
+        mode,
+        topics: [topic],
+        title: <Ui de={topic.titleDe} en={topic.title} />,
+        modeName: `${info.name} · ${info.english}`,
+        description: info.description,
+        exitHref: topicHref(topic.id),
+        exitLabel: <Ui {...COPY.common.topic} />,
+        modesByTopic: modesByTopic(summaries),
+        topicTitles: topicTitles(summaries),
+      }}
     />
   );
 }

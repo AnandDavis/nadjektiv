@@ -111,16 +111,47 @@ describe.each(TOPICS.map((t) => [t.id, t]))('%s', (_, topic) => {
 });
 
 describe('German text', () => {
-  it('uses real umlauts and ß, not ASCII substitutes in common words', () => {
-    const substitutes =
-      /\b(fuer|ueber|Strasse|grosse?|muessen|koennen|duerfen|moechte|haette|waere|Maedchen|Baecker)\b/;
-    const text = (q: Question) =>
-      q.kind === 'sort'
-        ? q.prompt
-        : q.kind === 'gap'
-          ? `${q.before} ${q.options.join(' ')} ${q.after}`
-          : q.tiles.join(' ');
-    const bad = ALL_QUESTIONS.filter(({ q }) => substitutes.test(text(q)));
+  const SUBSTITUTES =
+    /\b(fuer|ueber|Ueber|Maedchen|Baecker|schoen|Gruesse|gruessen|koennen|kann't|muessen|duerfen|moechte|moegen|waere|haette|hoeren|Aerztin|Kaese|Strasse|gross|grosse|heisst|Fuss|Fruehstueck|Muenchen|Koeln|Tuer|Schluessel|Buero|Zuerich|spaet|frueh|natuerlich)\b/;
+  const display = (q: Question) =>
+    q.kind === 'sort'
+      ? q.prompt
+      : q.kind === 'gap'
+        ? `${q.before} ${q.options.join(' ')} ${q.after}`
+        : q.tiles.join(' ');
+
+  it('uses real umlauts and ß, not ASCII substitutes', () => {
+    const bad = ALL_QUESTIONS.filter(({ q }) => SUBSTITUTES.test(display(q)));
     expect(bad.map(({ q }) => q.id)).toEqual([]);
+  });
+
+  it('has no stray whitespace in options, tiles or prompts', () => {
+    const untidy = (text: string) => text !== text.trim() || /\s{2,}/.test(text);
+    const bad = ALL_QUESTIONS.filter(({ q }) =>
+      q.kind === 'sort'
+        ? untidy(q.prompt)
+        : q.kind === 'gap'
+          ? q.options.some(untidy) || [q.before, q.after].some((part) => /\s{2,}/.test(part))
+          : q.tiles.some(untidy) || (q.accepted ?? []).flat().some(untidy),
+    );
+    expect(bad.map(({ q }) => q.id)).toEqual([]);
+  });
+
+  it('fills every gap into a complete, capitalised, punctuated sentence', () => {
+    const bad = TOPICS.flatMap((topic) => topic.gap ?? []).filter((q) => {
+      const sentence = `${q.before}${q.answer}${q.after}`.trim();
+      const spacingOk =
+        (q.before === '' || /\s$/.test(q.before) || /\p{L}$/u.test(q.before)) &&
+        (q.after === '' || /^[\s.,;:?!…)]/.test(q.after));
+      return !/^[\p{Lu}0-9„"]/u.test(sentence) || !/[.?!…]["“”)]?$/.test(sentence) || !spacingOk;
+    });
+    expect(bad.map((q) => q.id)).toEqual([]);
+  });
+
+  it('gives every sentence builder a translation', () => {
+    const bad = TOPICS.flatMap((topic) => topic.build ?? []).filter(
+      (q) => q.translation.trim().length < 3,
+    );
+    expect(bad.map((q) => q.id)).toEqual([]);
   });
 });

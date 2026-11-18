@@ -148,13 +148,15 @@
   }
 
   /* What shows when the page is pulled past its edge (e.g. pull to refresh): the
-     header's colour, which the bottom bar shares, so it reads as part of the app. */
-  html {
+     header's colour, which the bottom bar shares, so it reads as part of the app.
+     iOS Safari paints that area with the body's background, so the body carries it
+     too and the page colour sits on a wrapper inside (app/layout.tsx). */
+  html,
+  body {
     background: var(--ink);
   }
 
   body {
-    background: var(--canvas);
     color: var(--ink);
   }
 

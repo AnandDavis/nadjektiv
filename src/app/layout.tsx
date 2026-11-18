@@ -45,9 +45,13 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
             passed for the page itself; without it the app can't be installed. */}
         <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
       </head>
-      <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
-        {/* Navigations cross-fade (short, and off with reduced motion: globals.css). */}
-        <ViewTransition>{children}</ViewTransition>
+      {/* The body takes the header colour, which iOS Safari shows when the page is pulled
+          past its edge; the page colour sits on the wrapper inside. */}
+      <body className="min-h-dvh bg-ink font-sans text-ink antialiased">
+        <div className="min-h-dvh bg-canvas">
+          {/* Navigations cross-fade (short, and off with reduced motion: globals.css). */}
+          <ViewTransition>{children}</ViewTransition>
+        </div>
         <ServiceWorkerRegistration />
         <SiteAnalytics />
       </body>

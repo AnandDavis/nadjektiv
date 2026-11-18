@@ -43,3 +43,13 @@ describe('session xp', () => {
     expect(xpForSession({ mode: 'gap', answers, score: 10, bestCombo: 1 })).toBe(10);
   });
 });
+
+describe('comboChange', () => {
+  it('reports a rise in the multiplier, and losing a raised one', async () => {
+    const { comboChange, COMBO_STEP } = await import('./scoring');
+    expect(comboChange(COMBO_STEP - 1, COMBO_STEP)).toEqual({ kind: 'up', multiplier: 2 });
+    expect(comboChange(0, 1)).toBeUndefined();
+    expect(comboChange(COMBO_STEP + 1, 0)).toEqual({ kind: 'lost', multiplier: 2 });
+    expect(comboChange(2, 0)).toBeUndefined();
+  });
+});

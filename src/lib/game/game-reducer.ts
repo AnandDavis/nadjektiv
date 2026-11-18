@@ -7,8 +7,10 @@ import type { GameMode, MixedMode } from '@/content/types';
 import { hintFor } from './hint';
 
 import {
+  comboChange,
   pointsForCorrect,
   pointsForHinted,
+  type ComboChange,
   type AnswerRecord,
   type SessionResult,
 } from './scoring';
@@ -21,6 +23,8 @@ export interface LastAnswer {
   /** What the learner chose: a bin, an option, or the built sentence. */
   given: string;
   points: number;
+  /** The combo multiplier rose, or a raised one was lost. */
+  comboChange?: ComboChange;
 }
 
 export interface Mistake {
@@ -114,7 +118,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         score: state.score + points,
         combo,
         bestCombo: Math.max(state.bestCombo, combo),
-        last: { isCorrect: action.isCorrect, given: action.given, points },
+        last: {
+          isCorrect: action.isCorrect,
+          given: action.given,
+          points,
+          comboChange: comboChange(state.combo, combo),
+        },
       };
     }
 

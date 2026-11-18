@@ -54,3 +54,8 @@ export function untimedBlitzHint(length: number): Bilingual {
 export function missedTimes(count: number): Bilingual {
   return { de: `${count}× falsch`, en: `missed ${count}×` };
 }
+
+/** "Kombo ×2!" / "Combo ×2!", announced when the multiplier rises. */
+export function comboLine(multiplier: number): Bilingual {
+  return { de: `Kombo ×${multiplier}!`, en: `Combo ×${multiplier}!` };
+}

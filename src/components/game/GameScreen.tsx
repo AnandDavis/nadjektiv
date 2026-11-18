@@ -164,6 +164,7 @@ export function GameScreen(props: GameScreenProps) {
               title={title}
               score={state.score}
               combo={state.combo}
+              comboChange={state.last?.comboChange}
               progress={
                 isTimed ? undefined : { current: state.index + 1, total: state.items.length }
               }

@@ -2,6 +2,48 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## Mistake patterns
+
+**Why:** the revise list shows single questions, but mistakes often share a cause across topics, such as picking Akkusativ after mit.
+
+**Notes:** group revise entries and recent misses by the rule behind them (topic, and for gap/sort questions the chosen vs right answer, e.g. den → dem). Show the top patterns on the revise page with a link to the rule card that explains them. Pure analysis in `src/lib/revise/`, with tests; no new content needed.
+
+## Noun cards: gender and plural together
+
+**Why:** der/die/das and the plural are learned as a pair ("der Tisch, die Tische"), but they're practised in separate topics.
+
+**Notes:** a Blitz-style round showing a noun and asking for both gender and plural form. Needs a checked noun list with plurals (reuse noun-gender and plurals content where it overlaps, and check every plural against `docs/grammar/`). New question ids are permanent once shipped.
+
+## Personal records page
+
+**Why:** bests are spread across topic pages; one place to see them all is motivating without streaks.
+
+**Notes:** fastest grid per table, best Blitz score and longest combo per topic, best accuracy, perfect rounds. Read from existing progress (no schema change). Link from Progress.
+
+## Topic graduation
+
+**Why:** reaching Gemeistert passes with a small call-out; it deserves a moment.
+
+**Notes:** a celebration screen after the round that reaches Gemeistert: what the topic covered, the learner's stats, and a suggested next topic. Shown once per topic (remember it in progress, as an optional field). Respect reduced motion.
+
+## Keyboard shortcuts on desktop
+
+**Why:** on a laptop, reaching for the mouse slows the games down.
+
+**Notes:** 1–4 (or the shown A/B/C letters) for options and bins, Enter for Prüfen/Weiter, H for a hint, Backspace to remove the last tile in Satzbau. Never steal keys while typing in Tippen or Tabelle. List the shortcuts somewhere discoverable (e.g. a "?" overlay or the About page).
+
+## Ask the browser to keep progress
+
+**Why:** browsers can evict localStorage and the offline cache under storage pressure, losing a learner's progress.
+
+**Notes:** call `navigator.storage.persist()` (after the first round, so it's tied to real use). Show in Settings whether storage is persistent. Handle browsers that refuse or don't support it.
+
+## Update-available prompt
+
+**Why:** a new version installs silently in the service worker, and learners may keep using the old one until they happen to reload.
+
+**Notes:** when a new service worker is waiting, show a small "Neue Version: neu laden" bar; tapping it activates the new worker and reloads. Never interrupt a round in progress: show it on the next non-game screen. Bilingual label in `COPY`.
+
 ## View transitions between screens
 
 **Why:** moving between screens is an instant swap. Animated transitions (a topic sliding into its game, a topic-map square growing into the topic header) would make the app feel native.
@@ -19,12 +61,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** topic → game navigation could be instant on Chromium browsers.
 
 **Notes:** add Speculation Rules (prerender on hover or tap for `/topics/*` and `/play/*`), checking how they interact with Next's own prefetching and with the service worker. Measure before and after.
-
-## Trim the font
-
-**Why:** Archivo is likely the largest download after JavaScript.
-
-**Notes:** load only the weights and the width-axis range actually used, and check visual baselines don't change.
 
 ## Load heavy screens on demand
 

@@ -4,6 +4,7 @@ import { TierBadge } from '@/components/progress/TierBadge';
 import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { MasteryInfo } from '@/lib/progress/mastery';
+import { topicHref } from '@/lib/routes';
 
 interface TopicCardProps {
   topic: TopicSummary;
@@ -19,7 +20,7 @@ interface TopicCardProps {
 export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
   return (
     <Link
-      href={`/topics/${topic.id}`}
+      href={topicHref(topic.id)}
       onClick={onOpen}
       className="group flex min-h-20 items-start gap-3 py-3 transition-colors hover:bg-yellow hover:text-on-yellow"
     >

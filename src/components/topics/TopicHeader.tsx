@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
-
 import { TierBadge } from '@/components/progress/TierBadge';
-import { ArrowLeftIcon, Badge, CheckIcon, Card, Ui } from '@/components/ui';
+import { Badge, CheckIcon, Card, Ui } from '@/components/ui';
 import type { GameMode, Level } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { cn } from '@/lib/utils/cn';
+
+import { TopicBackLink } from './TopicBackLink';
 import { COPY } from '@/lib/i18n/copy';
 
 interface TopicHeaderProps {
@@ -25,12 +25,7 @@ export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: 
 
   return (
     <header className="flex flex-col gap-4">
-      <Link
-        href="/"
-        className="-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas"
-      >
-        <ArrowLeftIcon /> <Ui {...COPY.common.allTopics} />
-      </Link>
+      <TopicBackLink />
       <div>
         <div className="flex items-center gap-2">
           <Badge>{level}</Badge>

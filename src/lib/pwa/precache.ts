@@ -14,6 +14,7 @@ const STATIC_ROUTES = [
   '/settings',
   '/about',
   '/glossary',
+  '/verbs',
   '/records',
   '/play/review',
   '/play/daily',

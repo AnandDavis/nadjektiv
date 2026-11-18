@@ -5,12 +5,13 @@
  * topic list.
  */
 
-export type TopicOrigin = 'progress' | 'revise' | 'glossary';
+export type TopicOrigin = 'progress' | 'revise' | 'glossary' | 'verbs';
 
 export const ORIGIN_HREFS: Readonly<Record<TopicOrigin, string>> = {
   progress: '/progress',
   revise: '/revise',
   glossary: '/glossary',
+  verbs: '/verbs',
 };
 
 let current: { topicId: string; origin: TopicOrigin } | null = null;

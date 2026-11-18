@@ -19,6 +19,13 @@ export function readTheme(): ThemePreference {
   }
 }
 
+const listeners = new Set<() => void>();
+
+export function subscribeTheme(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
 export function writeTheme(theme: ThemePreference): void {
   const root = document.documentElement;
   if (theme === 'system') root.removeAttribute('data-theme');
@@ -29,4 +36,5 @@ export function writeTheme(theme: ThemePreference): void {
   } catch (error) {
     console.warn('Could not save theme preference.', error);
   }
+  for (const listener of listeners) listener();
 }

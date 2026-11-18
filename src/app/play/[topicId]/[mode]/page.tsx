@@ -1,0 +1,45 @@
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+
+import { GameScreen } from '@/components/game/GameScreen';
+import { TOPICS, getTopic, isGameMode } from '@/content';
+import { getTopicSummaries, modesByTopic, topicTitles } from '@/content/summaries';
+import { MODE_INFO } from '@/lib/game/modes';
+import { availableModes } from '@/lib/game/session';
+
+export function generateStaticParams() {
+  return TOPICS.flatMap((topic) =>
+    availableModes(topic).map((mode) => ({ topicId: topic.id, mode })),
+  );
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps<'/play/[topicId]/[mode]'>): Promise<Metadata> {
+  const { topicId, mode } = await params;
+  const topic = getTopic(topicId);
+  if (!topic || !isGameMode(mode)) return {};
+  return { title: `${MODE_INFO[mode].name} · ${topic.title}` };
+}
+
+export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[mode]'>) {
+  const { topicId, mode } = await params;
+  const topic = getTopic(topicId);
+  if (!topic || !isGameMode(mode) || !availableModes(topic).includes(mode)) notFound();
+  const summaries = getTopicSummaries();
+  const info = MODE_INFO[mode];
+
+  return (
+    <GameScreen
+      mode={mode}
+      topics={[topic]}
+      title={topic.title}
+      modeName={`${info.name} · ${info.english}`}
+      description={info.description}
+      exitHref={`/topics/${topic.id}`}
+      exitLabel="Topic"
+      modesByTopic={modesByTopic(summaries)}
+      topicTitles={topicTitles(summaries)}
+    />
+  );
+}

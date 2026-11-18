@@ -171,6 +171,13 @@ export const COPY = {
     topic: { de: 'Thema', en: 'Topic' },
   },
   game: {
+    newWord: { de: 'Neues Wort', en: 'New word' },
+    newWordHint: {
+      de: 'Merk dir Artikel und Plural, dann kommt die Frage.',
+      en: 'Note the article and plural; the question comes next.',
+    },
+    noPlural: { de: 'meist ohne Plural', en: 'usually no plural' },
+    gotIt: { de: 'Verstanden', en: 'Got it' },
     bestScore: { de: 'Bestwert', en: 'Best score' },
     bestAccuracy: { de: 'Beste Quote', en: 'Best accuracy' },
     bestCombo: { de: 'Beste Serie', en: 'Best combo' },

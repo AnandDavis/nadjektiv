@@ -2,6 +2,9 @@ import { expect, test } from '@playwright/test';
 
 import { getTopic } from '../src/content';
 import { hintFor } from '../src/lib/game/hint';
+import { skipNewWords } from './new-words';
+
+test.beforeEach(async ({ page }) => skipNewWords(page));
 
 const articles = getTopic('articles')!;
 

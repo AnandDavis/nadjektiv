@@ -14,12 +14,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
 
-## Gender reveal on new nouns
-
-**Why:** meeting a noun for the first time in a quiz means guessing its gender.
-
-**Notes:** the first time a noun appears, show it briefly with its ■ ● ▲ shape, article and plural before asking. Track "seen" per noun in progress.
-
 ## Topic tests (Prüfung)
 
 **Why:** a way to check a whole level, like a mock exam.

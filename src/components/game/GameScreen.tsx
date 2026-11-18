@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Ui } from '@/components/ui';
@@ -25,6 +25,7 @@ import {
   type SessionItem,
 } from '@/lib/game/session';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { nounToReveal, withSeenNoun } from '@/lib/nouns/reveal';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
 import { OPTIONS } from '@/lib/storage/options';
@@ -35,6 +36,7 @@ import { GameHeader } from './GameHeader';
 import { GameIntro } from './GameIntro';
 import type { GraduationInfo } from './GraduationPanel';
 import { HintControl } from './HintControl';
+import { NounReveal } from './NounReveal';
 import { QuestionView } from './QuestionView';
 import { ResultsScreen } from './ResultsScreen';
 import { SortTimer } from './SortTimer';
@@ -117,6 +119,18 @@ export function GameScreen(props: GameScreenProps) {
   const isTimed = mode === 'sort' && !untimed;
   const hintText = item && hintsOption !== 'hidden' ? hintFor(item.question) : undefined;
 
+  // A noun met for the first time is shown before it's asked (and stops the clock).
+  const [metThisRound, setMetThisRound] = useState<ReadonlySet<string>>(new Set());
+  const revealNoun =
+    item && progress && state.phase === 'playing'
+      ? nounToReveal(item.question, progress)
+      : undefined;
+  const isRevealing = revealNoun !== undefined && !metThisRound.has(revealNoun.word);
+  const meetNoun = (word: string) => {
+    setMetThisRound((met) => new Set(met).add(word));
+    updateProgress((current) => withSeenNoun(current, word));
+  };
+
   const isShowingFeedback = state.phase === 'feedback' && state.last !== undefined;
   // A wrong answer always stops for its explanation (and, in Blitz, stops the clock).
   // A right answer moves on by itself in timed Blitz, or anywhere if the learner asked.
@@ -176,20 +190,24 @@ export function GameScreen(props: GameScreenProps) {
                 isTimed ? (
                   <SortTimer
                     seconds={SORT_ROUND_SECONDS}
-                    isPaused={isWaitingOnLearner}
+                    isPaused={isWaitingOnLearner || isRevealing}
                     onExpire={finish}
                   />
                 ) : undefined
               }
             />
-            <QuestionView
-              key={`${state.items.length}-${state.index}-${item.question.id}`}
-              item={item}
-              last={state.phase === 'feedback' ? state.last : undefined}
-              onAnswer={answer}
-            />
+            {isRevealing ? (
+              <NounReveal noun={revealNoun} onDone={() => meetNoun(revealNoun.word)} />
+            ) : (
+              <QuestionView
+                key={`${state.items.length}-${state.index}-${item.question.id}`}
+                item={item}
+                last={state.phase === 'feedback' ? state.last : undefined}
+                onAnswer={answer}
+              />
+            )}
             <div aria-live="polite" className="contents">
-              {state.phase === 'playing' && hintText && (
+              {state.phase === 'playing' && !isRevealing && hintText && (
                 <HintControl hint={hintText} isShown={state.hinted} onShow={hint} />
               )}
               {isWaitingOnLearner && state.last && (

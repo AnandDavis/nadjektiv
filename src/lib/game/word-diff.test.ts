@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { BuildQuestion } from '@/content/types';
 
-import { diffBuiltSentence } from './word-diff';
+import { diffBuiltSentence, diffSentences } from './word-diff';
 
 const question: BuildQuestion = {
   id: 'b',
@@ -35,5 +35,13 @@ describe('diffBuiltSentence', () => {
   it('ignores commas and capitals when matching words', () => {
     const diff = diffBuiltSentence(question, 'Als ich ein Kind war, habe ich in Polen gewohnt.');
     expect(wrong(diff.given)).toEqual([]);
+  });
+});
+
+describe('diffSentences', () => {
+  it('marks the words outside the longest shared run', () => {
+    const diff = diffSentences('Ich bin heute müde.', 'Heute bin ich müde.');
+    expect(diff.answer.filter((w) => !w.isRight).map((w) => w.text)).toHaveLength(2);
+    expect(diff.given.at(-1)).toEqual({ text: 'müde.', isRight: true });
   });
 });

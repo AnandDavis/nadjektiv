@@ -47,7 +47,12 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
           <p className="text-sm font-semibold">
             <Ui {...COPY.revise.practiseHint} />
           </p>
-          <ButtonLink href="/play/review" size="lg">
+          {/* On yellow the usual ink button turns pale in dark mode; keep it dark. */}
+          <ButtonLink
+            href="/play/review"
+            size="lg"
+            className="bg-on-yellow text-yellow hover:bg-blue hover:text-on-blue"
+          >
             <ShuffleIcon /> <Ui {...COPY.revise.practise} />
           </ButtonLink>
         </Card>

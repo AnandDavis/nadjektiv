@@ -494,7 +494,7 @@ export const comparatives: Topic = {
       columns: ['Komparativ', 'Superlativ (am …)'],
       seconds: 180,
       explanation:
-        'Short adjectives with a, o or u usually take an umlaut (warm, wärmer). After -d, -t, -s, -ß, -sch or -z the superlative adds -esten (am kältesten, am heißesten); -el drops its e in the comparative (dunkler).',
+        'Short adjectives with a, o or u usually take an umlaut (warm, wärmer). After -d, -t, -s, -ß, -sch or -z the superlative usually adds -esten (am kältesten, am heißesten), but groß gives am größten; -el drops its e in the comparative (dunkler).',
       rows: [
         {
           label: 'warm',

@@ -368,7 +368,7 @@ export const plurals: Topic = {
       answer: 'Eltern',
       translation: 'My parents live in Cologne.',
       explanation:
-        'Eltern (parents) only exists in the plural: die Eltern, meine Eltern. There is no singular form to learn.',
+        'Eltern (parents) only exists in the plural: die Eltern, meine Eltern. There is no everyday singular.',
     },
     {
       id: 'plurals-gap-30',

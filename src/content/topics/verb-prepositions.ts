@@ -217,7 +217,7 @@ export const verbPrepositions: Topic = {
       kind: 'gap',
       before: 'Erzähl mal ',
       after: ' deiner Reise!',
-      options: ['von', 'über', 'nach'],
+      options: ['von', 'über', 'an'],
       answer: 'von',
       translation: 'Tell me about your trip!',
       explanation:

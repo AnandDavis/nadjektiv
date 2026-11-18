@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: APP_CONFIG.description,
   appleWebApp: { capable: true, title: APP_CONFIG.shortName, statusBarStyle: 'default' },
   formatDetection: { telephone: false },
+  // The German is the lesson: a browser translating it would change the answers.
+  other: { google: 'notranslate' },
 };
 
 export const viewport: Viewport = {
@@ -34,7 +36,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={archivo.variable} suppressHydrationWarning>
+    <html lang="en" translate="no" className={archivo.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFERENCES_SCRIPT }} />
       </head>

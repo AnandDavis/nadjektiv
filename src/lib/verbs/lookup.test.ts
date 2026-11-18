@@ -10,7 +10,9 @@ const entries = verbEntries();
 describe('verbEntries', () => {
   it('covers every verb in the irregular-verbs table, with matching er-forms', () => {
     const rows = getTopic('irregular-verbs')!.rules[0].table!.rows;
-    expect(entries.map((e) => e.infinitive)).toEqual(rows.map((r) => r[0]));
+    const names = entries.map((e) => e.infinitive);
+    expect(rows.map((r) => r[0]).filter((name) => !names.includes(name))).toEqual([]);
+    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'de')));
     expect(Object.keys(VERB_FORMS).sort()).toEqual(rows.map((r) => r[0]).sort());
     for (const [infinitive, er] of rows) {
       expect(VERB_FORMS[infinitive].present[2], infinitive).toBe(er);
@@ -32,6 +34,22 @@ describe('verbEntries', () => {
     expect(sehen).toMatchObject({ auxiliary: 'haben', participle: 'gesehen' });
     expect(entries.find((e) => e.infinitive === 'anfangen')!.topicIds).toContain('separable-verbs');
   });
+
+  it('marks modal and dative verbs and links their topics', () => {
+    const koennen = entries.find((e) => e.infinitive === 'können')!;
+    expect(koennen).toMatchObject({
+      kind: 'modal',
+      present: ['kann', 'kannst', 'kann', 'können', 'könnt', 'können'],
+    });
+    expect(koennen.topicIds).toContain('modal-verbs');
+    expect(koennen.topicIds).not.toContain('irregular-verbs');
+    for (const name of ['helfen', 'gefallen', 'danken']) {
+      const verb = entries.find((e) => e.infinitive === name)!;
+      expect(verb.dative, name).toBe(true);
+      expect(verb.topicIds, name).toContain('dative-verbs');
+    }
+    expect(entries.find((e) => e.infinitive === 'einkaufen')!.separable).toBe(true);
+  });
 });
 
 describe('searchVerbs', () => {
@@ -39,7 +57,10 @@ describe('searchVerbs', () => {
     expect(searchVerbs(entries, '')).toHaveLength(entries.length);
     expect(searchVerbs(entries, 'ging').map((e) => e.infinitive)).toEqual(['gehen']);
     expect(searchVerbs(entries, 'Fährst').map((e) => e.infinitive)).toEqual(['fahren']);
-    expect(searchVerbs(entries, 'auf')[0].infinitive).toBe('laufen');
+    expect(searchVerbs(entries, 'auf').map((e) => e.infinitive)).toEqual(
+      expect.arrayContaining(['laufen', 'aufstehen', 'aufräumen']),
+    );
+    expect(searchVerbs(entries, 'kann').map((e) => e.infinitive)).toEqual(['können']);
     expect(searchVerbs(entries, 'to invite').map((e) => e.infinitive)).toEqual(['einladen']);
     expect(searchVerbs(entries, 'xyz')).toEqual([]);
   });

@@ -48,6 +48,14 @@ export function VerbLookup({ verbs, topicTitles }: VerbLookupProps) {
   );
 }
 
+function kinds(verb: VerbEntry): Bilingual[] {
+  return [
+    COPY.verbs[verb.kind],
+    ...(verb.separable ? [COPY.verbs.separable] : []),
+    ...(verb.dative ? [COPY.verbs.dative] : []),
+  ];
+}
+
 function Verb({
   verb,
   topicTitles,
@@ -67,7 +75,16 @@ function Verb({
           {verb.infinitive}
         </h2>
         <p className="text-sm font-extrabold tracking-wide text-muted uppercase">{verb.gloss}</p>
+        <p className="mt-1 flex flex-wrap gap-x-2 text-xs font-bold text-muted">
+          {kinds(verb).map((kind, i) => (
+            <span key={i}>
+              {i > 0 && '· '}
+              <Ui {...kind} />
+            </span>
+          ))}
+        </p>
       </header>
+      {verb.note && <p className="text-sm text-ink">{verb.note}</p>}
 
       <div>
         <h3 className={LABEL}>

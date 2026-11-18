@@ -10,6 +10,7 @@ import { describe, expect, it } from 'vitest';
 
 import { GLOSSARY } from './glossary';
 import { NOUNS } from './nouns';
+import { MORE_VERBS } from './more-verbs';
 import { VERB_FORMS } from './verbs';
 import { TOPICS } from './index';
 import { SPELLING_ALLOWLIST } from './spelling-allowlist';
@@ -71,7 +72,11 @@ function correctTexts(): Array<{ id: string; text: string }> {
     id: `verb ${infinitive}`,
     text: forms.present.join(' '),
   }));
-  return [...glossary, ...nouns, ...verbs].concat(
+  const moreVerbs = MORE_VERBS.map((verb) => ({
+    id: `verb ${verb.infinitive}`,
+    text: [verb.infinitive, ...verb.present, verb.praeteritum, verb.participle].join(' '),
+  }));
+  return [...glossary, ...nouns, ...verbs, ...moreVerbs].concat(
     TOPICS.flatMap((topic) => [
       { id: `${topic.id} title`, text: topic.titleDe },
       ...(topic.grids ?? []).flatMap((grid) => [

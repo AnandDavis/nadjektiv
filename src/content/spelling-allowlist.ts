@@ -18,6 +18,8 @@ export const SPELLING_ALLOWLIST: ReadonlySet<string> = new Set([
   'Beeil', // du-imperative of sich beeilen: "Beeil dich!"
   'leidtun', // post-1996 spelling of "leid tun"
   'Modalverb', // grammar term (das Modalverb), in the glossary
+  'gedurft', // Partizip II of dürfen (ich habe es nicht gedurft)
+  'gesollt', // Partizip II of sollen
   'Neujahr',
   // Grammar terms used in topic titles.
   'Konnektoren',

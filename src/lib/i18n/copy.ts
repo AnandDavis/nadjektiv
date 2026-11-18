@@ -119,8 +119,8 @@ export const COPY = {
   verbs: {
     title: { de: 'Verben', en: 'Verbs' },
     intro: {
-      de: 'Die unregelmäßigen Verben auf einen Blick: Präsens, Präteritum und Perfekt.',
-      en: 'The irregular verbs at a glance: present tense, Präteritum and Perfekt.',
+      de: 'Häufige Verben auf einen Blick: Präsens, Präteritum und Perfekt.',
+      en: 'Common verbs at a glance: present tense, Präteritum and Perfekt.',
     },
     searchLabel: { de: 'Verb suchen', en: 'Search verbs' },
     searchPlaceholder: { de: 'z. B. gehen, ging, to go', en: 'e.g. gehen, ging, to go' },
@@ -128,6 +128,11 @@ export const COPY = {
     praeteritum: { de: 'Präteritum', en: 'Präteritum (simple past)' },
     perfekt: { de: 'Perfekt', en: 'Perfekt (spoken past)' },
     noResults: { de: 'Kein Verb gefunden', en: 'No verb found' },
+    irregular: { de: 'unregelmäßig', en: 'irregular' },
+    regular: { de: 'regelmäßig', en: 'regular' },
+    modal: { de: 'Modalverb', en: 'modal verb' },
+    separable: { de: 'trennbar', en: 'separable' },
+    dative: { de: 'mit Dativ', en: 'takes the dative' },
   },
   welcome: {
     heading: { de: 'Willkommen bei Nadjektiv', en: 'Welcome to Nadjektiv' },

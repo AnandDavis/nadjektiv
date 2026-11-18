@@ -17,6 +17,10 @@ interface ResultsScreenProps {
   answers: AnswerRecord[];
   mistakes: Mistake[];
   outcome: SessionOutcome | null;
+  /** This round's longest run of right answers. */
+  bestCombo: number;
+  /** The all-time best run for this topic and game, once saved; none for mixed rounds. */
+  recordCombo?: number;
   exitHref: string;
   exitLabel: ReactNode;
   topicTitles: Readonly<Record<string, Bilingual>>;
@@ -28,6 +32,8 @@ export function ResultsScreen({
   answers,
   mistakes,
   outcome,
+  bestCombo,
+  recordCombo,
   exitHref,
   exitLabel,
   topicTitles,
@@ -69,6 +75,20 @@ export function ResultsScreen({
           className="bg-yellow text-on-yellow"
         />
       </div>
+
+      <p className="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm text-ink">
+        <span>
+          <span className="font-extrabold">
+            <Ui {...COPY.records.longestCombo} />:
+          </span>{' '}
+          <span className="tabular-nums">×{bestCombo}</span>
+        </span>
+        {recordCombo !== undefined && (
+          <span className="text-muted">
+            <Ui {...COPY.common.best} />: <span className="tabular-nums">×{recordCombo}</span>
+          </span>
+        )}
+      </p>
 
       {outcome && <Celebrations outcome={outcome} topicTitles={topicTitles} />}
 

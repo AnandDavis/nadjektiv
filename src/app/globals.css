@@ -147,6 +147,12 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* What shows when the page is pulled past its edge (e.g. pull to refresh): the
+     header's colour, which the bottom bar shares, so it reads as part of the app. */
+  html {
+    background: var(--ink);
+  }
+
   body {
     background: var(--canvas);
     color: var(--ink);

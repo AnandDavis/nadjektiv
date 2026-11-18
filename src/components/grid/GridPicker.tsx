@@ -38,7 +38,7 @@ export function GridPicker({ title, grids, bests, exitHref, onStart }: GridPicke
         <p className="mt-4 text-xs font-extrabold tracking-widest text-muted uppercase">
           {info.name} · {info.english}
         </p>
-        <h1 className="mt-1 text-5xl leading-none font-black text-ink">{title}</h1>
+        <h1 className="mt-1 text-display leading-none font-black text-ink">{title}</h1>
         <p className="mt-4 text-ink">{info.description}</p>
       </div>
 

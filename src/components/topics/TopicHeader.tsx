@@ -35,7 +35,7 @@ export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: 
         </div>
         {/* The title morphs here from its row in the topic list. */}
         <ViewTransition name={topicTitleTransition(topicId)} share="morph" default="none">
-          <h1 className="mt-3 text-5xl leading-none font-black text-ink">
+          <h1 className="mt-3 text-display leading-none font-black text-ink">
             <Ui de={titleDe} en={title} />
           </h1>
         </ViewTransition>

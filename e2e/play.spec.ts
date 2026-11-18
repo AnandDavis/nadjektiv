@@ -12,7 +12,7 @@ test('home lists A1 and A2 topics', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'A1', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'A2', exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Noun gender/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: /der, die oder das\?/ })).toBeVisible();
 });
 
 test('a finished gap round is saved and survives a reload', async ({ page }) => {

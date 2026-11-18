@@ -3,6 +3,7 @@ import { expect, test } from '@playwright/test';
 test('interface language switches headings to English and persists', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Was üben wir heute?' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Wechselpräpositionen/ })).toBeVisible();
 
   await page.goto('/settings');
   await page.getByText('English', { exact: true }).click();
@@ -36,4 +37,5 @@ test('game and results labels follow the interface language', async ({ page }) =
   await page.goto('/topics/articles');
   await expect(page.getByText(/^Answer \d+ questions \(10 so far\)$/)).toBeVisible();
   await expect(page.getByRole('link', { name: 'All topics' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'The article grid' })).toBeVisible();
 });

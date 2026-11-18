@@ -486,5 +486,137 @@ export const comparatives: Topic = {
         },
       ],
     },
+    {
+      id: 'comparatives-grid-2',
+      title: 'Umlauts and spelling changes',
+      titleDe: 'Umlaut und Schreibung',
+      rowHeader: 'Positiv',
+      columns: ['Komparativ', 'Superlativ (am …)'],
+      seconds: 180,
+      explanation:
+        'Short adjectives with a, o or u usually take an umlaut (warm, wärmer). After -d, -t, -s, -ß, -sch or -z the superlative adds -esten (am kältesten, am heißesten); -el drops its e in the comparative (dunkler).',
+      rows: [
+        {
+          label: 'warm',
+          cells: [
+            {
+              answer: 'wärmer',
+            },
+            {
+              answer: 'am wärmsten',
+              accepted: ['wärmsten'],
+            },
+          ],
+        },
+        {
+          label: 'kalt',
+          cells: [
+            {
+              answer: 'kälter',
+            },
+            {
+              answer: 'am kältesten',
+              accepted: ['kältesten'],
+            },
+          ],
+        },
+        {
+          label: 'lang',
+          cells: [
+            {
+              answer: 'länger',
+            },
+            {
+              answer: 'am längsten',
+              accepted: ['längsten'],
+            },
+          ],
+        },
+        {
+          label: 'kurz',
+          cells: [
+            {
+              answer: 'kürzer',
+            },
+            {
+              answer: 'am kürzesten',
+              accepted: ['kürzesten'],
+            },
+          ],
+        },
+        {
+          label: 'arm',
+          cells: [
+            {
+              answer: 'ärmer',
+            },
+            {
+              answer: 'am ärmsten',
+              accepted: ['ärmsten'],
+            },
+          ],
+        },
+        {
+          label: 'stark',
+          cells: [
+            {
+              answer: 'stärker',
+            },
+            {
+              answer: 'am stärksten',
+              accepted: ['stärksten'],
+            },
+          ],
+        },
+        {
+          label: 'schwach',
+          cells: [
+            {
+              answer: 'schwächer',
+            },
+            {
+              answer: 'am schwächsten',
+              accepted: ['schwächsten'],
+            },
+          ],
+        },
+        {
+          label: 'klug',
+          cells: [
+            {
+              answer: 'klüger',
+            },
+            {
+              answer: 'am klügsten',
+              accepted: ['klügsten'],
+            },
+          ],
+        },
+        {
+          label: 'dunkel',
+          cells: [
+            {
+              answer: 'dunkler',
+            },
+            {
+              answer: 'am dunkelsten',
+              accepted: ['dunkelsten'],
+            },
+          ],
+        },
+        {
+          label: 'heiß',
+          cells: [
+            {
+              answer: 'heißer',
+            },
+            {
+              answer: 'am heißesten',
+              accepted: ['heißesten'],
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

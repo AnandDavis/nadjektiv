@@ -251,6 +251,18 @@ export const COPY = {
   progress: {
     medals: { de: 'Medaillen', en: 'Medals' },
     map: { de: 'Themenkarte', en: 'Topic map' },
+    perDay: { de: 'Antworten pro Tag', en: 'Answers per day' },
+    perWeek: { de: 'Richtig pro Woche', en: 'Correct per week' },
+    today: { de: 'Heute', en: 'Today' },
+    thisWeek: { de: 'Diese Woche', en: 'This week' },
+    day: { de: 'Tag', en: 'Day' },
+    week: { de: 'Woche bis', en: 'Week to' },
+    answers: { de: 'Antworten', en: 'Answers' },
+    correct: { de: 'Richtig', en: 'Correct' },
+    noHistory: {
+      de: 'Spiel eine Runde, dann siehst du hier deinen Verlauf.',
+      en: 'Play a round and your history shows up here.',
+    },
   },
   patterns: {
     title: { de: 'Häufige Fehler', en: 'Common mistakes' },

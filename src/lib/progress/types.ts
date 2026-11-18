@@ -106,6 +106,11 @@ export const progressSchema = z.object({
    * without a version bump (optional).
    */
   seenNouns: z.optional(z.array(z.string())),
+  /**
+   * Answers per day ("2026-11-18"), for the Progress charts; the latest
+   * GAME_CONFIG.historyDays days. Added without a version bump (optional).
+   */
+  history: z.optional(z.record(z.string(), z.object({ answered: count, correct: count }))),
   /** Level tests, keyed by level ("A1"). Added without a version bump (optional). */
   exams: z.optional(
     z.record(

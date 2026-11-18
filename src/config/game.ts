@@ -31,6 +31,11 @@ export const GAME_CONFIG = {
   examLength: 20,
   /** Lowest percentage for each grade, as on the Goethe-Zertifikat; below the last, not passed. */
   examGrades: { sehrGut: 90, gut: 80, befriedigend: 70, ausreichend: 60 },
+  /** Days of answer history kept for the Progress charts. */
+  historyDays: 120,
+  /** Days in the answers-per-day chart, and weeks in the accuracy chart. */
+  chartDays: 14,
+  chartWeeks: 8,
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

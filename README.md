@@ -126,3 +126,7 @@ Built for Vercel: import the repository and deploy with the default Next.js sett
 ## Credits
 
 The grammar scope follows the free A1 and A2 German cheat sheets from [Ankommo](https://ankommo.de). The sheets aren't redistributed in this repository, and all questions and explanations are original.
+
+## Licence
+
+[MIT](LICENSE). The German spellcheck dictionary used in tests (`dictionary-de`) is GPL-licensed and is a dev-only dependency, never shipped in the app.

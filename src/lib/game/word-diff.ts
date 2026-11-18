@@ -44,14 +44,27 @@ function lcs(a: readonly string[], b: readonly string[]): { inA: Set<number>; in
   return { inA, inB };
 }
 
+const words = (text: string) => text.split(/\s+/).filter(Boolean);
+
+/** Compare a learner's sentence with one correct sentence, word by word. */
+export function diffSentences(given: string, correct: string): WordDiff {
+  const a = words(given);
+  const b = words(correct);
+  const { inA, inB } = lcs(a, b);
+  return {
+    given: a.map((text, i) => ({ text, isRight: inA.has(i) })),
+    answer: b.map((text, j) => ({ text, isRight: inB.has(j) })),
+  };
+}
+
 /**
  * Compare a learner's sentence (as shown: "Als ich ein Kind war ich habe …") with the
  * correct order it is closest to, word by word.
  */
 export function diffBuiltSentence(question: BuildQuestion, given: string): WordDiff {
-  const givenWords = given.split(/\s+/).filter(Boolean);
+  const givenWords = words(given);
   const orders = [question.tiles, ...(question.accepted ?? [])].map((order) =>
-    formatSentence(order, question.punctuation).split(/\s+/),
+    words(formatSentence(order, question.punctuation)),
   );
   let best = { order: orders[0], ...lcs(givenWords, orders[0]) };
   for (const order of orders.slice(1)) {

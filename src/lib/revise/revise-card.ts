@@ -12,11 +12,22 @@ const MAX_EXAMPLES = 3;
 const MAX_ALSO_CORRECT = 3;
 const ARTICLE = /^(der|die|das|den|dem|des)$/i;
 
+/** A piece of the correct form; `isAnswer` marks the part the question asked for. */
+export interface CorrectPart {
+  text: string;
+  isAnswer: boolean;
+}
+
 export interface ReviseCard {
   questionId: string;
   topicId: string;
   /** The question answered correctly, e.g. "die Wohnung" or a full sentence. */
   correct: string;
+  /**
+   * `correct` split around the answer, to underline it. Absent for sentence builders,
+   * where the whole order is the answer and the words out of place are compared instead.
+   */
+  correctParts?: CorrectPart[];
   /** English gloss or translation, when the question has one. */
   translation?: string;
   explanation: string;
@@ -28,14 +39,30 @@ export interface ReviseCard {
   examplesKind?: 'sameAnswer' | 'row';
 }
 
+const answer = (text: string): CorrectPart => ({ text, isAnswer: true });
+const plain = (text: string): CorrectPart => ({ text, isAnswer: false });
+
+function sortParts(question: SortQuestion): CorrectPart[] {
+  if (question.prompt.includes('___')) {
+    const [before, after] = question.prompt.split('___');
+    return [plain(before), answer(question.answer), plain(after)];
+  }
+  if (ARTICLE.test(question.answer)) return [answer(question.answer), plain(` ${question.prompt}`)];
+  return [plain(`${question.prompt} → `), answer(question.answer)];
+}
+
+function gapParts(question: GapQuestion): CorrectPart[] {
+  return [plain(question.before), answer(question.answer), plain(question.after)];
+}
+
+const joinParts = (parts: readonly CorrectPart[]) => parts.map((p) => p.text).join('');
+
 function sortCorrect(question: SortQuestion): string {
-  if (question.prompt.includes('___')) return question.prompt.replace('___', question.answer);
-  if (ARTICLE.test(question.answer)) return `${question.answer} ${question.prompt}`;
-  return `${question.prompt} → ${question.answer}`;
+  return joinParts(sortParts(question));
 }
 
 function gapCorrect(question: GapQuestion): string {
-  return `${question.before}${question.answer}${question.after}`;
+  return joinParts(gapParts(question));
 }
 
 /** The question with its right answer filled in. */
@@ -81,6 +108,7 @@ export function buildReviseCard(topic: Topic, question: Question): ReviseCard {
       return {
         ...base,
         translation: question.gloss,
+        correctParts: sortParts(question).filter((part) => part.text !== ''),
         alsoCorrect: [],
         examples: sameAnswerExamples(topic, question),
       };
@@ -88,6 +116,7 @@ export function buildReviseCard(topic: Topic, question: Question): ReviseCard {
       return {
         ...base,
         translation: question.translation,
+        correctParts: gapParts(question).filter((part) => part.text !== ''),
         alsoCorrect: [],
         examples: sameAnswerExamples(topic, question),
       };
@@ -138,6 +167,7 @@ export function buildGridCellCard(
     questionId: `${grid.id}:${row}:${col}`,
     topicId: topic.id,
     correct: `${gridRow.label} · ${grid.columns[col]}: ${cell.answer}`,
+    correctParts: [plain(`${gridRow.label} · ${grid.columns[col]}: `), answer(cell.answer)],
     translation: grid.title,
     explanation: grid.explanation,
     alsoCorrect: [],

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { diffSentences } from '@/lib/game/word-diff';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
 
@@ -11,6 +12,41 @@ interface ReviseCardViewProps {
   misses: number;
   /** Shown above the card, since the list is sorted by misses rather than grouped. */
   topicTitle?: Bilingual;
+}
+
+const RIGHT_MARK = 'underline decoration-correct decoration-4 underline-offset-4';
+const WRONG_MARK = 'underline decoration-wrong decoration-4 underline-offset-4';
+
+/**
+ * The correct form with the part that was asked for underlined: the answer itself, or
+ * for a built sentence the words that were out of place in what was chosen.
+ */
+function CorrectForm({ card, given }: { card: ReviseCard; given: string }) {
+  if (card.correctParts) {
+    return (
+      <>
+        {card.correctParts.map((part, i) =>
+          part.isAnswer ? (
+            <span key={i} className={RIGHT_MARK}>
+              {part.text}
+            </span>
+          ) : (
+            <span key={i}>{part.text}</span>
+          ),
+        )}
+      </>
+    );
+  }
+  return (
+    <>
+      {diffSentences(given, card.correct).answer.map((word, i) => (
+        <span key={i}>
+          {i > 0 && ' '}
+          <span className={word.isRight ? undefined : RIGHT_MARK}>{word.text}</span>
+        </span>
+      ))}
+    </>
+  );
 }
 
 export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardViewProps) {
@@ -24,10 +60,13 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
       <div className="flex items-start gap-2">
         <CheckIcon className="mt-1 shrink-0 text-correct" />
         <div className="min-w-0 flex-1">
-          <p lang="de" className="text-xl leading-tight font-black break-words text-ink">
-            {card.correct}
+          {/* Above the German, so the answer's underline never runs into it. */}
+          {card.translation && (
+            <p className="translation mb-1 text-sm text-muted">{card.translation}</p>
+          )}
+          <p lang="de" className="text-xl leading-snug font-black break-words text-ink">
+            <CorrectForm card={card} given={given} />
           </p>
-          {card.translation && <p className="translation text-sm text-muted">{card.translation}</p>}
         </div>
         {misses > 0 && (
           <Badge className="shrink-0">
@@ -42,7 +81,7 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
           <Ui {...COPY.game.youChose} />:
         </span>
         {given.trim() ? (
-          <span lang="de" className="font-semibold line-through decoration-wrong decoration-4">
+          <span lang="de" className={`font-semibold ${WRONG_MARK}`}>
             {given}
           </span>
         ) : (
@@ -50,12 +89,12 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
         )}
       </p>
 
-      <p className="text-sm text-ink">
-        <span className="font-semibold">
-          <Ui {...COPY.game.why} />{' '}
-        </span>
-        {card.explanation}
-      </p>
+      <div>
+        <p className="text-xs font-extrabold tracking-widest text-ink uppercase">
+          <Ui {...COPY.game.why} />
+        </p>
+        <p className="mt-1 text-sm text-ink">{card.explanation}</p>
+      </div>
 
       {card.alsoCorrect.length > 0 && (
         <ExampleList label={<Ui {...COPY.revise.alsoCorrect} />} items={card.alsoCorrect} />

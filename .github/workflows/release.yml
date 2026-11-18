@@ -1,0 +1,22 @@
+name: Release
+
+# Keeps a release pull request open that bumps the version in package.json and
+# updates CHANGELOG.md from the Conventional Commits merged since the last release
+# (fix → patch, feat → minor, ! or BREAKING CHANGE → major). Merging it tags the
+# release, and the push to main deploys it.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v5
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

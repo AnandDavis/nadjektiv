@@ -4,7 +4,7 @@
 
 ## Critical Rules
 
-1. **Commits use Conventional Commits** — `type(scope): summary` (`feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `style`, `perf`). Imperative mood, lowercase summary, no trailing period, ≤ 72 chars. One logical change per commit. Never push, force-push, or rewrite history without explicit permission.
+1. **Commits use Conventional Commits** — `type(scope): summary` (`feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `style`, `perf`). Imperative mood, lowercase summary, no trailing period, ≤ 72 chars. One logical change per commit. Never push, force-push, or rewrite history without explicit permission. The commit types drive releases (see [Releases](#releases)), so pick them honestly: `fix` for a bug, `feat` for something new, `!` for a breaking change.
 2. **Search before creating** — find an existing component, hook or util before writing a new one. Extend it rather than building a parallel version.
 3. **German content must be correct, and its ids are permanent** — question ids and grid cell positions are stored in learners' progress, so never renumber questions or reorder grid rows and columns. every question carries an `explanation`, and every sentence must be grammatical, natural A1/A2 German. Check articles, case endings, umlauts and `ß` against `docs/grammar/` before adding content. A wrong answer key teaches the wrong thing — treat it as a bug, not a typo. `npm test` runs content-integrity checks; keep them green.
 4. **Persistence goes through the progress store** — never touch `localStorage` directly outside `src/lib/storage/`. UI reads progress through `useProgress()`; writes go through `ProgressService` pure functions and the `ProgressStore` port. This is the seam that lets us swap in a server-backed store when logins arrive.
@@ -90,6 +90,10 @@ Every `Promise.all(...)` or `.then(...)` has a `.catch()` or sits in `try/catch`
 - Directories: `kebab-case/`
 
 ---
+
+## Releases
+
+release-please (`.github/workflows/release.yml`) keeps a release pull request open on GitHub. It bumps `version` in `package.json` and writes `CHANGELOG.md` from the commits merged since the last release: `fix` → patch, `feat` → minor, `!` or `BREAKING CHANGE:` → major; other types don't trigger a release. Merging that PR tags the release, and Vercel deploys it. The About page shows `version`. Never edit `version` or `CHANGELOG.md` by hand. `CHANGELOG.md` is the developer changelog; the learner-facing one is `src/content/changelog.ts` (rule 18).
 
 ## Development Commands
 

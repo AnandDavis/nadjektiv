@@ -12,10 +12,6 @@ export const COPY = {
   daily: {
     title: { de: 'Tagesmix', en: 'Daily mix' },
     done: { de: 'Heute erledigt', en: 'Done today' },
-    doneHint: {
-      de: 'Morgen gibt es einen neuen Mix. Du kannst diesen trotzdem nochmal spielen.',
-      en: 'A new mix tomorrow. You can still play this one again.',
-    },
   },
   hint: {
     // "Half" matches GAME_CONFIG.points.hintFactor.

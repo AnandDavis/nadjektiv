@@ -6,10 +6,11 @@
 import type { GameMode } from '@/content/types';
 import { isMixedMode } from '@/lib/game/modes';
 
-import { accuracy, xpForSession, type SessionResult } from '../game/scoring';
+import { accuracy, runBreakers, xpForSession, type SessionResult } from '../game/scoring';
 import { levelForXp } from './level';
 import { masteryFor, tierRank, type Tier } from './mastery';
 import {
+  COMBO_BREAKS_KEPT,
   RECENT_WINDOW,
   createEmptyTopicProgress,
   type GridBest,
@@ -188,6 +189,7 @@ export function applySessionResult(
       grids,
       startedAt: progress.startedAt ?? now,
       ...(result.dailyDate ? { daily: { lastDone: result.dailyDate } } : {}),
+      ...withComboBreaks(progress, runBreakers(result.answers), now),
     },
     xpGained,
     newBests,
@@ -196,4 +198,11 @@ export function applySessionResult(
     addedToRevise,
     clearedFromRevise,
   };
+}
+
+/** Keep the latest questions that broke a long run, for the daily mix to lean on. */
+function withComboBreaks(progress: Progress, breakers: string[], now: string) {
+  if (breakers.length === 0) return {};
+  const added = breakers.map((questionId) => ({ questionId, at: now }));
+  return { comboBreaks: [...(progress.comboBreaks ?? []), ...added].slice(-COMBO_BREAKS_KEPT) };
 }

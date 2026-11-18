@@ -99,3 +99,24 @@ describe('todaysMix', () => {
     expect(todaysMix(TOPICS, progress, DAY).isNew).toBe(true);
   });
 });
+
+describe('combo-aware daily mix', () => {
+  it('leans towards the topic and game where a long run broke', () => {
+    // Equally strong everywhere, so only the first three started topics are drawn
+    // from; pronouns, last in the syllabus of these, is left out without a break.
+    const progress = played({ plurals: 1, articles: 1, cases: 1, pronouns: 1 });
+    const fromPronouns = (p: typeof progress) =>
+      buildDailySession(TOPICS, p, DAY).filter((item) => item.topicId === 'pronouns').length;
+    expect(fromPronouns(progress)).toBe(0);
+
+    const breaker = TOPICS.find((t) => t.id === 'pronouns')!.gap![0].id;
+    expect(
+      fromPronouns({ ...progress, comboBreaks: [{ questionId: breaker, at: DAY }] }),
+    ).toBeGreaterThan(0);
+  });
+
+  it('names a question’s group by its topic and game', async () => {
+    const { questionGroup } = await import('./daily');
+    expect(questionGroup('two-way-prepositions-gap-7')).toBe('two-way-prepositions-gap');
+  });
+});

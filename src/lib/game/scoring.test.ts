@@ -53,3 +53,21 @@ describe('comboChange', () => {
     expect(comboChange(2, 0)).toBeUndefined();
   });
 });
+
+describe('runBreakers', () => {
+  it('names the wrong answers that ended a raised run, mirroring hints', async () => {
+    const { runBreakers, COMBO_STEP } = await import('./scoring');
+    const answer = (questionId: string, isCorrect: boolean, hinted = false) => ({
+      questionId,
+      topicId: 't',
+      given: '',
+      isCorrect,
+      hinted,
+    });
+    const run = Array.from({ length: COMBO_STEP }, (_, i) => answer(`r${i}`, true));
+    expect(runBreakers([...run, answer('x', false)])).toEqual(['x']);
+    expect(runBreakers([answer('a', true), answer('y', false)])).toEqual([]);
+    const hintedRun = run.map((a) => ({ ...a, hinted: true }));
+    expect(runBreakers([...hintedRun, answer('z', false)])).toEqual([]);
+  });
+});

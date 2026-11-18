@@ -23,6 +23,12 @@ import {
 export const DAILY_LENGTH = GAME_CONFIG.dailyLength;
 const WEAK_TOPICS = GAME_CONFIG.dailyWeakTopics;
 const STARTER_TOPICS = GAME_CONFIG.dailyStarterTopics;
+const BREAK_BOOST = GAME_CONFIG.dailyBreakBoost;
+
+/** "two-way-prepositions-gap" for "two-way-prepositions-gap-7": the question's topic and game. */
+export function questionGroup(questionId: string): string {
+  return questionId.replace(/-\d+$/, '');
+}
 
 /** The learner's own calendar day, "2026-11-18": the mix changes at local midnight. */
 export function dailyKey(date: Date): string {
@@ -68,18 +74,29 @@ export function buildDailySession(
     rng,
   );
 
-  const weakest = [...started]
-    .sort(
-      (a, b) =>
-        recentAccuracy(progress.topics[a.id]) - recentAccuracy(progress.topics[b.id]) ||
-        progress.topics[a.id].answered - progress.topics[b.id].answered,
-    )
-    .slice(0, WEAK_TOPICS);
+  // Where a long run broke is a clue to a rule that isn't solid yet: those topics come
+  // first, and questions from the same topic and game weigh more.
+  const breaks = progress.comboBreaks ?? [];
+  const breakGroups = new Set(breaks.map((b) => questionGroup(b.questionId)));
+  const breakTopics = new Set(
+    pool.filter((item) => breakGroups.has(questionGroup(item.question.id))).map((i) => i.topicId),
+  );
+  const byWeakness = [...started].sort(
+    (a, b) =>
+      recentAccuracy(progress.topics[a.id]) - recentAccuracy(progress.topics[b.id]) ||
+      progress.topics[a.id].answered - progress.topics[b.id].answered,
+  );
+  const weakest = [
+    ...byWeakness.filter((t) => breakTopics.has(t.id)),
+    ...byWeakness.filter((t) => !breakTopics.has(t.id)),
+  ].slice(0, WEAK_TOPICS);
   const chosen = new Set(picked);
   const weakPool = poolOf(weakest).filter(
     (item) => !picked.some((p) => p.question.id === item.question.id),
   );
-  const weight = (item: SessionItem) => questionWeight(stats[item.question.id]);
+  const weight = (item: SessionItem) =>
+    questionWeight(stats[item.question.id]) *
+    (breakGroups.has(questionGroup(item.question.id)) ? BREAK_BOOST : 1);
   for (const item of take(weakPool, DAILY_LENGTH - picked.length, weight, rng)) chosen.add(item);
 
   // A small syllabus or few weak questions: top up from everything started.

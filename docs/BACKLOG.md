@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Combo-aware daily mix
-
-**Why:** where a run breaks is a clue to a rule that isn't solid yet.
-
-**Notes:** record the question (and so the rule) that broke each long run. The next daily mix leans towards questions on that rule. "Rule" could start as the question's topic and mode, refined later if questions get rule tags. Needs a small addition to saved progress (schema change with a migration).
-
 ## Mistake patterns
 
 **Why:** the revise list shows single questions, but mistakes often share a cause across topics, such as picking Akkusativ after mit.

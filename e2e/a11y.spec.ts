@@ -10,6 +10,7 @@ const PAGES = [
   '/settings',
   '/about',
   '/glossary',
+  '/verbs',
   '/records',
   '/play/exam/a1',
 ];

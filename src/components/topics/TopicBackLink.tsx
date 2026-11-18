@@ -16,6 +16,7 @@ const LABELS: Readonly<Record<TopicOrigin, Bilingual>> = {
   progress: COPY.nav.progress,
   revise: COPY.revise.title,
   glossary: COPY.glossary.title,
+  verbs: COPY.verbs.title,
 };
 
 /** Back to wherever the topic was opened from, or the topic list. */

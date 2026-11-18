@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { AppVersion } from '@/components/about/AppVersion';
 import { ChangelogList } from '@/components/about/ChangelogList';
 import { FeatureList } from '@/components/about/FeatureList';
 import { LevelsExplainer } from '@/components/about/LevelsExplainer';
@@ -20,6 +21,7 @@ export default function AboutPage() {
         <p className="mt-1 text-muted">
           {APP_CONFIG.name}: {APP_CONFIG.description}
         </p>
+        <AppVersion />
       </header>
       <FeatureList />
       <LevelsExplainer />

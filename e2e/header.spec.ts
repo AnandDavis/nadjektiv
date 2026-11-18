@@ -64,3 +64,15 @@ test('the open menu and the About page have no accessibility violations', async 
     results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(', ')}`),
   ).toEqual([]);
 });
+
+test('About shows the app version and links the build to its commit', async ({ page }) => {
+  await page.goto('/about');
+  const version = page.getByTestId('app-version');
+  await expect(version).toContainText(/Version\s*\d+\.\d+\.\d+/);
+  const build = version.getByRole('link');
+  await expect(build).toHaveText(/^[0-9a-f]{7}$/);
+  await expect(build).toHaveAttribute(
+    'href',
+    /^https:\/\/github\.com\/AnandDavis\/nadjektiv\/commit\/[0-9a-f]{40}$/,
+  );
+});

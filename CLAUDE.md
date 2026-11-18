@@ -18,6 +18,8 @@
 12. **Zero is not null** — store `0` for a measured zero (score, combo, attempts). Reserve `undefined` for "never played".
 13. **Never give time estimates, and never cut corners based on perceived effort** — no "quick fix", "an hour's work" or similar, anywhere. Defer work only on its merits (scope, risk, value, missing information), never on the clock.
 14. **Verify findings before acting on them** — when a review, doc or sub-agent claims something about the code or the German, open the file and read the line before acting. Docs describe what was true when written.
+15. **Interface labels are bilingual** — headings, buttons and other labels that have a German form live in `src/lib/i18n/copy.ts` and render through `<Ui {...COPY.x.y} />`, which shows German or English per the learner's setting (switched by CSS before paint, so no flash). Grammar content is always German and never goes through `COPY`.
+16. **A wrong answer is always explained before the game moves on** — every mode stops on a wrong answer, shows what was chosen, the right answer and the rule, and waits for the learner to continue (Blitz pauses its clock while it waits).
 
 ---
 

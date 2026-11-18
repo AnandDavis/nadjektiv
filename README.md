@@ -12,10 +12,14 @@ A mobile-first progressive web app for learning **German A1–A2 grammar** throu
 
 Every topic has a **Die Regeln** card set summarising the rule, and one or more game modes:
 
-- **Blitz** (rapid-fire sorter): 60 seconds to sort as many prompts as you can, such as der/die/das, Akkusativ/Dativ, haben/sein or Wo?/Wohin?. Runs of correct answers raise a combo multiplier.
+- **Blitz** (rapid-fire sorter): 60 seconds to sort as many prompts as you can, such as der/die/das, Akkusativ/Dativ, haben/sein or Wo?/Wohin?. Runs of correct answers raise a combo multiplier. A wrong answer pauses the clock until you've read why.
 - **Lückentext** (fill the gap): 10 sentences. Pick the word or ending that fits, then see the rule explained.
 - **Satzbau** (sentence builder): 8 sentences. Tap word tiles into the right order. Every grammatically correct order is accepted, not just the textbook one.
 - **Gemischte Wiederholung** (mixed review): 12 questions drawn from every topic you've played, weighted towards the ones you get wrong.
+
+Every wrong answer, in every mode, shows what you chose, the right answer and the rule before you continue.
+
+**Interface language:** headings and buttons are in German by default for extra immersion. Switch them to English in Settings. Grammar questions are always German.
 
 ## Gamification (no streaks)
 

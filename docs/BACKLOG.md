@@ -2,6 +2,54 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## View transitions between screens
+
+**Why:** moving between screens is an instant swap. Animated transitions (a topic sliding into its game, a topic-map square growing into the topic header) would make the app feel native.
+
+**Notes:** React 19 and Next 16 support the View Transitions API. Respect the reduced-motion setting (`data-motion` and `prefers-reduced-motion`), keep transitions short, and check they don't clash with the service worker's offline navigation fallback.
+
+## Install prompt
+
+**Why:** few learners know the app can be installed. Android only offers it from the browser menu, and iPhone never prompts.
+
+**Notes:** on Android, capture `beforeinstallprompt` and show our own "Installieren" button (e.g. in Settings or once on home). On iPhone, show a one-time hint: Share → Add to Home Screen. Never show either once installed (`display-mode: standalone`). Bilingual labels in `COPY`.
+
+## Prerender the next page (Speculation Rules)
+
+**Why:** topic → game navigation could be instant on Chromium browsers.
+
+**Notes:** add Speculation Rules (prerender on hover or tap for `/topics/*` and `/play/*`), checking how they interact with Next's own prefetching and with the service worker. Measure before and after.
+
+## Trim the font
+
+**Why:** Archivo is likely the largest download after JavaScript.
+
+**Notes:** load only the weights and the width-axis range actually used, and check visual baselines don't change.
+
+## Load heavy screens on demand
+
+**Why:** the home page's JavaScript grows with every feature, and the budget is 230 KB.
+
+**Notes:** split grid fill, the topic map and the glossary with `next/dynamic` or route-level splitting so they load only when opened. Keep offline working: the service worker must still precache the chunks.
+
+## React Compiler
+
+**Why:** game screens re-render on every answer. The compiler memoises components automatically.
+
+**Notes:** enable it in Next 16, check our hooks follow its rules (lint), and compare render counts and the JS budget before and after.
+
+## Speed Insights
+
+**Why:** Lighthouse measures a lab machine. Speed Insights reports real Core Web Vitals from learners' phones.
+
+**Notes:** Vercel's `@vercel/speed-insights`. It sends anonymous performance data, so mention it on the About page and decide on consent first.
+
+## Web Analytics
+
+**Why:** see which games and topics are actually used, to decide what to build next.
+
+**Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
+
 ## Spaced repetition for the revise list
 
 **Why:** a missed question comes back whenever the learner opens the list, not when it would help memory most.

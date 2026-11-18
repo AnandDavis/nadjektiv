@@ -10,6 +10,18 @@ export const TIER_CLASSES: Record<Tier, string> = {
   mastered: 'text-mastered border-mastered',
 };
 
+/**
+ * A tier as a filled square (topic map, home list): new topics are an empty outline,
+ * each medal fills the square in its own colour.
+ */
+export const TIER_FILLS: Record<Tier, string> = {
+  new: 'border-tier-new bg-surface text-muted',
+  bronze: 'border-ink bg-bronze text-canvas',
+  silver: 'border-ink bg-silver text-canvas',
+  gold: 'border-ink bg-gold text-canvas',
+  mastered: 'border-ink bg-mastered text-canvas',
+};
+
 export const TIER_MARKS: Record<Tier, string> = {
   new: '○',
   bronze: '●',
@@ -30,6 +42,27 @@ export function TierBadge({ tier, className }: { tier: Tier; className?: string 
     >
       <span aria-hidden="true">{TIER_MARKS[tier]}</span>
       <Ui {...TIER_LABELS[tier]} />
+    </span>
+  );
+}
+
+/**
+ * A tier as a fixed-size square showing only its mark, so a column of them lines up.
+ * The tier's name is read out, so it never relies on colour or shape alone.
+ */
+export function TierSquare({ tier, className }: { tier: Tier; className?: string }) {
+  return (
+    <span
+      className={cn(
+        'flex size-9 items-center justify-center border-2 text-base font-black',
+        TIER_FILLS[tier],
+        className,
+      )}
+    >
+      <span aria-hidden="true">{TIER_MARKS[tier]}</span>
+      <span className="sr-only">
+        <Ui {...TIER_LABELS[tier]} />
+      </span>
     </span>
   );
 }

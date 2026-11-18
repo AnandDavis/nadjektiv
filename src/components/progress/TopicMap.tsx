@@ -3,24 +3,15 @@
 import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
-import { TIERS, TIER_LABELS, masteryFor, type Tier } from '@/lib/progress/mastery';
+import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import type { Progress } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
 import { cn } from '@/lib/utils/cn';
 
-import { TIER_MARKS } from './TierBadge';
+import { TIER_FILLS, TIER_MARKS } from './TierBadge';
 import { TopicLink } from '../topics/TopicLink';
 
 const LEVELS: readonly Level[] = ['A1', 'A2'];
-
-/** New topics are an empty outline; each medal fills the square in its own colour. */
-const TILE_CLASSES: Record<Tier, string> = {
-  new: 'border-tier-new bg-surface text-muted',
-  bronze: 'border-ink bg-bronze text-canvas',
-  silver: 'border-ink bg-silver text-canvas',
-  gold: 'border-ink bg-gold text-canvas',
-  mastered: 'border-ink bg-mastered text-canvas',
-};
 
 interface TopicMapProps {
   topics: TopicSummary[];
@@ -55,7 +46,7 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
                       origin="progress"
                       className={cn(
                         'flex aspect-square min-h-11 flex-col items-center justify-center border-2 font-black transition-colors hover:bg-yellow hover:text-on-yellow',
-                        TILE_CLASSES[tier],
+                        TIER_FILLS[tier],
                       )}
                     >
                       <span aria-hidden="true" className="text-sm leading-none tabular-nums">
@@ -83,7 +74,7 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
           <li key={tier} className="flex items-center gap-1">
             <span
               aria-hidden="true"
-              className={cn('flex size-5 items-center justify-center border-2', TILE_CLASSES[tier])}
+              className={cn('flex size-5 items-center justify-center border-2', TIER_FILLS[tier])}
             >
               {TIER_MARKS[tier]}
             </span>

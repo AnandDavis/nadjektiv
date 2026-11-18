@@ -1,4 +1,4 @@
-import { TierBadge } from '@/components/progress/TierBadge';
+import { TierSquare } from '@/components/progress/TierBadge';
 import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { MasteryInfo } from '@/lib/progress/mastery';
@@ -36,9 +36,9 @@ export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
       </span>
       <span className="flex shrink-0 flex-col items-end gap-1 pt-0.5 pr-1">
         {mastery ? (
-          <TierBadge tier={mastery.tier} />
+          <TierSquare tier={mastery.tier} />
         ) : (
-          <span className="h-6 w-16 animate-pulse bg-sunken" aria-hidden="true" />
+          <span className="size-9 animate-pulse bg-sunken" aria-hidden="true" />
         )}
         {mastery && mastery.tier !== 'new' && (
           <span className="text-xs font-bold text-muted tabular-nums group-hover:text-on-yellow">

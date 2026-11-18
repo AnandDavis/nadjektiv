@@ -39,6 +39,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     <html lang="en" translate="no" className={archivo.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFERENCES_SCRIPT }} />
+        {/* Browsers fetch the manifest without cookies unless told otherwise. Sending them
+            lets the request through Vercel's bot check, which the browser has already
+            passed for the page itself; without it the app can't be installed. */}
+        <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
       </head>
       <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
         {children}

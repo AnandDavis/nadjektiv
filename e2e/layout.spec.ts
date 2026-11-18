@@ -19,6 +19,7 @@ const PAGES = [
   '/settings',
   '/about',
   '/glossary',
+  '/records',
 ];
 
 // German and English labels, and German at the largest text size (an option in Settings).

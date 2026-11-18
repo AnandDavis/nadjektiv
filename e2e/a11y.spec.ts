@@ -10,6 +10,7 @@ const PAGES = [
   '/settings',
   '/about',
   '/glossary',
+  '/records',
 ];
 
 for (const colorScheme of ['light', 'dark'] as const) {

@@ -97,6 +97,7 @@ export function GameScreen(props: GameScreenProps) {
           current.questions,
           current.revise,
           rng,
+          dailyKey(new Date()),
         );
       }
       return buildTopicSession(topics[0], mode, current.questions, rng, { untimed });

@@ -29,7 +29,9 @@ test('wrong answers are collected on the revise page with the answer and why', a
   // One card per missed question; each shows what was chosen and why.
   await expect(page.getByText('Deine Wahl')).toHaveCount(10 - correct);
   await expect(page.getByText('Warum?')).toHaveCount(10 - correct);
-  await expect(page.getByRole('navigation', { name: 'Main' })).toContainText(String(10 - correct));
+  // Spaced repetition: a miss comes back tomorrow, so nothing is due yet.
+  await expect(page.getByText(/Morgen fällig · noch 3× richtig/)).toHaveCount(10 - correct);
+  await expect(page.getByRole('navigation', { name: 'Main' })).not.toContainText(/\d/);
 
   // After a client-side navigation the <title> streams in with the page metadata.
   await expect(page).toHaveTitle(/To revise/);

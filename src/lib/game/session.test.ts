@@ -159,6 +159,31 @@ describe('buildReviewSession', () => {
     ).toEqual(['started-gap-2', 'started-sort-4']);
     expect(new Set(session.map((item) => item.question.id)).size).toBe(12);
   });
+
+  it('asks the revise questions due today before later ones', () => {
+    const started = makeTopic('started', 0, 20);
+    const revise = Object.fromEntries(
+      Array.from({ length: 14 }, (_, i) => [
+        `started-gap-${i + 1}`,
+        { misses: 5, dueOn: i < 4 ? '2026-11-18' : '2026-11-25' },
+      ]),
+    );
+    const session = buildReviewSession(
+      [started],
+      new Set(['started']),
+      {},
+      revise,
+      createRng(3),
+      '2026-11-18',
+    );
+    expect(
+      session
+        .slice(0, 4)
+        .map((item) => item.question.id)
+        .sort(),
+    ).toEqual(['started-gap-1', 'started-gap-2', 'started-gap-3', 'started-gap-4']);
+    expect(session.every((item) => revise[item.question.id])).toBe(true);
+  });
 });
 
 describe('Type the answer', () => {

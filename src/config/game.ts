@@ -21,6 +21,12 @@ export const GAME_CONFIG = {
   dailyStarterTopics: 3,
   /** Daily mix weight on questions like one that recently broke a long run. */
   dailyBreakBoost: 3,
+  /**
+   * Spaced repetition for the revise list: a missed question comes back after the first
+   * gap in days; each right answer when it's due moves it to the next gap, and a right
+   * answer at the last one takes it off the list. A miss starts it again.
+   */
+  reviseIntervalsDays: [1, 3, 7],
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

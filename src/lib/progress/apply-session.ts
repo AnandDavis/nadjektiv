@@ -6,6 +6,8 @@
 import type { GameMode } from '@/content/types';
 import { isMixedMode } from '@/lib/game/modes';
 
+import { afterMiss, afterRight } from '../revise/schedule';
+import { dailyKey } from '../utils/day';
 import { accuracy, runBreakers, xpForSession, type SessionResult } from '../game/scoring';
 import { levelForXp } from './level';
 import { masteryFor, tierRank, type Tier } from './mastery';
@@ -29,7 +31,7 @@ export interface SessionOutcome {
   tierUps: Array<{ topicId: string; from: Tier; to: Tier }>;
   /** Questions newly put on the "to revise" list by this round. */
   addedToRevise: number;
-  /** Questions taken off the list because they were answered correctly. */
+  /** Questions taken off the list: answered correctly when due at the last gap. */
   clearedFromRevise: number;
   /** Topics that reached Gemeistert for the first time in this round. */
   graduations: string[];
@@ -117,6 +119,7 @@ export function applySessionResult(
   const revise = { ...progress.revise };
   let addedToRevise = 0;
   let clearedFromRevise = 0;
+  const today = dailyKey(new Date(now));
 
   const resultsByTopic = new Map<string, boolean[]>();
   for (const answer of result.answers) {
@@ -131,12 +134,18 @@ export function applySessionResult(
       correct: stats.correct + (answer.isCorrect ? 1 : 0),
     };
 
-    // A miss goes on the revise list; a correct answer later takes it off.
+    // A miss goes on the revise list and comes back after spaced gaps; right answers on
+    // the days it's due move it along, and one at the last gap takes it off.
     const entry = revise[answer.questionId];
     if (answer.isCorrect) {
       if (entry) {
-        delete revise[answer.questionId];
-        clearedFromRevise += 1;
+        const next = afterRight(entry, today);
+        if (next) {
+          revise[answer.questionId] = next;
+        } else {
+          delete revise[answer.questionId];
+          clearedFromRevise += 1;
+        }
       }
     } else {
       if (!entry) addedToRevise += 1;
@@ -145,6 +154,7 @@ export function applySessionResult(
         given: answer.given,
         misses: (entry?.misses ?? 0) + 1,
         lastMissedAt: now,
+        ...afterMiss(today),
       };
     }
   }

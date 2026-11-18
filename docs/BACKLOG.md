@@ -20,12 +20,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
 
-## Spaced repetition for the revise list
-
-**Why:** a missed question comes back whenever the learner opens the list, not when it would help memory most.
-
-**Notes:** schedule each revise entry to return after 1, 3, then 7 days, resetting on a miss. Mixed review and the daily mix draw "due" entries first. Needs a `dueAt` on revise entries, so a schema change with a migration.
-
 ## Gender reveal on new nouns
 
 **Why:** meeting a noun for the first time in a quiz means guessing its gender.

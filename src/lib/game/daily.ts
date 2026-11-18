@@ -1,8 +1,8 @@
 /**
  * The daily mix: a short ready-made round, the same all day. Up to half comes from
- * the revise list, the rest from the learner's weakest topics. The day's date seeds
- * every choice, so reopening it gives the same questions until midnight. There is
- * no streak: missing a day costs nothing.
+ * the revise list (entries due today first), the rest from the learner's weakest
+ * topics. The day's date seeds every choice, so reopening it gives the same questions
+ * until midnight. There is no streak: missing a day costs nothing.
  */
 
 import { GAME_CONFIG } from '@/config/game';
@@ -13,6 +13,7 @@ import type { Progress } from '@/lib/progress/types';
 
 import { createRng, shuffle, type Rng } from './rng';
 import {
+  pickRevise,
   pickWeighted,
   questionModes,
   questionWeight,
@@ -31,10 +32,7 @@ export function questionGroup(questionId: string): string {
 }
 
 /** The learner's own calendar day, "2026-11-18": the mix changes at local midnight. */
-export function dailyKey(date: Date): string {
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
+export { dailyKey } from '@/lib/utils/day';
 
 export function isDailyDone(progress: Progress, key: string): boolean {
   return progress.daily?.lastDone === key;
@@ -66,13 +64,8 @@ export function buildDailySession(
 
   const pool = poolOf(started);
   const stats = progress.questions;
-  const toRevise = pool.filter((item) => progress.revise[item.question.id]);
-  const picked = take(
-    toRevise,
-    Math.ceil(DAILY_LENGTH / 2),
-    (item) => progress.revise[item.question.id].misses,
-    rng,
-  );
+  // Revise entries due today come first, then the others.
+  const picked = pickRevise(pool, progress.revise, Math.ceil(DAILY_LENGTH / 2), rng, key);
 
   // Where a long run broke is a clue to a rule that isn't solid yet: those topics come
   // first, and questions from the same topic and game weigh more.

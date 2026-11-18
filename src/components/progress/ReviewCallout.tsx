@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { RepeatIcon, ShuffleIcon, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY } from '@/lib/i18n/copy';
-import { reviseCount } from '@/lib/revise/revise-list';
+import { dueCount } from '@/lib/revise/schedule';
+import { dailyKey } from '@/lib/utils/day';
 
 const CALLOUT_CLASS =
   'flex min-h-16 items-center gap-3 border-2 border-ink bg-yellow p-4 text-on-yellow transition-colors hover:bg-ink hover:text-canvas';
@@ -14,7 +15,7 @@ const CALLOUT_CLASS =
 export function ReviewCallout() {
   const progress = useProgress();
   if (!progress || Object.keys(progress.topics).length === 0) return null;
-  const count = reviseCount(progress.revise);
+  const count = dueCount(progress.revise, dailyKey(new Date()));
 
   if (count > 0) {
     return (

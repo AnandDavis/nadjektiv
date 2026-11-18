@@ -11,6 +11,8 @@ interface ReviseCardViewProps {
   card: ReviseCard;
   given: string;
   misses: number;
+  /** When it comes back and how many right answers it still needs. */
+  due?: Bilingual;
   /** Shown above the card, since the list is sorted by misses rather than grouped. */
   topicTitle?: Bilingual;
 }
@@ -50,7 +52,7 @@ function CorrectForm({ card, given }: { card: ReviseCard; given: string }) {
   );
 }
 
-export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardViewProps) {
+export function ReviseCardView({ card, given, misses, due, topicTitle }: ReviseCardViewProps) {
   return (
     <Card className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
@@ -121,6 +123,11 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
       >
         <Ui {...COPY.revise.seeRules} /> →
       </TopicLink>
+      {due && (
+        <p className="border-t-2 border-line pt-2 text-xs font-extrabold tracking-widest text-muted uppercase">
+          <Ui {...due} />
+        </p>
+      )}
     </Card>
   );
 }

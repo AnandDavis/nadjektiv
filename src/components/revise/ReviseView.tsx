@@ -5,9 +5,11 @@ import { useMemo } from 'react';
 import { ButtonLink, Card, ShuffleIcon, Ui } from '@/components/ui';
 import type { Topic } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
-import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { COPY, dueLine, type Bilingual } from '@/lib/i18n/copy';
 import { mistakePatterns } from '@/lib/revise/patterns';
 import { reviseList } from '@/lib/revise/revise-list';
+import { daysUntilDue, stepsLeft } from '@/lib/revise/schedule';
+import { dailyKey } from '@/lib/utils/day';
 
 import { MistakePatterns } from './MistakePatterns';
 import { ReviseCardView } from './ReviseCardView';
@@ -19,9 +21,11 @@ interface ReviseViewProps {
 
 export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
   const progress = useProgress();
+  // The date is read only once progress has loaded in the browser, never while prerendering.
+  const today = progress ? dailyKey(new Date()) : '';
   const items = useMemo(
-    () => (progress ? reviseList(topics, progress.revise) : null),
-    [progress, topics],
+    () => (progress ? reviseList(topics, progress.revise, today) : null),
+    [progress, topics, today],
   );
   const total = items?.length ?? 0;
   const patterns = useMemo(
@@ -90,6 +94,7 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
                 card={card}
                 given={entry.given}
                 misses={entry.misses}
+                due={dueLine(daysUntilDue(entry, today), stepsLeft(entry))}
                 topicTitle={topicTitles[card.topicId]}
               />
             </li>

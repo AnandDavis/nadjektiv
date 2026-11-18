@@ -12,6 +12,10 @@ export const COPY = {
   home: {
     heading: { de: 'Was üben wir heute?', en: 'What shall we practise today?' },
     review: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
+    reviewHint: {
+      de: 'Die Fragen, die du am häufigsten falsch hast',
+      en: 'The questions you miss most',
+    },
   },
   nav: {
     learn: { de: 'Lernen', en: 'Learn' },
@@ -39,6 +43,31 @@ export const COPY = {
   },
   progress: {
     medals: { de: 'Medaillen', en: 'Medals' },
+  },
+  revise: {
+    title: { de: 'Zu wiederholen', en: 'To revise' },
+    navLabel: { de: 'Wiederholen', en: 'Revise' },
+    intro: {
+      de: 'Alles, was du falsch hattest – mit der richtigen Antwort und dem Warum. Beantworte es später richtig, dann verschwindet es von der Liste.',
+      en: 'Everything you got wrong, with the right answer and why. Answer it correctly later and it leaves the list.',
+    },
+    practise: { de: 'Jetzt üben', en: 'Practise these' },
+    practiseHint: {
+      de: 'Gemischte Wiederholung: zuerst diese Fragen, dann deine schwächsten.',
+      en: 'Mixed review: these questions first, then your weakest ones.',
+    },
+    empty: { de: 'Nichts zu wiederholen', en: 'Nothing to revise' },
+    emptyHint: {
+      de: 'Wenn du etwas falsch beantwortest, landet es hier.',
+      en: 'When you get something wrong, it lands here.',
+    },
+    reviewAnyway: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
+    alsoCorrect: { de: 'Auch richtig', en: 'Also correct' },
+    samePattern: { de: 'Mit derselben Antwort', en: 'Same answer' },
+    seeRules: { de: 'Regeln ansehen', en: 'See the rules' },
+    missed: { de: 'Mal falsch', en: 'times missed' },
+    added: { de: 'neu auf deiner Wiederholungsliste', en: 'added to your revise list' },
+    cleared: { de: 'von der Liste erledigt', en: 'cleared from your revise list' },
   },
   settings: {
     theme: { de: 'Design', en: 'Theme' },

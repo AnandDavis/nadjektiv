@@ -69,6 +69,7 @@ export function GameScreen(props: GameScreenProps) {
           topics,
           new Set(Object.keys(current.topics)),
           current.questions,
+          current.revise,
           rng,
         );
       }

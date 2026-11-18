@@ -5,7 +5,7 @@
 import { TOPICS } from '@/content';
 import { availableModes } from '@/lib/game/session';
 
-const STATIC_ROUTES = ['/', '/progress', '/settings', '/play/review'];
+const STATIC_ROUTES = ['/', '/revise', '/progress', '/settings', '/play/review'];
 const ASSETS = [
   '/manifest.webmanifest',
   '/icons/icon-192.png',

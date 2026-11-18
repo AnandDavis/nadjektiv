@@ -1,4 +1,6 @@
-import { Button, ButtonLink, Card, TrophyIcon, Ui } from '@/components/ui';
+import Link from 'next/link';
+
+import { Button, ButtonLink, Card, RepeatIcon, TrophyIcon, Ui } from '@/components/ui';
 import { TierBadge } from '@/components/progress/TierBadge';
 import type { Mistake } from '@/lib/game/game-reducer';
 import { resultHeadline } from '@/lib/game/result-headline';
@@ -65,6 +67,8 @@ export function ResultsScreen({
 
       {outcome && <Celebrations outcome={outcome} topicTitles={topicTitles} />}
 
+      {outcome && <ReviseNote added={outcome.addedToRevise} cleared={outcome.clearedFromRevise} />}
+
       {mistakes.length > 0 && <MistakeList mistakes={mistakes} />}
 
       <div className="grid grid-cols-2 gap-3">
@@ -76,6 +80,32 @@ export function ResultsScreen({
         </Button>
       </div>
     </div>
+  );
+}
+
+/** Tells the learner where their mistakes went, and which ones they've now fixed. */
+function ReviseNote({ added, cleared }: { added: number; cleared: number }) {
+  if (added === 0 && cleared === 0) return null;
+  return (
+    <Link
+      href="/revise"
+      className="flex min-h-11 items-center gap-3 rounded-3xl border-2 border-line bg-surface p-3 text-sm text-ink hover:bg-sunken"
+    >
+      <RepeatIcon className="shrink-0 text-xl text-brand-strong" />
+      <span className="flex-1">
+        {added > 0 && (
+          <span className="block">
+            <strong>{added}</strong> <Ui {...COPY.revise.added} />
+          </span>
+        )}
+        {cleared > 0 && (
+          <span className="block">
+            <strong>{cleared}</strong> <Ui {...COPY.revise.cleared} />
+          </span>
+        )}
+      </span>
+      <span aria-hidden="true">→</span>
+    </Link>
   );
 }
 

@@ -115,23 +115,38 @@ export function buildTopicSession(
 }
 
 /**
- * Mixed review across topics the learner has started: the questions they miss most.
- * Sort questions are included with their deck's bins.
+ * Mixed review across topics the learner has started. Questions on the "to revise"
+ * list come first (most-missed first); the rest of the round is the questions they
+ * miss most. Sort questions are included with their deck's bins.
+ *
+ * @param revise question id → times missed, from the learner's revise list
  */
 export function buildReviewSession(
   topics: readonly Topic[],
   startedTopicIds: ReadonlySet<string>,
   stats: Readonly<Record<string, QuestionStats>>,
+  revise: Readonly<Record<string, { misses: number }>>,
   rng: Rng,
 ): SessionItem[] {
   const pool = topics
     .filter((topic) => startedTopicIds.has(topic.id))
     .flatMap((topic) => availableModes(topic).flatMap((mode) => topicItems(topic, mode)));
-  const seenPool = pool.filter((item) => (stats[item.question.id]?.seen ?? 0) > 0);
-  const source = seenPool.length >= REVIEW_LENGTH ? seenPool : pool;
-  return pickWeighted(
+
+  const toRevise = pool.filter((item) => revise[item.question.id]);
+  const picked = pickWeighted(
+    toRevise,
+    Math.min(REVIEW_LENGTH, toRevise.length),
+    (item) => revise[item.question.id].misses,
+    rng,
+  );
+  if (picked.length >= REVIEW_LENGTH) return picked;
+
+  const rest = pool.filter((item) => !revise[item.question.id]);
+  const seenRest = rest.filter((item) => (stats[item.question.id]?.seen ?? 0) > 0);
+  const source = seenRest.length >= REVIEW_LENGTH - picked.length ? seenRest : rest;
+  const filler = pickWeighted(
     source,
-    Math.min(REVIEW_LENGTH, source.length),
+    Math.min(REVIEW_LENGTH - picked.length, source.length),
     (item) => {
       const s = stats[item.question.id];
       // In review, unseen questions are the lowest priority rather than the highest.
@@ -139,4 +154,5 @@ export function buildReviewSession(
     },
     rng,
   );
+  return [...picked, ...filler];
 }

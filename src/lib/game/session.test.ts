@@ -135,11 +135,26 @@ describe('buildReviewSession', () => {
         [started, untouched],
         new Set(['started']),
         stats,
+        {},
         createRng(seed),
       );
       expect(session.every((item) => item.topicId === 'started')).toBe(true);
       if (session.some((item) => item.question.id === 'started-gap-3')) missedIncluded++;
     }
     expect(missedIncluded).toBeGreaterThan(40);
+  });
+
+  it('puts every to-revise question in the round before anything else', () => {
+    const started = makeTopic('started', 10, 10);
+    const revise = { 'started-gap-2': { misses: 1 }, 'started-sort-4': { misses: 3 } };
+    const session = buildReviewSession([started], new Set(['started']), {}, revise, createRng(7));
+    expect(session).toHaveLength(12);
+    expect(
+      session
+        .slice(0, 2)
+        .map((item) => item.question.id)
+        .sort(),
+    ).toEqual(['started-gap-2', 'started-sort-4']);
+    expect(new Set(session.map((item) => item.question.id)).size).toBe(12);
   });
 });

@@ -51,7 +51,7 @@ export function ResultsScreen({
         <h2
           ref={headingRef}
           tabIndex={-1}
-          className="text-5xl leading-none font-black text-ink uppercase focus:outline-none"
+          className="text-display leading-none font-black text-ink uppercase focus:outline-none"
         >
           <Ui {...resultHeadline(answers)} />
         </h2>

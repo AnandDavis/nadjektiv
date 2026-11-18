@@ -64,6 +64,10 @@
 }
 
 @theme inline {
+  /* The biggest headings: 3rem, shrinking with the screen on narrow phones so a long
+     word ("PRACTISING!", "Wechselpräpositionen") fits on its line unbroken. */
+  --text-display: min(3rem, 11vw);
+  --text-display--line-height: 1;
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-sunken: var(--sunken);
@@ -149,12 +153,23 @@
   }
 
   /* Long German compounds (Wechselpräpositionen) in big type must never widen the
-     page: hyphenate by each span's lang, and break mid-word as a last resort. */
+     page: a word too wide for the line breaks mid-word, as a last resort only. */
   h1,
   h2,
   h3 {
     overflow-wrap: break-word;
+    /* No automatic hyphens in English: they split ordinary words ("prac- tising") just
+       to fill a line, and the display size keeps English headings fitting anyway. */
+    hyphens: manual;
+  }
+
+  /* German compounds are hyphenated as German typesetting does, but only long ones
+     ("Wechsel-präpositionen"), never a short word like "Weiter". */
+  h1 :lang(de),
+  h2 :lang(de),
+  h3 :lang(de) {
     hyphens: auto;
+    hyphenate-limit-chars: 14 6 6;
   }
 
   /* Search fields draw their own clear button. */

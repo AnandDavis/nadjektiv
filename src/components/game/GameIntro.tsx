@@ -44,7 +44,7 @@ export function GameIntro({
           <p className="mt-4 text-xs font-extrabold tracking-widest text-muted uppercase">
             {modeName}
           </p>
-          <h1 className="mt-1 text-5xl leading-none font-black text-ink">{title}</h1>
+          <h1 className="mt-1 text-display leading-none font-black text-ink">{title}</h1>
           <p className="mt-4 text-ink">{description}</p>
         </div>
         {best && (

@@ -81,7 +81,7 @@ export function WelcomeFlow({ topicCount }: { topicCount: number }) {
       <h1
         ref={heading}
         tabIndex={-1}
-        className="mt-3 mb-6 text-5xl leading-none font-black tracking-tight text-ink focus:outline-none"
+        className="mt-3 mb-6 text-display leading-none font-black tracking-tight text-ink focus:outline-none"
       >
         <Ui {...STEP_HEADINGS[step]} />
       </h1>

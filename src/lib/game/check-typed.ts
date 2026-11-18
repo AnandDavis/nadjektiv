@@ -1,7 +1,9 @@
 /**
  * Type the answer: checking what the learner typed into a gap. Forgiving about case,
  * spacing and the hyphen on endings (see normaliseAnswer); strict about spelling, so
- * "ae" never counts for "ä" and "ss" never for "ß". One slip is "nearly", still wrong.
+ * "ae" never counts for "ä" and "ss" never for "ß". One slip is "nearly", still wrong,
+ * unless what was typed is another of the question's options: "den" for "dem" is a
+ * wrong case, not a typo, and must read as plainly wrong.
  */
 
 import type { GapQuestion } from '@/content/types';
@@ -41,6 +43,7 @@ export function checkTyped(question: GapQuestion, typed: string): TypedVerdict {
   const answer = normaliseAnswer(question.answer);
   if (attempt === answer) return 'correct';
   if (attempt === '') return 'wrong';
+  if (question.options.some((option) => normaliseAnswer(option) === attempt)) return 'wrong';
   return editDistance(attempt, answer, 1) === 1 ? 'nearly' : 'wrong';
 }
 

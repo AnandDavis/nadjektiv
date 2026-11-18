@@ -259,3 +259,8 @@ export function dailyHint(length: number, hasProgress: boolean): Bilingual {
       }
     : { de: `${length} Fragen zum Einstieg`, en: `${length} questions to get you started` };
 }
+
+/** "Gebaut von Nad in London" / "Built by Nad in London" */
+export function builtBy(name: string, place: string): Bilingual {
+  return { de: `Gebaut von ${name} in ${place}`, en: `Built by ${name} in ${place}` };
+}

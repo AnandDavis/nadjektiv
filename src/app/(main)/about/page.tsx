@@ -7,7 +7,7 @@ import { LevelsExplainer } from '@/components/about/LevelsExplainer';
 import { MedalsExplainer } from '@/components/about/MedalsExplainer';
 import { ButtonLink, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, builtBy } from '@/lib/i18n/copy';
 
 export const metadata: Metadata = { title: 'About' };
 
@@ -26,10 +26,15 @@ export default function AboutPage() {
           <Ui {...COPY.welcome.reopen} />
         </ButtonLink>
       </header>
-      <FeatureList />
-      <LevelsExplainer />
-      <MedalsExplainer />
-      <ChangelogList />
+      <div className="border-b-4 border-ink">
+        <FeatureList />
+        <LevelsExplainer />
+        <MedalsExplainer />
+        <ChangelogList />
+      </div>
+      <p className="text-center text-xs font-extrabold tracking-widest text-muted uppercase">
+        <Ui {...builtBy(APP_CONFIG.maker.name, APP_CONFIG.maker.place)} />
+      </p>
     </div>
   );
 }

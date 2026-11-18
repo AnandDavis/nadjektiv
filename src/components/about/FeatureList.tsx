@@ -1,13 +1,12 @@
-import { SectionHeading, Ui } from '@/components/ui';
+import { Ui } from '@/components/ui';
 import { FEATURES } from '@/content/features';
 import { COPY } from '@/lib/i18n/copy';
 
+import { AboutSection } from './AboutSection';
+
 export function FeatureList() {
   return (
-    <section aria-labelledby="features-heading">
-      <SectionHeading id="features-heading">
-        <Ui {...COPY.about.features} />
-      </SectionHeading>
+    <AboutSection id="features" title={<Ui {...COPY.about.features} />}>
       <ol>
         {FEATURES.map((feature, index) => (
           <li key={feature.title} className="flex gap-3 border-b-2 border-ink py-3">
@@ -21,6 +20,6 @@ export function FeatureList() {
           </li>
         ))}
       </ol>
-    </section>
+    </AboutSection>
   );
 }

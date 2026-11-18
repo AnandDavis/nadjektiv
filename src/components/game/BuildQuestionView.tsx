@@ -90,6 +90,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
             onClick={() => setChosen((keys) => keys.filter((k) => k !== tile.key))}
             className={cn(TILE_CLASS, 'motion-safe:animate-pop')}
             aria-label={`Remove ${tile.text}`}
+            data-shortcut="undo"
           >
             {i === 0 ? tile.text.charAt(0).toUpperCase() + tile.text.slice(1) : tile.text}
           </button>
@@ -122,7 +123,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
             >
               <Ui {...COPY.game.clear} />
             </Button>
-            <Button size="lg" onClick={check} disabled={!isComplete}>
+            <Button size="lg" onClick={check} disabled={!isComplete} data-shortcut="confirm">
               <Ui {...COPY.game.check} />
             </Button>
           </div>

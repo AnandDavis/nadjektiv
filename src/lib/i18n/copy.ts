@@ -129,6 +129,11 @@ export const COPY = {
     levels: { de: 'Level und XP', en: 'Levels and XP' },
     tiers: { de: 'Medaillen pro Thema', en: 'Medals for each topic' },
     changelog: { de: 'Neuigkeiten', en: 'What’s new' },
+    shortcuts: { de: 'Tastenkürzel', en: 'Keyboard shortcuts' },
+    shortcutsHint: {
+      de: 'Auf einem Computer spielst du auch mit der Tastatur. Beim Tippen in Tippen und Tabelle sind die Kürzel aus.',
+      en: 'On a computer you can play with the keyboard too. They’re off while you type in Tippen and Tabelle.',
+    },
     version: { de: 'Version', en: 'Version' },
   },
   nav: {

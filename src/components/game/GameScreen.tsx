@@ -9,6 +9,7 @@ import type { GameMode, Question, RoundMode, Topic } from '@/content/types';
 import { isMixedMode } from '@/lib/game/modes';
 import { GAME_CONFIG } from '@/config/game';
 import { useGameSession } from '@/hooks/useGameSession';
+import { useGameShortcuts } from '@/hooks/useGameShortcuts';
 import { useOption } from '@/hooks/useOption';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
@@ -70,6 +71,7 @@ function correctAnswerText(question: Question): string {
 export function GameScreen(props: GameScreenProps) {
   const { mode, topics, title, modeName, description, exitHref, exitLabel } = props;
   const progress = useProgress();
+  useGameShortcuts();
   const topicId = isMixedMode(mode) ? undefined : topics[0]?.id;
   const [blitzClock] = useOption(OPTIONS.blitzClock);
   const [hintsOption] = useOption(OPTIONS.hints);

@@ -57,7 +57,13 @@ export function GameIntro({
             <Stat label={<Ui {...COPY.game.bestCombo} />} value={String(best.bestCombo)} />
           </div>
         )}
-        <Button size="lg" onClick={onStart} disabled={!isReady} className="w-full">
+        <Button
+          size="lg"
+          onClick={onStart}
+          disabled={!isReady}
+          className="w-full"
+          data-shortcut="confirm"
+        >
           <Ui {...COPY.game.start} />
         </Button>
       </div>

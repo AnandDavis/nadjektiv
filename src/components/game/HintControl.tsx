@@ -11,7 +11,7 @@ interface HintControlProps {
 export function HintControl({ hint, isShown, onShow }: HintControlProps) {
   if (!isShown) {
     return (
-      <Button variant="ghost" className="self-start" onClick={onShow}>
+      <Button variant="ghost" className="self-start" onClick={onShow} data-shortcut="hint">
         <Ui {...COPY.hint.show} />
       </Button>
     );

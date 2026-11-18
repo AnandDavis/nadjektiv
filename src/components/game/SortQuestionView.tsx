@@ -79,6 +79,7 @@ export function SortQuestionView({
       <div
         className={cn('grid gap-2', bins.length === 3 ? 'grid-cols-3' : 'grid-cols-2')}
         role="group"
+        data-shortcuts="choices"
         aria-label="Sort into"
       >
         {bins.map((bin) => {

@@ -15,7 +15,8 @@ Every topic has a **Die Regeln** card set summarising the rule, and one or more 
 - **Blitz** (rapid-fire sorter): 60 seconds to sort as many prompts as you can, such as der/die/das, Akkusativ/Dativ, haben/sein or Wo?/Wohin?. Runs of correct answers raise a combo multiplier. A wrong answer pauses the clock until you've read why.
 - **Lückentext** (fill the gap): 10 sentences. Pick the word or ending that fits, then see the rule explained.
 - **Satzbau** (sentence builder): 8 sentences. Tap word tiles into the right order. Every grammatically correct order is accepted, not just the textbook one.
-- **Gemischte Wiederholung** (mixed review): 12 questions drawn from every topic you've played, weighted towards the ones you get wrong.
+- **Zu wiederholen** (to revise): every question you get wrong, in any mode, lands on this list. Each card shows the correct answer, what you chose, why, other correct word orders, and more examples with the same answer. Answer it correctly later and it leaves the list. The bottom navigation shows how many are waiting.
+- **Gemischte Wiederholung** (mixed review): 12 questions that start with your "to revise" list, then fill up with the questions you miss most across every topic you've played.
 
 Every wrong answer, in every mode, shows what you chose, the right answer and the rule before you continue.
 

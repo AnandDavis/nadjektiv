@@ -15,6 +15,8 @@ import { blankCells, type CellKey } from '@/lib/grid/grid-round';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { applyKey, type KeyAction } from '@/lib/text/caret-edit';
 
+import type { GraduationInfo } from '../game/GraduationPanel';
+
 import { GridBoard } from './GridBoard';
 import { GridPicker } from './GridPicker';
 import { GridResults } from './GridResults';
@@ -26,6 +28,7 @@ interface GridScreenProps {
   exitLabel: ReactNode;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   topicTitles: Readonly<Record<string, Bilingual>>;
+  graduation?: GraduationInfo;
 }
 
 /** Grid fill: pick a table, fill it against the clock, see the answer key. */
@@ -36,6 +39,7 @@ export function GridScreen({
   exitLabel,
   modesByTopic,
   topicTitles,
+  graduation,
 }: GridScreenProps) {
   const progress = useProgress();
   const appKeyboard = useAppKeyboard();
@@ -196,6 +200,7 @@ export function GridScreen({
             exitHref={exitHref}
             exitLabel={exitLabel}
             topicTitles={topicTitles}
+            graduation={graduation}
             onPlayAgain={() => startGrid(grid)}
             onOtherTable={leave}
           />

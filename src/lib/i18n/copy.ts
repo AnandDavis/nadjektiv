@@ -201,6 +201,10 @@ export const COPY = {
     keepGoing: { de: 'Weiter üben!', en: 'Keep practising!' },
     achievements: { de: 'Erfolge', en: 'Achievements' },
   },
+  graduation: {
+    title: { de: 'Gemeistert!', en: 'Mastered!' },
+    next: { de: 'Als Nächstes', en: 'Up next' },
+  },
   records: {
     title: { de: 'Rekorde', en: 'Records' },
     intro: {

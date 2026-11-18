@@ -31,6 +31,11 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
   if (!topic || !isGameMode(mode) || !availableModes(topic).includes(mode)) notFound();
   const summaries = getTopicSummaries();
   const info = MODE_INFO[mode];
+  const next = TOPICS[TOPICS.indexOf(topic) + 1];
+  const graduation = {
+    tagline: topic.tagline,
+    next: next ? { id: next.id, title: { de: next.titleDe, en: next.title } } : undefined,
+  };
 
   if (mode === 'grid') {
     return (
@@ -42,6 +47,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
           exitLabel: <Ui {...COPY.common.topic} />,
           modesByTopic: modesByTopic(summaries),
           topicTitles: topicTitles(summaries),
+          graduation,
         }}
       />
     );
@@ -59,6 +65,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
         exitLabel: <Ui {...COPY.common.topic} />,
         modesByTopic: modesByTopic(summaries),
         topicTitles: topicTitles(summaries),
+        graduation,
       }}
     />
   );

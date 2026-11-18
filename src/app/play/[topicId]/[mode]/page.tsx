@@ -2,9 +2,11 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { GameScreen } from '@/components/game/GameScreen';
+import { GridScreen } from '@/components/grid/GridScreen';
 import { TOPICS, getTopic, isGameMode } from '@/content';
 import { getTopicSummaries, modesByTopic, topicTitles } from '@/content/summaries';
 import { MODE_INFO } from '@/lib/game/modes';
+import { topicHref } from '@/lib/routes';
 import { availableModes } from '@/lib/game/session';
 import { Ui } from '@/components/ui';
 import { COPY } from '@/lib/i18n/copy';
@@ -31,6 +33,19 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
   const summaries = getTopicSummaries();
   const info = MODE_INFO[mode];
 
+  if (mode === 'grid') {
+    return (
+      <GridScreen
+        topic={topic}
+        title={<Ui de={topic.titleDe} en={topic.title} />}
+        exitHref={topicHref(topic.id)}
+        exitLabel={<Ui {...COPY.common.topic} />}
+        modesByTopic={modesByTopic(summaries)}
+        topicTitles={topicTitles(summaries)}
+      />
+    );
+  }
+
   return (
     <GameScreen
       mode={mode}
@@ -38,7 +53,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
       title={<Ui de={topic.titleDe} en={topic.title} />}
       modeName={`${info.name} · ${info.english}`}
       description={info.description}
-      exitHref={`/topics/${topic.id}`}
+      exitHref={topicHref(topic.id)}
       exitLabel={<Ui {...COPY.common.topic} />}
       modesByTopic={modesByTopic(summaries)}
       topicTitles={topicTitles(summaries)}

@@ -14,7 +14,7 @@ interface ShapeProps {
   className?: string;
 }
 
-/** The Bauhaus marks: ■ ● ▲. Decorative; pair with text so meaning never relies on shape alone. */
+/** The Bauhaus marks: ■ ● ▲, and the ink ▦ for grid fill. Decorative; pair with text so meaning never relies on shape alone. */
 export function Shape({ kind, color, className }: ShapeProps) {
   return (
     <svg
@@ -27,6 +27,14 @@ export function Shape({ kind, color, className }: ShapeProps) {
       {kind === 'square' && <rect x="2" y="2" width="16" height="16" />}
       {kind === 'circle' && <circle cx="10" cy="10" r="8.5" />}
       {kind === 'triangle' && <polygon points="10,1.5 19,18.5 1,18.5" />}
+      {kind === 'grid' && (
+        <>
+          <rect x="2" y="2" width="7" height="7" />
+          <rect x="11" y="2" width="7" height="7" />
+          <rect x="2" y="11" width="7" height="7" />
+          <rect x="11" y="11" width="7" height="7" />
+        </>
+      )}
     </svg>
   );
 }

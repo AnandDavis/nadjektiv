@@ -1,7 +1,7 @@
 import type { Topic } from '@/content/types';
 
 import type { ReviseEntry } from '../progress/types';
-import { buildReviseCard, findQuestion, type ReviseCard } from './revise-card';
+import { reviseCardFor, type ReviseCard } from './revise-card';
 
 export interface ReviseGroup {
   topicId: string;
@@ -18,10 +18,10 @@ export function reviseGroups(
 ): ReviseGroup[] {
   const byTopic = new Map<string, ReviseGroup['items']>();
   for (const [questionId, entry] of Object.entries(revise)) {
-    const found = findQuestion(topics, entry.topicId, questionId);
-    if (!found) continue;
+    const card = reviseCardFor(topics, entry.topicId, questionId);
+    if (!card) continue;
     const items = byTopic.get(entry.topicId) ?? [];
-    items.push({ card: buildReviseCard(found.topic, found.question), entry });
+    items.push({ card, entry });
     byTopic.set(entry.topicId, items);
   }
   return topics

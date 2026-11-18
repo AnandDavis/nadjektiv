@@ -9,6 +9,23 @@ export interface Bilingual {
 }
 
 export const COPY = {
+  grid: {
+    chooseTable: { de: 'Tabelle wählen', en: 'Choose a table' },
+    cells: { de: 'Felder', en: 'Cells' },
+    time: { de: 'Zeit', en: 'Time' },
+    timeLimit: { de: 'Zeitlimit', en: 'Time limit' },
+    bestTime: { de: 'Bestzeit', en: 'Best time' },
+    mostCells: { de: 'Meiste Felder', en: 'Most cells' },
+    start: { de: 'Starten', en: 'Start' },
+    done: { de: 'Fertig', en: 'Done' },
+    otherTable: { de: 'Andere Tabelle', en: 'Another table' },
+    answerKey: { de: 'Die Lösung', en: 'The answers' },
+    specialCharacters: { de: 'Sonderzeichen', en: 'Special characters' },
+    typeHint: {
+      de: 'Tippe in die leeren Felder. Richtige Felder werden grün und bleiben stehen.',
+      en: 'Type into the empty cells. Correct cells turn green and stay.',
+    },
+  },
   search: {
     label: { de: 'Themen suchen', en: 'Search topics' },
     placeholder: { de: 'Thema suchen, z. B. Dativ', en: 'Search, e.g. dative' },
@@ -79,6 +96,8 @@ export const COPY = {
     newBestScore: { de: 'Neuer Bestwert!', en: 'New best score!' },
     newBestAccuracy: { de: 'Neue beste Quote!', en: 'New best accuracy!' },
     newBestCombo: { de: 'Neue beste Serie!', en: 'New best combo!' },
+    newBestTime: { de: 'Neue Bestzeit!', en: 'New best time!' },
+    newBestCells: { de: 'So viele Felder wie noch nie!', en: 'Most cells ever!' },
     reached: { de: 'erreicht', en: 'reached' },
     mixedReview: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
     nothingToReview: { de: 'Noch nichts zu wiederholen', en: 'Nothing to review yet' },
@@ -123,6 +142,7 @@ export const COPY = {
     reviewAnyway: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
     alsoCorrect: { de: 'Auch richtig', en: 'Also correct' },
     samePattern: { de: 'Mit derselben Antwort', en: 'Same answer' },
+    wholeRow: { de: 'Die ganze Zeile', en: 'The whole row' },
     seeRules: { de: 'Regeln ansehen', en: 'See the rules' },
     missed: { de: 'Mal falsch', en: 'times missed' },
     added: { de: 'neu auf deiner Wiederholungsliste', en: 'added to your revise list' },

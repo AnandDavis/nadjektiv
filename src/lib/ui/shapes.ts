@@ -5,7 +5,7 @@
 
 import type { GameMode } from '@/content/types';
 
-export type ShapeKind = 'square' | 'circle' | 'triangle';
+export type ShapeKind = 'square' | 'circle' | 'triangle' | 'grid';
 export type ShapeColor = 'blue' | 'red' | 'yellow' | 'ink';
 
 export interface ShapeSpec {
@@ -28,4 +28,6 @@ export const MODE_SHAPES: Record<GameMode, ShapeSpec> = {
   sort: { kind: 'triangle', color: 'yellow' },
   gap: { kind: 'square', color: 'blue' },
   build: { kind: 'circle', color: 'red' },
+  // Grid fill is the fourth mode: an ink table mark, so the three primaries keep der/die/das.
+  grid: { kind: 'grid', color: 'ink' },
 };

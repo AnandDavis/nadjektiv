@@ -34,9 +34,13 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
         <span className="text-muted">
           <Ui {...COPY.game.youChose} />:
         </span>
-        <span lang="de" className="font-semibold line-through decoration-wrong">
-          {given}
-        </span>
+        {given.trim() ? (
+          <span lang="de" className="font-semibold line-through decoration-wrong">
+            {given}
+          </span>
+        ) : (
+          <span className="font-semibold">–</span>
+        )}
       </p>
 
       <p className="text-sm text-ink">
@@ -50,7 +54,14 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
         <ExampleList label={<Ui {...COPY.revise.alsoCorrect} />} items={card.alsoCorrect} />
       )}
       {card.examples.length > 0 && (
-        <ExampleList label={<Ui {...COPY.revise.samePattern} />} items={card.examples} />
+        <ExampleList
+          label={
+            <Ui
+              {...(card.examplesKind === 'row' ? COPY.revise.wholeRow : COPY.revise.samePattern)}
+            />
+          }
+          items={card.examples}
+        />
       )}
 
       <Link

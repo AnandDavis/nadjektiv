@@ -4,18 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 
 import { ClockIcon, ProgressBar } from '@/components/ui';
 import { cn } from '@/lib/utils/cn';
+import { formatClock } from '@/lib/utils/format-duration';
 
 interface SortTimerProps {
   seconds: number;
   /** While paused (e.g. reading why an answer was wrong) the clock stands still. */
   isPaused: boolean;
   onExpire: () => void;
+  /** "seconds" shows 45s; "clock" shows 3:45 for longer rounds. */
+  format?: 'seconds' | 'clock';
 }
 
 const TICK_MS = 200;
 
 /** Countdown for timed rounds. Calls onExpire once when it reaches zero. */
-export function SortTimer({ seconds, isPaused, onExpire }: SortTimerProps) {
+export function SortTimer({ seconds, isPaused, onExpire, format = 'seconds' }: SortTimerProps) {
   const [remainingMs, setRemainingMs] = useState(seconds * 1000);
   const remainingRef = useRef(seconds * 1000);
   const onExpireRef = useRef(onExpire);
@@ -50,7 +53,7 @@ export function SortTimer({ seconds, isPaused, onExpire }: SortTimerProps) {
         )}
       >
         <ClockIcon />
-        {remaining}s
+        {format === 'clock' ? formatClock(remaining) : `${remaining}s`}
       </span>
       <ProgressBar
         value={remainingMs / (seconds * 1000)}

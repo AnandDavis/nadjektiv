@@ -6,7 +6,7 @@
  */
 
 import { GAME_CONFIG } from '@/config/game';
-import type { GameMode, Question, Topic } from '@/content/types';
+import type { GameMode, Question, QuestionMode, Topic } from '@/content/types';
 
 import type { QuestionStats } from '../progress/types';
 import type { Rng } from './rng';
@@ -20,7 +20,7 @@ export interface SessionItem {
   instruction?: string;
 }
 
-export const SESSION_LENGTH: Readonly<Record<GameMode, number>> = GAME_CONFIG.sessionLength;
+export const SESSION_LENGTH: Readonly<Record<QuestionMode, number>> = GAME_CONFIG.sessionLength;
 
 export const SORT_ROUND_SECONDS = GAME_CONFIG.sortRoundSeconds;
 
@@ -54,7 +54,7 @@ export function pickWeighted<T>(
     .map(({ item }) => item);
 }
 
-export function topicItems(topic: Topic, mode: GameMode): SessionItem[] {
+export function topicItems(topic: Topic, mode: QuestionMode): SessionItem[] {
   switch (mode) {
     case 'sort':
       return (topic.sort?.questions ?? []).map((question) => ({
@@ -75,11 +75,17 @@ export function topicItems(topic: Topic, mode: GameMode): SessionItem[] {
   }
 }
 
+/** The one-question-at-a-time modes a topic has (everything but grid fill). */
+export function questionModes(topic: Topic): QuestionMode[] {
+  return availableModes(topic).filter((mode): mode is QuestionMode => mode !== 'grid');
+}
+
 export function availableModes(topic: Topic): GameMode[] {
   const modes: GameMode[] = [];
   if (topic.sort?.questions.length) modes.push('sort');
   if (topic.gap?.length) modes.push('gap');
   if (topic.build?.length) modes.push('build');
+  if (topic.grids?.length) modes.push('grid');
   return modes;
 }
 
@@ -89,7 +95,7 @@ export function availableModes(topic: Topic): GameMode[] {
  */
 export function buildTopicSession(
   topic: Topic,
-  mode: GameMode,
+  mode: QuestionMode,
   stats: Readonly<Record<string, QuestionStats>>,
   rng: Rng,
 ): SessionItem[] {
@@ -128,7 +134,7 @@ export function buildReviewSession(
 ): SessionItem[] {
   const pool = topics
     .filter((topic) => startedTopicIds.has(topic.id))
-    .flatMap((topic) => availableModes(topic).flatMap((mode) => topicItems(topic, mode)));
+    .flatMap((topic) => questionModes(topic).flatMap((mode) => topicItems(topic, mode)));
 
   const toRevise = pool.filter((item) => revise[item.question.id]);
   const picked = pickWeighted(

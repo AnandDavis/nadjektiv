@@ -34,6 +34,11 @@ export const FEATURES: readonly Feature[] = [
       'Tap words into the right order to build 8 sentences. Every correct German word order counts.',
   },
   {
+    title: 'Tabelle',
+    description:
+      'Fill in a whole table against the clock, such as the article grid or the irregular verbs. Cells lock green when they’re right, and your best time is saved for each table.',
+  },
+  {
     title: 'Every mistake explained',
     description:
       'A wrong answer always stops to show what you chose, the right answer and why, before you carry on.',

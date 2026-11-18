@@ -24,6 +24,10 @@ export interface SessionResult {
   /** Undefined for mixed review sessions, which don't set personal bests. */
   topicId?: string;
   mode: GameMode | 'review';
+  /** Grid rounds only: which table was played. */
+  gridId?: string;
+  /** Grid rounds only, and only when every cell was solved: time to complete. */
+  timeMs?: number;
   answers: AnswerRecord[];
   score: number;
   bestCombo: number;

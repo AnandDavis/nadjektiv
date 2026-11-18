@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-import type { GameMode } from '@/content/types';
+import type { GameMode, QuestionMode } from '@/content/types';
 import {
   INITIAL_GAME_STATE,
   gameReducer,
@@ -16,7 +16,7 @@ import type { Progress } from '@/lib/progress/types';
 import { getSnapshot, updateProgress } from '@/lib/storage/progress-client';
 
 interface UseGameSessionOptions {
-  mode: GameMode | 'review';
+  mode: QuestionMode | 'review';
   topicId?: string;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   /** Builds the round's questions from current progress when the learner presses start. */

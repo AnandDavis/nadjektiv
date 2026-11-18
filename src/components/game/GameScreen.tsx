@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Ui } from '@/components/ui';
 
-import type { GameMode, Question, Topic } from '@/content/types';
+import type { GameMode, Question, QuestionMode, Topic } from '@/content/types';
 import { useGameSession } from '@/hooks/useGameSession';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
@@ -32,7 +32,7 @@ import { SortTimer } from './SortTimer';
 const SORT_CORRECT_ADVANCE_MS = 250;
 
 interface GameScreenProps {
-  mode: GameMode | 'review';
+  mode: QuestionMode | 'review';
   /** One topic for a topic round; every topic for a mixed review. */
   topics: Topic[];
   title: ReactNode;

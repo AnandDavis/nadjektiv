@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { getTopic } from '@/content';
 import type { Topic } from '@/content/types';
 
-import { buildReviseCard, correctForm, findQuestion } from './revise-card';
+import { buildReviseCard, correctForm, findQuestion, reviseCardFor } from './revise-card';
 
 const topic: Topic = {
   id: 't',
@@ -130,5 +130,24 @@ describe('correctForm for non-article sort answers', () => {
         explanation: 'mit + Dativ.',
       }),
     ).toBe('mit → Dativ');
+  });
+});
+
+describe('grid cell cards', () => {
+  it('shows the cell, the rule and the whole row', () => {
+    const real = getTopic('articles')!;
+    const card = reviseCardFor([real], 'articles', 'articles-grid-1:1:0');
+    expect(card).toMatchObject({
+      questionId: 'articles-grid-1:1:0',
+      correct: 'Akk · M: den',
+      examples: ['Akk: den · die · das · die'],
+      examplesKind: 'row',
+    });
+  });
+
+  it('returns nothing for a cell that no longer exists', () => {
+    const real = getTopic('articles')!;
+    expect(reviseCardFor([real], 'articles', 'articles-grid-1:9:9')).toBeUndefined();
+    expect(reviseCardFor([real], 'articles', 'articles-grid-99:0:0')).toBeUndefined();
   });
 });

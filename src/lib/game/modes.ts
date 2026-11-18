@@ -24,4 +24,10 @@ export const MODE_INFO: Record<GameMode, ModeInfo> = {
     english: 'Sentence builder',
     description: `${SESSION_LENGTH.build} sentences. Tap the words into the right order.`,
   },
+  grid: {
+    name: 'Tabelle',
+    english: 'Grid fill',
+    description:
+      'Fill in a whole table before the clock runs out. Each cell locks when it’s right.',
+  },
 };

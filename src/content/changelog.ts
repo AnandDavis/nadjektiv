@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T14:56Z',
+    title: 'New game: Tabelle (grid fill)',
+    description:
+      'Fill in a whole grammar table against the clock: articles, pronouns, verb endings, modal verbs, adjective endings, the Präteritum, comparatives and the 33 irregular verbs. Each cell locks green when it’s right, ä ö ü ß keys are built in, and missed cells go on your revise list. Beat your best time for every table.',
+  },
+  {
     date: '2026-11-18T14:28Z',
     title: 'Search for topics',
     description:

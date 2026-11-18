@@ -3,9 +3,10 @@
  * and a few examples from the same topic that follow the same pattern.
  */
 
-import type { GapQuestion, Question, SortQuestion, Topic } from '@/content/types';
+import type { GapQuestion, GridPuzzle, Question, SortQuestion, Topic } from '@/content/types';
 
 import { formatSentence } from '../game/check-answer';
+import { parseCellId } from '../grid/grid-round';
 
 const MAX_EXAMPLES = 3;
 const MAX_ALSO_CORRECT = 3;
@@ -23,6 +24,8 @@ export interface ReviseCard {
   alsoCorrect: string[];
   /** Other items in the topic with the same answer, so the pattern is visible. */
   examples: string[];
+  /** What `examples` shows: other items with the same answer, or the cell's whole table row. */
+  examplesKind?: 'sameAnswer' | 'row';
 }
 
 function sortCorrect(question: SortQuestion): string {
@@ -119,4 +122,40 @@ export function findQuestion(
     ...(topic.build ?? []),
   ].find((q) => q.id === questionId);
   return question ? { topic, question } : undefined;
+}
+
+/** A missed grid cell as a study card: the cell, the rule, and its whole row. */
+export function buildGridCellCard(
+  topic: Topic,
+  grid: GridPuzzle,
+  row: number,
+  col: number,
+): ReviseCard | undefined {
+  const gridRow = grid.rows[row];
+  const cell = gridRow?.cells[col];
+  if (!gridRow || !cell) return undefined;
+  return {
+    questionId: `${grid.id}:${row}:${col}`,
+    topicId: topic.id,
+    correct: `${gridRow.label} · ${grid.columns[col]}: ${cell.answer}`,
+    translation: grid.title,
+    explanation: grid.explanation,
+    alsoCorrect: [],
+    examples: [`${gridRow.label}: ${gridRow.cells.map((c) => c.answer).join(' · ')}`],
+    examplesKind: 'row',
+  };
+}
+
+/** The study card for any revise-list id: a question or a grid cell. */
+export function reviseCardFor(
+  topics: readonly Topic[],
+  topicId: string,
+  id: string,
+): ReviseCard | undefined {
+  const found = findQuestion(topics, topicId, id);
+  if (found) return buildReviseCard(found.topic, found.question);
+  const cell = parseCellId(id);
+  const topic = topics.find((t) => t.id === topicId);
+  const grid = cell && topic?.grids?.find((g) => g.id === cell.gridId);
+  return grid && topic ? buildGridCellCard(topic, grid, cell.row, cell.col) : undefined;
 }

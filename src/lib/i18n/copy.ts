@@ -49,6 +49,21 @@ export const COPY = {
     menu: { de: 'Menü', en: 'Menu' },
     about: { de: 'Über die App', en: 'About' },
   },
+  welcome: {
+    heading: { de: 'Willkommen bei Nadjektiv', en: 'Welcome to Nadjektiv' },
+    language: { de: 'Überschriften und Knöpfe auf', en: 'Headings and buttons in' },
+    languageHint: {
+      de: 'Die Grammatik ist immer auf Deutsch. Du kannst das später in den Einstellungen ändern.',
+      en: 'The grammar is always in German. You can change this later in Settings.',
+    },
+    games: { de: 'Vier Spiele', en: 'Four games' },
+    progress: { de: 'Dein Fortschritt', en: 'Your progress' },
+    next: { de: 'Weiter', en: 'Next' },
+    back: { de: 'Zurück', en: 'Back' },
+    skip: { de: 'Überspringen', en: 'Skip' },
+    start: { de: 'Los geht’s', en: 'Let’s go' },
+    reopen: { de: 'Einführung ansehen', en: 'See the intro' },
+  },
   about: {
     earningXp: { de: 'XP sammeln', en: 'Earning XP' },
     levelsTable: { de: 'Level', en: 'Levels' },
@@ -201,4 +216,9 @@ export function topicCount(count: number): Bilingual {
     de: `${count} ${count === 1 ? 'Thema' : 'Themen'}`,
     en: `${count} ${count === 1 ? 'topic' : 'topics'}`,
   };
+}
+
+/** "Schritt 2 von 3" / "Step 2 of 3" */
+export function stepOf(step: number, total: number): Bilingual {
+  return { de: `Schritt ${step} von ${total}`, en: `Step ${step} of ${total}` };
 }

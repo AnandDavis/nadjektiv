@@ -2,19 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Welcome intro on first open
-
-**Why:** a first-time visitor lands on a list of 24 topics with no idea what the games are, that progress lives on their device, or that headings can be switched to English. A short intro would explain the app before the topic list.
-
-**Notes:**
-
-- Two or three Bauhaus-style screens, swiped or stepped through: what Nadjektiv is; the four games (Blitz, Lückentext, Satzbau, Tabelle) with their shapes; and how progress works (saved on this device, no streaks, export in Settings, installable and works offline).
-- Let the learner pick the interface language (Deutsch or English) on the first screen, so the rest of the intro is in their choice.
-- Show it once: store a "welcome seen" flag with the display preferences (`src/lib/storage/preferences.ts`), not in progress, so resetting progress doesn't replay it. Always skippable, and reopenable from the menu or About.
-- Prefer a full-screen route (e.g. `/welcome`, redirected to on first visit) over a modal overlay. It's easier to make accessible, works with the back button, and won't flash over the home page before the flag is read. Decide that in the spec.
-- Existing learners (anyone with progress already saved) shouldn't see it.
-- Cover it with an e2e test (first visit shows it, skip and finish both land on home, second visit doesn't) plus a visual baseline.
-
 ## Type the answer
 
 **Why:** recall is harder than recognition. A harder Lückentext where you type the word rather than pick it, for topics you've already earned a medal in.

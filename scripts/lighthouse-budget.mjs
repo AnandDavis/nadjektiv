@@ -13,7 +13,9 @@ import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
 
 const PORT = 3300;
-const PAGES = ['/', '/topics/articles', '/play/articles/gap', '/about'];
+// Lighthouse runs with empty storage, so '/' would redirect a "first visit" to the
+// intro: audit the intro itself, which is what a new visitor loads.
+const PAGES = ['/welcome', '/topics/articles', '/play/articles/gap', '/about'];
 
 /** Minimum category scores, 0–100. Raise these when the app improves; never lower them quietly. */
 const BUDGETS = {

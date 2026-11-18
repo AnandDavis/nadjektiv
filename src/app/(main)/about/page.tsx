@@ -5,7 +5,7 @@ import { ChangelogList } from '@/components/about/ChangelogList';
 import { FeatureList } from '@/components/about/FeatureList';
 import { LevelsExplainer } from '@/components/about/LevelsExplainer';
 import { MedalsExplainer } from '@/components/about/MedalsExplainer';
-import { Ui } from '@/components/ui';
+import { ButtonLink, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { COPY } from '@/lib/i18n/copy';
 
@@ -22,6 +22,9 @@ export default function AboutPage() {
           {APP_CONFIG.name}: {APP_CONFIG.description}
         </p>
         <AppVersion />
+        <ButtonLink href="/welcome" variant="secondary" className="mt-4">
+          <Ui {...COPY.welcome.reopen} />
+        </ButtonLink>
       </header>
       <FeatureList />
       <LevelsExplainer />

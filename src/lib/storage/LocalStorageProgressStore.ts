@@ -1,11 +1,9 @@
-import { STORAGE_CONFIG } from '@/config/app';
-
 import { parseProgress } from '../progress/migrate';
 import { createEmptyProgress, type Progress } from '../progress/types';
+import { BACKUP_KEY_PREFIX, PROGRESS_KEY } from './keys';
 import type { ProgressStore } from './progress-store';
 
-export const PROGRESS_KEY = `${STORAGE_CONFIG.keyPrefix}:progress`;
-export const BACKUP_KEY_PREFIX = `${STORAGE_CONFIG.keyPrefix}:progress-backup:`;
+export { BACKUP_KEY_PREFIX, PROGRESS_KEY };
 
 /**
  * localStorage adapter. Validates and migrates on load; if stored data is corrupt it

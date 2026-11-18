@@ -10,6 +10,11 @@ export interface Feature {
 
 export const FEATURES: readonly Feature[] = [
   {
+    title: 'A short welcome',
+    description:
+      'The first time you open the app, three quick screens explain the games, how your progress is saved, and let you choose German or English headings. Skip it any time, and see it again from this page.',
+  },
+  {
     title: '24 grammar topics',
     description:
       'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to adjective endings, the past tense and connectors. Each topic has a short summary of the rules.',

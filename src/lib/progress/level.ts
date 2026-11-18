@@ -20,7 +20,7 @@ export interface LevelInfo {
   fraction: number;
 }
 
-const TITLES: ReadonlyArray<readonly [minLevel: number, title: Bilingual]> = [
+export const LEVEL_TITLES: ReadonlyArray<readonly [minLevel: number, title: Bilingual]> = [
   [1, { de: 'Anfänger', en: 'Beginner' }],
   [3, { de: 'Lernender', en: 'Learner' }],
   [5, { de: 'Entdecker', en: 'Explorer' }],
@@ -37,8 +37,8 @@ export function xpForLevel(level: number): number {
 }
 
 export function titleForLevel(level: number): Bilingual {
-  let title = TITLES[0][1];
-  for (const [minLevel, name] of TITLES) {
+  let title = LEVEL_TITLES[0][1];
+  for (const [minLevel, name] of LEVEL_TITLES) {
     if (level >= minLevel) title = name;
   }
   return title;

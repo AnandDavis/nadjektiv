@@ -30,6 +30,8 @@ test('wrong answers are collected on the revise page with the answer and why', a
   await expect(page.getByText('Warum?')).toHaveCount(10 - correct);
   await expect(page.getByRole('navigation', { name: 'Main' })).toContainText(String(10 - correct));
 
+  // After a client-side navigation the <title> streams in with the page metadata.
+  await expect(page).toHaveTitle(/To revise/);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 

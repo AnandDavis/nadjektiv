@@ -39,10 +39,13 @@ export function WelcomeFlow({ topicCount }: { topicCount: number }) {
     heading.current?.focus();
   }, [step]);
 
+  // The page stays alive in the background after you leave it, however you leave
+  // (finishing, skipping, the back button, a link). Hiding it runs this cleanup, so
+  // the intro always reopens at step one.
+  useEffect(() => () => setStep(0), []);
+
   const finish = () => {
     markWelcomeSeen();
-    // The page stays alive in the background, so start from step one next time.
-    setStep(0);
     router.replace('/');
   };
 

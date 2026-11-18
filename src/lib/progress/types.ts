@@ -35,6 +35,9 @@ export const topicProgressSchema = z.object({
     gap: modeBestSchema.optional(),
     build: modeBestSchema.optional(),
     grid: modeBestSchema.optional(),
+    // Added without a version bump: an optional key reads fine in older saves, and an
+    // older cached app version drops it instead of rejecting the whole progress.
+    type: modeBestSchema.optional(),
   }),
 });
 

@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Type the answer
-
-**Why:** recall is harder than recognition. A harder Lückentext where you type the word rather than pick it, for topics you've already earned a medal in.
-
-**Notes:** an on-screen ä/ö/ü/ß key row. Ignore case and surrounding spaces, but never accept `ae` for `ä` or `ss` for `ß`. Show a "nearly" message for one-letter typos, but still count them wrong. Reuses the existing gap questions, so no new content is needed.
-
 ## Audio
 
 **Why:** the app is silent. Hearing each sentence helps with listening and pronunciation, which are both on the A1/A2 sheets.

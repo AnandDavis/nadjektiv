@@ -9,6 +9,19 @@ export interface Bilingual {
 }
 
 export const COPY = {
+  typed: {
+    yourAnswer: { de: 'Deine Antwort', en: 'Your answer' },
+    check: { de: 'Prüfen', en: 'Check' },
+    nearly: {
+      de: 'Fast! Nur ein Buchstabe stimmt nicht. Das zählt trotzdem als falsch.',
+      en: 'Nearly! Just one letter is off. It still counts as wrong.',
+    },
+    youTyped: { de: 'Du hast getippt', en: 'You typed' },
+    locked: {
+      de: 'Freigeschaltet, sobald du in diesem Thema eine Medaille hast.',
+      en: 'Unlocks once you have a medal in this topic.',
+    },
+  },
   grid: {
     chooseTable: { de: 'Tabelle wählen', en: 'Choose a table' },
     cells: { de: 'Felder', en: 'Cells' },

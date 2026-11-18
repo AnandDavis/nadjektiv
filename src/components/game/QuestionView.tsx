@@ -4,6 +4,7 @@ import type { SessionItem } from '@/lib/game/session';
 import { BuildQuestionView } from './BuildQuestionView';
 import { GapQuestionView } from './GapQuestionView';
 import { SortQuestionView } from './SortQuestionView';
+import { TypeQuestionView } from './TypeQuestionView';
 
 interface QuestionViewProps {
   item: SessionItem;
@@ -25,7 +26,11 @@ export function QuestionView({ item, last, onAnswer }: QuestionViewProps) {
         />
       );
     case 'gap':
-      return <GapQuestionView question={question} last={last} onAnswer={onAnswer} />;
+      return item.typed ? (
+        <TypeQuestionView question={question} last={last} onAnswer={onAnswer} />
+      ) : (
+        <GapQuestionView question={question} last={last} onAnswer={onAnswer} />
+      );
     case 'build':
       return <BuildQuestionView question={question} last={last} onAnswer={onAnswer} />;
     default: {

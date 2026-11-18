@@ -4,7 +4,7 @@
  */
 export const GAME_CONFIG = {
   /** Questions per round. Blitz is timed, so its value is the size of the queue. */
-  sessionLength: { sort: 60, gap: 10, build: 8 },
+  sessionLength: { sort: 60, gap: 10, build: 8, type: 10 },
   /** Length of a Blitz round. */
   sortRoundSeconds: 60,
   /** Questions in a mixed review round. */

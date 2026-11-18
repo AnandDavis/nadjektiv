@@ -56,14 +56,16 @@ const MODE_NAMES: Record<QuestionMode, string> = {
   sort: 'Blitz',
   gap: 'Lückentext',
   build: 'Satzbau',
+  type: 'Tippen',
 };
 
 /**
- * Modes that count towards "play every mode". Grid fill is a bonus: it arrived after
- * learners had earned medals, and requiring it would take medals away.
+ * Modes that count towards "play every mode". Grid fill and Type the answer are
+ * bonuses: grid fill arrived after learners had earned medals, and Type the answer
+ * only unlocks once a topic has one. Requiring either would take medals away.
  */
 function requiredModes(modes: readonly GameMode[]): QuestionMode[] {
-  return modes.filter((mode): mode is QuestionMode => mode !== 'grid');
+  return modes.filter((mode): mode is QuestionMode => mode !== 'grid' && mode !== 'type');
 }
 
 function requirementsFor(

@@ -19,6 +19,11 @@ export const MODE_INFO: Record<GameMode, ModeInfo> = {
     english: 'Fill the gap',
     description: `${SESSION_LENGTH.gap} sentences. Pick the word that fits, then see why.`,
   },
+  type: {
+    name: 'Tippen',
+    english: 'Type the answer',
+    description: `${SESSION_LENGTH.type} sentences. Type the missing word yourself, with nothing to pick from.`,
+  },
   build: {
     name: 'Satzbau',
     english: 'Sentence builder',

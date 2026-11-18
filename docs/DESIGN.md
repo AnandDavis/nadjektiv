@@ -4,14 +4,15 @@ Nadjektiv looks like a printed Bauhaus poster, not a template. The concept drive
 
 ## The shapes
 
-| Shape          | Colour | Means                |
-| -------------- | ------ | -------------------- |
-| ■ square       | blue   | **der** · Lückentext |
-| ● circle       | red    | **die** · Satzbau    |
-| ▲ triangle     | yellow | **das** · Blitz      |
-| ▦ four squares | ink    | Tabelle (grid fill)  |
+| Shape          | Colour | Means                    |
+| -------------- | ------ | ------------------------ |
+| ■ square       | blue   | **der** · Lückentext     |
+| ● circle       | red    | **die** · Satzbau        |
+| ▲ triangle     | yellow | **das** · Blitz          |
+| ▦ four squares | ink    | Tabelle (grid fill)      |
+| ▮ upright bar  | ink    | Tippen (type the answer) |
 
-The pairings are fixed so learners connect der with a blue square everywhere. Grid fill uses the ink ▦ so the three primaries stay reserved for der/die/das. Use `genderShape()` and `MODE_SHAPES` (`src/lib/ui/shapes.ts`) with the `<Shape>` primitive; never draw them ad hoc. Shapes are decorative (`aria-hidden`): always pair them with the word.
+The pairings are fixed so learners connect der with a blue square everywhere. Grid fill (▦) and Type the answer (▮, a text cursor) use ink so the three primaries stay reserved for der/die/das. Use `genderShape()` and `MODE_SHAPES` (`src/lib/ui/shapes.ts`) with the `<Shape>` primitive; never draw them ad hoc. Shapes are decorative (`aria-hidden`): always pair them with the word.
 
 ## Rules
 

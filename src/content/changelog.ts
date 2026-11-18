@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T17:20Z',
+    title: 'New game: Tippen (type the answer)',
+    description:
+      'A harder Lückentext for topics where you already have a medal: type the missing word yourself, with nothing to pick from. ä ö ü ß keys are built in, and if you’re just one letter off you’re told it was nearly right, though it still counts as a mistake.',
+  },
+  {
     date: '2026-11-18T16:54Z',
     title: 'A welcome for new learners',
     description:

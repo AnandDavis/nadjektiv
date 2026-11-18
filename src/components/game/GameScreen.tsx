@@ -154,6 +154,7 @@ export function GameScreen(props: GameScreenProps) {
                 <FeedbackPanel
                   isCorrect={state.last.isCorrect}
                   given={state.last.given}
+                  givenLabel={item.typed ? COPY.typed.youTyped : undefined}
                   correctAnswer={correctAnswerText(item.question)}
                   explanation={item.question.explanation}
                   points={state.last.points}

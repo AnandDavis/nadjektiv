@@ -1,11 +1,20 @@
 import Link from 'next/link';
 
-import { DropdownMenu, InfoIcon, MenuIcon, SettingsIcon, Shape, Ui } from '@/components/ui';
+import {
+  BookIcon,
+  DropdownMenu,
+  InfoIcon,
+  MenuIcon,
+  SettingsIcon,
+  Shape,
+  Ui,
+} from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { COPY } from '@/lib/i18n/copy';
 
 const MENU_ITEMS = [
   { href: '/settings', label: <Ui {...COPY.nav.settings} />, icon: <SettingsIcon /> },
+  { href: '/glossary', label: <Ui {...COPY.glossary.title} />, icon: <BookIcon /> },
   { href: '/about', label: <Ui {...COPY.header.about} />, icon: <InfoIcon /> },
 ] as const;
 

@@ -18,6 +18,7 @@ const PAGES = [
   '/progress',
   '/settings',
   '/about',
+  '/glossary',
 ];
 
 // German and English labels, and German at the largest text size (an option in Settings).

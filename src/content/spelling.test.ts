@@ -8,6 +8,7 @@ import dictionary from 'dictionary-de';
 import nspell from 'nspell';
 import { describe, expect, it } from 'vitest';
 
+import { GLOSSARY } from './glossary';
 import { TOPICS } from './index';
 import { SPELLING_ALLOWLIST } from './spelling-allowlist';
 
@@ -56,28 +57,34 @@ function unknownWords(text: string): string[] {
 }
 
 function correctTexts(): Array<{ id: string; text: string }> {
-  return TOPICS.flatMap((topic) => [
-    { id: `${topic.id} title`, text: topic.titleDe },
-    ...(topic.grids ?? []).flatMap((grid) => [
-      { id: grid.id, text: grid.titleDe },
-      ...grid.rows.flatMap((row) =>
-        row.cells.flatMap((cell) =>
-          [cell.answer, ...(cell.accepted ?? [])].map((text) => ({ id: grid.id, text })),
+  const glossary = GLOSSARY.flatMap((entry) => [
+    { id: `glossary ${entry.id}`, text: entry.term },
+    { id: `glossary ${entry.id}`, text: entry.example.de },
+  ]);
+  return glossary.concat(
+    TOPICS.flatMap((topic) => [
+      { id: `${topic.id} title`, text: topic.titleDe },
+      ...(topic.grids ?? []).flatMap((grid) => [
+        { id: grid.id, text: grid.titleDe },
+        ...grid.rows.flatMap((row) =>
+          row.cells.flatMap((cell) =>
+            [cell.answer, ...(cell.accepted ?? [])].map((text) => ({ id: grid.id, text })),
+          ),
         ),
+      ]),
+      ...(topic.sort?.questions ?? []).map((q) => ({
+        id: q.id,
+        text: q.prompt.replace('___', q.answer),
+      })),
+      ...(topic.gap ?? []).map((q) => ({ id: q.id, text: `${q.before}${q.answer}${q.after}` })),
+      ...(topic.build ?? []).flatMap((q) =>
+        [q.tiles, ...(q.accepted ?? [])].map((order) => ({ id: q.id, text: order.join(' ') })),
+      ),
+      ...topic.rules.flatMap((rule) =>
+        (rule.examples ?? []).map((example) => ({ id: `${topic.id} rules`, text: example.de })),
       ),
     ]),
-    ...(topic.sort?.questions ?? []).map((q) => ({
-      id: q.id,
-      text: q.prompt.replace('___', q.answer),
-    })),
-    ...(topic.gap ?? []).map((q) => ({ id: q.id, text: `${q.before}${q.answer}${q.after}` })),
-    ...(topic.build ?? []).flatMap((q) =>
-      [q.tiles, ...(q.accepted ?? [])].map((order) => ({ id: q.id, text: order.join(' ') })),
-    ),
-    ...topic.rules.flatMap((rule) =>
-      (rule.examples ?? []).map((example) => ({ id: `${topic.id} rules`, text: example.de })),
-    ),
-  ]);
+  );
 }
 
 describe('German spellcheck', () => {

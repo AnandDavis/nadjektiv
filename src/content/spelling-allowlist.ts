@@ -17,6 +17,7 @@ export const SPELLING_ALLOWLIST: ReadonlySet<string> = new Set([
   // Valid forms the dictionary lacks.
   'Beeil', // du-imperative of sich beeilen: "Beeil dich!"
   'leidtun', // post-1996 spelling of "leid tun"
+  'Modalverb', // grammar term (das Modalverb), in the glossary
   'Neujahr',
   // Grammar terms used in topic titles.
   'Konnektoren',

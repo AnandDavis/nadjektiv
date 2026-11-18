@@ -12,6 +12,7 @@ const STATIC_ROUTES = [
   '/progress',
   '/settings',
   '/about',
+  '/glossary',
   '/play/review',
   '/play/daily',
 ];

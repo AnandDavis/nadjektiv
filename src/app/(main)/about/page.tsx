@@ -22,9 +22,14 @@ export default function AboutPage() {
           {APP_CONFIG.name}: {APP_CONFIG.description}
         </p>
         <AppVersion />
-        <ButtonLink href="/welcome" variant="secondary" className="mt-4">
-          <Ui {...COPY.welcome.reopen} />
-        </ButtonLink>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <ButtonLink href="/welcome" variant="secondary">
+            <Ui {...COPY.welcome.reopen} />
+          </ButtonLink>
+          <ButtonLink href="/glossary" variant="secondary">
+            <Ui {...COPY.glossary.title} />
+          </ButtonLink>
+        </div>
       </header>
       <div className="border-b-4 border-ink">
         <FeatureList />

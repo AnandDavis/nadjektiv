@@ -24,7 +24,8 @@ test('wrong answers are collected on the revise page with the answer and why', a
   await page.getByRole('link', { name: /neu auf deiner Wiederholungsliste/ }).click();
 
   await expect(page).toHaveURL(/\/revise$/);
-  await expect(page.getByRole('heading', { name: 'Die Artikeltabelle' })).toBeVisible();
+  // Sorted by misses rather than grouped, so each card names its topic.
+  await expect(page.getByText('Die Artikeltabelle')).toHaveCount(10 - correct);
   // One card per missed question; each shows what was chosen and why.
   await expect(page.getByText('Deine Wahl')).toHaveCount(10 - correct);
   await expect(page.getByText('Warum?')).toHaveCount(10 - correct);

@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T19:10Z',
+    title: 'Clearer explanations, and your hardest questions first',
+    description:
+      'When you get something wrong, the reason now comes first, in big type, so you see the rule straight away. In Satzbau only the words in the wrong place are crossed out. The “To revise” list now puts the questions you’ve missed most at the top.',
+  },
+  {
     date: '2026-11-18T18:30Z',
     title: 'Daily mix',
     description:

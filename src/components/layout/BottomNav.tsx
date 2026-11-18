@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChartIcon, HomeIcon, RepeatIcon, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY } from '@/lib/i18n/copy';
-import { reviseCount } from '@/lib/revise/revise-groups';
+import { reviseCount } from '@/lib/revise/revise-list';
 import { cn } from '@/lib/utils/cn';
 
 const LINKS = [

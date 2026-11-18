@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { RepeatIcon, ShuffleIcon, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY } from '@/lib/i18n/copy';
-import { reviseCount } from '@/lib/revise/revise-groups';
+import { reviseCount } from '@/lib/revise/revise-list';
 
 const CALLOUT_CLASS =
   'flex min-h-16 items-center gap-3 border-2 border-ink bg-yellow p-4 text-on-yellow transition-colors hover:bg-ink hover:text-canvas';

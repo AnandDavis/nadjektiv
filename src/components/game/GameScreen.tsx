@@ -13,6 +13,7 @@ import { formatSentence } from '@/lib/game/check-answer';
 import { buildDailySession, dailyKey } from '@/lib/game/daily';
 import { currentItem } from '@/lib/game/game-reducer';
 import { hintFor } from '@/lib/game/hint';
+import { diffBuiltSentence } from '@/lib/game/word-diff';
 import { createRng } from '@/lib/game/rng';
 import {
   SORT_ROUND_SECONDS,
@@ -167,6 +168,11 @@ export function GameScreen(props: GameScreenProps) {
                   given={state.last.given}
                   givenLabel={item.typed ? COPY.typed.youTyped : undefined}
                   correctAnswer={correctAnswerText(item.question)}
+                  diff={
+                    item.question.kind === 'build' && !state.last.isCorrect
+                      ? diffBuiltSentence(item.question, state.last.given)
+                      : undefined
+                  }
                   explanation={item.question.explanation}
                   points={state.last.points}
                   onContinue={next}

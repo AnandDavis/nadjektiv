@@ -63,7 +63,7 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
               'mx-1 inline-block min-w-20 px-2 text-center align-baseline',
               !last && 'bg-ink text-ink',
               last?.isCorrect && 'bg-correct text-canvas',
-              last && !last.isCorrect && 'bg-red text-on-red line-through',
+              last && !last.isCorrect && 'bg-red text-on-red line-through decoration-4',
             )}
           >
             {last ? last.given : ' '}

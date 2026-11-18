@@ -99,7 +99,7 @@ export function GridBoard({
                     >
                       <span className="block font-extrabold text-wrong">{cell.answer}</span>
                       {typed.trim() && (
-                        <span className="block text-xs text-muted line-through decoration-red">
+                        <span className="block text-xs text-muted line-through decoration-red decoration-2">
                           {typed}
                         </span>
                       )}

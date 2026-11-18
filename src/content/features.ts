@@ -10,11 +10,6 @@ export interface Feature {
 
 export const FEATURES: readonly Feature[] = [
   {
-    title: 'A short welcome',
-    description:
-      'The first time you open the app, three quick screens explain the games, how your progress is saved, and let you choose German or English headings. Skip it any time, and see it again from this page.',
-  },
-  {
     title: '24 grammar topics',
     description:
       'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to adjective endings, the past tense and connectors. Each topic has a short summary of the rules.',
@@ -28,11 +23,6 @@ export const FEATURES: readonly Feature[] = [
     title: 'Topic map',
     description:
       'The Progress page shows the whole syllabus as a grid of squares, one per topic, filled in as you earn medals. Tap a square to open that topic.',
-  },
-  {
-    title: 'Search',
-    description:
-      'Find any topic from the home page by its German or English name, or by a word it covers, such as “Dativ” or “weil”.',
   },
   {
     title: 'Blitz',
@@ -79,23 +69,8 @@ export const FEATURES: readonly Feature[] = [
       'A round across all the topics you’ve played, starting with your “to revise” questions, then the ones you miss most.',
   },
   {
-    title: 'XP, levels and medals',
-    description:
-      'Earn XP for every right answer, level up, and win Bronze, Silber, Gold and Gemeistert medals for each topic. No streaks: taking a break never costs you anything.',
-  },
-  {
-    title: 'Personal bests',
-    description:
-      'Your best score, accuracy and combo for every topic and game, so you can beat yourself.',
-  },
-  {
     title: 'Works offline',
     description:
       'Add it to your home screen and use it anywhere, even without a connection. Your progress stays on your device.',
-  },
-  {
-    title: 'Your way',
-    description:
-      'Light or dark theme, headings in German or English, and export or import your progress to move devices.',
   },
 ];

@@ -41,6 +41,7 @@ test('the menu opens Settings and About, and closes with Escape', async ({ page 
   await page.getByRole('menuitem', { name: 'Über die App' }).click();
   await expect(page).toHaveURL(/\/about$/);
   await expect(page.getByRole('heading', { name: 'Level und XP' })).toBeVisible();
+  await page.getByText('Neuigkeiten').click();
   await expect(page.getByText('Added revision section')).toBeVisible();
 
   await menuButton.click();

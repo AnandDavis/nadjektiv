@@ -8,6 +8,8 @@ export const APP_CONFIG = {
   shortName: 'Nadjektiv',
   description:
     'Learn German A1–A2 grammar through quick games: sort, fill the gap, build sentences.',
+  /** Shown at the foot of the About page. */
+  maker: { name: 'Nad', place: 'London' },
   /** File name prefix for progress exports (safe to change). */
   exportFilePrefix: 'nadjektiv-progress',
   /**

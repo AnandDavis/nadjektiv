@@ -20,12 +20,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** a glossary page (e.g. `/glossary`, linked from the menu and About) with one entry per term: the German name, the English name, a one-line plain explanation, an example sentence, and links to the topics that teach it. Where a term appears in a rule card or explanation, it could link to its entry. Terms are content, so they live in `src/content/` with tests (every entry has an example, every linked topic exists) and pass the German spellcheck. Keep the explanations in plain English, the examples in German, and check every example against `docs/grammar/`.
 
-## Reorganise the About page
-
-**Why:** the About page has grown long: the version, the feature list, how XP and levels work, the medal rules and the change log all stack in one scroll, and the change log grows with every release.
-
-**Notes:** split it with tabs or accordions, for example _Features_, _XP and medals_ and _What's new_, keeping the heading, version and "See the intro" link at the top. Use native `<details>`/`<summary>` for accordions, or an accessible tab pattern (`role="tablist"`, arrow-key navigation) if tabs. Either must work at 360 px and in both themes, and keep the Bauhaus look: rules and blocks, not rounded cards. Open the section a link points at (e.g. `/about#changelog`). Update the About visual baselines and the a11y spec.
-
 ## Audio
 
 **Why:** the app is silent. Hearing each sentence helps with listening and pronunciation, which are both on the A1/A2 sheets.

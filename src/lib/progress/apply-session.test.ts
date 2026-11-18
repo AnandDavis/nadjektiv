@@ -171,3 +171,28 @@ describe('grid rounds', () => {
     expect(applySessionResult(progress, grid(2, 4), gridModes, NOW).newBests).toEqual(['cells']);
   });
 });
+
+describe('hinted answers', () => {
+  it('count only when wrong: no mastery, stats or revise credit for a hinted right answer', () => {
+    const missed = applySessionResult(createEmptyProgress(), result(0, 1), modes, NOW).progress;
+    const round: SessionResult = {
+      topicId: 't',
+      mode: 'gap',
+      score: 5,
+      bestCombo: 0,
+      answers: [
+        { questionId: 't-gap-w0', topicId: 't', isCorrect: true, given: 'right', hinted: true },
+        { questionId: 't-gap-h', topicId: 't', isCorrect: false, given: 'wrong', hinted: true },
+      ],
+    };
+    const outcome = applySessionResult(missed, round, modes, NOW);
+    const topic = outcome.progress.topics.t;
+    expect(topic.answered).toBe(2);
+    expect(topic.recent).toEqual([0, 0]);
+    expect(outcome.progress.questions['t-gap-w0']).toEqual({ seen: 1, correct: 0 });
+    expect(outcome.progress.revise['t-gap-w0']).toBeDefined();
+    expect(outcome.progress.revise['t-gap-h']).toBeDefined();
+    expect(outcome.clearedFromRevise).toBe(0);
+    expect(outcome.xpGained).toBe(5);
+  });
+});

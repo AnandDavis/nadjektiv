@@ -91,3 +91,37 @@ describe('gameReducer', () => {
     });
   });
 });
+
+describe('hints', () => {
+  it('halve the points and hold the combo for a right answer', async () => {
+    const { gameReducer, INITIAL_GAME_STATE } = await import('./game-reducer');
+    const items = Array.from({ length: 3 }, (_, i) => ({
+      topicId: 't',
+      question: {
+        id: `q${i}`,
+        kind: 'gap' as const,
+        before: '',
+        after: '',
+        options: ['a', 'b'],
+        answer: 'a',
+        translation: '',
+        explanation: 'a is right',
+      },
+    }));
+    let state = gameReducer(INITIAL_GAME_STATE, { type: 'start', items });
+    state = gameReducer(state, { type: 'answer', isCorrect: true, given: 'a' });
+    state = gameReducer(state, { type: 'next' });
+    expect(state.combo).toBe(1);
+
+    state = gameReducer(state, { type: 'hint' });
+    expect(gameReducer(state, { type: 'hint' })).toBe(state);
+    state = gameReducer(state, { type: 'answer', isCorrect: true, given: 'a' });
+    expect(state.last?.points).toBe(5);
+    expect(state.combo).toBe(1);
+    expect(state.answers[1]).toMatchObject({ isCorrect: true, hinted: true });
+
+    state = gameReducer(state, { type: 'next' });
+    expect(state.hinted).toBe(false);
+    expect(gameReducer({ ...state, phase: 'feedback' }, { type: 'hint' }).hinted).toBe(false);
+  });
+});

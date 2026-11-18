@@ -14,7 +14,8 @@ export function MedalsExplainer() {
         <p className="text-sm text-ink">
           Each topic earns its own medal from your accuracy over your last {RECENT_WINDOW} answers
           in it. A medal reflects what you know now: it can drop if you start getting a topic wrong,
-          but never just because you took a break.
+          but never just because you took a break. Only answers you get without a hint count towards
+          a medal; a wrong answer counts either way.
         </p>
         <ul className="mt-3 flex flex-col gap-2">
           {MEDAL_RULES.map((rule) => (

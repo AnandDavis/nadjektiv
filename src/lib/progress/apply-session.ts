@@ -116,6 +116,8 @@ export function applySessionResult(
 
   const resultsByTopic = new Map<string, boolean[]>();
   for (const answer of result.answers) {
+    // Mastery and the revise list only count unaided answers. A hinted miss is still a miss.
+    if (answer.hinted && answer.isCorrect) continue;
     const list = resultsByTopic.get(answer.topicId) ?? [];
     list.push(answer.isCorrect);
     resultsByTopic.set(answer.topicId, list);

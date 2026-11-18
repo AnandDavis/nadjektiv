@@ -10,6 +10,7 @@ import { useGameSession } from '@/hooks/useGameSession';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
 import { currentItem } from '@/lib/game/game-reducer';
+import { hintFor } from '@/lib/game/hint';
 import { createRng } from '@/lib/game/rng';
 import {
   SORT_ROUND_SECONDS,
@@ -24,6 +25,7 @@ import type { Progress } from '@/lib/progress/types';
 import { FeedbackPanel } from './FeedbackPanel';
 import { GameHeader } from './GameHeader';
 import { GameIntro } from './GameIntro';
+import { HintControl } from './HintControl';
 import { QuestionView } from './QuestionView';
 import { ResultsScreen } from './ResultsScreen';
 import { SortTimer } from './SortTimer';
@@ -80,7 +82,7 @@ export function GameScreen(props: GameScreenProps) {
     [mode, topics],
   );
 
-  const { state, outcome, start, answer, next, finish } = useGameSession({
+  const { state, outcome, start, answer, next, finish, hint } = useGameSession({
     mode,
     topicId,
     modesByTopic: props.modesByTopic,
@@ -88,6 +90,7 @@ export function GameScreen(props: GameScreenProps) {
   });
   const item = currentItem(state);
   const isTimed = mode === 'sort';
+  const hintText = item ? hintFor(item.question) : undefined;
 
   const isShowingFeedback = state.phase === 'feedback' && state.last !== undefined;
   // A wrong answer always stops for its explanation (and, in Blitz, stops the clock);
@@ -150,6 +153,9 @@ export function GameScreen(props: GameScreenProps) {
               onAnswer={answer}
             />
             <div aria-live="polite" className="contents">
+              {state.phase === 'playing' && hintText && (
+                <HintControl hint={hintText} isShown={state.hinted} onShow={hint} />
+              )}
               {isWaitingOnLearner && state.last && (
                 <FeedbackPanel
                   isCorrect={state.last.isCorrect}

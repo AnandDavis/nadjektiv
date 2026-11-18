@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T17:45Z',
+    title: 'Hints',
+    description:
+      'In Lückentext, Tippen and Satzbau you can now ask for one hint per question. It shows the rule behind the answer without giving the answer away. A right answer after a hint earns half the points and keeps your run going, but only answers without hints count towards medals.',
+  },
+  {
     date: '2026-11-18T17:20Z',
     title: 'New game: Tippen (type the answer)',
     description:

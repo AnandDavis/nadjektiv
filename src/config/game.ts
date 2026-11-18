@@ -15,6 +15,8 @@ export const GAME_CONFIG = {
     comboStep: 5,
     maxMultiplier: 3,
     perfectBonusXp: 50,
+    /** A right answer after a hint scores this share of its points, and keeps the combo. */
+    hintFactor: 0.5,
   },
   /** Each level needs this much more XP than the last (100 → 300 → 600 …). */
   xpPerLevelStep: 100,

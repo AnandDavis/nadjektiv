@@ -4,7 +4,7 @@ import { useCallback, useRef, type ReactNode } from 'react';
 
 import { SortTimer } from '@/components/game/SortTimer';
 import { AppHeader } from '@/components/layout/AppHeader';
-import { Button, CrossIcon, Ui } from '@/components/ui';
+import { Button, CrossIcon, KeyboardDock, Ui } from '@/components/ui';
 import type { GameMode, GridPuzzle, Topic } from '@/content/types';
 import { useGridRound } from '@/hooks/useGridRound';
 import { useProgress } from '@/hooks/useProgress';
@@ -163,12 +163,12 @@ export function GridScreen({
               onEnter={(key) => focusNext(key, state.solved)}
               registerInput={registerInput}
             />
-            <div className="sticky bottom-0 mt-auto flex flex-col gap-2 bg-canvas pt-2 pb-safe">
+            <KeyboardDock className="mt-auto flex flex-col gap-2 pt-2 pb-safe">
               <UmlautKeys label={COPY.grid.specialCharacters[language]} onInsert={handleInsert} />
               <Button size="lg" variant="secondary" onClick={finish}>
                 <Ui {...COPY.grid.done} />
               </Button>
-            </div>
+            </KeyboardDock>
           </>
         ) : (
           <GridResults

@@ -3,7 +3,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 
 import { UmlautKeys } from '@/components/grid/UmlautKeys';
-import { Button, Ui } from '@/components/ui';
+import { Button, KeyboardDock, Ui } from '@/components/ui';
 import type { GapQuestion } from '@/content/types';
 import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { checkTyped } from '@/lib/game/check-typed';
@@ -51,8 +51,10 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
     field.dispatchEvent(new Event('input', { bubbles: true }));
   };
 
+  // `contents` makes these direct children of the page column, so the key dock can
+  // rise the full height of the page to stay above the on-screen keyboard.
   return (
-    <div className="flex flex-col gap-6">
+    <div className="contents">
       <div>
         <p lang="de" className="text-3xl leading-snug font-extrabold text-ink">
           {question.before}
@@ -71,7 +73,7 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
         <p className="mt-2 text-sm text-muted">{question.translation}</p>
       </div>
 
-      <form onSubmit={submit} className="flex flex-col gap-3">
+      <form id="typed-form" onSubmit={submit} className="flex flex-col gap-3">
         <label
           htmlFor="typed-answer"
           className="text-xs font-extrabold tracking-widest text-ink uppercase"
@@ -104,20 +106,20 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
             className="min-h-14 w-full min-w-0 bg-transparent px-3 text-2xl font-extrabold text-ink outline-none disabled:opacity-60"
           />
         </div>
-        {!last && (
-          <>
-            <UmlautKeys label={COPY.grid.specialCharacters[language]} onInsert={insert} />
-            <Button type="submit" size="lg" disabled={typed.trim() === ''}>
-              <Ui {...COPY.typed.check} />
-            </Button>
-          </>
-        )}
         {isNearly && (
           <p className="border-2 border-ink bg-yellow px-3 py-2 text-sm font-extrabold text-on-yellow">
             <Ui {...COPY.typed.nearly} />
           </p>
         )}
       </form>
+      {!last && (
+        <KeyboardDock className="flex flex-col gap-3 py-2">
+          <UmlautKeys label={COPY.grid.specialCharacters[language]} onInsert={insert} />
+          <Button type="submit" form="typed-form" size="lg" disabled={typed.trim() === ''}>
+            <Ui {...COPY.typed.check} />
+          </Button>
+        </KeyboardDock>
+      )}
     </div>
   );
 }

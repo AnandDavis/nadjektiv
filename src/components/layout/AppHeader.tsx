@@ -13,9 +13,9 @@ import { APP_CONFIG } from '@/config/app';
 import { COPY } from '@/lib/i18n/copy';
 
 const MENU_ITEMS = [
-  { href: '/settings', label: <Ui {...COPY.nav.settings} />, icon: <SettingsIcon /> },
   { href: '/glossary', label: <Ui {...COPY.glossary.title} />, icon: <BookIcon /> },
   { href: '/verbs', label: <Ui {...COPY.verbs.title} />, icon: <BookIcon /> },
+  { href: '/settings', label: <Ui {...COPY.nav.settings} />, icon: <SettingsIcon /> },
   { href: '/about', label: <Ui {...COPY.header.about} />, icon: <InfoIcon /> },
 ] as const;
 

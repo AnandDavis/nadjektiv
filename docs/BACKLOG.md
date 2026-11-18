@@ -14,12 +14,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** Vercel Web Analytics is cookie-free. Same privacy question as Speed Insights: mention it on the About page.
 
-## Topic tests (Prüfung)
-
-**Why:** a way to check a whole level, like a mock exam.
-
-**Notes:** a mixed round across every A1 or A2 topic, ending with a grade and the weakest topics to go back to. No hints. Keep the best grade per level.
-
 ## Verb lookup
 
 **Why:** learners often want one verb's forms at a glance.

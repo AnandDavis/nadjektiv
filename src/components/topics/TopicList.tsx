@@ -12,6 +12,7 @@ import { COPY, topicCount, type Bilingual } from '@/lib/i18n/copy';
 import { masteryFor, type MasteryInfo } from '@/lib/progress/mastery';
 import { searchTopics } from '@/lib/topics/search';
 
+import { ExamLink } from './ExamLink';
 import { groupTopics } from './group-order';
 import { TopicCard } from './TopicCard';
 
@@ -119,6 +120,7 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
                 </ul>
               </div>
             ))}
+            {!isSearching && <ExamLink level={level} />}
           </section>
         );
       })}

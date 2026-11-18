@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-import type { GameMode, RoundMode } from '@/content/types';
+import type { GameMode, Level, RoundMode } from '@/content/types';
 import { dailyKey } from '@/lib/game/daily';
 import {
   INITIAL_GAME_STATE,
@@ -27,6 +27,8 @@ interface UseGameSessionOptions {
   untimed?: boolean;
   /** Show each question's hint up front. */
   autoHint?: boolean;
+  /** Level tests only: the level being tested. */
+  examLevel?: Level;
 }
 
 /**
@@ -40,6 +42,7 @@ export function useGameSession({
   buildItems,
   untimed = false,
   autoHint = false,
+  examLevel,
 }: UseGameSessionOptions) {
   const [state, setState] = useState<GameState>(INITIAL_GAME_STATE);
   const [outcome, setOutcome] = useState<SessionOutcome | null>(null);
@@ -58,6 +61,7 @@ export function useGameSession({
           ...toSessionResult(next, mode, topicId),
           ...(mode === 'daily' ? { dailyDate: dailyKey(new Date()) } : {}),
           ...(mode === 'sort' && untimed ? { untimed: true } : {}),
+          ...(mode === 'exam' && examLevel ? { examLevel } : {}),
         };
         const now = new Date().toISOString();
         let recorded: SessionOutcome | null = null;
@@ -70,7 +74,7 @@ export function useGameSession({
         void requestPersistence();
       }
     },
-    [mode, topicId, modesByTopic, untimed],
+    [mode, topicId, modesByTopic, untimed, examLevel],
   );
 
   const start = useCallback(() => {

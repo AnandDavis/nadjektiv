@@ -65,6 +65,19 @@ export function dueLine(days: number, left: number): Bilingual {
   };
 }
 
+/** "Prüfung A1" / "A1 test". */
+export function examTitle(level: string): Bilingual {
+  return { de: `Prüfung ${level}`, en: `${level} test` };
+}
+
+/** What a level test is, under its link. */
+export function examHint(level: string, questions: number): Bilingual {
+  return {
+    de: `${questions} Fragen aus allen ${level}-Themen, ohne Hinweise. Am Ende gibt es eine Note.`,
+    en: `${questions} questions from every ${level} topic, with no hints. You get a grade at the end.`,
+  };
+}
+
 /** "Kombo ×2!" / "Combo ×2!", announced when the multiplier rises. */
 export function comboLine(multiplier: number): Bilingual {
   return { de: `Kombo ×${multiplier}!`, en: `Combo ×${multiplier}!` };

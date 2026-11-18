@@ -37,7 +37,7 @@ export const MODE_INFO: Record<GameMode, ModeInfo> = {
   },
 };
 
-/** Mixed review and the daily mix draw from many topics and set no topic bests. */
+/** Mixed review, the daily mix and level tests draw from many topics and set no topic bests. */
 export function isMixedMode(mode: string): mode is MixedMode {
-  return mode === 'review' || mode === 'daily';
+  return mode === 'review' || mode === 'daily' || mode === 'exam';
 }

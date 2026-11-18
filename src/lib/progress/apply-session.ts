@@ -6,6 +6,7 @@
 import type { GameMode } from '@/content/types';
 import { isMixedMode } from '@/lib/game/modes';
 
+import { examPercent, withExamResult } from '../exam/exam';
 import { afterMiss, afterRight } from '../revise/schedule';
 import { dailyKey } from '../utils/day';
 import { accuracy, runBreakers, xpForSession, type SessionResult } from '../game/scoring';
@@ -35,6 +36,8 @@ export interface SessionOutcome {
   clearedFromRevise: number;
   /** Topics that reached Gemeistert for the first time in this round. */
   graduations: string[];
+  /** Level tests only: whether this result is the best yet for the level. */
+  examBest?: boolean;
 }
 
 function updateTopic(topic: TopicProgress, results: readonly boolean[]): TopicProgress {
@@ -201,6 +204,10 @@ export function applySessionResult(
         }
       : {};
 
+  const exam = result.examLevel
+    ? withExamResult(progress, result.examLevel, examPercent(result.answers))
+    : undefined;
+
   const xp = progress.xp + xpGained;
   const levelBefore = levelForXp(progress.xp).level;
   const levelAfter = levelForXp(xp).level;
@@ -217,6 +224,7 @@ export function applySessionResult(
       ...(result.dailyDate ? { daily: { lastDone: result.dailyDate } } : {}),
       ...withComboBreaks(progress, runBreakers(result.answers), now),
       ...graduated,
+      ...(exam ? { exams: exam.exams } : {}),
     },
     xpGained,
     newBests,
@@ -225,6 +233,7 @@ export function applySessionResult(
     addedToRevise,
     clearedFromRevise,
     graduations,
+    ...(exam ? { examBest: exam.isBest } : {}),
   };
 }
 

@@ -24,6 +24,8 @@ Every wrong answer, in every mode, shows what you chose, the right answer and th
 
 **Interface language:** headings and buttons are in German by default for extra immersion. Switch them to English in Settings. Grammar questions are always German.
 
+**About page:** the menu in the app header (top right) has Settings and About. About lists the features, explains how XP, levels and medals work, and has a dated change log of new features.
+
 ## Gamification (no streaks)
 
 - **Mastery tiers per topic:** Bronze → Silber → Gold → Gemeistert. A tier depends on how many questions you've answered and your accuracy over your last 40 answers. Gold and above also require playing every mode. Time away never costs you a tier; only getting things wrong does.

@@ -21,6 +21,7 @@
 15. **Interface labels are bilingual** — headings, buttons and other labels that have a German form live in `src/lib/i18n/copy.ts` and render through `<Ui {...COPY.x.y} />`, which shows German or English per the learner's setting (switched by CSS before paint, so no flash). Grammar content is always German and never goes through `COPY`.
 16. **A wrong answer is always explained before the game moves on** — every mode stops on a wrong answer, shows what was chosen, the right answer and the rule, and waits for the learner to continue (Blitz pauses its clock while it waits).
 17. **Names and tuning live in `src/config/`** — the app name, description and brand colours come from `APP_CONFIG`; round lengths, timers, points and XP from `GAME_CONFIG`. Don't hardcode them elsewhere. `STORAGE_CONFIG` holds identifiers baked into saved data (localStorage keys, export marker) and must not change without a migration.
+18. **Every learner-facing feature updates the About page in the same change** — add a dated entry to the change log (`src/content/changelog.ts`, newest first, UTC timestamp `YYYY-MM-DDTHH:mmZ` = when it ships) and update the feature list (`src/content/features.ts`) so it describes how the app now works. Write for learners in plain, non-technical words ("Added revision section", not "feat(revise): …"). Leave out internal work and app chrome: refactors, tests, build or tooling fixes, headers, menus, navigation tweaks. If the change alters how XP, levels or medals work, check the About page explanation (it is generated from `GAME_CONFIG` and the tier rules, but its wording may need updating).
 
 ---
 
@@ -43,7 +44,7 @@ src/
   components/game/        game modes and the shared game shell
   components/progress/    mastery, XP and personal-best displays
   config/                 app identity (app.ts) and gameplay tuning (game.ts)
-  content/                grammar topics and question banks (data only)
+  content/                grammar topics, question banks, change log and feature list (data only)
   hooks/                  React hooks (useProgress, useGameSession …)
   lib/game/               pure game logic: session building, scoring, answer checking
   lib/progress/           progress types, schema, ProgressService, mastery and XP maths

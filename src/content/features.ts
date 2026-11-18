@@ -10,14 +10,14 @@ export interface Feature {
 
 export const FEATURES: readonly Feature[] = [
   {
-    title: '25 grammar topics',
+    title: '27 grammar topics',
     description:
-      'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to adjective endings, the past tense and connectors. Each topic has a short summary of the rules, with grammar words linked to the glossary.',
+      'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to weak nouns, verbs with prepositions, the past tense and connectors. Each topic has a short summary of the rules, with grammar words linked to the glossary.',
   },
   {
     title: 'Noun cards',
     description:
-      'Learn nouns the way Germans say them: der Tisch, die Tische. Each card asks for the article and the plural together. The first time a noun comes up, a “new word” card shows its shape, article and plural before you’re asked.',
+      'Learn 152 everyday nouns the way Germans say them: der Tisch, die Tische. Family, food, home, town, work, the body, clothes, time and nature: each card asks for the article and the plural together. The first time a noun comes up, a “new word” card shows its shape, article and plural before you’re asked.',
   },
   {
     title: 'Level tests',
@@ -52,7 +52,7 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'Verb lookup',
     description:
-      'Look up any of the 33 irregular verbs, by any form or its English meaning, and see its whole present tense, Präteritum and Perfekt (with haben or sein) together, with links to the topics.',
+      'Look up 75 common verbs (irregular, modal, regular, separable and those that take the dative) by any form or their English meaning, and see its whole present tense, Präteritum and Perfekt (with haben or sein) together, with links to the topics.',
   },
   {
     title: 'Your progress',

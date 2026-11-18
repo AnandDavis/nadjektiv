@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T23:40Z',
+    title: 'More words and two new topics',
+    description:
+      'Noun cards now cover 152 everyday nouns, from family and food to clothes and nature. The der/die/das Blitz has compound nouns like die Haustür, and Plural has nouns with no singular, like die Eltern. Two new A2 topics: weak nouns (den Kollegen) and verbs with prepositions (warten auf, Angst haben vor). The verb lookup now has 75 verbs, including the modal verbs, and comparatives have a second table.',
+  },
+  {
     date: '2026-11-18T23:30Z',
     title: 'Easier typing in Tippen',
     description:

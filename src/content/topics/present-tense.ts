@@ -44,8 +44,8 @@ export const presentTense: Topic = {
           ],
           ['e → ie', 'sehen, lesen', 'siehst / sieht; liest / liest'],
           [
-            'a → ä',
-            'fahren, schlafen, tragen, waschen, laufen, einladen',
+            'a → ä (au → äu)',
+            'fahren, schlafen, tragen, waschen, einladen, laufen',
             'fährst / fährt; läufst / läuft',
           ],
         ],

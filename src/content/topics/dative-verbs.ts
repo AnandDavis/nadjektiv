@@ -612,16 +612,21 @@ export const dativeVerbs: Topic = {
       accepted: [
         ['dem', 'Kind', 'gebe', 'ich', 'den', 'Ball'],
         ['den', 'Ball', 'gebe', 'ich', 'dem', 'Kind'],
+        ['ich', 'gebe', 'den', 'Ball', 'dem', 'Kind'],
       ],
       punctuation: '.',
       translation: 'I give the child the ball.',
-      explanation: 'Two nouns: the dative (dem Kind) comes before the accusative (den Ball).',
+      explanation:
+        'Two nouns: the neutral order is dative (dem Kind) before accusative (den Ball). With two definite nouns, den Ball dem Kind is also possible when you stress the child.',
     },
     {
       id: 'dative-verbs-build-2',
       kind: 'build',
       tiles: ['ich', 'gebe', 'ihn', 'dem', 'Kind'],
-      accepted: [['dem', 'Kind', 'gebe', 'ich', 'ihn']],
+      accepted: [
+        ['dem', 'Kind', 'gebe', 'ich', 'ihn'],
+        ['ihn', 'gebe', 'ich', 'dem', 'Kind'],
+      ],
       punctuation: '.',
       translation: 'I give it to the child.',
       explanation:
@@ -631,6 +636,10 @@ export const dativeVerbs: Topic = {
       id: 'dative-verbs-build-3',
       kind: 'build',
       tiles: ['ich', 'gebe', 'ihn', 'ihm'],
+      accepted: [
+        ['ihm', 'gebe', 'ich', 'ihn'],
+        ['ihn', 'gebe', 'ich', 'ihm'],
+      ],
       punctuation: '.',
       translation: 'I give it to him.',
       explanation: 'Two pronouns: accusative first, then dative: ihn ihm.',
@@ -665,7 +674,10 @@ export const dativeVerbs: Topic = {
       id: 'dative-verbs-build-7',
       kind: 'build',
       tiles: ['ich', 'schicke', 'es', 'dir', 'morgen'],
-      accepted: [['morgen', 'schicke', 'ich', 'es', 'dir']],
+      accepted: [
+        ['morgen', 'schicke', 'ich', 'es', 'dir'],
+        ['dir', 'schicke', 'ich', 'es', 'morgen'],
+      ],
       punctuation: '.',
       translation: 'I will send it to you tomorrow.',
       explanation: 'Two pronouns: accusative es before dative dir.',
@@ -696,6 +708,7 @@ export const dativeVerbs: Topic = {
       id: 'dative-verbs-build-10',
       kind: 'build',
       tiles: ['ich', 'erkläre', 'es', 'dir'],
+      accepted: [['dir', 'erkläre', 'ich', 'es']],
       punctuation: '.',
       translation: 'I will explain it to you.',
       explanation: 'Two pronouns: accusative es first, then dative dir.',
@@ -724,14 +737,17 @@ export const dativeVerbs: Topic = {
       id: 'dative-verbs-build-13',
       kind: 'build',
       tiles: ['bringst', 'du', 'den', 'Gästen', 'den', 'Kaffee'],
+      accepted: [['bringst', 'du', 'den', 'Kaffee', 'den', 'Gästen']],
       punctuation: '?',
       translation: 'Will you bring the guests the coffee?',
-      explanation: 'Two nouns: dative plural den Gästen before accusative den Kaffee.',
+      explanation:
+        'Two nouns: the neutral order is dative plural den Gästen before accusative den Kaffee. With two definite nouns, den Kaffee den Gästen is also possible.',
     },
     {
       id: 'dative-verbs-build-14',
       kind: 'build',
       tiles: ['ich', 'habe', 'es', 'ihm', 'gesagt'],
+      accepted: [['ihm', 'habe', 'ich', 'es', 'gesagt']],
       punctuation: '.',
       translation: 'I told him.',
       explanation: 'Two pronouns: accusative es before dative ihm; the participle goes last.',

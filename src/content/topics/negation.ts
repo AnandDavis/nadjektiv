@@ -584,7 +584,10 @@ export const negation: Topic = {
       id: 'negation-build-5',
       kind: 'build',
       tiles: ['ich', 'habe', 'den Film', 'nicht', 'gesehen'],
-      accepted: [['den Film', 'habe', 'ich', 'nicht', 'gesehen']],
+      accepted: [
+        ['den Film', 'habe', 'ich', 'nicht', 'gesehen'],
+        ['gesehen', 'habe', 'ich', 'den Film', 'nicht'],
+      ],
       punctuation: '.',
       translation: "I haven't seen the film.",
       explanation:
@@ -679,7 +682,10 @@ export const negation: Topic = {
       id: 'negation-build-15',
       kind: 'build',
       tiles: ['er', 'hat', 'seine Hausaufgaben', 'nicht', 'gemacht'],
-      accepted: [['seine Hausaufgaben', 'hat', 'er', 'nicht', 'gemacht']],
+      accepted: [
+        ['seine Hausaufgaben', 'hat', 'er', 'nicht', 'gemacht'],
+        ['gemacht', 'hat', 'er', 'seine Hausaufgaben', 'nicht'],
+      ],
       punctuation: '.',
       translation: "He hasn't done his homework.",
       explanation:

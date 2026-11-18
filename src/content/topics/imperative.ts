@@ -409,6 +409,7 @@ export const imperative: Topic = {
       id: 'imperative-build-14',
       kind: 'build',
       tiles: ['kommt', 'doch', 'heute Abend', 'vorbei'],
+      accepted: [['kommt', 'heute Abend', 'doch', 'vorbei']],
       punctuation: '!',
       translation: 'Why don’t you (all) drop by this evening!',
       explanation: 'ihr-imperative kommt first; the prefix vorbei goes last.',

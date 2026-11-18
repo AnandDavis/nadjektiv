@@ -303,6 +303,7 @@ export const wordOrder: Topic = {
       accepted: [
         ['ich', 'habe', 'am Montag', 'einen Termin'],
         ['einen Termin', 'habe', 'ich', 'am Montag'],
+        ['ich', 'habe', 'einen Termin', 'am Montag'],
       ],
       punctuation: '.',
       explanation: 'Anything can go in position 1, but the verb habe always stays second.',
@@ -315,6 +316,7 @@ export const wordOrder: Topic = {
       accepted: [
         ['jeden Tag', 'lerne', 'ich', 'Deutsch'],
         ['Deutsch', 'lerne', 'ich', 'jeden Tag'],
+        ['ich', 'lerne', 'Deutsch', 'jeden Tag'],
       ],
       punctuation: '.',
       explanation:

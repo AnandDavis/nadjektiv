@@ -520,7 +520,7 @@ export const adjectiveEndings: Topic = {
       answer: 'neu',
       translation: 'Our hotel is brand new.',
       explanation:
-        'An adjective after the noun (after sein) stays in its basic form: Das Hotel ist neu.',
+        'An adjective after the noun (after sein) stays in its basic form: Unser Hotel ist ganz neu.',
     },
     {
       id: 'adjective-endings-gap-44',

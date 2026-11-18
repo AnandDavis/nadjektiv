@@ -442,7 +442,7 @@ export const cases: Topic = {
       kind: 'gap',
       before: 'Das Fahrrad gehört ',
       after: ' Mädchen.',
-      options: ['das', 'dem', 'den'],
+      options: ['das', 'dem', 'der'],
       answer: 'dem',
       translation: 'The bike belongs to the girl.',
       explanation: 'gehören takes the dative, and neuter das becomes dem.',

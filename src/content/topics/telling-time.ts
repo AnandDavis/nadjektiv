@@ -37,7 +37,7 @@ export const tellingTime: Topic = {
     },
     {
       heading: 'Dates and prices',
-      body: 'Ordinals add -te up to 19 (zweite, vierte) and -ste from 20 (zwanzigste). Learn the odd ones: erste, dritte, siebte. After am they end in -en: am dritten Mai. Prices say the euros, then the cents.',
+      body: 'Ordinals add -te up to 19 (zweite, vierte) and -ste from 20 (zwanzigste). Learn the odd ones: erste, dritte, siebte, achte. After am they end in -en: am dritten Mai. Prices say the euros, then the cents.',
       examples: [
         { de: 'Heute ist der dritte Mai.', en: 'Today is the 3rd of May.' },
         { de: 'Der Termin ist am dritten Mai.', en: 'The appointment is on the 3rd of May.' },
@@ -273,10 +273,10 @@ export const tellingTime: Topic = {
       kind: 'gap',
       before: 'Meine Schwester ist 16 — sie ist ',
       after: ' Jahre alt.',
-      options: ['sechzehn', 'sechszehn', 'sechszig'],
+      options: ['sechzehn', 'sechszehn', 'sechzig'],
       answer: 'sechzehn',
       translation: 'My sister is 16 — she is sixteen years old.',
-      explanation: 'sechs drops its s in sechzehn (16) and sechzig (60).',
+      explanation: 'sechs drops its s in sechzehn (16) and sechzig (60). sechzig is 60, not 16.',
     },
     {
       id: 'telling-time-gap-24',

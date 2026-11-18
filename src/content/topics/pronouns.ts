@@ -35,7 +35,7 @@ export const pronouns: Topic = {
     },
     {
       heading: 'Formal Sie is always capitalised',
-      body: 'Sie, Ihnen and Ihr (formal you, your) always start with a capital letter. du, dich, dir and dein never do, not even in a letter.',
+      body: 'Sie, Ihnen and Ihr (formal you, your) always start with a capital letter. du, dich, dir and dein are written in lower case (in a letter or email you may capitalise them, but you do not have to).',
       examples: [
         { de: 'Frau Weber, ist das Ihre Tasche?', en: 'Ms Weber, is this your bag?' },
         { de: 'Anna, ist das deine Tasche?', en: 'Anna, is this your bag?' },
@@ -229,7 +229,7 @@ export const pronouns: Topic = {
       kind: 'gap',
       before: 'Das ist mein Bruder. ',
       after: ' Name ist Max.',
-      options: ['Sein', 'Seine', 'Ihr'],
+      options: ['Sein', 'Seine', 'Seinen'],
       answer: 'Sein',
       translation: 'This is my brother. His name is Max.',
       explanation:

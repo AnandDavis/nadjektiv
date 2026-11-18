@@ -544,7 +544,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-2',
         kind: 'sort',
-        prompt: 'essen: Ich … gestern Pizza …',
+        prompt: 'essen: Ich … gestern Pizza.',
         gloss: 'I ate pizza yesterday.',
         answer: 'Perfekt',
         explanation: 'Most verbs use the Perfekt in speech: Ich habe gestern Pizza gegessen.',
@@ -568,7 +568,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-5',
         kind: 'sort',
-        prompt: 'gehen: Wir … ins Kino …',
+        prompt: 'gehen: Wir … ins Kino.',
         gloss: 'We went to the cinema.',
         answer: 'Perfekt',
         explanation: 'gehen uses the Perfekt in speech: Wir sind ins Kino gegangen.',
@@ -592,7 +592,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-8',
         kind: 'sort',
-        prompt: 'machen: Ich … meine Hausaufgaben …',
+        prompt: 'machen: Ich … meine Hausaufgaben.',
         gloss: 'I did my homework.',
         answer: 'Perfekt',
         explanation: 'machen uses the Perfekt in speech: Ich habe meine Hausaufgaben gemacht.',
@@ -600,7 +600,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-9',
         kind: 'sort',
-        prompt: 'kaufen: Sie … neue Schuhe …',
+        prompt: 'kaufen: Sie … neue Schuhe.',
         gloss: 'She bought new shoes.',
         answer: 'Perfekt',
         explanation: 'kaufen uses the Perfekt in speech: Sie hat neue Schuhe gekauft.',
@@ -616,7 +616,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-11',
         kind: 'sort',
-        prompt: 'sehen: Ich … einen tollen Film …',
+        prompt: 'sehen: Ich … einen tollen Film.',
         gloss: 'I saw a great film.',
         answer: 'Perfekt',
         explanation: 'sehen uses the Perfekt in speech: Ich habe einen tollen Film gesehen.',
@@ -632,7 +632,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-13',
         kind: 'sort',
-        prompt: 'schlafen: Ich … lange …',
+        prompt: 'schlafen: Ich … lange.',
         gloss: 'I slept in.',
         answer: 'Perfekt',
         explanation: 'schlafen uses the Perfekt in speech: Ich habe lange geschlafen.',
@@ -648,7 +648,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-15',
         kind: 'sort',
-        prompt: 'fahren: Er … nach Berlin …',
+        prompt: 'fahren: Er … nach Berlin.',
         gloss: 'He went to Berlin.',
         answer: 'Perfekt',
         explanation: 'fahren uses the Perfekt in speech: Er ist nach Berlin gefahren.',
@@ -664,7 +664,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-17',
         kind: 'sort',
-        prompt: 'trinken: Wir … Kaffee …',
+        prompt: 'trinken: Wir … Kaffee.',
         gloss: 'We drank coffee.',
         answer: 'Perfekt',
         explanation: 'trinken uses the Perfekt in speech: Wir haben Kaffee getrunken.',
@@ -680,7 +680,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-19',
         kind: 'sort',
-        prompt: 'arbeiten: Ich … bis acht Uhr …',
+        prompt: 'arbeiten: Ich … bis acht Uhr.',
         gloss: 'I worked until eight.',
         answer: 'Perfekt',
         explanation:
@@ -697,7 +697,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-21',
         kind: 'sort',
-        prompt: 'spielen: Die Kinder … Fußball …',
+        prompt: 'spielen: Die Kinder … Fußball.',
         gloss: 'The children played football.',
         answer: 'Perfekt',
         explanation: 'spielen uses the Perfekt in speech: Die Kinder haben Fußball gespielt.',
@@ -713,7 +713,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-23',
         kind: 'sort',
-        prompt: 'treffen: Ich … Freunde …',
+        prompt: 'treffen: Ich … Freunde.',
         gloss: 'I met friends.',
         answer: 'Perfekt',
         explanation: 'treffen uses the Perfekt in speech: Ich habe Freunde getroffen.',
@@ -721,15 +721,15 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-24',
         kind: 'sort',
-        prompt: 'es gibt: … einen Unfall auf der Autobahn.',
-        gloss: 'There was an accident on the motorway.',
+        prompt: 'es gibt: Im Hotel … kein WLAN.',
+        gloss: 'There was no Wi-Fi in the hotel.',
         answer: 'Präteritum',
-        explanation: 'es gab is the everyday past of es gibt: Es gab einen Unfall.',
+        explanation: 'es gab is the everyday past of es gibt: Im Hotel gab es kein WLAN.',
       },
       {
         id: 'praeteritum-sort-25',
         kind: 'sort',
-        prompt: 'anrufen: Ich … meine Oma …',
+        prompt: 'anrufen: Ich … meine Oma.',
         gloss: 'I called my grandma.',
         answer: 'Perfekt',
         explanation: 'anrufen uses the Perfekt in speech: Ich habe meine Oma angerufen.',
@@ -745,7 +745,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-27',
         kind: 'sort',
-        prompt: 'schreiben: Ich … dir eine E-Mail …',
+        prompt: 'schreiben: Ich … dir eine E-Mail.',
         gloss: 'I wrote you an email.',
         answer: 'Perfekt',
         explanation: 'schreiben uses the Perfekt in speech: Ich habe dir eine E-Mail geschrieben.',
@@ -761,7 +761,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-29',
         kind: 'sort',
-        prompt: 'besuchen: Wir … meine Eltern …',
+        prompt: 'besuchen: Wir … meine Eltern.',
         gloss: 'We visited my parents.',
         answer: 'Perfekt',
         explanation: 'besuchen uses the Perfekt in speech: Wir haben meine Eltern besucht.',
@@ -769,7 +769,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-30',
         kind: 'sort',
-        prompt: 'aufstehen: Ich … um sechs Uhr …',
+        prompt: 'aufstehen: Ich … um sechs Uhr.',
         gloss: 'I got up at six.',
         answer: 'Perfekt',
         explanation: 'aufstehen uses the Perfekt in speech: Ich bin um sechs Uhr aufgestanden.',
@@ -785,7 +785,7 @@ export const praeteritum: Topic = {
       {
         id: 'praeteritum-sort-32',
         kind: 'sort',
-        prompt: 'kochen: Ich … Spaghetti …',
+        prompt: 'kochen: Ich … Spaghetti.',
         gloss: 'I cooked spaghetti.',
         answer: 'Perfekt',
         explanation: 'kochen uses the Perfekt in speech: Ich habe Spaghetti gekocht.',

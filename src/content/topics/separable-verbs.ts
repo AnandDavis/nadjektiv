@@ -621,7 +621,10 @@ export const separableVerbs: Topic = {
       id: 'separable-verbs-build-8',
       kind: 'build',
       tiles: ['ich', 'habe', 'dich', 'gestern', 'angerufen'],
-      accepted: [['gestern', 'habe', 'ich', 'dich', 'angerufen']],
+      accepted: [
+        ['gestern', 'habe', 'ich', 'dich', 'angerufen'],
+        ['dich', 'habe', 'ich', 'gestern', 'angerufen'],
+      ],
       punctuation: '.',
       translation: 'I called you yesterday.',
       explanation:

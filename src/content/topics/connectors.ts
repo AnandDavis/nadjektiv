@@ -372,7 +372,7 @@ export const connectors: Topic = {
       answer: 'denn',
       translation: 'I am tired because I slept badly.',
       explanation:
-        'The clause after the gap is a normal sentence (ich habe …), so you need a position-0 word: denn.',
+        'The clause after the gap is a normal sentence (ich habe …), so you need a position-0 word: denn. With weil the verb would go to the end: weil ich schlecht geschlafen habe.',
     },
     {
       id: 'connectors-gap-4',
@@ -618,7 +618,10 @@ export const connectors: Topic = {
       kind: 'build',
       translation: 'It is raining, so I am staying at home.',
       tiles: ['es', 'regnet,', 'deshalb', 'bleibe', 'ich', 'zu Hause'],
-      accepted: [['es', 'regnet,', 'ich', 'bleibe', 'deshalb', 'zu Hause']],
+      accepted: [
+        ['es', 'regnet,', 'ich', 'bleibe', 'deshalb', 'zu Hause'],
+        ['es', 'regnet,', 'zu Hause', 'bleibe', 'ich', 'deshalb'],
+      ],
       punctuation: '.',
       explanation:
         'deshalb takes position 1, so the verb bleibe follows at once. It can also sit in the middle: ich bleibe deshalb zu Hause.',
@@ -662,7 +665,10 @@ export const connectors: Topic = {
       kind: 'build',
       translation: 'He has a fever, but he still goes to work.',
       tiles: ['er', 'hat', 'Fieber,', 'trotzdem', 'geht', 'er', 'zur Arbeit'],
-      accepted: [['er', 'hat', 'Fieber,', 'er', 'geht', 'trotzdem', 'zur Arbeit']],
+      accepted: [
+        ['er', 'hat', 'Fieber,', 'er', 'geht', 'trotzdem', 'zur Arbeit'],
+        ['er', 'hat', 'Fieber,', 'zur Arbeit', 'geht', 'er', 'trotzdem'],
+      ],
       punctuation: '.',
       explanation:
         'trotzdem takes position 1, so geht follows at once. It can also sit in the middle: er geht trotzdem zur Arbeit.',
@@ -744,9 +750,14 @@ export const connectors: Topic = {
       kind: 'build',
       translation: 'First I go shopping, after that I cook.',
       tiles: ['zuerst', 'kaufe', 'ich', 'ein,', 'danach', 'koche', 'ich'],
-      accepted: [['ich', 'kaufe', 'zuerst', 'ein,', 'danach', 'koche', 'ich']],
+      accepted: [
+        ['ich', 'kaufe', 'zuerst', 'ein,', 'danach', 'koche', 'ich'],
+        ['zuerst', 'kaufe', 'ich', 'ein,', 'ich', 'koche', 'danach'],
+        ['ich', 'kaufe', 'zuerst', 'ein,', 'ich', 'koche', 'danach'],
+      ],
       punctuation: '.',
-      explanation: 'danach takes position 1, so the verb koche follows at once.',
+      explanation:
+        'danach takes position 1, so the verb koche follows at once. It can also sit after the verb: ich koche danach.',
     },
     {
       id: 'connectors-build-18',

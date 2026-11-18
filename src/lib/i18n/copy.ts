@@ -17,6 +17,16 @@ export const COPY = {
       en: 'The questions you miss most',
     },
   },
+  header: {
+    menu: { de: 'Menü', en: 'Menu' },
+    about: { de: 'Über die App', en: 'About' },
+  },
+  about: {
+    features: { de: 'Was die App kann', en: 'What you can do' },
+    levels: { de: 'Level und XP', en: 'Levels and XP' },
+    tiers: { de: 'Medaillen pro Thema', en: 'Medals for each topic' },
+    changelog: { de: 'Neuigkeiten', en: 'What’s new' },
+  },
   nav: {
     learn: { de: 'Lernen', en: 'Learn' },
     progress: { de: 'Fortschritt', en: 'Progress' },

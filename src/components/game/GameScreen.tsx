@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, type ReactNode } from 'react';
 
+import { AppHeader } from '@/components/layout/AppHeader';
 import { Ui } from '@/components/ui';
 
 import type { GameMode, Question, Topic } from '@/content/types';
@@ -104,74 +105,81 @@ export function GameScreen(props: GameScreenProps) {
   }, [isAutoAdvancing]);
 
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-xl flex-col gap-5 px-4 pt-4 pb-8">
-      {state.phase === 'intro' && (
-        <GameIntro
-          title={title}
-          modeName={modeName}
-          description={description}
-          best={topicId && mode !== 'review' ? progress?.topics[topicId]?.modes[mode] : undefined}
-          isReady={progress !== null}
-          onStart={start}
-        />
-      )}
-
-      {item && (
-        <>
-          <GameHeader
-            exitHref={exitHref}
+    <div className="flex min-h-dvh flex-col">
+      {/* The quiz intro is a focused start screen; every other phase keeps the app header. */}
+      {state.phase !== 'intro' && <AppHeader />}
+      <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pt-4 pb-8">
+        {state.phase === 'intro' && (
+          <GameIntro
             title={title}
-            score={state.score}
-            combo={state.combo}
-            progress={isTimed ? undefined : { current: state.index + 1, total: state.items.length }}
-            timer={
-              isTimed ? (
-                <SortTimer
-                  seconds={SORT_ROUND_SECONDS}
-                  isPaused={isWaitingOnLearner}
-                  onExpire={finish}
-                />
-              ) : undefined
-            }
+            modeName={modeName}
+            description={description}
+            best={topicId && mode !== 'review' ? progress?.topics[topicId]?.modes[mode] : undefined}
+            isReady={progress !== null}
+            exitHref={exitHref}
+            onStart={start}
           />
-          <QuestionView
-            key={`${state.items.length}-${state.index}-${item.question.id}`}
-            item={item}
-            last={state.phase === 'feedback' ? state.last : undefined}
-            onAnswer={answer}
-          />
-          <div aria-live="polite" className="contents">
-            {isWaitingOnLearner && state.last && (
-              <FeedbackPanel
-                isCorrect={state.last.isCorrect}
-                given={state.last.given}
-                correctAnswer={correctAnswerText(item.question)}
-                explanation={item.question.explanation}
-                points={state.last.points}
-                onContinue={next}
-              />
-            )}
-            {isAutoAdvancing && (
-              <p className="sr-only">
-                <Ui {...COPY.game.correct} />
-              </p>
-            )}
-          </div>
-        </>
-      )}
+        )}
 
-      {state.phase === 'finished' && (
-        <ResultsScreen
-          score={state.score}
-          answers={state.answers}
-          mistakes={state.mistakes}
-          outcome={outcome}
-          exitHref={exitHref}
-          exitLabel={exitLabel}
-          topicTitles={props.topicTitles}
-          onPlayAgain={start}
-        />
-      )}
-    </main>
+        {item && (
+          <>
+            <GameHeader
+              exitHref={exitHref}
+              title={title}
+              score={state.score}
+              combo={state.combo}
+              progress={
+                isTimed ? undefined : { current: state.index + 1, total: state.items.length }
+              }
+              timer={
+                isTimed ? (
+                  <SortTimer
+                    seconds={SORT_ROUND_SECONDS}
+                    isPaused={isWaitingOnLearner}
+                    onExpire={finish}
+                  />
+                ) : undefined
+              }
+            />
+            <QuestionView
+              key={`${state.items.length}-${state.index}-${item.question.id}`}
+              item={item}
+              last={state.phase === 'feedback' ? state.last : undefined}
+              onAnswer={answer}
+            />
+            <div aria-live="polite" className="contents">
+              {isWaitingOnLearner && state.last && (
+                <FeedbackPanel
+                  isCorrect={state.last.isCorrect}
+                  given={state.last.given}
+                  correctAnswer={correctAnswerText(item.question)}
+                  explanation={item.question.explanation}
+                  points={state.last.points}
+                  onContinue={next}
+                />
+              )}
+              {isAutoAdvancing && (
+                <p className="sr-only">
+                  <Ui {...COPY.game.correct} />
+                </p>
+              )}
+            </div>
+          </>
+        )}
+
+        {state.phase === 'finished' && (
+          <ResultsScreen
+            score={state.score}
+            answers={state.answers}
+            mistakes={state.mistakes}
+            outcome={outcome}
+            exitHref={exitHref}
+            exitLabel={exitLabel}
+            topicTitles={props.topicTitles}
+            onPlayAgain={start}
+          />
+        )}
+      </main>
+    </div>
   );
 }

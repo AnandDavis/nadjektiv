@@ -114,3 +114,16 @@ export const RepeatIcon = (p: IconProps) => (
     <path d="M21 13v2a3 3 0 0 1-3 3H3" />
   </Svg>
 );
+
+export const MenuIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </Svg>
+);
+
+export const InfoIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 11v5M12 8h.01" />
+  </Svg>
+);

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { ChartIcon, HomeIcon, RepeatIcon, SettingsIcon, Ui } from '@/components/ui';
+import { ChartIcon, HomeIcon, RepeatIcon, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY } from '@/lib/i18n/copy';
 import { reviseCount } from '@/lib/revise/revise-groups';
@@ -13,7 +13,6 @@ const LINKS = [
   { href: '/', label: COPY.nav.learn, icon: HomeIcon },
   { href: '/revise', label: COPY.revise.navLabel, icon: RepeatIcon },
   { href: '/progress', label: COPY.nav.progress, icon: ChartIcon },
-  { href: '/settings', label: COPY.nav.settings, icon: SettingsIcon },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {
@@ -31,7 +30,7 @@ export function BottomNav() {
       aria-label="Main"
       className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-surface pb-safe"
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-4">
+      <ul className="mx-auto grid max-w-xl grid-cols-3">
         {LINKS.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           const count = href === '/revise' ? toRevise : 0;

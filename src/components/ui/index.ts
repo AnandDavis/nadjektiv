@@ -6,3 +6,4 @@ export { ProgressBar } from './ProgressBar';
 export * from './icons';
 export { Ui } from './Ui';
 export { SegmentedControl } from './SegmentedControl';
+export { DropdownMenu, type DropdownMenuItem } from './DropdownMenu';

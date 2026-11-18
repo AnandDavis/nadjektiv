@@ -60,3 +60,14 @@ test('"See the rules" opens the topic at its rules, below the header', async ({ 
     .poll(() => rulesHeading.evaluate((el) => el.getBoundingClientRect().top))
     .toBeGreaterThanOrEqual(headerBottom);
 });
+
+test('opening a topic from a search clears the search for when you come back', async ({ page }) => {
+  await page.goto('/');
+  const search = page.getByRole('searchbox', { name: 'Themen suchen' });
+  await search.fill('wechsel');
+  await page.getByRole('link', { name: /Wechselpräpositionen/ }).click();
+  await expect(page).toHaveURL(/\/topics\//);
+  await page.goBack();
+  await expect(search).toHaveValue('');
+  await expect(topicLinks(page)).toHaveCount(24);
+});

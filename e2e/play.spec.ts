@@ -45,7 +45,7 @@ test('blitz round ends when time runs out', async ({ page }) => {
   await page.clock.install();
   await page.goto('/play/noun-gender/sort');
   await page.getByRole('button', { name: /Los geht/ }).click();
-  await page.getByRole('group', { name: 'Sort into' }).getByRole('button', { name: 'die' }).click();
+  // Don't answer: a wrong answer would (rightly) pause the clock.
   await page.clock.runFor(61_000);
   await expect(page.getByRole('button', { name: 'Play again' })).toBeVisible();
 });
@@ -55,4 +55,29 @@ test('blitz round ends when time runs out', async ({ page }) => {
 test('unknown topics show the not-found page', async ({ page }) => {
   await page.goto('/topics/does-not-exist');
   await expect(page.getByText('Diese Seite gibt es nicht.')).toBeVisible();
+});
+
+test('a wrong blitz answer pauses the clock and explains before moving on', async ({ page }) => {
+  await page.clock.install();
+  await page.goto('/play/noun-gender/sort');
+  await page.getByRole('button', { name: /Los geht/ }).click();
+
+  const bins = page.getByRole('group', { name: 'Sort into' });
+  const continueButton = page.getByRole('button', { name: 'Weiter' });
+  // Keep tapping "das" until one is wrong (most nouns in the deck aren't das).
+  for (let i = 0; i < 15 && !(await continueButton.isVisible()); i++) {
+    await bins.getByRole('button', { name: 'das' }).click();
+    await page.clock.runFor(300);
+  }
+  await expect(continueButton).toBeVisible();
+  await expect(page.getByText('Warum?')).toBeVisible();
+  await expect(page.getByText('Deine Wahl')).toBeVisible();
+
+  const timer = page.getByRole('progressbar', { name: /Time left/ });
+  const before = await timer.getAttribute('aria-valuenow');
+  await page.clock.runFor(5_000);
+  expect(await timer.getAttribute('aria-valuenow')).toBe(before);
+
+  await continueButton.click();
+  await expect(continueButton).toBeHidden();
 });

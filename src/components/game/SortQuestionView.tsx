@@ -52,13 +52,10 @@ export function SortQuestionView({
           last && !last.isCorrect && 'border-wrong motion-safe:animate-shake',
         )}
       >
-        <p className="font-display text-3xl font-bold break-words text-ink">
+        <p lang="de" className="font-display text-3xl font-bold break-words text-ink">
           <PromptText prompt={question.prompt} />
         </p>
         {question.gloss && <p className="mt-2 text-muted">{question.gloss}</p>}
-        {last && !last.isCorrect && (
-          <p className="mt-3 font-semibold text-wrong">Answer: {question.answer}</p>
-        )}
       </div>
       <div
         className={cn(

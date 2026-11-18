@@ -7,12 +7,17 @@ import { cn } from '@/lib/utils/cn';
 
 interface SortTimerProps {
   seconds: number;
+  /** While paused (e.g. reading why an answer was wrong) the clock stands still. */
+  isPaused: boolean;
   onExpire: () => void;
 }
 
+const TICK_MS = 200;
+
 /** Countdown for timed rounds. Calls onExpire once when it reaches zero. */
-export function SortTimer({ seconds, onExpire }: SortTimerProps) {
-  const [remaining, setRemaining] = useState(seconds);
+export function SortTimer({ seconds, isPaused, onExpire }: SortTimerProps) {
+  const [remainingMs, setRemainingMs] = useState(seconds * 1000);
+  const remainingRef = useRef(seconds * 1000);
   const onExpireRef = useRef(onExpire);
 
   useEffect(() => {
@@ -20,18 +25,21 @@ export function SortTimer({ seconds, onExpire }: SortTimerProps) {
   }, [onExpire]);
 
   useEffect(() => {
-    const endsAt = Date.now() + seconds * 1000;
+    if (isPaused || remainingRef.current <= 0) return;
+    const endsAt = Date.now() + remainingRef.current;
     const id = window.setInterval(() => {
-      const left = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
-      setRemaining(left);
+      const left = Math.max(0, endsAt - Date.now());
+      remainingRef.current = left;
+      setRemainingMs(left);
       if (left === 0) {
         window.clearInterval(id);
         onExpireRef.current();
       }
-    }, 200);
+    }, TICK_MS);
     return () => window.clearInterval(id);
-  }, [seconds]);
+  }, [isPaused]);
 
+  const remaining = Math.ceil(remainingMs / 1000);
   const isLow = remaining <= 10;
   return (
     <div className="flex items-center gap-2">
@@ -45,8 +53,8 @@ export function SortTimer({ seconds, onExpire }: SortTimerProps) {
         {remaining}s
       </span>
       <ProgressBar
-        value={remaining / seconds}
-        label="Time left"
+        value={remainingMs / (seconds * 1000)}
+        label={isPaused ? 'Time left (paused)' : 'Time left'}
         fillClassName={isLow ? 'bg-wrong' : 'bg-brand'}
       />
     </div>

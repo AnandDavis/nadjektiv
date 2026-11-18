@@ -1,6 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, type ReactNode } from 'react';
+
+import { Ui } from '@/components/ui';
 
 import type { GameMode, Question, Topic } from '@/content/types';
 import { useGameSession } from '@/hooks/useGameSession';
@@ -14,6 +16,7 @@ import {
   buildTopicSession,
   type SessionItem,
 } from '@/lib/game/session';
+import { COPY } from '@/lib/i18n/copy';
 import type { Progress } from '@/lib/progress/types';
 
 import { FeedbackPanel } from './FeedbackPanel';
@@ -23,14 +26,14 @@ import { QuestionView } from './QuestionView';
 import { ResultsScreen } from './ResultsScreen';
 import { SortTimer } from './SortTimer';
 
-/** Pause after a sort answer before the next prompt: short when right, longer when wrong. */
-const SORT_ADVANCE_MS = { correct: 250, wrong: 1400 } as const;
+/** In timed rounds a right answer moves on by itself after this pause. */
+const SORT_CORRECT_ADVANCE_MS = 250;
 
 interface GameScreenProps {
   mode: GameMode | 'review';
   /** One topic for a topic round; every topic for a mixed review. */
   topics: Topic[];
-  title: string;
+  title: ReactNode;
   modeName: string;
   description: string;
   exitHref: string;
@@ -83,17 +86,21 @@ export function GameScreen(props: GameScreenProps) {
   const item = currentItem(state);
   const isTimed = mode === 'sort';
 
-  // Sort rounds advance on their own so the clock keeps the pressure on.
+  const isShowingFeedback = state.phase === 'feedback' && state.last !== undefined;
+  // A wrong answer always stops for its explanation (and, in Blitz, stops the clock);
+  // only a right answer in a timed round moves on by itself.
+  const isAutoAdvancing = isTimed && isShowingFeedback && state.last?.isCorrect === true;
+  const isWaitingOnLearner = isShowingFeedback && !isAutoAdvancing;
+
   const nextRef = useRef(next);
   useEffect(() => {
     nextRef.current = next;
   }, [next]);
   useEffect(() => {
-    if (!isTimed || state.phase !== 'feedback' || !state.last) return;
-    const delay = state.last.isCorrect ? SORT_ADVANCE_MS.correct : SORT_ADVANCE_MS.wrong;
-    const id = window.setTimeout(() => nextRef.current(), delay);
+    if (!isAutoAdvancing) return;
+    const id = window.setTimeout(() => nextRef.current(), SORT_CORRECT_ADVANCE_MS);
     return () => window.clearTimeout(id);
-  }, [isTimed, state.phase, state.last]);
+  }, [isAutoAdvancing]);
 
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-xl flex-col gap-5 px-4 pt-4 pb-8">
@@ -117,7 +124,13 @@ export function GameScreen(props: GameScreenProps) {
             combo={state.combo}
             progress={isTimed ? undefined : { current: state.index + 1, total: state.items.length }}
             timer={
-              isTimed ? <SortTimer seconds={SORT_ROUND_SECONDS} onExpire={finish} /> : undefined
+              isTimed ? (
+                <SortTimer
+                  seconds={SORT_ROUND_SECONDS}
+                  isPaused={isWaitingOnLearner}
+                  onExpire={finish}
+                />
+              ) : undefined
             }
           />
           <QuestionView
@@ -127,20 +140,19 @@ export function GameScreen(props: GameScreenProps) {
             onAnswer={answer}
           />
           <div aria-live="polite" className="contents">
-            {state.phase === 'feedback' && state.last && !isTimed && (
+            {isWaitingOnLearner && state.last && (
               <FeedbackPanel
                 isCorrect={state.last.isCorrect}
+                given={state.last.given}
                 correctAnswer={correctAnswerText(item.question)}
                 explanation={item.question.explanation}
                 points={state.last.points}
                 onContinue={next}
               />
             )}
-            {state.phase === 'feedback' && state.last && isTimed && (
+            {isAutoAdvancing && (
               <p className="sr-only">
-                {state.last.isCorrect
-                  ? 'Richtig'
-                  : `Falsch. Answer: ${correctAnswerText(item.question)}`}
+                <Ui {...COPY.game.correct} />
               </p>
             )}
           </div>

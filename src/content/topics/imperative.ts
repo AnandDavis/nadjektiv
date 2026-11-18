@@ -5,6 +5,7 @@ export const imperative: Topic = {
   level: 'A1',
   group: 'verbs',
   title: 'Imperative',
+  titleDe: 'Imperativ',
   tagline: 'Komm! Kommt! Kommen Sie! Giving instructions and asking politely.',
   rules: [
     {

@@ -75,7 +75,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center justify-between gap-2">
                       <span className="font-extrabold text-ink">
-                        {topic.title}{' '}
+                        <Ui de={topic.titleDe} en={topic.title} />{' '}
                         <span className="text-xs font-extrabold text-muted">{topic.level}</span>
                       </span>
                       <TierBadge tier={mastery.tier} />

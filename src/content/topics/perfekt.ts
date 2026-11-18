@@ -5,6 +5,7 @@ export const perfekt: Topic = {
   level: 'A1',
   group: 'verbs',
   title: 'Perfekt',
+  titleDe: 'Perfekt',
   tagline: 'Talking about yesterday: haben or sein, and the participle at the end.',
   rules: [
     {

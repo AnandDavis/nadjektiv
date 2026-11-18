@@ -13,12 +13,13 @@ import { COPY } from '@/lib/i18n/copy';
 interface TopicHeaderProps {
   topicId: string;
   title: string;
+  titleDe: string;
   level: Level;
   tagline: string;
   modes: GameMode[];
 }
 
-export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHeaderProps) {
+export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: TopicHeaderProps) {
   const progress = useProgress();
   const mastery = progress ? masteryFor(progress.topics[topicId], modes) : null;
 
@@ -35,7 +36,9 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
           <Badge>{level}</Badge>
           {mastery && <TierBadge tier={mastery.tier} />}
         </div>
-        <h1 className="mt-3 text-5xl leading-none font-black text-ink">{title}</h1>
+        <h1 className="mt-3 text-5xl leading-none font-black text-ink">
+          <Ui de={titleDe} en={title} />
+        </h1>
         <p className="mt-3 text-lg text-ink">{tagline}</p>
       </div>
       {mastery?.next && (

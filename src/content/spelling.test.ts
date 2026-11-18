@@ -43,7 +43,12 @@ function isCompound(word: string): boolean {
 }
 
 function unknownWords(text: string): string[] {
-  const words = text.replace(/___/g, ' ').match(WORD) ?? [];
+  // "-er als, am -sten": an ending written with a leading hyphen is notation, not a word.
+  const words =
+    text
+      .replace(/___/g, ' ')
+      .replace(/(^|\s)-\p{L}+/gu, ' ')
+      .match(WORD) ?? [];
   return words.filter(
     (word) =>
       word.length > 1 && !SPELLING_ALLOWLIST.has(word) && !isKnown(word) && !isCompound(word),
@@ -52,6 +57,7 @@ function unknownWords(text: string): string[] {
 
 function correctTexts(): Array<{ id: string; text: string }> {
   return TOPICS.flatMap((topic) => [
+    { id: `${topic.id} title`, text: topic.titleDe },
     ...(topic.sort?.questions ?? []).map((q) => ({
       id: q.id,
       text: q.prompt.replace('___', q.answer),
@@ -72,6 +78,7 @@ describe('German spellcheck', () => {
     expect(unknownWords('Lena trinkt Kaffee im Café.')).toEqual([]);
     expect(unknownWords('Ich habe das Buch gelsen.')).toEqual(['gelsen']);
     expect(unknownWords('Die Strase ist lang.')).toEqual(['Strase']);
+    expect(unknownWords('Vergleichen: -er als, am -sten')).toEqual([]);
   });
 
   it('finds no misspellings in any correct German in the app', { timeout: 60_000 }, () => {

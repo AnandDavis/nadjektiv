@@ -5,6 +5,7 @@ export const wordOrder: Topic = {
   level: 'A1',
   group: 'sentences',
   title: 'Word order',
+  titleDe: 'Satzstellung',
   tagline: 'The verb is always second. Almost everything else follows from that.',
   rules: [
     {

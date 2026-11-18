@@ -5,6 +5,7 @@ export const articles: Topic = {
   level: 'A1',
   group: 'cases',
   title: 'The article grid',
+  titleDe: 'Die Artikeltabelle',
   tagline: 'der, den, dem: one grid for the, a, kein and mein.',
   rules: [
     {

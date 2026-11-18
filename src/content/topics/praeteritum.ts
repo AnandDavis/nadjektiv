@@ -5,6 +5,7 @@ export const praeteritum: Topic = {
   level: 'A2',
   group: 'verbs',
   title: 'Präteritum',
+  titleDe: 'Präteritum',
   tagline: 'war, hatte, konnte, es gab, and the -te forms you meet in stories.',
   rules: [
     {

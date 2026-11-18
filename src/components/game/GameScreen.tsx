@@ -17,7 +17,7 @@ import {
   buildTopicSession,
   type SessionItem,
 } from '@/lib/game/session';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
 
@@ -41,7 +41,7 @@ interface GameScreenProps {
   exitHref: string;
   exitLabel: ReactNode;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
-  topicTitles: Readonly<Record<string, string>>;
+  topicTitles: Readonly<Record<string, Bilingual>>;
 }
 
 function correctAnswerText(question: Question): string {

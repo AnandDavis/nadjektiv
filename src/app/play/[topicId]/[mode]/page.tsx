@@ -35,7 +35,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
     <GameScreen
       mode={mode}
       topics={[topic]}
-      title={topic.title}
+      title={<Ui de={topic.titleDe} en={topic.title} />}
       modeName={`${info.name} · ${info.english}`}
       description={info.description}
       exitHref={`/topics/${topic.id}`}

@@ -99,6 +99,8 @@ export interface Topic {
   level: Level;
   group: TopicGroup;
   title: string;
+  /** German title, shown when the interface language is German. */
+  titleDe: string;
   /** One-line description shown on the topic card. */
   tagline: string;
   rules: RuleCard[];

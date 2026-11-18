@@ -5,6 +5,7 @@ export const cases: Topic = {
   level: 'A1',
   group: 'cases',
   title: 'Which case?',
+  titleDe: 'Welcher Fall?',
   tagline: 'Nominativ, Akkusativ or Dativ: who does what to whom.',
   rules: [
     {

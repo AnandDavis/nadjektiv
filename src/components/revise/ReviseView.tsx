@@ -5,14 +5,14 @@ import { useMemo } from 'react';
 import { ButtonLink, Card, SectionHeading, ShuffleIcon, Ui } from '@/components/ui';
 import type { Topic } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { reviseGroups } from '@/lib/revise/revise-groups';
 
 import { ReviseCardView } from './ReviseCardView';
 
 interface ReviseViewProps {
   topics: Topic[];
-  topicTitles: Readonly<Record<string, string>>;
+  topicTitles: Readonly<Record<string, Bilingual>>;
 }
 
 export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
@@ -72,7 +72,7 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
       {groups?.map((group) => (
         <section key={group.topicId} aria-labelledby={`revise-${group.topicId}`}>
           <SectionHeading id={`revise-${group.topicId}`}>
-            {topicTitles[group.topicId] ?? group.topicId}
+            {topicTitles[group.topicId] ? <Ui {...topicTitles[group.topicId]} /> : group.topicId}
           </SectionHeading>
           <ul className="flex flex-col gap-3">
             {group.items.map(({ card, entry }) => (

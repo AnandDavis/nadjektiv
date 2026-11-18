@@ -17,6 +17,9 @@ describe('topic summaries', () => {
 
   it('builds lookup maps for modes and titles', () => {
     expect(modesByTopic(summaries)['noun-gender']).toEqual(['sort', 'gap']);
-    expect(topicTitles(summaries)['noun-gender']).toBe('Noun gender');
+    expect(topicTitles(summaries)['noun-gender']).toEqual({
+      de: 'der, die oder das?',
+      en: 'Noun gender',
+    });
   });
 });

@@ -5,6 +5,7 @@ export const twoWayPrepositions: Topic = {
   level: 'A2',
   group: 'prepositions',
   title: 'Two-way prepositions',
+  titleDe: 'Wechselpräpositionen',
   tagline: 'Wo? takes the dative, Wohin? the accusative.',
   rules: [
     {

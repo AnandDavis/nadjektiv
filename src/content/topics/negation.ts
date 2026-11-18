@@ -5,6 +5,7 @@ export const negation: Topic = {
   level: 'A1',
   group: 'sentences',
   title: 'kein or nicht',
+  titleDe: 'kein oder nicht',
   tagline: 'kein for nouns, nicht for everything else, and Doch!',
   rules: [
     {

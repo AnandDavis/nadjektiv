@@ -5,6 +5,7 @@ export const presentTense: Topic = {
   level: 'A1',
   group: 'verbs',
   title: 'Present tense',
+  titleDe: 'Präsens',
   tagline: 'Six endings, two helpers, and the verbs that change their vowel.',
   rules: [
     {

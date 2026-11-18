@@ -5,6 +5,7 @@ export const sentenceMiddle: Topic = {
   level: 'A2',
   group: 'sentences',
   title: 'Inside the middle',
+  titleDe: 'Im Mittelfeld',
   tagline: 'Te-Ka-Mo-Lo, two objects, and where nicht goes.',
   rules: [
     {

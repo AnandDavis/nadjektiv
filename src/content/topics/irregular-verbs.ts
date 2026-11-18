@@ -5,6 +5,7 @@ export const irregularVerbs: Topic = {
   level: 'A2',
   group: 'verbs',
   title: 'The 33 irregular verbs',
+  titleDe: 'Die 33 unregelmäßigen Verben',
   tagline: 'er-form, Präteritum and Partizip II for the verbs A2 asks.',
   rules: [
     {

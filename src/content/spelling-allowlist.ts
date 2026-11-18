@@ -18,4 +18,7 @@ export const SPELLING_ALLOWLIST: ReadonlySet<string> = new Set([
   'Beeil', // du-imperative of sich beeilen: "Beeil dich!"
   'leidtun', // post-1996 spelling of "leid tun"
   'Neujahr',
+  // Grammar terms used in topic titles.
+  'Konnektoren',
+  'Modalverben',
 ]);

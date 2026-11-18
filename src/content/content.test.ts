@@ -29,6 +29,7 @@ describe('topic registry', () => {
     expect(topic.rules.length).toBeGreaterThan(0);
     expect(availableModes(topic).length).toBeGreaterThan(0);
     expect(topic.title.trim()).not.toBe('');
+    expect(topic.titleDe.trim()).not.toBe('');
     expect(topic.tagline.trim()).not.toBe('');
   });
 });

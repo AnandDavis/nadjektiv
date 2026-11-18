@@ -5,6 +5,7 @@ export const connectors: Topic = {
   level: 'A2',
   group: 'sentences',
   title: 'Connectors',
+  titleDe: 'Konnektoren',
   tagline: 'weil, deshalb, denn: what each one does to the verb.',
   rules: [
     {

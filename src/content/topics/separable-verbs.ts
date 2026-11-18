@@ -5,6 +5,7 @@ export const separableVerbs: Topic = {
   level: 'A1',
   group: 'verbs',
   title: 'Separable verbs',
+  titleDe: 'Trennbare Verben',
   tagline: 'aufstehen, anrufen, einkaufen: the prefix jumps to the end.',
   rules: [
     {

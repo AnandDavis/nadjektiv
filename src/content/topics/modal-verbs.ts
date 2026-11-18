@@ -5,6 +5,7 @@ export const modalVerbs: Topic = {
   level: 'A1',
   group: 'verbs',
   title: 'Modal verbs',
+  titleDe: 'Modalverben',
   tagline: 'can, must, want to: the modal in position two, the infinitive at the end.',
   rules: [
     {

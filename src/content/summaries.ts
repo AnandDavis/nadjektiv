@@ -6,6 +6,8 @@
 import { availableModes } from '@/lib/game/session';
 
 import { TOPICS } from './index';
+import type { Bilingual } from '@/lib/i18n/copy';
+
 import type { GameMode, Level, TopicGroup } from './types';
 
 export interface TopicSummary {
@@ -13,6 +15,7 @@ export interface TopicSummary {
   level: Level;
   group: TopicGroup;
   title: string;
+  titleDe: string;
   tagline: string;
   modes: GameMode[];
   questionCount: number;
@@ -24,6 +27,7 @@ export function getTopicSummaries(): TopicSummary[] {
     level: topic.level,
     group: topic.group,
     title: topic.title,
+    titleDe: topic.titleDe,
     tagline: topic.tagline,
     modes: availableModes(topic),
     questionCount:
@@ -35,6 +39,6 @@ export function modesByTopic(summaries: readonly TopicSummary[]): Record<string,
   return Object.fromEntries(summaries.map((s) => [s.id, s.modes]));
 }
 
-export function topicTitles(summaries: readonly TopicSummary[]): Record<string, string> {
-  return Object.fromEntries(summaries.map((s) => [s.id, s.title]));
+export function topicTitles(summaries: readonly TopicSummary[]): Record<string, Bilingual> {
+  return Object.fromEntries(summaries.map((s) => [s.id, { de: s.titleDe, en: s.title }]));
 }

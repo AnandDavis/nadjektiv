@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { TierBadge } from '@/components/progress/TierBadge';
+import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { MasteryInfo } from '@/lib/progress/mastery';
 
@@ -24,7 +25,7 @@ export function TopicCard({ topic, index, mastery }: TopicCardProps) {
       </span>
       <span className="min-w-0 flex-1">
         <span className="block text-lg leading-tight font-extrabold text-ink group-hover:text-on-yellow">
-          {topic.title}
+          <Ui de={topic.titleDe} en={topic.title} />
         </span>
         <span className="mt-0.5 line-clamp-2 block text-sm text-muted group-hover:text-on-yellow">
           {topic.tagline}

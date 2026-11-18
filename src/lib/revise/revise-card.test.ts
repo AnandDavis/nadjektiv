@@ -10,6 +10,7 @@ const topic: Topic = {
   level: 'A1',
   group: 'nouns',
   title: 'T',
+  titleDe: 'T',
   tagline: '',
   rules: [],
   sort: {

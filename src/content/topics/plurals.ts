@@ -5,6 +5,7 @@ export const plurals: Topic = {
   level: 'A1',
   group: 'nouns',
   title: 'Plurals',
+  titleDe: 'Plural',
   tagline: 'Tische, Frauen, Kinder, Autos: the five plural patterns.',
   rules: [
     {

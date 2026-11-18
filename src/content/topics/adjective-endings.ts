@@ -5,6 +5,7 @@ export const adjectiveEndings: Topic = {
   level: 'A2',
   group: 'adjectives',
   title: 'Adjective endings',
+  titleDe: 'Adjektivendungen',
   tagline: 'der gute Mann, ein guter Mann, guter Kaffee: three situations, one habit.',
   rules: [
     {

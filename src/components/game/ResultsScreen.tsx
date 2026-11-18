@@ -22,7 +22,7 @@ interface ResultsScreenProps {
   outcome: SessionOutcome | null;
   exitHref: string;
   exitLabel: ReactNode;
-  topicTitles: Readonly<Record<string, string>>;
+  topicTitles: Readonly<Record<string, Bilingual>>;
   onPlayAgain: () => void;
 }
 
@@ -128,7 +128,7 @@ function Celebrations({
   topicTitles,
 }: {
   outcome: SessionOutcome;
-  topicTitles: Readonly<Record<string, string>>;
+  topicTitles: Readonly<Record<string, Bilingual>>;
 }) {
   const items: React.ReactNode[] = [];
   if (outcome.levelUp) {
@@ -152,8 +152,8 @@ function Celebrations({
   for (const up of outcome.tierUps) {
     items.push(
       <li key={up.topicId} className="flex flex-wrap items-center gap-2">
-        {topicTitles[up.topicId] ?? up.topicId} <Ui {...COPY.game.reached} />{' '}
-        <TierBadge tier={up.to} />
+        {topicTitles[up.topicId] ? <Ui {...topicTitles[up.topicId]} /> : up.topicId}{' '}
+        <Ui {...COPY.game.reached} /> <TierBadge tier={up.to} />
       </li>,
     );
   }

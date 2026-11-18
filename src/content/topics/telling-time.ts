@@ -5,6 +5,7 @@ export const tellingTime: Topic = {
   level: 'A1',
   group: 'prepositions',
   title: 'The clock, numbers and dates',
+  titleDe: 'Uhrzeit, Zahlen und Datum',
   tagline: 'halb acht is 7:30, einundzwanzig is 21, am dritten Mai.',
   rules: [
     {

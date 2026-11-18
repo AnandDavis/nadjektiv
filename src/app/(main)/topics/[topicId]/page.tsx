@@ -30,6 +30,7 @@ export default async function TopicPage({ params }: PageProps<'/topics/[topicId]
       <TopicHeader
         topicId={topic.id}
         title={topic.title}
+        titleDe={topic.titleDe}
         level={topic.level}
         tagline={topic.tagline}
         modes={modes}

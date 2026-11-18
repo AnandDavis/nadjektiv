@@ -1,12 +1,13 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState, type FormEvent } from 'react';
+import { useLayoutEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 
-import { Button, OnScreenKeyboard, Ui } from '@/components/ui';
+import { Button, CrossIcon, OnScreenKeyboard, Ui } from '@/components/ui';
 import type { GapQuestion } from '@/content/types';
 import { useAppKeyboard } from '@/hooks/useAppKeyboard';
+import { useUiLanguage } from '@/hooks/useUiLanguage';
 import { checkTyped } from '@/lib/game/check-typed';
-import { isEndingGap } from '@/lib/game/gap';
+import { capitaliseFirst, isEndingGap, startsSentence } from '@/lib/game/gap';
 import type { LastAnswer } from '@/lib/game/game-reducer';
 import { COPY } from '@/lib/i18n/copy';
 import { applyKey, type KeyAction } from '@/lib/text/caret-edit';
@@ -16,15 +17,21 @@ interface TypeQuestionViewProps {
   question: GapQuestion;
   last?: LastAnswer;
   onAnswer: (isCorrect: boolean, given: string) => void;
+  /** The hint control, shown above the keyboard so the keys sit at the bottom. */
+  hint?: ReactNode;
 }
 
 /**
  * A gap question answered by typing: on a touch screen with the app's own German
  * keyboard (so the phone's keyboard never opens), otherwise with a real keyboard.
  */
-export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewProps) {
+export function TypeQuestionView({ question, last, onAnswer, hint }: TypeQuestionViewProps) {
   const appKeyboard = useAppKeyboard();
-  const [typed, setTyped] = useState('');
+  const [language] = useUiLanguage();
+  const [typed, setTypedRaw] = useState('');
+  // At the start of a sentence the word is shown with its capital, as it would be written.
+  const opensSentence = startsSentence(question);
+  const setTyped = (value: string) => setTypedRaw(opensSentence ? capitaliseFirst(value) : value);
   const input = useRef<HTMLInputElement>(null);
   // Where the caret goes after an on-screen key, applied once React has re-rendered.
   const pendingCaret = useRef<number | null>(null);
@@ -119,6 +126,19 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
             inputMode={appKeyboard ? 'none' : undefined}
             className="min-h-14 w-full min-w-0 bg-transparent px-3 text-2xl font-extrabold text-ink outline-none disabled:opacity-60"
           />
+          {typed && !last && (
+            <button
+              type="button"
+              aria-label={COPY.typed.clear[language]}
+              onClick={() => {
+                setTyped('');
+                input.current?.focus();
+              }}
+              className="flex w-12 shrink-0 items-center justify-center text-xl text-ink hover:bg-ink hover:text-canvas"
+            >
+              <CrossIcon />
+            </button>
+          )}
         </div>
         {isNearly && (
           <p className="border-2 border-ink bg-yellow px-3 py-2 text-sm font-extrabold text-on-yellow">
@@ -126,8 +146,13 @@ export function TypeQuestionView({ question, last, onAnswer }: TypeQuestionViewP
           </p>
         )}
       </form>
+      {hint && (
+        <div aria-live="polite" className="contents">
+          {hint}
+        </div>
+      )}
       {!last && (
-        <div className="sticky bottom-0 z-10 bg-canvas py-2">
+        <div className="sticky bottom-0 z-10 mt-auto bg-canvas py-2">
           {appKeyboard ? (
             <OnScreenKeyboard
               onKey={pressKey}

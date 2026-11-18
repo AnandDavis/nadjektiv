@@ -139,6 +139,11 @@ export function GameScreen(props: GameScreenProps) {
     updateProgress((current) => withSeenNoun(current, word));
   };
 
+  const hintControl =
+    state.phase === 'playing' && !isRevealing && hintText ? (
+      <HintControl hint={hintText} isShown={state.hinted} onShow={hint} />
+    ) : null;
+
   const isShowingFeedback = state.phase === 'feedback' && state.last !== undefined;
   // A wrong answer always stops for its explanation (and, in Blitz, stops the clock).
   // A right answer moves on by itself in timed Blitz, or anywhere if the learner asked.
@@ -212,12 +217,11 @@ export function GameScreen(props: GameScreenProps) {
                 item={item}
                 last={state.phase === 'feedback' ? state.last : undefined}
                 onAnswer={answer}
+                hint={item.typed ? hintControl : undefined}
               />
             )}
             <div aria-live="polite" className="contents">
-              {state.phase === 'playing' && !isRevealing && hintText && (
-                <HintControl hint={hintText} isShown={state.hinted} onShow={hint} />
-              )}
+              {!item.typed && hintControl}
               {isWaitingOnLearner && state.last && (
                 <FeedbackPanel
                   isCorrect={state.last.isCorrect}

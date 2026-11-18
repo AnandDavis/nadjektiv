@@ -57,6 +57,7 @@ export const COPY = {
   typed: {
     yourAnswer: { de: 'Deine Antwort', en: 'Your answer' },
     check: { de: 'Prüfen', en: 'Check' },
+    clear: { de: 'Antwort löschen', en: 'Clear answer' },
     nearly: {
       de: 'Fast! Nur ein Buchstabe stimmt nicht. Das zählt trotzdem als falsch.',
       en: 'Nearly! Just one letter is off. It still counts as wrong.',

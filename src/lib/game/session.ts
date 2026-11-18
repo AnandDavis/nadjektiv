@@ -5,6 +5,7 @@
  * drifts towards weak spots without a separate review deck.
  */
 
+import { GAME_CONFIG } from '@/config/game';
 import type { GameMode, Question, Topic } from '@/content/types';
 
 import type { QuestionStats } from '../progress/types';
@@ -19,15 +20,11 @@ export interface SessionItem {
   instruction?: string;
 }
 
-export const SESSION_LENGTH: Record<GameMode, number> = {
-  sort: 60, // a queue for the timed round; the timer ends the round first
-  gap: 10,
-  build: 8,
-};
+export const SESSION_LENGTH: Readonly<Record<GameMode, number>> = GAME_CONFIG.sessionLength;
 
-export const SORT_ROUND_SECONDS = 60;
+export const SORT_ROUND_SECONDS = GAME_CONFIG.sortRoundSeconds;
 
-export const REVIEW_LENGTH = 12;
+export const REVIEW_LENGTH = GAME_CONFIG.reviewLength;
 
 const UNSEEN_WEIGHT = 3;
 const MIN_WEIGHT = 1;

@@ -3,9 +3,11 @@
  * level 2 at 100 XP, level 3 at 300, level 4 at 600, level 5 at 1000 …
  */
 
+import { GAME_CONFIG } from '@/config/game';
+
 import type { Bilingual } from '../i18n/copy';
 
-const XP_STEP = 100;
+const XP_STEP = GAME_CONFIG.xpPerLevelStep;
 
 export interface LevelInfo {
   level: number;

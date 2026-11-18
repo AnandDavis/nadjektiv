@@ -2,13 +2,14 @@
  * Points, combos and XP for a game round.
  */
 
+import { GAME_CONFIG } from '@/config/game';
 import type { GameMode } from '@/content/types';
 
-export const POINTS_PER_CORRECT = 10;
+export const POINTS_PER_CORRECT = GAME_CONFIG.points.perCorrect;
 /** Every COMBO_STEP correct answers in a row raises the multiplier by one. */
-export const COMBO_STEP = 5;
-export const MAX_MULTIPLIER = 3;
-export const PERFECT_BONUS_XP = 50;
+export const COMBO_STEP = GAME_CONFIG.points.comboStep;
+export const MAX_MULTIPLIER = GAME_CONFIG.points.maxMultiplier;
+export const PERFECT_BONUS_XP = GAME_CONFIG.points.perfectBonusXp;
 
 export interface AnswerRecord {
   /** What the learner chose: a bin, an option, or the built sentence. */

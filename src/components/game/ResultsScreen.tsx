@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 
 import { Button, ButtonLink, Card, RepeatIcon, TrophyIcon, Ui } from '@/components/ui';
 import { TierBadge } from '@/components/progress/TierBadge';
@@ -39,13 +42,26 @@ export function ResultsScreen({
   topicTitles,
   onPlayAgain,
 }: ResultsScreenProps) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // A round can end mid-scroll (the clock, or a long mistake list below). Start the
+  // results at the top, and announce the headline rather than a button further down.
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+    headingRef.current?.focus({ preventScroll: true });
+  }, []);
+
   const correct = answers.filter((a) => a.isCorrect).length;
   const percent = Math.round(accuracy(answers) * 100);
 
   return (
     <div className="flex flex-col gap-5 motion-safe:animate-rise">
       <div>
-        <h2 className="text-5xl leading-none font-black text-ink uppercase">
+        <h2
+          ref={headingRef}
+          tabIndex={-1}
+          className="text-5xl leading-none font-black text-ink uppercase focus:outline-none"
+        >
           <Ui {...resultHeadline(answers)} />
         </h2>
         <p className="mt-2 text-sm font-extrabold tracking-widest text-muted uppercase">
@@ -73,7 +89,7 @@ export function ResultsScreen({
         <ButtonLink href={exitHref} variant="secondary" size="lg">
           {exitLabel}
         </ButtonLink>
-        <Button size="lg" onClick={onPlayAgain} autoFocus>
+        <Button size="lg" onClick={onPlayAgain}>
           Play again
         </Button>
       </div>

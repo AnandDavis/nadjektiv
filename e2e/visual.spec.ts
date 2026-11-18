@@ -102,6 +102,15 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await snap(page, `grid-playing-${colorScheme}`);
     });
 
+    test('welcome intro', async ({ page }) => {
+      await page.goto('/welcome');
+      await snap(page, `welcome-hello-${colorScheme}`);
+      await page.getByRole('button', { name: 'Weiter' }).click();
+      await snap(page, `welcome-games-${colorScheme}`);
+      await page.getByRole('button', { name: 'Weiter' }).click();
+      await snap(page, `welcome-progress-${colorScheme}`);
+    });
+
     test('about', async ({ page }) => {
       await page.goto('/about');
       await snap(page, `about-${colorScheme}`, true);

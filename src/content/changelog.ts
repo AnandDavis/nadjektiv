@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T16:54Z',
+    title: 'A welcome for new learners',
+    description:
+      'Opening Nadjektiv for the first time now starts with three short screens: what the app is, the four games and their shapes, and how your progress is saved. You can pick German or English headings on the first screen, skip the intro at any point, and see it again from the About page.',
+  },
+  {
     date: '2026-11-18T16:12Z',
     title: 'The German stays German',
     description:

@@ -6,12 +6,17 @@ import {
   THEME_COLORS,
   THEME_KEY,
   UI_LANGUAGE_KEY,
+  WELCOME_KEY,
+  WELCOME_PATH,
+  markWelcomeSeen,
+  readWelcomeSeen,
   readTheme,
   readUiLanguage,
   subscribePreferences,
   writeTheme,
   writeUiLanguage,
 } from './preferences';
+import { PROGRESS_KEY } from './keys';
 
 const override = () => document.getElementById(THEME_COLOR_OVERRIDE_ID) as HTMLMetaElement | null;
 
@@ -104,6 +109,7 @@ describe('preferences plumbing', () => {
   });
 
   it('ships a pre-paint script that applies both stored preferences', () => {
+    window.localStorage.setItem(WELCOME_KEY, '1');
     window.localStorage.setItem(THEME_KEY, 'dark');
     window.localStorage.setItem(UI_LANGUAGE_KEY, 'en');
     new Function(PREFERENCES_SCRIPT)();
@@ -111,5 +117,42 @@ describe('preferences plumbing', () => {
     expect(document.documentElement.dataset.uiLang).toBe('en');
     expect(override()?.content).toBe(THEME_COLORS.dark);
     expect(document.head.firstElementChild).toBe(override());
+  });
+});
+
+describe('welcome intro', () => {
+  /** Runs the pre-paint script with a stand-in for window.location. */
+  function runScript(pathname: string) {
+    const location = { pathname, replace: vi.fn() };
+    new Function('location', PREFERENCES_SCRIPT)(location);
+    return location.replace;
+  }
+
+  afterEach(() => window.localStorage.clear());
+
+  it('sends a first-time visitor from home to the intro, before anything is applied', () => {
+    window.localStorage.setItem(THEME_KEY, 'dark');
+    expect(runScript('/')).toHaveBeenCalledWith(WELCOME_PATH);
+    expect(document.documentElement.dataset.theme).toBeUndefined();
+  });
+
+  it('leaves deep links alone, so a shared topic link opens the topic', () => {
+    expect(runScript('/topics/articles')).not.toHaveBeenCalled();
+  });
+
+  it('never sends someone with saved progress, and remembers that for after a reset', () => {
+    window.localStorage.setItem(PROGRESS_KEY, '{}');
+    expect(runScript('/')).not.toHaveBeenCalled();
+    expect(readWelcomeSeen()).toBe(true);
+
+    window.localStorage.removeItem(PROGRESS_KEY);
+    expect(runScript('/')).not.toHaveBeenCalled();
+  });
+
+  it('is not shown again once finished or skipped', () => {
+    expect(readWelcomeSeen()).toBe(false);
+    markWelcomeSeen();
+    expect(readWelcomeSeen()).toBe(true);
+    expect(runScript('/')).not.toHaveBeenCalled();
   });
 });

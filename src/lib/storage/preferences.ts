@@ -6,6 +6,8 @@
 
 import { APP_CONFIG, STORAGE_CONFIG } from '@/config/app';
 
+import { PROGRESS_KEY } from './keys';
+
 export type ThemePreference = 'system' | 'light' | 'dark';
 /** Language of headings and labels. Grammar content is always German. */
 export type UiLanguage = 'de' | 'en';
@@ -13,6 +15,9 @@ export type UiLanguage = 'de' | 'en';
 export const THEME_KEY = `${STORAGE_CONFIG.keyPrefix}:theme`;
 export const UI_LANGUAGE_KEY = `${STORAGE_CONFIG.keyPrefix}:ui-language`;
 export const DEFAULT_UI_LANGUAGE: UiLanguage = 'de';
+/** Set once the welcome intro is finished or skipped. Not progress: a reset keeps it. */
+export const WELCOME_KEY = `${STORAGE_CONFIG.keyPrefix}:welcome-seen`;
+export const WELCOME_PATH = '/welcome';
 
 /** Address-bar colour for a forced theme: the header's, so the two read as one block. */
 export const THEME_COLORS = {
@@ -27,8 +32,13 @@ export const THEME_COLORS = {
  */
 export const THEME_COLOR_OVERRIDE_ID = 'theme-color-override';
 
-/** Runs in <head> before paint; must stay dependency-free ES5. */
-export const PREFERENCES_SCRIPT = `(function(){try{var d=document.documentElement,t=localStorage.getItem("${THEME_KEY}"),l=localStorage.getItem("${UI_LANGUAGE_KEY}");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);var m=document.createElement("meta");m.id="${THEME_COLOR_OVERRIDE_ID}";m.name="theme-color";m.content=t==="dark"?"${THEME_COLORS.dark}":"${THEME_COLORS.light}";document.head.insertBefore(m,document.head.firstChild)}if(l==="en")d.setAttribute("data-ui-lang","en")}catch(e){}})()`;
+/**
+ * Runs in <head> before paint; must stay dependency-free ES5. Applies the theme and
+ * language, and sends a first-time visitor from the home page to the welcome intro
+ * before the home page can show. Anyone with progress already saved counts as having
+ * seen it, so existing learners are never sent there, even after resetting progress.
+ */
+export const PREFERENCES_SCRIPT = `(function(){try{var d=document.documentElement,s=localStorage,t=s.getItem("${THEME_KEY}"),l=s.getItem("${UI_LANGUAGE_KEY}");if(!s.getItem("${WELCOME_KEY}")){if(s.getItem("${PROGRESS_KEY}"))s.setItem("${WELCOME_KEY}","1");else if(location.pathname==="/"){location.replace("${WELCOME_PATH}");return}}if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);var m=document.createElement("meta");m.id="${THEME_COLOR_OVERRIDE_ID}";m.name="theme-color";m.content=t==="dark"?"${THEME_COLORS.dark}":"${THEME_COLORS.light}";document.head.insertBefore(m,document.head.firstChild)}if(l==="en")d.setAttribute("data-ui-lang","en")}catch(e){}})()`;
 
 const listeners = new Set<() => void>();
 
@@ -98,4 +108,12 @@ export function writeUiLanguage(language: UiLanguage): void {
   else root.removeAttribute('data-ui-lang');
   write(UI_LANGUAGE_KEY, language === DEFAULT_UI_LANGUAGE ? null : language);
   notify();
+}
+
+export function readWelcomeSeen(): boolean {
+  return read(WELCOME_KEY) !== null;
+}
+
+export function markWelcomeSeen(): void {
+  write(WELCOME_KEY, '1');
 }

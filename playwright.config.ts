@@ -1,6 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import { STORAGE_CONFIG } from './src/config/app';
+
 const PORT = 3100;
+const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: './e2e',
@@ -9,8 +12,18 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? 'github' : 'list',
   use: {
-    baseURL: `http://localhost:${PORT}`,
+    baseURL: BASE_URL,
     trace: 'on-first-retry',
+    // Most specs test a returning learner; welcome.spec.ts starts from nothing.
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: BASE_URL,
+          localStorage: [{ name: `${STORAGE_CONFIG.keyPrefix}:welcome-seen`, value: '1' }],
+        },
+      ],
+    },
   },
   projects: [
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
@@ -18,7 +31,7 @@ export default defineConfig({
   ],
   webServer: {
     command: `npm run build && npm run start -- --port ${PORT}`,
-    url: `http://localhost:${PORT}`,
+    url: BASE_URL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
   },

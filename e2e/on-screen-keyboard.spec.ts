@@ -28,6 +28,23 @@ test.describe('on a touch screen', () => {
     await expect(page.getByRole('button', { name: 'Weiter' })).toBeVisible();
   });
 
+  test('Tippen keeps the hint above the keys, and the field clears in one tap', async ({
+    page,
+  }) => {
+    await page.goto('/play/articles/type');
+    await page.getByRole('button', { name: /Los geht/ }).click();
+    const hint = await page.getByRole('button', { name: /Hinweis zeigen/ }).boundingBox();
+    const keys = await page.getByRole('group', { name: 'Tastatur' }).boundingBox();
+    expect(hint!.y + hint!.height).toBeLessThanOrEqual(keys!.y);
+
+    const field = page.getByRole('textbox', { name: 'Deine Antwort' });
+    await tap(page, ['d', 'e']);
+    await page.getByRole('button', { name: 'Antwort löschen' }).click();
+    await expect(field).toHaveValue('');
+    await expect(field).toBeFocused();
+    await expect(page.getByRole('button', { name: 'Antwort löschen' })).toHaveCount(0);
+  });
+
   test('Tabelle fills a cell with the app keyboard', async ({ page }) => {
     await page.goto('/play/articles/grid');
     await page.getByRole('button', { name: /Der bestimmte Artikel/ }).click();

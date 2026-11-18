@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 import type { LastAnswer } from '@/lib/game/game-reducer';
 import type { SessionItem } from '@/lib/game/session';
 
@@ -10,9 +12,11 @@ interface QuestionViewProps {
   item: SessionItem;
   last?: LastAnswer;
   onAnswer: (isCorrect: boolean, given: string) => void;
+  /** Tippen only: the hint control, placed above the keyboard so the keys stay low. */
+  hint?: ReactNode;
 }
 
-export function QuestionView({ item, last, onAnswer }: QuestionViewProps) {
+export function QuestionView({ item, last, onAnswer, hint }: QuestionViewProps) {
   const { question } = item;
   switch (question.kind) {
     case 'sort':
@@ -27,7 +31,7 @@ export function QuestionView({ item, last, onAnswer }: QuestionViewProps) {
       );
     case 'gap':
       return item.typed ? (
-        <TypeQuestionView question={question} last={last} onAnswer={onAnswer} />
+        <TypeQuestionView question={question} last={last} onAnswer={onAnswer} hint={hint} />
       ) : (
         <GapQuestionView question={question} last={last} onAnswer={onAnswer} />
       );

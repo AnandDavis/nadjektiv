@@ -49,3 +49,8 @@ export function untimedBlitzHint(length: number): Bilingual {
     en: `Untimed Blitz has ${length} words and its own bests.`,
   };
 }
+
+/** "2× falsch" / "missed 2×", on a revise card. */
+export function missedTimes(count: number): Bilingual {
+  return { de: `${count}× falsch`, en: `missed ${count}×` };
+}

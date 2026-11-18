@@ -1,5 +1,5 @@
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
-import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { COPY, missedTimes, type Bilingual } from '@/lib/i18n/copy';
 import { diffClosest } from '@/lib/game/word-diff';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
@@ -53,11 +53,16 @@ function CorrectForm({ card, given }: { card: ReviseCard; given: string }) {
 export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardViewProps) {
   return (
     <Card className="flex flex-col gap-3">
-      {topicTitle && (
-        <p className="text-xs font-extrabold tracking-widest text-muted uppercase">
-          <Ui {...topicTitle} />
+      <div className="flex items-center gap-3">
+        <p className="min-w-0 flex-1 text-xs font-extrabold tracking-widest text-muted uppercase">
+          {topicTitle && <Ui {...topicTitle} />}
         </p>
-      )}
+        {misses > 0 && (
+          <Badge className="shrink-0">
+            <Ui {...missedTimes(misses)} />
+          </Badge>
+        )}
+      </div>
       <div className="flex items-start gap-2">
         <CheckIcon className="mt-1 shrink-0 text-correct" />
         <div className="min-w-0 flex-1">
@@ -69,11 +74,6 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
             <CorrectForm card={card} given={given} />
           </p>
         </div>
-        {misses > 0 && (
-          <Badge className="shrink-0">
-            {misses}× <Ui {...COPY.revise.missed} />
-          </Badge>
-        )}
       </div>
 
       <p className="flex items-center gap-2 text-sm text-ink">

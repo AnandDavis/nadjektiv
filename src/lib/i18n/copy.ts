@@ -238,7 +238,6 @@ export const COPY = {
     samePattern: { de: 'Mit derselben Antwort', en: 'Same answer' },
     wholeRow: { de: 'Die ganze Zeile', en: 'The whole row' },
     seeRules: { de: 'Regeln ansehen', en: 'See the rules' },
-    missed: { de: 'Mal falsch', en: 'times missed' },
     added: { de: 'neu auf deiner Wiederholungsliste', en: 'added to your revise list' },
     cleared: { de: 'von der Liste erledigt', en: 'cleared from your revise list' },
   },

@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { builtBy, dailyHint, stepOf, untimedBlitzHint } from './copy';
+import { builtBy, dailyHint, missedTimes, stepOf, untimedBlitzHint } from './copy';
 
 describe('copy helpers', () => {
   it('fill in their numbers and names in both languages', () => {
     expect(stepOf(2, 3)).toEqual({ de: 'Schritt 2 von 3', en: 'Step 2 of 3' });
+    expect(missedTimes(2)).toEqual({ de: '2× falsch', en: 'missed 2×' });
     expect(builtBy('Nad', 'London')).toEqual({
       de: 'Gebaut von Nad in London',
       en: 'Built by Nad in London',

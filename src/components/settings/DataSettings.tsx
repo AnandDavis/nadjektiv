@@ -5,6 +5,7 @@ import { useRef, useState } from 'react';
 import { Button, Card, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
+import { usePersistence } from '@/hooks/usePersistence';
 import { clearReviseList } from '@/lib/progress/clear-revise';
 import { getSnapshot, resetProgress, updateProgress } from '@/lib/storage/progress-client';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
@@ -26,6 +27,7 @@ function downloadFile(name: string, contents: string): void {
 export function DataSettings() {
   const fileInput = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
+  const persistence = usePersistence();
 
   function handleExport() {
     const now = new Date().toISOString();
@@ -70,6 +72,15 @@ export function DataSettings() {
         <p className="mt-1 text-sm text-muted">
           <Ui {...COPY.settings.progressHint} />
         </p>
+        {persistence && (
+          <p className="mt-2 text-sm text-ink">
+            <Ui
+              {...(persistence === 'persisted'
+                ? COPY.app.storagePersisted
+                : COPY.app.storageAtRisk)}
+            />
+          </p>
+        )}
       </div>
       <div className="grid grid-cols-2 gap-2">
         <Button variant="secondary" onClick={handleExport}>

@@ -14,6 +14,7 @@ import {
 import type { SessionItem } from '@/lib/game/session';
 import { applySessionResult, type SessionOutcome } from '@/lib/progress/apply-session';
 import type { Progress } from '@/lib/progress/types';
+import { requestPersistence } from '@/lib/storage/persistence';
 import { getSnapshot, updateProgress } from '@/lib/storage/progress-client';
 
 interface UseGameSessionOptions {
@@ -65,6 +66,8 @@ export function useGameSession({
           return recorded.progress;
         });
         setOutcome(recorded);
+        // A finished round is real use: ask the browser to keep this site's storage.
+        void requestPersistence();
       }
     },
     [mode, topicId, modesByTopic, untimed],

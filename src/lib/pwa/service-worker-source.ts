@@ -41,8 +41,14 @@ async function precachePages() {
   await Promise.allSettled([...assets].map((url) => statics.add(new Request(url, { cache: 'reload' }))));
 }
 
+// The first install takes over at once. An update waits until the page says so (the
+// learner taps "neu laden"), so a round in progress keeps the code it started with.
 self.addEventListener('install', (event) => {
-  event.waitUntil(precachePages().then(() => self.skipWaiting()));
+  event.waitUntil(precachePages().then(() => (self.registration.active ? undefined : self.skipWaiting())));
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {

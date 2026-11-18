@@ -1,4 +1,5 @@
 import { DailyCallout } from '@/components/progress/DailyCallout';
+import { InstallHint } from '@/components/pwa/InstallHint';
 import { LevelCard } from '@/components/progress/LevelCard';
 import { ReviewCallout } from '@/components/progress/ReviewCallout';
 import { TopicList } from '@/components/topics/TopicList';
@@ -17,6 +18,7 @@ export default function HomePage() {
       </header>
       <DailyCallout show="pending" />
       <LevelCard />
+      <InstallHint />
       <ReviewCallout />
       <TopicList topics={topics} />
     </div>

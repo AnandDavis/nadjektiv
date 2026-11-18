@@ -2,7 +2,7 @@ export { Badge } from './Badge';
 export { Button } from './Button';
 export { ButtonLink } from './ButtonLink';
 export { Card } from './Card';
-export { KeyboardDock } from './KeyboardDock';
+export { OnScreenKeyboard } from './OnScreenKeyboard';
 export { ProgressBar } from './ProgressBar';
 export * from './icons';
 export { Ui } from './Ui';

@@ -44,13 +44,4 @@ test('typing the answer: right, nearly, and the umlaut keys', async ({ page }) =
   await expect(page.getByText('Du hast getippt')).toBeVisible();
   await expect(page.getByText(/^Warum\?/)).toBeVisible();
   await page.getByRole('button', { name: 'Weiter' }).click();
-
-  // The ä ö ü ß keys type into the answer.
-  await field.fill('gr');
-  await page
-    .getByRole('group', { name: 'Sonderzeichen' })
-    .getByRole('button', { name: 'ö' })
-    .click();
-  await field.pressSequentially('ße');
-  await expect(field).toHaveValue('größe');
 });

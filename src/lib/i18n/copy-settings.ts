@@ -42,6 +42,13 @@ export const SETTINGS_COPY = {
     de: 'Falsche Antworten werden immer erklärt, bevor es weitergeht.',
     en: 'Wrong answers are always explained before you move on.',
   },
+  keyboard: { de: 'Tastatur', en: 'Keyboard' },
+  keyboardApp: { de: 'App-Tastatur', en: 'App keyboard' },
+  keyboardDevice: { de: 'Geräte-Tastatur', en: 'Device keyboard' },
+  keyboardHint: {
+    de: 'Die App-Tastatur hat ä, ö, ü und ß als eigene Tasten. Auf der Geräte-Tastatur bekommst du sie mit langem Druck auf a, o, u oder s.',
+    en: 'The app keyboard has ä, ö, ü and ß as keys of their own. On the device keyboard, long-press a, o, u or s for them.',
+  },
   textSize: { de: 'Textgröße', en: 'Text size' },
   textNormal: { de: 'Normal', en: 'Normal' },
   textLarge: { de: 'Groß', en: 'Large' },

@@ -12,6 +12,8 @@ interface GridBoardProps {
   onFocusCell?: (key: CellKey) => void;
   onEnter?: (key: CellKey) => void;
   registerInput?: (key: CellKey, input: HTMLInputElement | null) => void;
+  /** The app's keyboard is shown: keep the phone's own keyboard closed. */
+  noSystemKeyboard?: boolean;
 }
 
 // Columns size to their content (kept on one line); wide tables scroll sideways in their region.
@@ -29,6 +31,7 @@ export function GridBoard({
   onFocusCell,
   onEnter,
   registerInput,
+  noSystemKeyboard,
 }: GridBoardProps) {
   const isPlaying = state.phase === 'playing';
   return (
@@ -118,6 +121,7 @@ export function GridBoard({
                       autoCorrect="off"
                       spellCheck={false}
                       enterKeyHint="next"
+                      inputMode={noSystemKeyboard ? 'none' : undefined}
                       // A small intrinsic size lets the column, not the input, set the width.
                       size={1}
                       onChange={(event) => onType?.(key, event.target.value)}

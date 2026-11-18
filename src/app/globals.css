@@ -195,11 +195,6 @@
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* Above the on-screen keyboard when one is open (set by useKeyboardInset), else 0. */
-@utility bottom-keyboard {
-  bottom: var(--keyboard-inset, 0px);
-}
-
 @utility pt-safe {
   padding-top: env(safe-area-inset-top);
 }

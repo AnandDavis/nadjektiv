@@ -42,6 +42,12 @@ export const COPY = {
     show: { de: 'Hinweis zeigen · halbe Punkte', en: 'Show a hint · half points' },
     label: { de: 'Hinweis', en: 'Hint' },
   },
+  keys: {
+    label: { de: 'Tastatur', en: 'Keyboard' },
+    backspace: { de: 'Löschen', en: 'Delete' },
+    space: { de: 'Leerzeichen', en: 'Space' },
+    next: { de: 'Nächstes Feld', en: 'Next cell' },
+  },
   typed: {
     yourAnswer: { de: 'Deine Antwort', en: 'Your answer' },
     check: { de: 'Prüfen', en: 'Check' },
@@ -66,7 +72,6 @@ export const COPY = {
     done: { de: 'Fertig', en: 'Done' },
     otherTable: { de: 'Andere Tabelle', en: 'Another table' },
     answerKey: { de: 'Die Lösung', en: 'The answers' },
-    specialCharacters: { de: 'Sonderzeichen', en: 'Special characters' },
     typeHint: {
       de: 'Tippe in die leeren Felder. Richtige Felder werden grün und bleiben stehen.',
       en: 'Type into the empty cells. Correct cells turn green and stay.',

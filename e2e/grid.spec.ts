@@ -62,17 +62,15 @@ test('the round ends when the clock runs out', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Die Lösung' })).toBeVisible();
 });
 
-test('the umlaut keys type into the focused cell', async ({ page }) => {
+test('the app keyboard types ä into the focused cell', async ({ page }, info) => {
+  test.skip(info.project.name !== 'mobile', 'The app keyboard is for touch screens.');
   await page.goto('/play/present-tense/grid');
   await page.getByRole('button', { name: /Vokalwechsel/ }).click();
-  const cell = page.getByRole('textbox', { name: 'du fahren' });
-  await cell.click();
-  await page.keyboard.type('f');
-  await page
-    .getByRole('group', { name: 'Sonderzeichen' })
-    .getByRole('button', { name: 'ä' })
-    .click();
-  await page.keyboard.type('hrst');
+  await page.getByRole('textbox', { name: 'du fahren' }).click();
+  const keyboard = page.getByRole('group', { name: 'Tastatur' });
+  for (const key of ['f', 'ä', 'h', 'r', 's', 't']) {
+    await keyboard.getByRole('button', { name: key, exact: true }).click();
+  }
   await expect(page.getByText('1/10')).toBeVisible();
 });
 

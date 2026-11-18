@@ -12,7 +12,7 @@ import { useGameSession } from '@/hooks/useGameSession';
 import { useOption } from '@/hooks/useOption';
 import { useProgress } from '@/hooks/useProgress';
 import { formatSentence } from '@/lib/game/check-answer';
-import { buildDailySession, dailyKey } from '@/lib/game/daily';
+import { dailyKey, todaysMix, withDailyMix } from '@/lib/game/daily';
 import { currentItem } from '@/lib/game/game-reducer';
 import { hintFor } from '@/lib/game/hint';
 import { diffBuiltSentence } from '@/lib/game/word-diff';
@@ -27,6 +27,7 @@ import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
 import { OPTIONS } from '@/lib/storage/options';
+import { updateProgress } from '@/lib/storage/progress-client';
 
 import { FeedbackPanel } from './FeedbackPanel';
 import { GameHeader } from './GameHeader';
@@ -77,7 +78,12 @@ export function GameScreen(props: GameScreenProps) {
 
   const buildItems = useCallback(
     (current: Progress): SessionItem[] => {
-      if (mode === 'daily') return buildDailySession(topics, current, dailyKey(new Date()));
+      if (mode === 'daily') {
+        const key = dailyKey(new Date());
+        const { items, isNew } = todaysMix(topics, current, key);
+        if (isNew) updateProgress((progress) => withDailyMix(progress, key, items));
+        return items;
+      }
       const rng = createRng(Date.now());
       if (mode === 'review') {
         return buildReviewSession(

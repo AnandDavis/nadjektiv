@@ -79,6 +79,8 @@ export const progressSchema = z.object({
    * bump: older saves read unchanged, and an older cached app drops it harmlessly.
    */
   daily: z.object({ lastDone: z.string() }).optional(),
+  /** Today's daily mix as built when first opened, so it stays the same all day. */
+  dailyMix: z.object({ day: z.string(), ids: z.array(z.string()) }).optional(),
 });
 
 export type QuestionStats = z.infer<typeof questionStatsSchema>;

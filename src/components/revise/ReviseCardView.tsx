@@ -1,10 +1,10 @@
-import Link from 'next/link';
-
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import { diffSentences } from '@/lib/game/word-diff';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
+
+import { TopicLink } from '../topics/TopicLink';
 
 interface ReviseCardViewProps {
   card: ReviseCard;
@@ -110,12 +110,14 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
         />
       )}
 
-      <Link
+      <TopicLink
+        topicId={card.topicId}
+        origin="revise"
         href={topicRulesHref(card.topicId)}
         className="min-h-11 w-fit content-center text-sm font-semibold text-brand-strong underline-offset-4 hover:underline"
       >
         <Ui {...COPY.revise.seeRules} /> →
-      </Link>
+      </TopicLink>
     </Card>
   );
 }

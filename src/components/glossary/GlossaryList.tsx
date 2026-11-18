@@ -1,10 +1,9 @@
-import Link from 'next/link';
-
 import { Ui } from '@/components/ui';
 import type { GlossaryEntry } from '@/content/glossary';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
-import { topicHref } from '@/lib/routes';
 import { highlightParts } from '@/lib/text/highlight';
+
+import { TopicLink } from '../topics/TopicLink';
 
 interface GlossaryListProps {
   entries: readonly GlossaryEntry[];
@@ -61,13 +60,14 @@ export function GlossaryList({ entries, topicTitles }: GlossaryListProps) {
                 <Ui {...COPY.glossary.topics} />
               </span>
               {entry.topics.map((id) => (
-                <Link
+                <TopicLink
                   key={id}
-                  href={topicHref(id)}
+                  topicId={id}
+                  origin="glossary"
                   className="inline-flex min-h-11 items-center font-semibold text-brand-strong underline underline-offset-4"
                 >
                   {topicTitles[id] ? <Ui {...topicTitles[id]} /> : id}
-                </Link>
+                </TopicLink>
               ))}
             </p>
           </dd>

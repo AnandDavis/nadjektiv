@@ -25,7 +25,7 @@ export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: 
 
   return (
     <header className="flex flex-col gap-4">
-      <TopicBackLink />
+      <TopicBackLink topicId={topicId} />
       <div>
         <div className="flex items-center gap-2">
           <Badge>{level}</Badge>

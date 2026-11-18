@@ -1,39 +1,36 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import { ArrowLeftIcon, Ui } from '@/components/ui';
-import { COPY } from '@/lib/i18n/copy';
-import { TOPIC_ORIGIN_PARAM, topicBackHref } from '@/lib/routes';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import {
+  ORIGIN_HREFS,
+  subscribeTopicOrigin,
+  topicOrigin,
+  type TopicOrigin,
+} from '@/lib/navigation/topic-origin';
 
-const CLASS =
-  '-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas';
+const LABELS: Readonly<Record<TopicOrigin, Bilingual>> = {
+  progress: COPY.nav.progress,
+  revise: COPY.revise.title,
+  glossary: COPY.glossary.title,
+};
 
-function BackLink({ from }: { from: string | null }) {
-  const back = topicBackHref(from);
-  return (
-    <Link href={back.href} className={CLASS}>
-      <ArrowLeftIcon />{' '}
-      <Ui {...(back.origin === 'progress' ? COPY.nav.progress : COPY.common.allTopics)} />
-    </Link>
+/** Back to wherever the topic was opened from, or the topic list. */
+export function TopicBackLink({ topicId }: { topicId: string }) {
+  const origin = useSyncExternalStore(
+    subscribeTopicOrigin,
+    () => topicOrigin(topicId),
+    () => null,
   );
-}
-
-function BackLinkFromParams() {
-  return <BackLink from={useSearchParams().get(TOPIC_ORIGIN_PARAM)} />;
-}
-
-/**
- * Back to wherever the topic was opened from: the progress page if it says so in the
- * URL, otherwise the topic list. The page itself stays static: the URL is read in the
- * browser, with the topic-list link as the fallback until then.
- */
-export function TopicBackLink() {
   return (
-    <Suspense fallback={<BackLink from={null} />}>
-      <BackLinkFromParams />
-    </Suspense>
+    <Link
+      href={origin ? ORIGIN_HREFS[origin] : '/'}
+      className="-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas"
+    >
+      <ArrowLeftIcon /> <Ui {...(origin ? LABELS[origin] : COPY.common.allTopics)} />
+    </Link>
   );
 }

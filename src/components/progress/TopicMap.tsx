@@ -1,17 +1,15 @@
 'use client';
 
-import Link from 'next/link';
-
 import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
 import { TIERS, TIER_LABELS, masteryFor, type Tier } from '@/lib/progress/mastery';
 import type { Progress } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
-import { topicHref } from '@/lib/routes';
 import { cn } from '@/lib/utils/cn';
 
 import { TIER_MARKS } from './TierBadge';
+import { TopicLink } from '../topics/TopicLink';
 
 const LEVELS: readonly Level[] = ['A1', 'A2'];
 
@@ -52,8 +50,9 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
                 const number = String(topics.indexOf(topic) + 1).padStart(2, '0');
                 return (
                   <li key={topic.id}>
-                    <Link
-                      href={topicHref(topic.id, 'progress')}
+                    <TopicLink
+                      topicId={topic.id}
+                      origin="progress"
                       className={cn(
                         'flex aspect-square min-h-11 flex-col items-center justify-center border-2 font-black transition-colors hover:bg-yellow hover:text-on-yellow',
                         TILE_CLASSES[tier],
@@ -71,7 +70,7 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
                           en={`${number} ${topic.title}: ${TIER_LABELS[tier].en}`}
                         />
                       </span>
-                    </Link>
+                    </TopicLink>
                   </li>
                 );
               })}

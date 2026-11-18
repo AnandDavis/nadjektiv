@@ -5,19 +5,8 @@
 /** The id of the rules heading on a topic page; also its URL fragment. */
 export const RULES_HEADING_ID = 'rules-heading';
 
-/** Pages that link into a topic and should be the topic page's way back. */
-export type TopicOrigin = 'progress';
-
-export const TOPIC_ORIGIN_PARAM = 'from';
-
-/** A topic page; `from` makes its back link return there instead of to the topic list. */
-export function topicHref(topicId: string, from?: TopicOrigin): string {
-  return from ? `/topics/${topicId}?${TOPIC_ORIGIN_PARAM}=${from}` : `/topics/${topicId}`;
-}
-
-/** Where a topic page's back link goes, given its `from` parameter. */
-export function topicBackHref(from: string | null): { href: string; origin?: TopicOrigin } {
-  return from === 'progress' ? { href: '/progress', origin: 'progress' } : { href: '/' };
+export function topicHref(topicId: string): string {
+  return `/topics/${topicId}`;
 }
 
 /** A topic page opened at its rules section. */

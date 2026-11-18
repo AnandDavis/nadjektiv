@@ -52,7 +52,7 @@ test.describe('installable app', () => {
 
   test('has a complete web manifest with working icons', async ({ page, request }) => {
     await page.goto('/');
-    const href = await page.locator('link[rel="manifest"]').getAttribute('href');
+    const href = await page.locator('link[rel="manifest"]').first().getAttribute('href');
     expect(href).toBeTruthy();
     const manifest = await (await request.get(href!)).json();
 
@@ -74,6 +74,17 @@ test.describe('installable app', () => {
     await expect(
       page.locator('link[rel="apple-touch-icon"], link[rel="icon"]').first(),
     ).toHaveCount(1);
+  });
+
+  test('fetches the manifest with cookies, so a bot check the page passed cannot block it', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    // Browsers use the first manifest link; ours must carry use-credentials.
+    await expect(page.locator('link[rel="manifest"]').first()).toHaveAttribute(
+      'crossorigin',
+      'use-credentials',
+    );
   });
 
   test('asks browsers not to translate the German', async ({ page }) => {

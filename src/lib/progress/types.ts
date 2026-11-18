@@ -5,14 +5,16 @@
  * marked "added without a version bump" below.
  */
 
-import { z } from 'zod';
+// zod/mini: the same validation as zod in a fraction of the JavaScript, which every
+// page that reads progress downloads.
+import * as z from 'zod/mini';
 
 export const PROGRESS_VERSION = 3;
 
 /** How many recent answers per topic feed the mastery accuracy. */
 export const RECENT_WINDOW = 40;
 
-const count = z.number().int().nonnegative();
+const count = z.int().check(z.gte(0));
 
 export const questionStatsSchema = z.object({
   seen: count,
@@ -23,7 +25,7 @@ export const modeBestSchema = z.object({
   plays: count,
   bestScore: count,
   /** 0–1 */
-  bestAccuracy: z.number().min(0).max(1),
+  bestAccuracy: z.number().check(z.gte(0), z.lte(1)),
   bestCombo: count,
 });
 
@@ -31,16 +33,16 @@ export const topicProgressSchema = z.object({
   answered: count,
   correct: count,
   /** Most recent last; 1 = correct, 0 = wrong. Capped at RECENT_WINDOW. */
-  recent: z.array(z.union([z.literal(0), z.literal(1)])).max(RECENT_WINDOW),
+  recent: z.array(z.union([z.literal(0), z.literal(1)])).check(z.maxLength(RECENT_WINDOW)),
   modes: z.object({
-    sort: modeBestSchema.optional(),
-    gap: modeBestSchema.optional(),
-    build: modeBestSchema.optional(),
-    grid: modeBestSchema.optional(),
+    sort: z.optional(modeBestSchema),
+    gap: z.optional(modeBestSchema),
+    build: z.optional(modeBestSchema),
+    grid: z.optional(modeBestSchema),
     // type and sortUntimed: added without a version bump (optional).
-    type: modeBestSchema.optional(),
+    type: z.optional(modeBestSchema),
     /** Untimed Blitz (an option), kept apart: a round without the clock isn't comparable. */
-    sortUntimed: modeBestSchema.optional(),
+    sortUntimed: z.optional(modeBestSchema),
   }),
 });
 
@@ -50,7 +52,7 @@ export const reviseEntrySchema = z.object({
   /** The learner's most recent wrong answer. */
   given: z.string(),
   /** Times missed since it was last answered correctly. */
-  misses: count.min(1),
+  misses: z.int().check(z.gte(1)),
   /** ISO timestamp of the latest miss. */
   lastMissedAt: z.string(),
 });
@@ -61,7 +63,7 @@ export const gridBestSchema = z.object({
   /** Most cells solved in one round. */
   bestCells: count,
   /** Fastest complete round, in ms. Undefined until the table has been completed. */
-  bestTimeMs: count.optional(),
+  bestTimeMs: z.optional(count),
 });
 
 export const progressSchema = z.object({
@@ -74,14 +76,14 @@ export const progressSchema = z.object({
   /** Grid-fill bests, keyed by grid id. */
   grids: z.record(z.string(), gridBestSchema),
   /** ISO timestamp of the first session. */
-  startedAt: z.string().optional(),
+  startedAt: z.optional(z.string()),
   /** The daily mix, for its "done today" mark. Added without a version bump (optional). */
-  daily: z.object({ lastDone: z.string() }).optional(),
+  daily: z.optional(z.object({ lastDone: z.string() })),
   /**
    * Today's daily mix as built when first opened, so it stays the same all day. Added
    * without a version bump (optional).
    */
-  dailyMix: z.object({ day: z.string(), ids: z.array(z.string()) }).optional(),
+  dailyMix: z.optional(z.object({ day: z.string(), ids: z.array(z.string()) })),
 });
 
 export type QuestionStats = z.infer<typeof questionStatsSchema>;

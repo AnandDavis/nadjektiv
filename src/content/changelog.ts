@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T16:12Z',
+    title: 'The German stays German',
+    description:
+      'Browsers no longer offer to translate the app, so the sentences you’re learning from aren’t swapped for English. Installing Nadjektiv on your phone’s home screen also works more reliably.',
+  },
+  {
     date: '2026-11-18T14:56Z',
     title: 'New game: Tabelle (grid fill)',
     description:

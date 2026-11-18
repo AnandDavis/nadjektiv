@@ -76,6 +76,12 @@ test.describe('installable app', () => {
     ).toHaveCount(1);
   });
 
+  test('asks browsers not to translate the German', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('html')).toHaveAttribute('translate', 'no');
+    await expect(page.locator('meta[name="google"]')).toHaveAttribute('content', 'notranslate');
+  });
+
   test('registers a service worker that controls the page', async ({ page }) => {
     await page.goto('/');
     await page.evaluate(() => navigator.serviceWorker.ready);

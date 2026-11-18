@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T19:40Z',
+    title: 'Topic map',
+    description:
+      'Your Progress page now has a map of all 24 topics: one square each, grouped by level, filled in with the colour of the medal you’ve earned. Tap any square to go to that topic.',
+  },
+  {
     date: '2026-11-18T19:10Z',
     title: 'Clearer explanations, and your hardest questions first',
     description:

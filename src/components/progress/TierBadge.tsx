@@ -2,7 +2,7 @@ import { Ui } from '@/components/ui/Ui';
 import { TIER_LABELS, type Tier } from '@/lib/progress/mastery';
 import { cn } from '@/lib/utils/cn';
 
-const TIER_CLASSES: Record<Tier, string> = {
+export const TIER_CLASSES: Record<Tier, string> = {
   new: 'text-tier-new border-tier-new',
   bronze: 'text-bronze border-bronze',
   silver: 'text-silver border-silver',
@@ -10,7 +10,7 @@ const TIER_CLASSES: Record<Tier, string> = {
   mastered: 'text-mastered border-mastered',
 };
 
-const TIER_MARKS: Record<Tier, string> = {
+export const TIER_MARKS: Record<Tier, string> = {
   new: '○',
   bronze: '●',
   silver: '◆',

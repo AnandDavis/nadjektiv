@@ -25,6 +25,11 @@ export const FEATURES: readonly Feature[] = [
       'Ten ready-made questions a day, from your revise list and your weakest topics. It’s the same mix all day, a new one tomorrow, and marked done once you’ve played it. There’s no streak: skipping a day costs nothing.',
   },
   {
+    title: 'Topic map',
+    description:
+      'The Progress page shows the whole syllabus as a grid of squares, one per topic, filled in as you earn medals. Tap a square to open that topic.',
+  },
+  {
     title: 'Search',
     description:
       'Find any topic from the home page by its German or English name, or by a word it covers, such as “Dativ” or “weil”.',

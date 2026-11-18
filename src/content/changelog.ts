@@ -16,6 +16,66 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T23:20Z',
+    title: 'No tracking, just anonymous counts',
+    description:
+      'The app now counts anonymous page views, finished rounds (only the topic and game) and loading speed, to learn which topics to improve. It uses no cookies and records nothing about you; your progress still never leaves your device.',
+  },
+  {
+    date: '2026-11-18T23:10Z',
+    title: 'Your history on the Progress page',
+    description:
+      'Two small charts show how many answers you gave on each of the last 14 days and how many you got right in each of the last 8 weeks. There are no streaks: a day off is just an empty bar.',
+  },
+  {
+    date: '2026-11-18T23:00Z',
+    title: 'Verb lookup',
+    description:
+      'Open Verben from the menu to look up any of the 33 irregular verbs, by any form (ging finds gehen) or its English meaning, and see its present tense, Präteritum and Perfekt together.',
+  },
+  {
+    date: '2026-11-18T22:50Z',
+    title: 'Level tests',
+    description:
+      'Take a Prüfung for A1 or A2 from the end of each level on the home page: 20 questions from every topic, no hints, and a grade at the end with the topics to go back to. Your best result is kept.',
+  },
+  {
+    date: '2026-11-18T22:40Z',
+    title: 'Noun cards and new words',
+    description:
+      'A new topic, Artikel und Plural, asks for a noun’s article and plural together: der Tisch, die Tische. And the first time a noun comes up in a game, a card shows it with its article and plural before you’re asked (the Blitz clock waits).',
+  },
+  {
+    date: '2026-11-18T22:30Z',
+    title: 'Revise at the right moment',
+    description:
+      'Questions on your revise list now come back after 1, 3 and then 7 days. Answer one right each time it’s due and it leaves the list; a miss starts it again. Mixed review and the daily mix ask the ones due today first, and the Revise tab counts only those.',
+  },
+  {
+    date: '2026-11-18T22:20Z',
+    title: 'Common mistakes',
+    description:
+      'The revise page now groups mix-ups you’ve made more than once, such as dem instead of den, with the rule that fixes them all.',
+  },
+  {
+    date: '2026-11-18T22:15Z',
+    title: 'Combos, records and celebrations',
+    description:
+      'The game now tells you when your combo rises or is lost, the results show your longest run beside your record, a new records page gathers your bests, and reaching Gemeistert in a topic gets its own celebration. The daily mix also leans towards questions like the ones that broke a long run.',
+  },
+  {
+    date: '2026-11-18T22:10Z',
+    title: 'A German keyboard, and shortcuts',
+    description:
+      'On a phone, Tippen and Tabelle now use the app’s own keyboard with ä ö ü ß beside the space bar (you can switch back to your phone’s keyboard in Settings). On a computer, play with the keyboard: 1–4 or A–D to choose, Enter to continue, H for a hint.',
+  },
+  {
+    date: '2026-11-18T22:05Z',
+    title: 'Easier to install, safer progress',
+    description:
+      'Settings now shows how to add the app to your home screen, a bar offers the new version when one is ready, and the app asks your browser to keep your progress safe. Grammar words in the rules and on revise cards link to the glossary.',
+  },
+  {
     date: '2026-11-18T22:00Z',
     title: 'Glossary',
     description:

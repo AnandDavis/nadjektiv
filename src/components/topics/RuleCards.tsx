@@ -3,6 +3,8 @@ import type { RuleCard } from '@/content/types';
 import { COPY } from '@/lib/i18n/copy';
 import { RULES_HEADING_ID } from '@/lib/routes';
 
+import { GlossaryText } from '../glossary/GlossaryText';
+
 export function RuleCards({ rules }: { rules: RuleCard[] }) {
   return (
     <section aria-labelledby={RULES_HEADING_ID}>
@@ -18,7 +20,11 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
               </span>
               {rule.heading}
             </h3>
-            {rule.body && <p className="mt-1 text-ink">{rule.body}</p>}
+            {rule.body && (
+              <p className="mt-1 text-ink">
+                <GlossaryText text={rule.body} />
+              </p>
+            )}
             {rule.table && (
               <div
                 className="-mx-1 mt-3 overflow-x-auto"

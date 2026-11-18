@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Square medal marks on the home topic list
-
-**Why:** on the home page each topic's medal chip ("NEU", "BRONZE", "GEMEISTERT" …) is a different width, so the right edge of the list looks ragged.
-
-**Notes:** replace the chip in `TopicCard` with a fixed-size square showing only the medal's mark (○ ● ◆ ★ ✦), filled like the topic map squares (`TopicMap` `TILE_CLASSES`, reuse rather than copy). With no visible text, the medal must still be read out (sr-only label from `TIER_LABELS`) so it isn't conveyed by colour or shape alone; keep the accuracy % beneath it. Check 360 px, both themes, and update the home visual baselines.
-
 ## View transitions between screens
 
 **Why:** moving between screens is an instant swap. Animated transitions (a topic sliding into its game, a topic-map square growing into the topic header) would make the app feel native.
@@ -85,12 +79,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** a sense of improvement, without streak pressure.
 
 **Notes:** on the Progress page, a simple chart of answers per day and accuracy per week. Needs a small daily history in progress (schema change). No streaks or "days in a row".
-
-## Links into the glossary
-
-**Why:** rule cards and explanations use grammar terms a learner may not know.
-
-**Notes:** link known glossary terms in rule cards and explanations to `/glossary#id`. Match whole words only, and link each term once per card.
 
 ## Content review tooling
 

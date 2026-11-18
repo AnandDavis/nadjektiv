@@ -17,3 +17,11 @@ test('a link to a term lands on it', async ({ page }) => {
   await page.goto('/glossary#wechselpraeposition');
   await expect(page.locator('#wechselpraeposition')).toBeInViewport();
 });
+
+test('grammar terms in a topic’s rules link to their glossary entry', async ({ page }) => {
+  await page.goto('/topics/cases');
+  const link = page.getByRole('main').getByRole('link', { name: 'Akkusativ', exact: true }).first();
+  await link.click();
+  await expect(page).toHaveURL(/\/glossary#akkusativ$/);
+  await expect(page.locator('#akkusativ')).toBeInViewport();
+});

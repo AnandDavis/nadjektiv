@@ -8,12 +8,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** a speaker button on German sentences, rule examples and revise cards, using the browser's speech synthesis with a `de-DE` voice. It's free and works offline where the device has a German voice. Hide the button when no German voice is available. Add a setting to auto-play after each answer.
 
-## Hints
-
-**Why:** a nudge towards the rule beats a blind guess.
-
-**Notes:** one hint per question, at a points cost (e.g. half points, and the combo isn't broken). Hints are written per question, or generated from the topic's rule (e.g. "dative after mit", "verb goes last"). Not available in Blitz. Record hint use, so the mastery tiers only count unaided answers.
-
 ## Daily mix
 
 **Why:** a short, ready-made practice round each day, without streak pressure.

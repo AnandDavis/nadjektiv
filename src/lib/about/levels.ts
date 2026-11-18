@@ -52,5 +52,7 @@ export function comboSteps(): ComboStep[] {
 }
 
 export const PERFECT_BONUS_XP = GAME_CONFIG.points.perfectBonusXp;
+/** Share of an answer's XP kept after a hint, as a percentage. */
+export const HINT_XP_PERCENT = Math.round(GAME_CONFIG.points.hintFactor * 100);
 
 export const MEDAL_RULES = TIER_RULES;

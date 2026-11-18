@@ -9,6 +9,11 @@ export interface Bilingual {
 }
 
 export const COPY = {
+  hint: {
+    // "Half" matches GAME_CONFIG.points.hintFactor.
+    show: { de: 'Hinweis zeigen · halbe Punkte', en: 'Show a hint · half points' },
+    label: { de: 'Hinweis', en: 'Hint' },
+  },
   typed: {
     yourAnswer: { de: 'Deine Antwort', en: 'Your answer' },
     check: { de: 'Prüfen', en: 'Check' },

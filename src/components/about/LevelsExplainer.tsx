@@ -1,5 +1,11 @@
 import { Card, SectionHeading, Ui } from '@/components/ui';
-import { LAST_TITLE_LEVEL, PERFECT_BONUS_XP, comboSteps, levelTable } from '@/lib/about/levels';
+import {
+  HINT_XP_PERCENT,
+  LAST_TITLE_LEVEL,
+  PERFECT_BONUS_XP,
+  comboSteps,
+  levelTable,
+} from '@/lib/about/levels';
 import { COPY } from '@/lib/i18n/copy';
 import { cn } from '@/lib/utils/cn';
 
@@ -31,7 +37,13 @@ export function LevelsExplainer() {
             </li>
           ))}
           <li>A wrong answer resets the run back to ×1.</li>
-          <li>Get every question in a round right for a +{PERFECT_BONUS_XP} XP bonus.</li>
+          <li>
+            After a hint, a right answer earns {HINT_XP_PERCENT}% of its XP. Your run stays where it
+            was: it doesn’t reset, but it doesn’t grow either.
+          </li>
+          <li>
+            Get every question in a round right, without hints, for a +{PERFECT_BONUS_XP} XP bonus.
+          </li>
           <li>Your points for a round are the XP you earn, in every game and in mixed review.</li>
         </ul>
       </Card>

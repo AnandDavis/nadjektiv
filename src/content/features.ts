@@ -44,6 +44,11 @@ export const FEATURES: readonly Feature[] = [
       'Once you have a medal in a topic, type the missing word yourself instead of picking it, with ä ö ü ß keys built in. Case and extra spaces don’t matter, but spelling does: “ae” never counts for “ä”. If you’re one letter off, you’re told it was nearly right.',
   },
   {
+    title: 'Hints',
+    description:
+      'Stuck in Lückentext, Tippen or Satzbau? Show one hint per question: the rule behind it, with the answer blanked out. A right answer then earns half the points and doesn’t break your run, but it doesn’t count towards medals.',
+  },
+  {
     title: 'Tabelle',
     description:
       'Fill in a whole table against the clock, such as the article grid or the irregular verbs. Cells lock green when they’re right, and your best time is saved for each table.',

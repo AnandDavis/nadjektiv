@@ -10,6 +10,7 @@ export const POINTS_PER_CORRECT = GAME_CONFIG.points.perCorrect;
 export const COMBO_STEP = GAME_CONFIG.points.comboStep;
 export const MAX_MULTIPLIER = GAME_CONFIG.points.maxMultiplier;
 export const PERFECT_BONUS_XP = GAME_CONFIG.points.perfectBonusXp;
+export const HINT_FACTOR = GAME_CONFIG.points.hintFactor;
 
 export interface AnswerRecord {
   /** What the learner chose: a bin, an option, or the built sentence. */
@@ -17,6 +18,8 @@ export interface AnswerRecord {
   questionId: string;
   topicId: string;
   isCorrect: boolean;
+  /** A hint was used: a right answer then doesn't count towards mastery or revise. */
+  hinted?: boolean;
 }
 
 /** Score for a whole round, ready to be applied to progress. */
@@ -42,13 +45,19 @@ export function pointsForCorrect(comboBefore: number): number {
   return POINTS_PER_CORRECT * comboMultiplier(comboBefore + 1);
 }
 
+/** Points for a correct answer after a hint: a share of the points, at today's multiplier. */
+export function pointsForHinted(comboBefore: number): number {
+  return Math.round(POINTS_PER_CORRECT * comboMultiplier(comboBefore) * HINT_FACTOR);
+}
+
 export function accuracy(answers: readonly AnswerRecord[]): number {
   if (answers.length === 0) return 0;
   return answers.filter((a) => a.isCorrect).length / answers.length;
 }
 
+/** Every answer right, and none of them helped by a hint. */
 export function isPerfect(answers: readonly AnswerRecord[]): boolean {
-  return answers.length > 0 && answers.every((a) => a.isCorrect);
+  return answers.length > 0 && answers.every((a) => a.isCorrect && !a.hinted);
 }
 
 export function xpForSession(result: SessionResult): number {

@@ -66,6 +66,7 @@ export function useGameSession({ mode, topicId, modesByTopic, buildItems }: UseG
   );
   const next = useCallback(() => dispatch({ type: 'next' }), [dispatch]);
   const finish = useCallback(() => dispatch({ type: 'finish' }), [dispatch]);
+  const hint = useCallback(() => dispatch({ type: 'hint' }), [dispatch]);
 
-  return { state, outcome, start, answer, next, finish };
+  return { state, outcome, start, answer, next, finish, hint };
 }

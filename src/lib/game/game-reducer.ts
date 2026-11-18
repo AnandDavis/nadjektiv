@@ -4,7 +4,12 @@
 
 import type { GameMode } from '@/content/types';
 
-import { pointsForCorrect, type AnswerRecord, type SessionResult } from './scoring';
+import {
+  pointsForCorrect,
+  pointsForHinted,
+  type AnswerRecord,
+  type SessionResult,
+} from './scoring';
 import type { SessionItem } from './session';
 
 export type GamePhase = 'intro' | 'playing' | 'feedback' | 'finished';
@@ -30,12 +35,15 @@ export interface GameState {
   score: number;
   combo: number;
   bestCombo: number;
+  /** A hint has been shown for the current question. */
+  hinted: boolean;
   last?: LastAnswer;
 }
 
 export type GameAction =
   | { type: 'start'; items: SessionItem[] }
   | { type: 'answer'; isCorrect: boolean; given: string }
+  | { type: 'hint' }
   | { type: 'next' }
   | { type: 'finish' };
 
@@ -48,6 +56,7 @@ export const INITIAL_GAME_STATE: GameState = {
   score: 0,
   combo: 0,
   bestCombo: 0,
+  hinted: false,
 };
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
@@ -59,11 +68,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         phase: action.items.length > 0 ? 'playing' : 'finished',
       };
 
+    case 'hint':
+      if (state.phase !== 'playing' || state.hinted) return state;
+      return { ...state, hinted: true };
+
     case 'answer': {
       if (state.phase !== 'playing') return state;
       const item = state.items[state.index];
-      const points = action.isCorrect ? pointsForCorrect(state.combo) : 0;
-      const combo = action.isCorrect ? state.combo + 1 : 0;
+      const { hinted } = state;
+      // A hinted right answer earns part of the points and holds the combo where it is.
+      const points = !action.isCorrect
+        ? 0
+        : hinted
+          ? pointsForHinted(state.combo)
+          : pointsForCorrect(state.combo);
+      const combo = !action.isCorrect ? 0 : hinted ? state.combo : state.combo + 1;
       return {
         ...state,
         phase: 'feedback',
@@ -74,6 +93,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
             topicId: item.topicId,
             isCorrect: action.isCorrect,
             given: action.given,
+            ...(hinted ? { hinted: true } : {}),
           },
         ],
         mistakes: action.isCorrect
@@ -90,7 +110,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.phase !== 'feedback') return state;
       const index = state.index + 1;
       if (index >= state.items.length) return { ...state, phase: 'finished' };
-      return { ...state, index, phase: 'playing', last: undefined };
+      return { ...state, index, phase: 'playing', hinted: false, last: undefined };
     }
 
     case 'finish':

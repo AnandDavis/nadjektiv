@@ -34,6 +34,11 @@ test('pages never opened online still load and play offline', async ({ page, con
   await page.getByRole('button', { name: /Los geht/ }).click();
   await expect(page.getByRole('group', { name: 'Words to place' })).toBeVisible();
 
+  // Grid fill loads in its own bundle; it must be precached too.
+  await page.goto('/play/articles/grid');
+  await page.getByRole('button', { name: /Der bestimmte Artikel/ }).click();
+  await expect(page.getByRole('textbox', { name: 'Akk M' })).toBeVisible();
+
   await page.goto('/revise');
   await expect(page.getByText('Nichts zu wiederholen')).toBeVisible();
 });

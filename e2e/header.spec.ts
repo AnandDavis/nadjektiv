@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
-const appHeader = (page: import('@playwright/test').Page) =>
+const appHeader = (page: Page) =>
   page.getByRole('banner').filter({ has: page.getByRole('link', { name: 'Nadjektiv' }) });
 
 test('the app header is on every page except the quiz intro', async ({ page }) => {

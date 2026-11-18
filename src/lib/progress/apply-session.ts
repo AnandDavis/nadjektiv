@@ -4,6 +4,7 @@
  */
 
 import type { GameMode } from '@/content/types';
+import { isMixedMode } from '@/lib/game/modes';
 
 import { accuracy, xpForSession, type SessionResult } from '../game/scoring';
 import { levelForXp } from './level';
@@ -153,7 +154,7 @@ export function applySessionResult(
   for (const topicId of touched) {
     const before = topics[topicId] ?? createEmptyTopicProgress();
     let after = updateTopic(before, resultsByTopic.get(topicId) ?? []);
-    if (result.topicId === topicId && result.mode !== 'review') {
+    if (result.topicId === topicId && !isMixedMode(result.mode)) {
       const { best, newBests: bests } = updateBest(before.modes[result.mode], result);
       after = { ...after, modes: { ...after.modes, [result.mode]: best } };
       newBests = bests;
@@ -185,6 +186,7 @@ export function applySessionResult(
       revise,
       grids,
       startedAt: progress.startedAt ?? now,
+      ...(result.dailyDate ? { daily: { lastDone: result.dailyDate } } : {}),
     },
     xpGained,
     newBests,

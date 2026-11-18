@@ -1,4 +1,4 @@
-import type { GameMode } from '@/content/types';
+import type { GameMode, MixedMode } from '@/content/types';
 
 import { SESSION_LENGTH, SORT_ROUND_SECONDS } from './session';
 
@@ -36,3 +36,8 @@ export const MODE_INFO: Record<GameMode, ModeInfo> = {
       'Fill in a whole table before the clock runs out. Each cell locks when it’s right.',
   },
 };
+
+/** Mixed review and the daily mix draw from many topics and set no topic bests. */
+export function isMixedMode(mode: string): mode is MixedMode {
+  return mode === 'review' || mode === 'daily';
+}

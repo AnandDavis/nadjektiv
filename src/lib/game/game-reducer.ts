@@ -2,7 +2,7 @@
  * State machine for one game round: intro → playing ⇄ feedback → finished.
  */
 
-import type { GameMode } from '@/content/types';
+import type { GameMode, MixedMode } from '@/content/types';
 
 import {
   pointsForCorrect,
@@ -133,7 +133,7 @@ export function currentItem(state: GameState): SessionItem | undefined {
 
 export function toSessionResult(
   state: GameState,
-  mode: GameMode | 'review',
+  mode: GameMode | MixedMode,
   topicId?: string,
 ): SessionResult {
   return { topicId, mode, answers: state.answers, score: state.score, bestCombo: state.bestCombo };

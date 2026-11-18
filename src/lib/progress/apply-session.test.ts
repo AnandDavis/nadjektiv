@@ -196,3 +196,16 @@ describe('hinted answers', () => {
     expect(outcome.xpGained).toBe(5);
   });
 });
+
+describe('daily mix', () => {
+  it('marks the day done, and sets no topic bests', () => {
+    const outcome = applySessionResult(
+      createEmptyProgress(),
+      { ...result(3, 1), topicId: undefined, mode: 'daily', dailyDate: '2026-11-18' },
+      modes,
+      NOW,
+    );
+    expect(outcome.progress.daily).toEqual({ lastDone: '2026-11-18' });
+    expect(outcome.progress.topics.t.modes).toEqual({});
+  });
+});

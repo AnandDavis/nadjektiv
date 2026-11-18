@@ -2,7 +2,8 @@
 
 import { useCallback, useRef, useState } from 'react';
 
-import type { GameMode, QuestionMode } from '@/content/types';
+import type { GameMode, RoundMode } from '@/content/types';
+import { dailyKey } from '@/lib/game/daily';
 import {
   INITIAL_GAME_STATE,
   gameReducer,
@@ -16,7 +17,7 @@ import type { Progress } from '@/lib/progress/types';
 import { getSnapshot, updateProgress } from '@/lib/storage/progress-client';
 
 interface UseGameSessionOptions {
-  mode: QuestionMode | 'review';
+  mode: RoundMode;
   topicId?: string;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   /** Builds the round's questions from current progress when the learner presses start. */
@@ -41,7 +42,10 @@ export function useGameSession({ mode, topicId, modesByTopic, buildItems }: UseG
       setState(next);
 
       if (next.phase === 'finished' && previous.phase !== 'finished' && next.answers.length > 0) {
-        const result = toSessionResult(next, mode, topicId);
+        const result = {
+          ...toSessionResult(next, mode, topicId),
+          ...(mode === 'daily' ? { dailyDate: dailyKey(new Date()) } : {}),
+        };
         const now = new Date().toISOString();
         let recorded: SessionOutcome | null = null;
         updateProgress((progress) => {

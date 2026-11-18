@@ -72,6 +72,11 @@ export const progressSchema = z.object({
   grids: z.record(z.string(), gridBestSchema),
   /** ISO timestamp of the first session. */
   startedAt: z.string().optional(),
+  /**
+   * The daily mix, for its "done today" mark. Optional and added without a version
+   * bump: older saves read unchanged, and an older cached app drops it harmlessly.
+   */
+  daily: z.object({ lastDone: z.string() }).optional(),
 });
 
 export type QuestionStats = z.infer<typeof questionStatsSchema>;

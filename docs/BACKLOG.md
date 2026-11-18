@@ -2,17 +2,17 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## Reorganise the About page
+
+**Why:** the About page has grown long: the version, the feature list, how XP and levels work, the medal rules and the change log all stack in one scroll, and the change log grows with every release.
+
+**Notes:** split it with tabs or accordions, for example _Features_, _XP and medals_ and _What's new_, keeping the heading, version and "See the intro" link at the top. Use native `<details>`/`<summary>` for accordions, or an accessible tab pattern (`role="tablist"`, arrow-key navigation) if tabs. Either must work at 360 px and in both themes, and keep the Bauhaus look: rules and blocks, not rounded cards. Open the section a link points at (e.g. `/about#changelog`). Update the About visual baselines and the a11y spec.
+
 ## Audio
 
 **Why:** the app is silent. Hearing each sentence helps with listening and pronunciation, which are both on the A1/A2 sheets.
 
 **Notes:** a speaker button on German sentences, rule examples and revise cards, using the browser's speech synthesis with a `de-DE` voice. It's free and works offline where the device has a German voice. Hide the button when no German voice is available. Add a setting to auto-play after each answer.
-
-## Daily mix
-
-**Why:** a short, ready-made practice round each day, without streak pressure.
-
-**Notes:** 10 questions drawn from the revise list and your weakest topics. Questions are seeded from the date, so the round is the same all day across devices. Nothing is lost for skipping a day, and no streak counter. Show "done today" once it's completed.
 
 ## Topic map
 

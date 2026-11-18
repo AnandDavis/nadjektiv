@@ -9,6 +9,14 @@ export interface Bilingual {
 }
 
 export const COPY = {
+  daily: {
+    title: { de: 'Tagesmix', en: 'Daily mix' },
+    done: { de: 'Heute erledigt', en: 'Done today' },
+    doneHint: {
+      de: 'Morgen gibt es einen neuen Mix. Du kannst diesen trotzdem nochmal spielen.',
+      en: 'A new mix tomorrow. You can still play this one again.',
+    },
+  },
   hint: {
     // "Half" matches GAME_CONFIG.points.hintFactor.
     show: { de: 'Hinweis zeigen · halbe Punkte', en: 'Show a hint · half points' },
@@ -239,4 +247,14 @@ export function topicCount(count: number): Bilingual {
 /** "Schritt 2 von 3" / "Step 2 of 3" */
 export function stepOf(step: number, total: number): Bilingual {
   return { de: `Schritt ${step} von ${total}`, en: `Step ${step} of ${total}` };
+}
+
+/** The daily mix's line on the home page, for a learner with or without progress. */
+export function dailyHint(length: number, hasProgress: boolean): Bilingual {
+  return hasProgress
+    ? {
+        de: `${length} Fragen aus deiner Wiederholungsliste und deinen schwächsten Themen`,
+        en: `${length} questions from your revise list and your weakest topics`,
+      }
+    : { de: `${length} Fragen zum Einstieg`, en: `${length} questions to get you started` };
 }

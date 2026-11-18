@@ -62,7 +62,7 @@ export function FeedbackPanel({
   points,
   onContinue,
 }: FeedbackPanelProps) {
-  // The panel is pinned to the bottom of the screen so Weiter is always in reach. A
+  // On a phone the panel is pinned to the bottom so Weiter is always in reach, and a
   // spacer of the same height lets the end of the question scroll into view above it.
   const sheet = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -76,9 +76,13 @@ export function FeedbackPanel({
 
   return (
     <>
-      <div aria-hidden="true" style={{ height }} />
-      <div ref={sheet} className="fixed inset-x-0 bottom-0 z-20 pb-safe">
-        <div className="mx-auto max-h-3/4 w-full max-w-xl overflow-y-auto px-4 pb-4">
+      <div aria-hidden="true" className="md:hidden" style={{ height }} />
+      {/* Pinned to the bottom on a phone; in the page under the question on a wider screen. */}
+      <div
+        ref={sheet}
+        className="fixed inset-x-0 bottom-0 z-20 pb-safe md:static md:z-auto md:pb-0"
+      >
+        <div className="mx-auto max-h-3/4 w-full max-w-xl overflow-y-auto px-4 pb-4 md:max-h-none md:overflow-visible md:px-0 md:pb-0">
           <div className="border-2 border-ink bg-surface motion-safe:animate-rise">
             <p
               className={cn(

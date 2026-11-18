@@ -16,8 +16,8 @@ export type QuestionMode = 'sort' | 'gap' | 'build' | 'type';
 /** Every game mode: the question modes plus grid fill, which shows a whole table. */
 export type GameMode = QuestionMode | 'grid';
 
-/** A round of questions across topics: mixed review, or the daily mix. */
-export type MixedMode = 'review' | 'daily';
+/** A round of questions across topics: mixed review, the daily mix, or a level test. */
+export type MixedMode = 'review' | 'daily' | 'exam';
 
 /** What one question-at-a-time round is playing. */
 export type RoundMode = QuestionMode | MixedMode;

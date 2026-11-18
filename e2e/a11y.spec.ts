@@ -11,6 +11,7 @@ const PAGES = [
   '/about',
   '/glossary',
   '/records',
+  '/play/exam/a1',
 ];
 
 for (const colorScheme of ['light', 'dark'] as const) {

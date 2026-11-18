@@ -3,6 +3,7 @@
  */
 
 import { TOPICS } from '@/content';
+import { EXAM_LEVELS } from '@/lib/exam/exam';
 import { availableModes } from '@/lib/game/session';
 
 const STATIC_ROUTES = [
@@ -16,6 +17,7 @@ const STATIC_ROUTES = [
   '/records',
   '/play/review',
   '/play/daily',
+  ...EXAM_LEVELS.map((level) => `/play/exam/${level.toLowerCase()}`),
 ];
 const ASSETS = [
   '/manifest.webmanifest',

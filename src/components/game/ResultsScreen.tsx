@@ -28,6 +28,8 @@ interface ResultsScreenProps {
   /** About this round's topic, for a Gemeistert celebration. */
   graduation?: GraduationInfo;
   onPlayAgain: () => void;
+  /** Shown under the stats, e.g. a level test's grade. */
+  children?: ReactNode;
 }
 
 export function ResultsScreen({
@@ -42,6 +44,7 @@ export function ResultsScreen({
   topicTitles,
   graduation,
   onPlayAgain,
+  children,
 }: ResultsScreenProps) {
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -93,6 +96,8 @@ export function ResultsScreen({
           </span>
         )}
       </p>
+
+      {children}
 
       {outcome && <GraduationPanel outcome={outcome} topicTitles={topicTitles} info={graduation} />}
 

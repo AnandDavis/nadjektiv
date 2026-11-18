@@ -3,7 +3,7 @@
  */
 
 import { GAME_CONFIG } from '@/config/game';
-import type { GameMode, MixedMode } from '@/content/types';
+import type { GameMode, Level, MixedMode } from '@/content/types';
 
 export const POINTS_PER_CORRECT = GAME_CONFIG.points.perCorrect;
 /** Every COMBO_STEP correct answers in a row raises the multiplier by one. */
@@ -27,6 +27,8 @@ export interface SessionResult {
   /** Undefined for mixed review sessions, which don't set personal bests. */
   topicId?: string;
   mode: GameMode | MixedMode;
+  /** Level tests only: the level tested. */
+  examLevel?: Level;
   /** Daily mix only: the day it was played for (see dailyKey). */
   dailyDate?: string;
   /** Blitz without the clock: its bests are kept apart from timed Blitz. */

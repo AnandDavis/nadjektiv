@@ -106,6 +106,13 @@ export const progressSchema = z.object({
    * without a version bump (optional).
    */
   seenNouns: z.optional(z.array(z.string())),
+  /** Level tests, keyed by level ("A1"). Added without a version bump (optional). */
+  exams: z.optional(
+    z.record(
+      z.string(),
+      z.object({ plays: count, bestPercent: z.int().check(z.gte(0), z.lte(100)) }),
+    ),
+  ),
 });
 
 export const COMBO_BREAKS_KEPT = 10;

@@ -27,6 +27,10 @@ export const GAME_CONFIG = {
    * answer at the last one takes it off the list. A miss starts it again.
    */
   reviseIntervalsDays: [1, 3, 7],
+  /** Questions in a level test (Prüfung), spread across every topic of the level. */
+  examLength: 20,
+  /** Lowest percentage for each grade, as on the Goethe-Zertifikat; below the last, not passed. */
+  examGrades: { sehrGut: 90, gut: 80, befriedigend: 70, ausreichend: 60 },
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

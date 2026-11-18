@@ -5,7 +5,8 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
 import { AppHeader } from '@/components/layout/AppHeader';
 import { Ui } from '@/components/ui';
 
-import type { GameMode, Question, RoundMode, Topic } from '@/content/types';
+import type { GameMode, Level, Question, RoundMode, Topic } from '@/content/types';
+import { buildExamSession } from '@/lib/exam/exam';
 import { isMixedMode } from '@/lib/game/modes';
 import { GAME_CONFIG } from '@/config/game';
 import { useGameSession } from '@/hooks/useGameSession';
@@ -31,6 +32,7 @@ import type { Progress } from '@/lib/progress/types';
 import { OPTIONS } from '@/lib/storage/options';
 import { updateProgress } from '@/lib/storage/progress-client';
 
+import { ExamResult } from './ExamResult';
 import { FeedbackPanel } from './FeedbackPanel';
 import { GameHeader } from './GameHeader';
 import { GameIntro } from './GameIntro';
@@ -57,6 +59,8 @@ interface GameScreenProps {
   topicTitles: Readonly<Record<string, Bilingual>>;
   /** About this round's topic, for a Gemeistert celebration (topic rounds only). */
   graduation?: GraduationInfo;
+  /** Level tests only (mode "exam"): the level, whose topics are `topics`. */
+  examLevel?: Level;
 }
 
 function correctAnswerText(question: Question): string {
@@ -92,6 +96,7 @@ export function GameScreen(props: GameScreenProps) {
         return items;
       }
       const rng = createRng(Date.now());
+      if (mode === 'exam') return buildExamSession(topics, rng);
       if (mode === 'review') {
         return buildReviewSession(
           topics,
@@ -113,11 +118,14 @@ export function GameScreen(props: GameScreenProps) {
     modesByTopic: props.modesByTopic,
     buildItems,
     untimed,
-    autoHint: hintsOption === 'shown',
+    // A test has no hints.
+    autoHint: hintsOption === 'shown' && mode !== 'exam',
+    examLevel: props.examLevel,
   });
   const item = currentItem(state);
   const isTimed = mode === 'sort' && !untimed;
-  const hintText = item && hintsOption !== 'hidden' ? hintFor(item.question) : undefined;
+  const hintText =
+    item && hintsOption !== 'hidden' && mode !== 'exam' ? hintFor(item.question) : undefined;
 
   // A noun met for the first time is shown before it's asked (and stops the clock).
   const [metThisRound, setMetThisRound] = useState<ReadonlySet<string>>(new Set());
@@ -253,7 +261,16 @@ export function GameScreen(props: GameScreenProps) {
             topicTitles={props.topicTitles}
             graduation={props.graduation}
             onPlayAgain={start}
-          />
+          >
+            {props.examLevel && (
+              <ExamResult
+                level={props.examLevel}
+                answers={state.answers}
+                outcome={outcome}
+                topicTitles={props.topicTitles}
+              />
+            )}
+          </ResultsScreen>
         )}
       </main>
     </div>

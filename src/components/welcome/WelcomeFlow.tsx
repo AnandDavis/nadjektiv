@@ -52,7 +52,7 @@ export function WelcomeFlow({ topicCount }: { topicCount: number }) {
   return (
     <main className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-4 pt-safe pb-safe">
       <div className="flex min-h-14 items-center gap-3">
-        <span className="text-xl font-black text-ink uppercase font-stretch-semi-expanded">
+        <span className="text-xl font-black tracking-wider text-ink uppercase">
           {APP_CONFIG.name}
         </span>
         <span className="ml-auto">

@@ -25,7 +25,7 @@ export function AppHeader() {
       <div className="mx-auto flex h-14 w-full max-w-xl items-center gap-3 px-4">
         <Link
           href="/"
-          className="-ml-1 flex min-h-11 items-center px-1 text-xl font-black uppercase font-stretch-semi-expanded"
+          className="-ml-1 flex min-h-11 items-center px-1 text-xl font-black tracking-wider uppercase"
         >
           {APP_CONFIG.name}
         </Link>

@@ -10,7 +10,6 @@ import './globals.css';
 const archivo = Archivo({
   variable: '--font-archivo',
   subsets: ['latin'],
-  axes: ['wdth'],
   display: 'swap',
 });
 

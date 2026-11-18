@@ -43,6 +43,18 @@ export const plurals: Topic = {
       ],
     },
     {
+      heading: 'Nouns with no singular',
+      body: 'A few everyday nouns only exist in the plural. They always take die and a plural verb.',
+      examples: [
+        { de: 'Meine Eltern wohnen in Köln.', en: 'My parents live in Cologne.' },
+        { de: 'Die Leute sind nett.', en: 'The people are nice.' },
+        {
+          de: 'die Geschwister, die Ferien, die Kosten',
+          en: 'brothers and sisters, the school holidays, the costs',
+        },
+      ],
+    },
+    {
       heading: 'Dative plural: add -n',
       body: 'In the dative plural the article is den and the noun adds -n. Plurals that already end in -n or end in -s add nothing.',
       examples: [
@@ -346,6 +358,82 @@ export const plurals: Topic = {
       translation: 'Please close the windows!',
       explanation:
         'Nouns ending in -er add nothing in the plural: das Fenster, die Fenster. The article die shows it is plural.',
+    },
+    {
+      id: 'plurals-gap-29',
+      kind: 'gap',
+      before: 'Meine ',
+      after: ' wohnen in Köln.',
+      options: ['Eltern', 'Elter', 'Elterns'],
+      answer: 'Eltern',
+      translation: 'My parents live in Cologne.',
+      explanation:
+        'Eltern (parents) only exists in the plural: die Eltern, meine Eltern. There is no singular form to learn.',
+    },
+    {
+      id: 'plurals-gap-30',
+      kind: 'gap',
+      before: 'Die Leute ',
+      after: ' sehr nett.',
+      options: ['sind', 'ist'],
+      answer: 'sind',
+      translation: 'The people are very nice.',
+      explanation:
+        'Leute (people) only exists in the plural, so the verb is plural too: die Leute sind.',
+    },
+    {
+      id: 'plurals-gap-31',
+      kind: 'gap',
+      before: 'Wann beginnen ',
+      after: ' Ferien?',
+      options: ['die', 'der', 'das'],
+      answer: 'die',
+      translation: 'When do the school holidays start?',
+      explanation: 'Ferien (school holidays) only exists in the plural, so its article is die.',
+    },
+    {
+      id: 'plurals-gap-32',
+      kind: 'gap',
+      before: 'Hast du ',
+      after: '?',
+      options: ['Geschwister', 'einen Geschwister', 'eine Geschwister'],
+      answer: 'Geschwister',
+      translation: 'Do you have brothers and sisters?',
+      explanation:
+        'Geschwister (brothers and sisters) is plural, so there is no ein: Hast du Geschwister?',
+    },
+    {
+      id: 'plurals-gap-33',
+      kind: 'gap',
+      before: 'Ich spiele mit ',
+      after: ' Geschwistern.',
+      options: ['meinen', 'meine', 'meinem'],
+      answer: 'meinen',
+      translation: 'I am playing with my brothers and sisters.',
+      explanation:
+        'Geschwister is plural, and mit takes the dative: dative plural is meinen, and the noun adds -n: mit meinen Geschwistern.',
+    },
+    {
+      id: 'plurals-gap-34',
+      kind: 'gap',
+      before: 'Die Kosten ',
+      after: ' zu hoch.',
+      options: ['sind', 'ist'],
+      answer: 'sind',
+      translation: 'The costs are too high.',
+      explanation:
+        'Kosten (costs) only exists in the plural, so the verb is plural: die Kosten sind.',
+    },
+    {
+      id: 'plurals-gap-35',
+      kind: 'gap',
+      before: 'Am Wochenende besuchen wir ',
+      after: ' Großeltern.',
+      options: ['unsere', 'unseren', 'unserer'],
+      answer: 'unsere',
+      translation: 'At the weekend we are visiting our grandparents.',
+      explanation:
+        'Großeltern only exists in the plural. Plural accusative possessives end in -e: unsere Großeltern.',
     },
   ],
 };

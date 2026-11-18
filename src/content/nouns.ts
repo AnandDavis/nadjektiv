@@ -890,6 +890,23 @@ const MORE_NOUNS: readonly Noun[] = [
   { word: 'Sonntag', gender: 'der', plural: 'Sonntage', gloss: 'Sunday' },
   { word: 'Häuschen', gender: 'das', plural: 'Häuschen', gloss: 'little house' },
   { word: 'Zeitschrift', gender: 'die', plural: 'Zeitschriften', gloss: 'magazine' },
+  // Compound nouns in the gender quiz.
+  { word: 'Kinderzimmer', gender: 'das', plural: 'Kinderzimmer', gloss: 'children’s room' },
+  { word: 'Hausaufgabe', gender: 'die', plural: 'Hausaufgaben', gloss: 'homework task' },
+  { word: 'Haustür', gender: 'die', plural: 'Haustüren', gloss: 'front door' },
+  { word: 'Schreibtisch', gender: 'der', plural: 'Schreibtische', gloss: 'desk' },
+  { word: 'Fußball', gender: 'der', plural: 'Fußbälle', gloss: 'football' },
+  { word: 'Handschuh', gender: 'der', plural: 'Handschuhe', gloss: 'glove' },
+  { word: 'Bücherregal', gender: 'das', plural: 'Bücherregale', gloss: 'bookshelf' },
+  { word: 'Briefmarke', gender: 'die', plural: 'Briefmarken', gloss: 'stamp' },
+  { word: 'Tomatensuppe', gender: 'die', plural: 'Tomatensuppen', gloss: 'tomato soup' },
+  { word: 'Hauptbahnhof', gender: 'der', plural: 'Hauptbahnhöfe', gloss: 'main station' },
+  { word: 'Zahnbürste', gender: 'die', plural: 'Zahnbürsten', gloss: 'toothbrush' },
+  { word: 'Schlafzimmer', gender: 'das', plural: 'Schlafzimmer', gloss: 'bedroom' },
+  { word: 'Sonnenbrille', gender: 'die', plural: 'Sonnenbrillen', gloss: 'sunglasses' },
+  { word: 'Kaffeetasse', gender: 'die', plural: 'Kaffeetassen', gloss: 'coffee cup' },
+  { word: 'Stadtplan', gender: 'der', plural: 'Stadtpläne', gloss: 'street map' },
+  { word: 'Lieblingsfarbe', gender: 'die', plural: 'Lieblingsfarben', gloss: 'favourite colour' },
 ];
 
 /** Every noun with its gender and plural, by word. */

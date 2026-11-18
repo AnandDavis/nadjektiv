@@ -55,3 +55,10 @@ describe('masteryFor', () => {
     expect(info.next?.requirements.find((r) => !r.isMet)?.label.de).toMatch(/30 Fragen/);
   });
 });
+
+describe('grid fill and medals', () => {
+  it('never requires grid fill for gold or mastered', () => {
+    const p = progress(100, 38, 40, ['gap', 'sort']);
+    expect(masteryFor(p, ['sort', 'gap', 'grid']).tier).toBe('mastered');
+  });
+});

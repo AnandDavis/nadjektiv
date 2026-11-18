@@ -17,7 +17,7 @@ describe('parseProgress', () => {
       questions: { 'articles-gap-1': { seen: 2, correct: 1 } },
       startedAt: '2026-11-18T10:00:00.000Z',
     };
-    expect(parseProgress(v1)).toEqual({ ...v1, version: PROGRESS_VERSION, revise: {} });
+    expect(parseProgress(v1)).toEqual({ ...v1, version: PROGRESS_VERSION, revise: {}, grids: {} });
   });
 
   it('rejects data that is not progress', () => {
@@ -31,5 +31,25 @@ describe('parseProgress without a version', () => {
     expect(() => parseProgress({ xp: 1, topics: {}, questions: {}, revise: {} })).toThrow(
       ProgressParseError,
     );
+  });
+});
+
+describe('parseProgress from version 2', () => {
+  it('keeps the revise list and adds empty grid bests', () => {
+    const v2 = {
+      version: 2,
+      xp: 40,
+      topics: {},
+      questions: {},
+      revise: {
+        'articles-gap-1': {
+          topicId: 'articles',
+          given: 'dem',
+          misses: 1,
+          lastMissedAt: '2026-11-18T10:00:00Z',
+        },
+      },
+    };
+    expect(parseProgress(v2)).toEqual({ ...v2, version: PROGRESS_VERSION, grids: {} });
   });
 });

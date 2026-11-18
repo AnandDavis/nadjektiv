@@ -5,7 +5,7 @@
  * There is no decay for time away — only for getting things wrong.
  */
 
-import type { GameMode } from '@/content/types';
+import type { GameMode, QuestionMode } from '@/content/types';
 
 import { RECENT_WINDOW, type TopicProgress } from './types';
 import type { Bilingual } from '../i18n/copy';
@@ -52,7 +52,19 @@ export function recentAccuracy(progress: TopicProgress | undefined): number {
   return progress.recent.reduce<number>((sum, r) => sum + r, 0) / progress.recent.length;
 }
 
-const MODE_NAMES: Record<GameMode, string> = { sort: 'Blitz', gap: 'Lückentext', build: 'Satzbau' };
+const MODE_NAMES: Record<QuestionMode, string> = {
+  sort: 'Blitz',
+  gap: 'Lückentext',
+  build: 'Satzbau',
+};
+
+/**
+ * Modes that count towards "play every mode". Grid fill is a bonus: it arrived after
+ * learners had earned medals, and requiring it would take medals away.
+ */
+function requiredModes(modes: readonly GameMode[]): QuestionMode[] {
+  return modes.filter((mode): mode is QuestionMode => mode !== 'grid');
+}
 
 function requirementsFor(
   rule: TierRule,
@@ -78,8 +90,9 @@ function requirementsFor(
       isMet: answered > 0 && acc >= rule.minAccuracy,
     },
   ];
-  if (rule.needsAllModes && modes.length > 1) {
-    for (const mode of modes) {
+  const required = requiredModes(modes);
+  if (rule.needsAllModes && required.length > 1) {
+    for (const mode of required) {
       requirements.push({
         label: { de: `${MODE_NAMES[mode]} spielen`, en: `Play ${MODE_NAMES[mode]}` },
         isMet: Boolean(progress?.modes[mode]),

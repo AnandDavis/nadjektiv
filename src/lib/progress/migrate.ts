@@ -11,6 +11,8 @@ type Migration = (data: Record<string, unknown>) => Record<string, unknown>;
 const MIGRATIONS: Record<number, Migration> = {
   // v2 adds the "to revise" list. Earlier misses weren't recorded, so it starts empty.
   1: (data) => ({ ...data, version: 2, revise: {} }),
+  // v3 adds grid-fill bests. No grid has been played before, so it starts empty.
+  2: (data) => ({ ...data, version: 3, grids: {} }),
 };
 
 export class ProgressParseError extends Error {}

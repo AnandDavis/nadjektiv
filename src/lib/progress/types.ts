@@ -5,7 +5,7 @@
 
 import { z } from 'zod';
 
-export const PROGRESS_VERSION = 2;
+export const PROGRESS_VERSION = 3;
 
 /** How many recent answers per topic feed the mastery accuracy. */
 export const RECENT_WINDOW = 40;
@@ -34,6 +34,7 @@ export const topicProgressSchema = z.object({
     sort: modeBestSchema.optional(),
     gap: modeBestSchema.optional(),
     build: modeBestSchema.optional(),
+    grid: modeBestSchema.optional(),
   }),
 });
 
@@ -48,6 +49,15 @@ export const reviseEntrySchema = z.object({
   lastMissedAt: z.string(),
 });
 
+/** Personal bests for one grid-fill table. */
+export const gridBestSchema = z.object({
+  plays: count,
+  /** Most cells solved in one round. */
+  bestCells: count,
+  /** Fastest complete round, in ms. Undefined until the table has been completed. */
+  bestTimeMs: count.optional(),
+});
+
 export const progressSchema = z.object({
   version: z.literal(PROGRESS_VERSION),
   xp: count,
@@ -55,6 +65,8 @@ export const progressSchema = z.object({
   questions: z.record(z.string(), questionStatsSchema),
   /** The "to revise" list, keyed by question id. */
   revise: z.record(z.string(), reviseEntrySchema),
+  /** Grid-fill bests, keyed by grid id. */
+  grids: z.record(z.string(), gridBestSchema),
   /** ISO timestamp of the first session. */
   startedAt: z.string().optional(),
 });
@@ -63,10 +75,11 @@ export type QuestionStats = z.infer<typeof questionStatsSchema>;
 export type ModeBest = z.infer<typeof modeBestSchema>;
 export type TopicProgress = z.infer<typeof topicProgressSchema>;
 export type ReviseEntry = z.infer<typeof reviseEntrySchema>;
+export type GridBest = z.infer<typeof gridBestSchema>;
 export type Progress = z.infer<typeof progressSchema>;
 
 export function createEmptyProgress(): Progress {
-  return { version: PROGRESS_VERSION, xp: 0, topics: {}, questions: {}, revise: {} };
+  return { version: PROGRESS_VERSION, xp: 0, topics: {}, questions: {}, revise: {}, grids: {} };
 }
 
 export function createEmptyTopicProgress(): TopicProgress {

@@ -127,3 +127,47 @@ describe('applySessionResult edge cases', () => {
     expect(outcome.progress.topics.t.answered).toBe(0);
   });
 });
+
+describe('grid rounds', () => {
+  const cell = (n: number, isCorrect: boolean) => ({
+    questionId: `t-grid-1:1:${n}`,
+    topicId: 't',
+    isCorrect,
+    given: isCorrect ? 'den' : '',
+  });
+  const grid = (correct: number, total: number, timeMs?: number): SessionResult => ({
+    topicId: 't',
+    mode: 'grid',
+    gridId: 't-grid-1',
+    answers: Array.from({ length: total }, (_, i) => cell(i, i < correct)),
+    score: correct * 10,
+    bestCombo: 0,
+    ...(timeMs === undefined ? {} : { timeMs }),
+  });
+  const gridModes = { t: ['gap' as const, 'grid' as const] };
+
+  it('records per-table bests and puts missed cells on the revise list', () => {
+    const outcome = applySessionResult(createEmptyProgress(), grid(3, 4), gridModes, NOW);
+    expect(outcome.progress.grids['t-grid-1']).toEqual({ plays: 1, bestCells: 3 });
+    expect(Object.keys(outcome.progress.revise)).toEqual(['t-grid-1:1:3']);
+    expect(outcome.progress.topics.t.modes.grid?.plays).toBe(1);
+  });
+
+  it('announces a first complete time and then faster times', () => {
+    let progress = applySessionResult(createEmptyProgress(), grid(3, 4), gridModes, NOW).progress;
+    let outcome = applySessionResult(progress, grid(4, 4, 50_000), gridModes, NOW);
+    expect(outcome.newBests).toEqual(['time']);
+    expect(outcome.progress.grids['t-grid-1'].bestTimeMs).toBe(50_000);
+    progress = outcome.progress;
+    outcome = applySessionResult(progress, grid(4, 4, 60_000), gridModes, NOW);
+    expect(outcome.newBests).toEqual([]);
+    expect(outcome.progress.grids['t-grid-1'].bestTimeMs).toBe(50_000);
+    outcome = applySessionResult(progress, grid(4, 4, 40_000), gridModes, NOW);
+    expect(outcome.newBests).toEqual(['time']);
+  });
+
+  it('announces more cells solved when the table is not completed', () => {
+    const progress = applySessionResult(createEmptyProgress(), grid(1, 4), gridModes, NOW).progress;
+    expect(applySessionResult(progress, grid(2, 4), gridModes, NOW).newBests).toEqual(['cells']);
+  });
+});

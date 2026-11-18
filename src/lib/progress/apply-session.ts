@@ -11,12 +11,13 @@ import { masteryFor, tierRank, type Tier } from './mastery';
 import {
   RECENT_WINDOW,
   createEmptyTopicProgress,
+  type GridBest,
   type ModeBest,
   type Progress,
   type TopicProgress,
 } from './types';
 
-export type BestKind = 'score' | 'accuracy' | 'combo';
+export type BestKind = 'score' | 'accuracy' | 'combo' | 'time' | 'cells';
 
 export interface SessionOutcome {
   progress: Progress;
@@ -60,6 +61,37 @@ function updateBest(
       bestScore: Math.max(previous?.bestScore ?? 0, result.score),
       bestAccuracy: Math.max(previous?.bestAccuracy ?? 0, acc),
       bestCombo: Math.max(previous?.bestCombo ?? 0, result.bestCombo),
+    },
+    newBests,
+  };
+}
+
+/**
+ * Grid tables are compared with themselves: the most cells solved, and the fastest
+ * complete round. A first play sets the baseline without being announced.
+ */
+function updateGridBest(
+  previous: GridBest | undefined,
+  result: SessionResult,
+): { best: GridBest; newBests: BestKind[] } {
+  const cells = result.answers.filter((a) => a.isCorrect).length;
+  const newBests: BestKind[] = [];
+  if (previous) {
+    if (
+      result.timeMs !== undefined &&
+      (previous.bestTimeMs === undefined || result.timeMs < previous.bestTimeMs)
+    ) {
+      newBests.push('time');
+    } else if (cells > previous.bestCells) {
+      newBests.push('cells');
+    }
+  }
+  const times = [previous?.bestTimeMs, result.timeMs].filter((t): t is number => t !== undefined);
+  return {
+    best: {
+      plays: (previous?.plays ?? 0) + 1,
+      bestCells: Math.max(previous?.bestCells ?? 0, cells),
+      ...(times.length > 0 ? { bestTimeMs: Math.min(...times) } : {}),
     },
     newBests,
   };
@@ -112,6 +144,7 @@ export function applySessionResult(
   }
 
   let newBests: BestKind[] = [];
+  const grids = { ...progress.grids };
   const tierUps: SessionOutcome['tierUps'] = [];
   const touched = new Set([...resultsByTopic.keys(), ...(result.topicId ? [result.topicId] : [])]);
 
@@ -122,6 +155,12 @@ export function applySessionResult(
       const { best, newBests: bests } = updateBest(before.modes[result.mode], result);
       after = { ...after, modes: { ...after.modes, [result.mode]: best } };
       newBests = bests;
+    }
+    if (result.topicId === topicId && result.mode === 'grid' && result.gridId) {
+      const { best, newBests: gridBests } = updateGridBest(grids[result.gridId], result);
+      grids[result.gridId] = best;
+      // Scores from different tables aren't comparable; only the table's own bests count.
+      newBests = gridBests;
     }
     topics[topicId] = after;
 
@@ -136,7 +175,15 @@ export function applySessionResult(
   const levelAfter = levelForXp(xp).level;
 
   return {
-    progress: { ...progress, xp, topics, questions, revise, startedAt: progress.startedAt ?? now },
+    progress: {
+      ...progress,
+      xp,
+      topics,
+      questions,
+      revise,
+      grids,
+      startedAt: progress.startedAt ?? now,
+    },
     xpGained,
     newBests,
     levelUp: levelAfter > levelBefore ? { from: levelBefore, to: levelAfter } : undefined,

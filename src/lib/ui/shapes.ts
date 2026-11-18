@@ -6,7 +6,8 @@
 import type { GameMode } from '@/content/types';
 
 export type ShapeKind = 'square' | 'circle' | 'triangle' | 'grid' | 'bar';
-export type ShapeColor = 'blue' | 'red' | 'yellow' | 'ink';
+/** `primaries` paints the grid's four squares blue, red, yellow and ink. */
+export type ShapeColor = 'blue' | 'red' | 'yellow' | 'ink' | 'primaries';
 
 export interface ShapeSpec {
   kind: ShapeKind;
@@ -28,8 +29,8 @@ export const MODE_SHAPES: Record<GameMode, ShapeSpec> = {
   sort: { kind: 'triangle', color: 'yellow' },
   gap: { kind: 'square', color: 'blue' },
   build: { kind: 'circle', color: 'red' },
-  // Type the answer: an ink text cursor, a bonus mode like grid fill.
-  type: { kind: 'bar', color: 'ink' },
-  // Grid fill is the fourth mode: an ink table mark, so the three primaries keep der/die/das.
-  grid: { kind: 'grid', color: 'ink' },
+  // Type the answer: a red text cursor, set apart from Lückentext's blue square.
+  type: { kind: 'bar', color: 'red' },
+  // Grid fill: a table of all four Bauhaus colours.
+  grid: { kind: 'grid', color: 'primaries' },
 };

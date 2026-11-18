@@ -57,12 +57,17 @@ const eslintConfig = defineConfig([
     ],
     rules: { 'no-restricted-globals': 'off', 'no-restricted-properties': 'off' },
   },
+  {
+    // Node scripts report to the terminal.
+    files: ['scripts/**'],
+    rules: { 'no-console': 'off' },
+  },
   globalIgnores([
     '.next/**',
     'out/**',
     'build/**',
     'next-env.d.ts',
-    'public/sw.js',
+
     'playwright-report/**',
     'test-results/**',
   ]),

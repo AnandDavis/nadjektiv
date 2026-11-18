@@ -70,3 +70,18 @@ test('every step of the intro has no accessibility violations', async ({ page })
     if (step < 2) await page.getByRole('button', { name: 'Weiter' }).click();
   }
 });
+
+test('the intro reopens at step one however it was left', async ({ page }) => {
+  await page.goto('/welcome');
+  await page.getByRole('button', { name: 'Überspringen' }).click();
+  await page.goto('/about');
+  await page.getByRole('link', { name: 'Einführung ansehen' }).click();
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  await expect(page.getByText('Schritt 3 von 3')).toBeVisible();
+  // Leave mid-intro with the back button, then come back in through About.
+  await page.goBack();
+  await expect(page).toHaveURL(/\/about$/);
+  await page.getByRole('link', { name: 'Einführung ansehen' }).click();
+  await expect(page.getByText('Schritt 1 von 3')).toBeVisible();
+});

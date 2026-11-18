@@ -119,6 +119,10 @@ Questions live in `src/content/topics/<topic>.ts`; the model is documented in `s
 - Sentence-builder questions list every acceptable word order in `accepted`.
 - Run `npm test`. The content-integrity test checks IDs, answer keys, options and word orders.
 
+## Releases
+
+Versions follow [Semantic Versioning](https://semver.org) and are automated by [release-please](https://github.com/googleapis/release-please) from the [Conventional Commits](https://www.conventionalcommits.org) on `main`. It keeps a release pull request open that bumps the version and updates `CHANGELOG.md`: `fix` gives a patch release, `feat` a minor one, and a breaking change a major one. Merge that pull request to release; the About page shows the version.
+
 ## Deployment
 
 Built for Vercel: import the repository and deploy with the default Next.js settings. No environment variables are needed.

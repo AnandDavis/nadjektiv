@@ -31,7 +31,7 @@ interface OnScreenKeyboardProps {
 }
 
 /**
- * The app's own German keyboard, laid out like a phone's (Enter and delete either side
+ * The app's own German keyboard, laid out like a phone's (delete and Enter either side
  * of the bottom letter row, ä ö ü ß either side of the space bar), so typing never opens the system keyboard: no page jumps, and ä ö ü ß
  * are ordinary keys. Keys keep focus in the field (pointer-down is cancelled) so its
  * caret stays where the learner put it.
@@ -69,6 +69,16 @@ export function OnScreenKeyboard({
         <button
           type="button"
           onPointerDown={keep}
+          onClick={() => onKey({ type: 'backspace' })}
+          aria-label={COPY.keys.backspace[language]}
+          className={cn(KEY, 'flex-2')}
+        >
+          ⌫
+        </button>
+        {ROWS[2].map(letter)}
+        <button
+          type="button"
+          onPointerDown={keep}
           onClick={onEnter}
           disabled={!canEnter}
           aria-label={enterName}
@@ -78,16 +88,6 @@ export function OnScreenKeyboard({
           )}
         >
           {enterLabel}
-        </button>
-        {ROWS[2].map(letter)}
-        <button
-          type="button"
-          onPointerDown={keep}
-          onClick={() => onKey({ type: 'backspace' })}
-          aria-label={COPY.keys.backspace[language]}
-          className={cn(KEY, 'flex-2')}
-        >
-          ⌫
         </button>
       </div>
       <div className="flex gap-1">

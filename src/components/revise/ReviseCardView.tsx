@@ -4,6 +4,7 @@ import { diffClosest } from '@/lib/game/word-diff';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
 
+import { GlossaryText } from '../glossary/GlossaryText';
 import { TopicLink } from '../topics/TopicLink';
 
 interface ReviseCardViewProps {
@@ -93,7 +94,9 @@ export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardVi
         <p className="text-xs font-extrabold tracking-widest text-ink uppercase">
           <Ui {...COPY.game.why} />
         </p>
-        <p className="mt-1 text-sm text-ink">{card.explanation}</p>
+        <p className="mt-1 text-sm text-ink">
+          <GlossaryText text={card.explanation} />
+        </p>
       </div>
 
       {card.alsoCorrect.length > 0 && (

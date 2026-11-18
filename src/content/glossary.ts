@@ -16,6 +16,11 @@ export interface GlossaryEntry {
   example: { de: string; en: string; highlight: string[] };
   /** Topic ids that teach the term. */
   topics: string[];
+  /**
+   * English names in explanations that link here (any case). Only distinctive terms:
+   * everyday words like "verb" or "noun" aren't listed, so text isn't over-linked.
+   */
+  aliases?: string[];
 }
 
 export const GLOSSARY: readonly GlossaryEntry[] = [
@@ -27,6 +32,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       'An adjective in front of a noun takes an ending, and the ending depends on the article, the gender and the case.',
     example: { de: 'Das ist ein neues Auto.', en: 'That’s a new car.', highlight: ['neues'] },
     topics: ['adjective-endings'],
+    aliases: ['adjective ending', 'adjective endings'],
   },
   {
     id: 'akkusativ',
@@ -36,6 +42,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       'The case of the direct object: who or what the action is done to. Only the masculine changes: der becomes den, ein becomes einen.',
     example: { de: 'Ich sehe den Bus.', en: 'I can see the bus.', highlight: ['den Bus'] },
     topics: ['cases', 'articles'],
+    aliases: ['accusative'],
   },
   {
     id: 'artikel',
@@ -62,6 +69,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['meiner Mutter'],
     },
     topics: ['cases', 'dative-verbs', 'prepositions-place-time'],
+    aliases: ['dative'],
   },
   {
     id: 'genus',
@@ -88,6 +96,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['bleibe'],
     },
     topics: ['word-order', 'connectors'],
+    aliases: ['main clause'],
   },
   {
     id: 'hilfsverb',
@@ -101,6 +110,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['ist'],
     },
     topics: ['perfekt', 'zu-infinitive'],
+    aliases: ['auxiliary', 'auxiliary verb'],
   },
   {
     id: 'imperativ',
@@ -110,6 +120,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       'The form for instructions and requests. It has one form for du, one for ihr and one for Sie.',
     example: { de: 'Komm bitte schnell!', en: 'Please come quickly!', highlight: ['Komm'] },
     topics: ['imperative'],
+    aliases: ['imperative'],
   },
   {
     id: 'infinitiv',
@@ -123,6 +134,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['schwimmen'],
     },
     topics: ['modal-verbs', 'zu-infinitive'],
+    aliases: ['infinitive'],
   },
   {
     id: 'kasus',
@@ -149,6 +161,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['älter als'],
     },
     topics: ['comparatives'],
+    aliases: ['comparative'],
   },
   {
     id: 'konjugation',
@@ -175,6 +188,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['denn'],
     },
     topics: ['connectors'],
+    aliases: ['conjunction'],
   },
   {
     id: 'mittelfeld',
@@ -188,6 +202,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['dem Kind einen Ball'],
     },
     topics: ['sentence-middle'],
+    aliases: ['middle field'],
   },
   {
     id: 'modalverb',
@@ -201,6 +216,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['muss'],
     },
     topics: ['modal-verbs'],
+    aliases: ['modal verb', 'modal verbs'],
   },
   {
     id: 'nebensatz',
@@ -214,6 +230,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['weil ich krank bin'],
     },
     topics: ['connectors', 'word-order'],
+    aliases: ['subordinate clause'],
   },
   {
     id: 'negation',
@@ -253,6 +270,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['Der Lehrer'],
     },
     topics: ['cases'],
+    aliases: ['nominative'],
   },
   {
     id: 'objekt',
@@ -275,6 +293,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       'The verb form at the end of a Perfekt sentence, usually ge- … -t (gemacht) or ge- … -en (gegessen).',
     example: { de: 'Wir sind nach Hause gegangen.', en: 'We went home.', highlight: ['gegangen'] },
     topics: ['perfekt', 'irregular-verbs'],
+    aliases: ['past participle', 'participle'],
   },
   {
     id: 'perfekt',
@@ -336,6 +355,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['war'],
     },
     topics: ['praeteritum', 'irregular-verbs'],
+    aliases: ['simple past'],
   },
   {
     id: 'pronomen',
@@ -362,6 +382,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['mich'],
     },
     topics: ['reflexive-verbs'],
+    aliases: ['reflexive verb', 'reflexive verbs'],
   },
   {
     id: 'subjekt',
@@ -383,6 +404,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['am kürzesten'],
     },
     topics: ['comparatives'],
+    aliases: ['superlative'],
   },
   {
     id: 'trennbares-verb',
@@ -396,6 +418,7 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['kommt', 'an'],
     },
     topics: ['separable-verbs'],
+    aliases: ['separable verb', 'separable verbs'],
   },
   {
     id: 'verb',
@@ -422,5 +445,6 @@ export const GLOSSARY: readonly GlossaryEntry[] = [
       highlight: ['auf den Tisch', 'auf dem Tisch'],
     },
     topics: ['two-way-prepositions'],
+    aliases: ['two-way preposition', 'two-way prepositions'],
   },
 ];

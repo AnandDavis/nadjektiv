@@ -16,8 +16,8 @@ test('wrong answers are collected on the revise page with the answer and why', a
   await expect(page.getByText('Nichts zu wiederholen')).toBeVisible();
 
   await playGapRound(page, '/play/articles/gap');
-  const correctText = await page.getByText(/of 10 correct/).textContent();
-  const correct = Number(correctText?.match(/(\d+) of 10/)?.[1]);
+  const correctText = await page.getByText(/von 10 richtig/).textContent();
+  const correct = Number(correctText?.match(/(\d+) von 10/)?.[1]);
   test.skip(correct === 10, 'Every first option happened to be right; nothing to revise.');
 
   await expect(page.getByText(/neu auf deiner Wiederholungsliste/)).toBeVisible();

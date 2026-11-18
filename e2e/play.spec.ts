@@ -18,12 +18,12 @@ test('home lists A1 and A2 topics', async ({ page }) => {
 test('a finished gap round is saved and survives a reload', async ({ page }) => {
   await page.goto('/play/articles/gap');
   await answerGapRound(page);
-  await expect(page.getByText(/of 10 correct/)).toBeVisible();
+  await expect(page.getByText(/von 10 richtig/)).toBeVisible();
 
   await page.goto('/topics/articles');
-  await expect(page.getByText('Answer 10 questions (10 so far)')).toBeVisible();
+  await expect(page.getByText('10 Fragen beantworten (bisher 10)')).toBeVisible();
   await page.reload();
-  await expect(page.getByText('Answer 10 questions (10 so far)')).toBeVisible();
+  await expect(page.getByText('10 Fragen beantworten (bisher 10)')).toBeVisible();
 
   await page.goto('/');
   await expect(page.getByRole('link', { name: /Gemischte Wiederholung/ })).toBeVisible();
@@ -37,7 +37,7 @@ test('sentence builder checks a completed sentence', async ({ page }) => {
   while ((await pool.getByRole('button').count()) > 0) {
     await pool.getByRole('button').first().click();
   }
-  await page.getByRole('button', { name: 'Check' }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
   await expect(page.getByText(/Richtig!|Nicht ganz/)).toBeVisible();
 });
 
@@ -47,7 +47,7 @@ test('blitz round ends when time runs out', async ({ page }) => {
   await page.getByRole('button', { name: /Los geht/ }).click();
   // Don't answer: a wrong answer would (rightly) pause the clock.
   await page.clock.runFor(61_000);
-  await expect(page.getByRole('button', { name: 'Play again' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Nochmal' })).toBeVisible();
 });
 
 // Under Cache Components unknown params render on demand and stream before notFound()

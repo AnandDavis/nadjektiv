@@ -27,7 +27,8 @@ async function snap(page: Page, name: string, fullPage = false) {
     fullPage,
     animations: 'disabled',
     caret: 'hide',
-    maxDiffPixelRatio: 0.01,
+    // Rendering is deterministic on one machine, so even a changed word must fail.
+    maxDiffPixels: 40,
   });
 }
 

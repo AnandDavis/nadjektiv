@@ -25,3 +25,11 @@ describe('parseProgress', () => {
     expect(() => parseProgress({ version: 2, xp: -1 })).toThrow(ProgressParseError);
   });
 });
+
+describe('parseProgress without a version', () => {
+  it('rejects data that has no version number', () => {
+    expect(() => parseProgress({ xp: 1, topics: {}, questions: {}, revise: {} })).toThrow(
+      ProgressParseError,
+    );
+  });
+});

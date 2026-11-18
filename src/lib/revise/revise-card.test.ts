@@ -116,3 +116,17 @@ describe('findQuestion', () => {
     expect(findQuestion([topic], 'nope', 't-gap-1')).toBeUndefined();
   });
 });
+
+describe('correctForm for non-article sort answers', () => {
+  it('shows the prompt and the category it belongs to', () => {
+    expect(
+      correctForm({
+        id: 'x-sort-1',
+        kind: 'sort',
+        prompt: 'mit',
+        answer: 'Dativ',
+        explanation: 'mit + Dativ.',
+      }),
+    ).toBe('mit → Dativ');
+  });
+});

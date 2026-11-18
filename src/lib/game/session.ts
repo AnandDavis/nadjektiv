@@ -67,6 +67,7 @@ export function topicItems(topic: Topic, mode: GameMode): SessionItem[] {
       return (topic.gap ?? []).map((question) => ({ topicId: topic.id, question }));
     case 'build':
       return (topic.build ?? []).map((question) => ({ topicId: topic.id, question }));
+    /* v8 ignore next 4 -- exhaustive: the type system proves this is unreachable */
     default: {
       const exhaustive: never = mode;
       throw new Error(`Unknown game mode: ${String(exhaustive)}`);

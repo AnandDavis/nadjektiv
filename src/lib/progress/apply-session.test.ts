@@ -112,3 +112,18 @@ describe('applySessionResult', () => {
     expect(outcome.clearedFromRevise).toBe(1);
   });
 });
+
+describe('applySessionResult edge cases', () => {
+  it('handles a topic with no registered modes', () => {
+    const outcome = applySessionResult(createEmptyProgress(), result(10, 0), {}, NOW);
+    expect(outcome.progress.topics.t.answered).toBe(10);
+    expect(outcome.tierUps).toEqual([{ topicId: 't', from: 'new', to: 'bronze' }]);
+  });
+
+  it('records the personal best for a topic round even with no answers in it', () => {
+    const empty: SessionResult = { topicId: 't', mode: 'gap', answers: [], score: 0, bestCombo: 0 };
+    const outcome = applySessionResult(createEmptyProgress(), empty, modes, NOW);
+    expect(outcome.progress.topics.t.modes.gap?.plays).toBe(1);
+    expect(outcome.progress.topics.t.answered).toBe(0);
+  });
+});

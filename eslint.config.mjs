@@ -62,8 +62,8 @@ const eslintConfig = defineConfig([
     rules: { 'no-restricted-globals': 'off', 'no-restricted-properties': 'off' },
   },
   {
-    // Node scripts report to the terminal.
-    files: ['scripts/**'],
+    // Node scripts and test suites report to the terminal.
+    files: ['scripts/**', 'e2e/**'],
     rules: { 'no-console': 'off' },
   },
   globalIgnores([
@@ -74,6 +74,7 @@ const eslintConfig = defineConfig([
 
     'playwright-report/**',
     'test-results/**',
+    'coverage/**',
   ]),
 ]);
 

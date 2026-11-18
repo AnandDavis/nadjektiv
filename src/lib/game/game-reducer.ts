@@ -97,6 +97,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       if (state.phase === 'intro' || state.phase === 'finished') return state;
       return { ...state, phase: 'finished' };
 
+    /* v8 ignore next 4 -- exhaustive: the type system proves this is unreachable */
     default: {
       const exhaustive: never = action;
       throw new Error(`Unknown game action: ${JSON.stringify(exhaustive)}`);

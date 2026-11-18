@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { createEmptyProgress } from '../progress/types';
 import { deserialiseProgress, serialiseProgress } from '../progress/transfer';
@@ -50,5 +50,43 @@ describe('progress transfer', () => {
   it('rejects files from elsewhere', () => {
     expect(() => deserialiseProgress('{"hello":1}')).toThrow(/isn’t a Nadjektiv progress export/);
     expect(() => deserialiseProgress('not json')).toThrow(/valid JSON/);
+  });
+});
+
+describe('LocalStorageProgressStore when storage is blocked or full', () => {
+  function failingStorage(): Storage {
+    const fail = () => {
+      throw new Error('denied');
+    };
+    return {
+      getItem: fail,
+      setItem: fail,
+      removeItem: fail,
+      clear: fail,
+      key: fail,
+      length: 0,
+    } as Storage;
+  }
+
+  it('falls back to empty progress and never throws', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const store = new LocalStorageProgressStore(failingStorage());
+    expect(store.load()).toEqual(createEmptyProgress());
+    expect(() => store.save(createEmptyProgress())).not.toThrow();
+    expect(() => store.clear()).not.toThrow();
+    expect(warn).toHaveBeenCalledTimes(3);
+    warn.mockRestore();
+  });
+
+  it('reloads when another tab changes progress', () => {
+    const store = new LocalStorageProgressStore(window.localStorage);
+    const listener = vi.fn();
+    const stop = store.onExternalChange(listener);
+    window.dispatchEvent(new StorageEvent('storage', { key: PROGRESS_KEY }));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'something-else' }));
+    expect(listener).toHaveBeenCalledTimes(1);
+    stop();
+    window.dispatchEvent(new StorageEvent('storage', { key: PROGRESS_KEY }));
+    expect(listener).toHaveBeenCalledTimes(1);
   });
 });

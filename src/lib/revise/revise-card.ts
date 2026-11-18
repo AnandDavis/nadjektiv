@@ -44,6 +44,7 @@ export function correctForm(question: Question): string {
       return gapCorrect(question);
     case 'build':
       return formatSentence(question.tiles, question.punctuation);
+    /* v8 ignore next 4 -- exhaustive: the type system proves this is unreachable */
     default: {
       const exhaustive: never = question;
       throw new Error(`Unknown question kind: ${JSON.stringify(exhaustive)}`);
@@ -96,6 +97,7 @@ export function buildReviseCard(topic: Topic, question: Question): ReviseCard {
           .map((order) => formatSentence(order, question.punctuation)),
         examples: [],
       };
+    /* v8 ignore next 4 -- exhaustive: the type system proves this is unreachable */
     default: {
       const exhaustive: never = question;
       throw new Error(`Unknown question kind: ${JSON.stringify(exhaustive)}`);

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { TOPICS } from '@/content';
 
-import { reviseGroups } from './revise-groups';
+import { reviseCount, reviseGroups } from './revise-groups';
 
 const entry = (topicId: string, misses: number, lastMissedAt: string) => ({
   topicId,
@@ -24,5 +24,12 @@ describe('reviseGroups', () => {
       'articles-gap-2',
       'articles-gap-1',
     ]);
+  });
+});
+
+describe('reviseCount', () => {
+  it('counts the entries on the list', () => {
+    expect(reviseCount({})).toBe(0);
+    expect(reviseCount({ a: entry('articles', 1, '2026-11-18T10:00:00Z') })).toBe(1);
   });
 });

@@ -25,6 +25,7 @@ import { sentenceMiddle } from './topics/sentence-middle';
 import { separableVerbs } from './topics/separable-verbs';
 import { tellingTime } from './topics/telling-time';
 import { twoWayPrepositions } from './topics/two-way-prepositions';
+import { verbPrepositions } from './topics/verb-prepositions';
 import { weakNouns } from './topics/weak-nouns';
 import { wordOrder } from './topics/word-order';
 import { zuInfinitive } from './topics/zu-infinitive';
@@ -56,6 +57,7 @@ export const TOPICS: readonly Topic[] = [
   praeteritum,
   irregularVerbs,
   reflexiveVerbs,
+  verbPrepositions,
   connectors,
   zuInfinitive,
   sentenceMiddle,

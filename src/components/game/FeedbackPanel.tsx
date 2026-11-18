@@ -121,7 +121,13 @@ export function FeedbackPanel({
                   </div>
                 </dl>
               )}
-              <Button className="w-full" size="lg" onClick={onContinue} autoFocus>
+              <Button
+                className="w-full"
+                size="lg"
+                onClick={onContinue}
+                autoFocus
+                data-shortcut="confirm"
+              >
                 <Ui {...COPY.game.next} />
               </Button>
             </div>

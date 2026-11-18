@@ -49,7 +49,12 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
         </p>
         <p className="translation mt-2 text-sm text-muted">{question.translation}</p>
       </div>
-      <div className="flex flex-col gap-2" role="group" aria-label="Answer options">
+      <div
+        className="flex flex-col gap-2"
+        role="group"
+        aria-label="Answer options"
+        data-shortcuts="choices"
+      >
         {options.map((option, index) => {
           const isAnswer = option === question.answer;
           const isChosen = last?.given === option;

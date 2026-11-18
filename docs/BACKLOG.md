@@ -2,6 +2,18 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## On-screen German keyboard
+
+**Why:** the ä ö ü ß bar that docks above the phone keyboard (VisualViewport) is buggy in real use. A keyboard drawn by the app, as in Wordle, avoids the system keyboard entirely: no viewport jumps, umlauts and ß as ordinary keys, and the same layout on every phone.
+
+**Notes:**
+
+- QWERTZ layout with ä ö ü ß on the main rows, plus backspace, space, and an Enter key that checks the answer. Keys at least 44 px, Bauhaus style, both themes.
+- Used in Tippen and Tabelle on touch devices. Inputs get `inputMode="none"` so the system keyboard stays closed, and keep focus for the caret and screen readers. On devices with a physical keyboard (`pointer: fine`), typing keeps working and the on-screen keyboard can hide.
+- Typing logic (insert, delete, caret position) is a pure function in `src/lib`, unit-tested. It replaces the `setRangeText` insertion in GridScreen and TypeQuestionView, and `KeyboardDock`/`useKeyboardInset` can go.
+- Accessible: real `<button>`s with labels, no focus stealing from the input (as UmlautKeys does with pointer-down), and announced keys for screen readers.
+- e2e: type an answer using only on-screen keys in both games, check the system keyboard isn't requested (`inputmode`), and add visual baselines.
+
 ## Combo feedback
 
 **Why:** the combo multiplier works, but it's easy to miss when it rises or breaks.
@@ -43,12 +55,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** reaching Gemeistert passes with a small call-out; it deserves a moment.
 
 **Notes:** a celebration screen after the round that reaches Gemeistert: what the topic covered, the learner's stats, and a suggested next topic. Shown once per topic (remember it in progress, as an optional field). Respect reduced motion.
-
-## Keyboard shortcuts on desktop
-
-**Why:** on a laptop, reaching for the mouse slows the games down.
-
-**Notes:** 1–4 (or the shown A/B/C letters) for options and bins, Enter for Prüfen/Weiter, H for a hint, Backspace to remove the last tile in Satzbau. Never steal keys while typing in Tippen or Tabelle. List the shortcuts somewhere discoverable (e.g. a "?" overlay or the About page).
 
 ## Speed Insights
 

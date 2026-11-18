@@ -5,6 +5,7 @@ import { ChangelogList } from '@/components/about/ChangelogList';
 import { FeatureList } from '@/components/about/FeatureList';
 import { LevelsExplainer } from '@/components/about/LevelsExplainer';
 import { MedalsExplainer } from '@/components/about/MedalsExplainer';
+import { ShortcutList } from '@/components/about/ShortcutList';
 import { ButtonLink, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { COPY, builtBy } from '@/lib/i18n/copy';
@@ -35,6 +36,7 @@ export default function AboutPage() {
         <FeatureList />
         <LevelsExplainer />
         <MedalsExplainer />
+        <ShortcutList />
         <ChangelogList />
       </div>
       <p className="text-center text-xs font-extrabold tracking-widest text-muted uppercase">

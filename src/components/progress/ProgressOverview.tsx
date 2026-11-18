@@ -13,6 +13,7 @@ import { summariseProgress } from '@/lib/progress/summary';
 import { TierBadge } from './TierBadge';
 import { TopicMap } from './TopicMap';
 import { COPY } from '@/lib/i18n/copy';
+import { topicHref } from '@/lib/routes';
 
 export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
   const progress = useProgress();
@@ -69,7 +70,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
             return (
               <li key={topic.id} className="border-b-2 border-ink">
                 <Link
-                  href={`/topics/${topic.id}`}
+                  href={topicHref(topic.id, 'progress')}
                   className="flex gap-3 py-3 transition-colors hover:bg-sunken"
                 >
                   <span className="w-7 shrink-0 text-right font-black text-muted tabular-nums">

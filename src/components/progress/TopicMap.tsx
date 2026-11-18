@@ -8,6 +8,7 @@ import type { Level } from '@/content/types';
 import { TIERS, TIER_LABELS, masteryFor, type Tier } from '@/lib/progress/mastery';
 import type { Progress } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
+import { topicHref } from '@/lib/routes';
 import { cn } from '@/lib/utils/cn';
 
 import { TIER_MARKS } from './TierBadge';
@@ -55,7 +56,7 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
                 return (
                   <li key={topic.id}>
                     <Link
-                      href={`/topics/${topic.id}`}
+                      href={topicHref(topic.id, 'progress')}
                       className={cn(
                         'flex aspect-square min-h-11 flex-col items-center justify-center border-2 font-black transition-colors hover:bg-yellow hover:text-on-yellow',
                         TILE_CLASSES[tier],

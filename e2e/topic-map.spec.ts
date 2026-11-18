@@ -18,7 +18,7 @@ test('the topic map shows every topic with its medal, and opens it', async ({ pa
   await expect(map.getByRole('link', { name: '01 der, die oder das?: Neu' })).toBeVisible();
 
   await articles.click();
-  await expect(page).toHaveURL(/\/topics\/articles$/);
+  await expect(page).toHaveURL(/\/topics\/articles\?from=progress$/);
 });
 
 test('the progress page, with its topic map, has no accessibility violations', async ({ page }) => {
@@ -27,4 +27,17 @@ test('the progress page, with its topic map, has no accessibility violations', a
   await expect(page.getByRole('region', { name: 'Themenkarte' })).toBeVisible();
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations).toEqual([]);
+});
+
+test('a topic opened from the progress page goes back to it', async ({ page }) => {
+  await page.goto('/progress');
+  await page.getByRole('region', { name: 'Themenkarte' }).getByRole('link').first().click();
+  await expect(page).toHaveURL(/\/topics\/noun-gender\?from=progress$/);
+  await page.getByRole('link', { name: 'Fortschritt', exact: true }).first().click();
+  await expect(page).toHaveURL(/\/progress$/);
+
+  // From the topic list, it's still "All topics" and home.
+  await page.goto('/topics/noun-gender');
+  await page.getByRole('link', { name: 'Alle Themen' }).click();
+  await expect(page).toHaveURL(/\/$/);
 });

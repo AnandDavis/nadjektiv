@@ -21,9 +21,9 @@ export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
     <TopicLink
       topicId={topic.id}
       onClick={onOpen}
-      className="group flex min-h-20 items-start gap-3 py-3 transition-colors hover:bg-yellow hover:text-on-yellow"
+      className="group flex items-center gap-3 py-4 transition-colors hover:bg-yellow hover:text-on-yellow"
     >
-      <span className="w-9 shrink-0 pt-0.5 text-right text-lg font-black text-muted tabular-nums group-hover:text-on-yellow">
+      <span className="w-9 shrink-0 self-start pt-0.5 text-right text-lg font-black text-muted tabular-nums group-hover:text-on-yellow">
         {String(index).padStart(2, '0')}
       </span>
       <span className="min-w-0 flex-1">
@@ -34,16 +34,16 @@ export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
           {topic.tagline}
         </span>
       </span>
-      <span className="flex shrink-0 flex-col items-end gap-1 pt-0.5 pr-1">
+      <span className="shrink-0 pr-1">
         {mastery ? (
-          <TierSquare tier={mastery.tier} />
+          <TierSquare
+            tier={mastery.tier}
+            caption={
+              mastery.tier === 'new' ? undefined : `${Math.round(mastery.recentAccuracy * 100)}%`
+            }
+          />
         ) : (
-          <span className="size-9 animate-pulse bg-sunken" aria-hidden="true" />
-        )}
-        {mastery && mastery.tier !== 'new' && (
-          <span className="text-xs font-bold text-muted tabular-nums group-hover:text-on-yellow">
-            {Math.round(mastery.recentAccuracy * 100)}%
-          </span>
+          <span className="block size-12 animate-pulse bg-sunken" aria-hidden="true" />
         )}
       </span>
     </TopicLink>

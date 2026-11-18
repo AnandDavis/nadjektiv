@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { LevelCard } from '@/components/progress/LevelCard';
 import { ProgressOverview } from '@/components/progress/ProgressOverview';
 import { getTopicSummaries } from '@/content/summaries';
-import { Ui } from '@/components/ui';
+import { ButtonLink, Ui } from '@/components/ui';
 import { COPY } from '@/lib/i18n/copy';
 
 export const metadata: Metadata = { title: 'Progress' };
@@ -15,6 +15,9 @@ export default function ProgressPage() {
         <Ui {...COPY.nav.progress} />
       </h1>
       <LevelCard />
+      <ButtonLink href="/records" variant="secondary" className="self-start">
+        <Ui {...COPY.records.see} />
+      </ButtonLink>
       <ProgressOverview topics={getTopicSummaries()} />
     </div>
   );

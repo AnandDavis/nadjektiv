@@ -195,6 +195,23 @@ export const COPY = {
     keepGoing: { de: 'Weiter üben!', en: 'Keep practising!' },
     achievements: { de: 'Erfolge', en: 'Achievements' },
   },
+  records: {
+    title: { de: 'Rekorde', en: 'Records' },
+    intro: {
+      de: 'Deine besten Runden, ohne Serien und ohne Druck.',
+      en: 'Your best rounds, with no streaks and no pressure.',
+    },
+    bestBlitz: { de: 'Bester Blitz', en: 'Best Blitz' },
+    longestCombo: { de: 'Längste Serie', en: 'Longest run' },
+    fastestTable: { de: 'Schnellste Tabelle', en: 'Fastest table' },
+    tables: { de: 'Tabellen', en: 'Tables' },
+    untimed: { de: 'ohne Uhr', en: 'untimed' },
+    none: {
+      de: 'Noch keine Rekorde. Spiel eine Runde, dann stehen sie hier.',
+      en: 'No records yet. Play a round and they’ll show up here.',
+    },
+    see: { de: 'Rekorde ansehen', en: 'See your records' },
+  },
   progress: {
     medals: { de: 'Medaillen', en: 'Medals' },
     map: { de: 'Themenkarte', en: 'Topic map' },

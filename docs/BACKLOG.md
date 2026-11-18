@@ -10,6 +10,7 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 - QWERTZ layout with ä ö ü ß on the main rows, plus backspace, space, and an Enter key that checks the answer. Keys at least 44 px, Bauhaus style, both themes.
 - Used in Tippen and Tabelle on touch devices. Inputs get `inputMode="none"` so the system keyboard stays closed, and keep focus for the caret and screen readers. On devices with a physical keyboard (`pointer: fine`), typing keeps working and the on-screen keyboard can hide.
+- A setting (Settings → Spielen, "Tastatur": app keyboard / device keyboard) turns it off. With the device keyboard, there's no ä ö ü ß bar either: the phone's own keyboard can type them (long-press a, o, u or s), so the fields just use the normal system keyboard.
 - Typing logic (insert, delete, caret position) is a pure function in `src/lib`, unit-tested. It replaces the `setRangeText` insertion in GridScreen and TypeQuestionView, and `KeyboardDock`/`useKeyboardInset` can go.
 - Accessible: real `<button>`s with labels, no focus stealing from the input (as UmlautKeys does with pointer-down), and announced keys for screen readers.
 - e2e: type an answer using only on-screen keys in both games, check the system keyboard isn't requested (`inputmode`), and add visual baselines.
@@ -43,12 +44,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** der/die/das and the plural are learned as a pair ("der Tisch, die Tische"), but they're practised in separate topics.
 
 **Notes:** a Blitz-style round showing a noun and asking for both gender and plural form. Needs a checked noun list with plurals (reuse noun-gender and plurals content where it overlaps, and check every plural against `docs/grammar/`). New question ids are permanent once shipped.
-
-## Personal records page
-
-**Why:** bests are spread across topic pages; one place to see them all is motivating without streaks.
-
-**Notes:** fastest grid per table, best Blitz score and longest combo per topic, best accuracy, perfect rounds. Read from existing progress (no schema change). Link from Progress.
 
 ## Topic graduation
 

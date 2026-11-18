@@ -2,6 +2,8 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import {
   PREFERENCES_SCRIPT,
+  THEME_COLOR_OVERRIDE_ID,
+  THEME_COLORS,
   THEME_KEY,
   UI_LANGUAGE_KEY,
   readTheme,
@@ -11,7 +13,10 @@ import {
   writeUiLanguage,
 } from './preferences';
 
+const override = () => document.getElementById(THEME_COLOR_OVERRIDE_ID) as HTMLMetaElement | null;
+
 afterEach(() => {
+  override()?.remove();
   document.documentElement.removeAttribute('data-theme');
   document.documentElement.removeAttribute('data-ui-lang');
   vi.restoreAllMocks();
@@ -67,6 +72,24 @@ describe('preferences plumbing', () => {
     expect(listener).toHaveBeenCalledTimes(2);
   });
 
+  it('colours the browser bar for a forced theme, ahead of the system pair', () => {
+    const system = document.createElement('meta');
+    system.name = 'theme-color';
+    document.head.append(system);
+
+    writeTheme('dark');
+    expect(override()?.content).toBe(THEME_COLORS.dark);
+    expect(document.head.firstElementChild).toBe(override());
+
+    writeTheme('light');
+    expect(document.querySelectorAll(`#${THEME_COLOR_OVERRIDE_ID}`)).toHaveLength(1);
+    expect(override()?.content).toBe(THEME_COLORS.light);
+
+    writeTheme('system');
+    expect(override()).toBeNull();
+    system.remove();
+  });
+
   it('keeps working when storage is blocked', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
       throw new Error('blocked');
@@ -86,5 +109,7 @@ describe('preferences plumbing', () => {
     new Function(PREFERENCES_SCRIPT)();
     expect(document.documentElement.dataset.theme).toBe('dark');
     expect(document.documentElement.dataset.uiLang).toBe('en');
+    expect(override()?.content).toBe(THEME_COLORS.dark);
+    expect(document.head.firstElementChild).toBe(override());
   });
 });

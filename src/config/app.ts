@@ -11,13 +11,13 @@ export const APP_CONFIG = {
   /** File name prefix for progress exports (safe to change). */
   exportFilePrefix: 'nadjektiv-progress',
   /**
-   * Literal colours for places CSS variables can't reach (manifest, <meta theme-color>).
-   * Keep in sync with --canvas and --brand in src/app/globals.css.
+   * The page background (--canvas in src/app/globals.css) as literal colours, for places
+   * CSS variables can't reach: the manifest and <meta theme-color>, which colours the
+   * browser's address bar. A test keeps them in sync with the stylesheet.
    */
   colors: {
-    canvasLight: '#faf7f2',
-    canvasDark: '#121117',
-    brand: '#e8a317',
+    canvasLight: '#efebe0',
+    canvasDark: '#141414',
   },
 } as const;
 

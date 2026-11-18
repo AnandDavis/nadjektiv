@@ -39,3 +39,37 @@ test('game and results labels follow the interface language', async ({ page }) =
   await expect(page.getByRole('link', { name: 'All topics' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1, name: 'The article grid' })).toBeVisible();
 });
+
+test('the browser bar matches the page, following the in-app theme', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') errors.push(message.text());
+  });
+  // Browsers colour their bar from the first theme-color whose media matches.
+  const barColour = () =>
+    page.evaluate(() => {
+      const metas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
+      return metas.find((m) => !m.media || matchMedia(m.media).matches)?.content;
+    });
+  const canvas = () =>
+    page.evaluate(() => {
+      const [r, g, b] = getComputedStyle(document.body).backgroundColor.match(/\d+/g)!.map(Number);
+      return '#' + [r, g, b].map((n) => n.toString(16).padStart(2, '0')).join('');
+    });
+
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/settings');
+  expect(await barColour()).toBe(await canvas());
+
+  await page.getByText('Dunkel', { exact: true }).filter({ visible: true }).click();
+  expect(await barColour()).toBe(await canvas());
+  expect(await canvas()).toBe('#141414');
+
+  // Applied before paint on the next visit, with nothing for React to complain about.
+  await page.reload();
+  expect(await barColour()).toBe('#141414');
+  await page.getByText('System', { exact: true }).filter({ visible: true }).click();
+  expect(await barColour()).toBe(await canvas());
+  expect(await canvas()).toBe('#efebe0');
+  expect(errors).toEqual([]);
+});

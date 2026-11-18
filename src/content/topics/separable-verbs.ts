@@ -6,6 +6,16 @@ export const separableVerbs: Topic = {
   group: 'verbs',
   title: 'Separable verbs',
   titleDe: 'Trennbare Verben',
+  keywords: [
+    'trennbar',
+    'separable',
+    'Präfix',
+    'prefix',
+    'anrufen',
+    'aufstehen',
+    'untrennbar',
+    'inseparable',
+  ],
   tagline: 'aufstehen, anrufen, einkaufen: the prefix jumps to the end.',
   rules: [
     {

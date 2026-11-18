@@ -6,6 +6,17 @@ export const presentTense: Topic = {
   group: 'verbs',
   title: 'Present tense',
   titleDe: 'Präsens',
+  keywords: [
+    'Präsens',
+    'present',
+    'Konjugation',
+    'conjugation',
+    'Verb',
+    'Vokalwechsel',
+    'stem change',
+    'sein',
+    'haben',
+  ],
   tagline: 'Six endings, two helpers, and the verbs that change their vowel.',
   rules: [
     {

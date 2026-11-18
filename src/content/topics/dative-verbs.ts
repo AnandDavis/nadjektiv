@@ -6,6 +6,17 @@ export const dativeVerbs: Topic = {
   group: 'cases',
   title: 'Dative verbs and two objects',
   titleDe: 'Dativverben und zwei Objekte',
+  keywords: [
+    'Dativ',
+    'dative',
+    'Verb',
+    'helfen',
+    'gefallen',
+    'gehören',
+    'Objekt',
+    'object',
+    'indirect object',
+  ],
   tagline: 'Ich helfe dir, nicht dich. And which object goes first.',
   rules: [
     {

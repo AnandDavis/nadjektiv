@@ -6,6 +6,18 @@ export const twoWayPrepositions: Topic = {
   group: 'prepositions',
   title: 'Two-way prepositions',
   titleDe: 'Wechselpräpositionen',
+  keywords: [
+    'Wechselpräposition',
+    'two-way',
+    'wo',
+    'wohin',
+    'Dativ',
+    'Akkusativ',
+    'liegen',
+    'legen',
+    'stehen',
+    'stellen',
+  ],
   tagline: 'Wo? takes the dative, Wohin? the accusative.',
   rules: [
     {

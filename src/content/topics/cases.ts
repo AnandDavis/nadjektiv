@@ -6,6 +6,17 @@ export const cases: Topic = {
   group: 'cases',
   title: 'Which case?',
   titleDe: 'Welcher Fall?',
+  keywords: [
+    'Kasus',
+    'Fall',
+    'case',
+    'Nominativ',
+    'Akkusativ',
+    'Dativ',
+    'nominative',
+    'accusative',
+    'dative',
+  ],
   tagline: 'Nominativ, Akkusativ or Dativ: who does what to whom.',
   rules: [
     {

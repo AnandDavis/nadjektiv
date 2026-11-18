@@ -11,6 +11,7 @@ const topic: Topic = {
   group: 'nouns',
   title: 'T',
   titleDe: 'T',
+  keywords: [],
   tagline: '',
   rules: [],
   sort: {

@@ -6,6 +6,21 @@ export const tellingTime: Topic = {
   group: 'prepositions',
   title: 'The clock, numbers and dates',
   titleDe: 'Uhrzeit, Zahlen und Datum',
+  keywords: [
+    'Uhrzeit',
+    'clock',
+    'time',
+    'Zahlen',
+    'numbers',
+    'Datum',
+    'date',
+    'halb',
+    'Viertel',
+    'Ordinalzahl',
+    'ordinal',
+    'Preis',
+    'price',
+  ],
   tagline: 'halb acht is 7:30, einundzwanzig is 21, am dritten Mai.',
   rules: [
     {

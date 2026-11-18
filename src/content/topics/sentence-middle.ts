@@ -6,6 +6,15 @@ export const sentenceMiddle: Topic = {
   group: 'sentences',
   title: 'Inside the middle',
   titleDe: 'Im Mittelfeld',
+  keywords: [
+    'Mittelfeld',
+    'TeKaMoLo',
+    'Satzstellung',
+    'word order',
+    'Objekt',
+    'object',
+    'Reihenfolge',
+  ],
   tagline: 'Te-Ka-Mo-Lo, two objects, and where nicht goes.',
   rules: [
     {

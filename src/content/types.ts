@@ -101,6 +101,8 @@ export interface Topic {
   title: string;
   /** German title, shown when the interface language is German. */
   titleDe: string;
+  /** Extra search terms, German and English: grammar names and telltale words. */
+  keywords: string[];
   /** One-line description shown on the topic card. */
   tagline: string;
   rules: RuleCard[];

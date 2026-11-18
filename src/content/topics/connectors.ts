@@ -6,6 +6,20 @@ export const connectors: Topic = {
   group: 'sentences',
   title: 'Connectors',
   titleDe: 'Konnektoren',
+  keywords: [
+    'Konnektor',
+    'Konjunktion',
+    'conjunction',
+    'connector',
+    'Nebensatz',
+    'subordinate clause',
+    'weil',
+    'dass',
+    'wenn',
+    'obwohl',
+    'deshalb',
+    'trotzdem',
+  ],
   tagline: 'weil, deshalb, denn: what each one does to the verb.',
   rules: [
     {

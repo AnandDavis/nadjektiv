@@ -6,6 +6,16 @@ export const perfekt: Topic = {
   group: 'verbs',
   title: 'Perfekt',
   titleDe: 'Perfekt',
+  keywords: [
+    'Perfekt',
+    'past tense',
+    'Vergangenheit',
+    'Partizip',
+    'participle',
+    'haben',
+    'sein',
+    'gegangen',
+  ],
   tagline: 'Talking about yesterday: haben or sein, and the participle at the end.',
   rules: [
     {

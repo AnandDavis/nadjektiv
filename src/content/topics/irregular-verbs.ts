@@ -6,6 +6,16 @@ export const irregularVerbs: Topic = {
   group: 'verbs',
   title: 'The 33 irregular verbs',
   titleDe: 'Die 33 unregelmäßigen Verben',
+  keywords: [
+    'unregelmäßig',
+    'irregular',
+    'starke Verben',
+    'strong verbs',
+    'Partizip',
+    'participle',
+    'Präteritum',
+    'Stammformen',
+  ],
   tagline: 'er-form, Präteritum and Partizip II for the verbs A2 asks.',
   rules: [
     {

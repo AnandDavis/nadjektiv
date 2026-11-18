@@ -6,6 +6,18 @@ export const pronouns: Topic = {
   group: 'cases',
   title: 'Pronouns',
   titleDe: 'Pronomen',
+  keywords: [
+    'Pronomen',
+    'pronoun',
+    'Personalpronomen',
+    'mich',
+    'mir',
+    'dich',
+    'dir',
+    'ihn',
+    'ihm',
+    'possessive',
+  ],
   tagline: 'mich or mir, ihn or ihm: pronouns in all three cases.',
   rules: [
     {

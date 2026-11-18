@@ -6,6 +6,7 @@ export const negation: Topic = {
   group: 'sentences',
   title: 'kein or nicht',
   titleDe: 'kein oder nicht',
+  keywords: ['Negation', 'Verneinung', 'kein', 'nicht', 'doch', 'negative'],
   tagline: 'kein for nouns, nicht for everything else, and Doch!',
   rules: [
     {

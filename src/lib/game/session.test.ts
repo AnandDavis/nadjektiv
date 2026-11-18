@@ -19,6 +19,7 @@ function makeTopic(id: string, sortCount: number, gapCount: number): Topic {
     group: 'nouns',
     title: id,
     titleDe: id,
+    keywords: [],
     tagline: '',
     rules: [],
     sort: {

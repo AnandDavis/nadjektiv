@@ -6,6 +6,16 @@ export const praeteritum: Topic = {
   group: 'verbs',
   title: 'Präteritum',
   titleDe: 'Präteritum',
+  keywords: [
+    'Präteritum',
+    'Imperfekt',
+    'simple past',
+    'past tense',
+    'Vergangenheit',
+    'war',
+    'hatte',
+    'es gab',
+  ],
   tagline: 'war, hatte, konnte, es gab, and the -te forms you meet in stories.',
   rules: [
     {

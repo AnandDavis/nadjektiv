@@ -1,17 +1,20 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
-import { Ui } from '@/components/ui';
-
+import { Button, SearchField, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
-import type { Bilingual } from '@/lib/i18n/copy';
 import { useProgress } from '@/hooks/useProgress';
+import { useUiLanguage } from '@/hooks/useUiLanguage';
+import { COPY, topicCount, type Bilingual } from '@/lib/i18n/copy';
 import { masteryFor, type MasteryInfo } from '@/lib/progress/mastery';
+import { searchTopics } from '@/lib/topics/search';
 
 import { groupTopics } from './group-order';
 import { TopicCard } from './TopicCard';
+
+const LEVELS: readonly Level[] = ['A1', 'A2'];
 
 const LEVEL_INTROS: Record<Level, Bilingual> = {
   A1: {
@@ -24,21 +27,59 @@ const LEVEL_INTROS: Record<Level, Bilingual> = {
   },
 };
 
+/** The numbered topic index, with search that filters it in place. */
 export function TopicList({ topics }: { topics: TopicSummary[] }) {
   const progress = useProgress();
+  const [language] = useUiLanguage();
+  const [query, setQuery] = useState('');
 
   const mastery = useMemo(() => {
     if (!progress) return null;
     const map = new Map<string, MasteryInfo>();
-    for (const topic of topics)
+    for (const topic of topics) {
       map.set(topic.id, masteryFor(progress.topics[topic.id], topic.modes));
+    }
     return map;
   }, [progress, topics]);
 
+  const matches = useMemo(() => searchTopics(topics, query), [topics, query]);
+  const isSearching = query.trim().length > 0;
+
   return (
     <div className="flex flex-col gap-10">
-      {(['A1', 'A2'] as const).map((level) => {
-        const levelTopics = topics.filter((t) => t.level === level);
+      <div role="search">
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          label={COPY.search.label[language]}
+          placeholder={COPY.search.placeholder[language]}
+          clearLabel={COPY.search.clear[language]}
+        />
+        <p
+          aria-live="polite"
+          className="mt-2 text-xs font-extrabold tracking-widest text-muted uppercase"
+        >
+          {isSearching && <Ui {...topicCount(matches.length)} />}
+        </p>
+      </div>
+
+      {isSearching && matches.length === 0 && (
+        <div className="flex flex-col items-start gap-3 border-2 border-ink bg-surface p-4">
+          <p className="text-xl font-black text-ink uppercase">
+            <Ui {...COPY.search.noResults} />
+          </p>
+          <p className="text-sm text-ink">
+            <Ui {...COPY.search.noResultsHint} />
+          </p>
+          <Button variant="secondary" onClick={() => setQuery('')}>
+            <Ui {...COPY.search.showAll} />
+          </Button>
+        </div>
+      )}
+
+      {LEVELS.map((level) => {
+        const levelTopics = matches.filter((t) => t.level === level);
+        if (levelTopics.length === 0) return null;
         return (
           <section key={level} aria-labelledby={`level-${level}`}>
             <div className="flex items-end gap-3 border-b-4 border-ink pb-2">

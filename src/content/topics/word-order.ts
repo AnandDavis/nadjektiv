@@ -6,6 +6,16 @@ export const wordOrder: Topic = {
   group: 'sentences',
   title: 'Word order',
   titleDe: 'Satzstellung',
+  keywords: [
+    'Satzstellung',
+    'Wortstellung',
+    'word order',
+    'verb position',
+    'Frage',
+    'question',
+    'weil',
+    'dass',
+  ],
   tagline: 'The verb is always second. Almost everything else follows from that.',
   rules: [
     {

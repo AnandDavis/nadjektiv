@@ -6,6 +6,7 @@ export const imperative: Topic = {
   group: 'verbs',
   title: 'Imperative',
   titleDe: 'Imperativ',
+  keywords: ['Imperativ', 'command', 'Befehl', 'Aufforderung', 'request', 'bitte'],
   tagline: 'Komm! Kommt! Kommen Sie! Giving instructions and asking politely.',
   rules: [
     {

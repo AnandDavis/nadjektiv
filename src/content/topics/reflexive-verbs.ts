@@ -6,6 +6,7 @@ export const reflexiveVerbs: Topic = {
   group: 'verbs',
   title: 'Reflexive verbs',
   titleDe: 'Reflexive Verben',
+  keywords: ['reflexiv', 'reflexive', 'sich', 'Reflexivpronomen', 'freuen', 'interessieren'],
   tagline: 'Ich freue mich auf …: the pronoun and the preposition belong to the verb.',
   rules: [
     {

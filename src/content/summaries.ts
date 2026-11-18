@@ -17,6 +17,7 @@ export interface TopicSummary {
   title: string;
   titleDe: string;
   tagline: string;
+  keywords: string[];
   modes: GameMode[];
   questionCount: number;
 }
@@ -28,6 +29,7 @@ export function getTopicSummaries(): TopicSummary[] {
     group: topic.group,
     title: topic.title,
     titleDe: topic.titleDe,
+    keywords: topic.keywords,
     tagline: topic.tagline,
     modes: availableModes(topic),
     questionCount:

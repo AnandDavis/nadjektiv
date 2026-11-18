@@ -6,6 +6,7 @@ export const nounGender: Topic = {
   group: 'nouns',
   title: 'Noun gender',
   titleDe: 'der, die oder das?',
+  keywords: ['Genus', 'gender', 'Artikel', 'article', 'der', 'die', 'das', 'Nomen', 'noun'],
   tagline: 'der, die or das? The endings that give it away.',
   rules: [
     {

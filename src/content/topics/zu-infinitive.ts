@@ -6,6 +6,7 @@ export const zuInfinitive: Topic = {
   group: 'sentences',
   title: 'zu + infinitive, future and man',
   titleDe: 'zu + Infinitiv, Futur und man',
+  keywords: ['Infinitiv', 'infinitive', 'zu', 'Futur', 'future', 'werden', 'man'],
   tagline: 'Lust, Deutsch zu lernen? When zu comes in, and when it stays out.',
   rules: [
     {

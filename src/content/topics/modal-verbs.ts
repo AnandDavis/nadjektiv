@@ -6,6 +6,17 @@ export const modalVerbs: Topic = {
   group: 'verbs',
   title: 'Modal verbs',
   titleDe: 'Modalverben',
+  keywords: [
+    'Modalverb',
+    'modal',
+    'können',
+    'müssen',
+    'wollen',
+    'sollen',
+    'dürfen',
+    'mögen',
+    'möchten',
+  ],
   tagline: 'can, must, want to: the modal in position two, the infinitive at the end.',
   rules: [
     {

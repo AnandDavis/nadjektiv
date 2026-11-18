@@ -9,6 +9,17 @@ export interface Bilingual {
 }
 
 export const COPY = {
+  search: {
+    label: { de: 'Themen suchen', en: 'Search topics' },
+    placeholder: { de: 'Thema suchen, z. B. Dativ', en: 'Search, e.g. dative' },
+    clear: { de: 'Suche löschen', en: 'Clear search' },
+    noResults: { de: 'Kein Thema gefunden', en: 'No topics found' },
+    noResultsHint: {
+      de: 'Probier ein anderes Wort, zum Beispiel „Perfekt“ oder „weil“.',
+      en: 'Try another word, such as “past tense” or “weil”.',
+    },
+    showAll: { de: 'Alle Themen zeigen', en: 'Show all topics' },
+  },
   home: {
     heading: { de: 'Was üben wir heute?', en: 'What shall we practise today?' },
     review: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
@@ -160,5 +171,13 @@ export function levelUpLine(level: number): Bilingual {
   return {
     de: `Level up! Du bist jetzt Level ${level}:`,
     en: `Level up! You’re now level ${level}:`,
+  };
+}
+
+/** "3 Themen" / "3 topics" */
+export function topicCount(count: number): Bilingual {
+  return {
+    de: `${count} ${count === 1 ? 'Thema' : 'Themen'}`,
+    en: `${count} ${count === 1 ? 'topic' : 'topics'}`,
   };
 }

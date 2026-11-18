@@ -15,6 +15,11 @@ export const FEATURES: readonly Feature[] = [
       'Everything on the A1 and A2 grammar syllabus, from der/die/das and the cases to adjective endings, the past tense and connectors. Each topic has a short summary of the rules.',
   },
   {
+    title: 'Search',
+    description:
+      'Find any topic from the home page by its German or English name, or by a word it covers, such as “Dativ” or “weil”.',
+  },
+  {
     title: 'Blitz',
     description:
       'Sort as many prompts as you can in 60 seconds, such as der/die/das, Akkusativ/Dativ or haben/sein. Runs of right answers multiply your points.',

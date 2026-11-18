@@ -6,6 +6,20 @@ export const articles: Topic = {
   group: 'cases',
   title: 'The article grid',
   titleDe: 'Die Artikeltabelle',
+  keywords: [
+    'Artikel',
+    'article',
+    'der',
+    'den',
+    'dem',
+    'ein',
+    'einen',
+    'einem',
+    'kein',
+    'mein',
+    'Possessivartikel',
+    'possessive',
+  ],
   tagline: 'der, den, dem: one grid for the, a, kein and mein.',
   rules: [
     {

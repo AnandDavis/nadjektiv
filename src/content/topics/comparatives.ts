@@ -6,6 +6,17 @@ export const comparatives: Topic = {
   group: 'adjectives',
   title: 'Comparing: -er als, am -sten',
   titleDe: 'Vergleichen: -er als, am -sten',
+  keywords: [
+    'Komparativ',
+    'Superlativ',
+    'comparative',
+    'superlative',
+    'Vergleich',
+    'compare',
+    'als',
+    'wie',
+    'besser',
+  ],
   tagline: 'größer als, so groß wie, am größten.',
   rules: [
     {

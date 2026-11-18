@@ -16,6 +16,18 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T14:28Z',
+    title: 'Search for topics',
+    description:
+      'Type in the search box on the home page to find a topic by its German or English name, or by words like “Dativ”, “weil” or “past tense”. Umlauts are optional.',
+  },
+  {
+    date: '2026-11-18T14:28Z',
+    title: '“See the rules” goes straight to the rules',
+    description:
+      'From a card in “To revise”, the rules link now opens the topic scrolled to its rules section.',
+  },
+  {
     date: '2026-11-18T13:30Z',
     title: 'A bold new look',
     description:

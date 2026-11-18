@@ -6,6 +6,20 @@ export const prepositionsPlaceTime: Topic = {
   group: 'prepositions',
   title: 'Going, being and time',
   titleDe: 'Wohin, wo und wann',
+  keywords: [
+    'Präposition',
+    'preposition',
+    'Ort',
+    'place',
+    'Zeit',
+    'time',
+    'nach',
+    'zu',
+    'am',
+    'im',
+    'um',
+    'seit',
+  ],
   tagline: 'nach Berlin or zu Anna? am Montag, im Mai, um 8 Uhr.',
   rules: [
     {

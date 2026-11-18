@@ -209,3 +209,32 @@ describe('daily mix', () => {
     expect(outcome.progress.topics.t.modes).toEqual({});
   });
 });
+
+describe('combo breaks', () => {
+  it('remembers the question that broke a long run, keeping the latest ten', async () => {
+    const { COMBO_BREAKS_KEPT } = await import('./types');
+    const run = Array.from({ length: 6 }, (_, i) => ({
+      questionId: `t-gap-${i}`,
+      topicId: 't',
+      isCorrect: true,
+      given: 'right',
+    }));
+    const round: SessionResult = {
+      topicId: 't',
+      mode: 'gap',
+      score: 60,
+      bestCombo: 6,
+      answers: [...run, { questionId: 't-gap-99', topicId: 't', isCorrect: false, given: 'x' }],
+    };
+    const start = {
+      ...createEmptyProgress(),
+      comboBreaks: Array.from({ length: COMBO_BREAKS_KEPT }, (_, i) => ({
+        questionId: `old-${i}`,
+        at: NOW,
+      })),
+    };
+    const breaks = applySessionResult(start, round, modes, NOW).progress.comboBreaks!;
+    expect(breaks).toHaveLength(COMBO_BREAKS_KEPT);
+    expect(breaks.at(-1)).toEqual({ questionId: 't-gap-99', at: NOW });
+  });
+});

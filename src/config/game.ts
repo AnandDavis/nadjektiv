@@ -19,6 +19,8 @@ export const GAME_CONFIG = {
   dailyWeakTopics: 3,
   /** With nothing played yet, the daily mix comes from this many first topics. */
   dailyStarterTopics: 3,
+  /** Daily mix weight on questions like one that recently broke a long run. */
+  dailyBreakBoost: 3,
   points: {
     perCorrect: 10,
     /** Every comboStep correct answers in a row raises the multiplier by one. */

@@ -84,8 +84,14 @@ export const progressSchema = z.object({
    * without a version bump (optional).
    */
   dailyMix: z.optional(z.object({ day: z.string(), ids: z.array(z.string()) })),
+  /**
+   * The questions that broke a long run of right answers (newest last), which the
+   * daily mix leans towards. Added without a version bump (optional).
+   */
+  comboBreaks: z.optional(z.array(z.object({ questionId: z.string(), at: z.string() }))),
 });
 
+export const COMBO_BREAKS_KEPT = 10;
 export type QuestionStats = z.infer<typeof questionStatsSchema>;
 export type ModeBest = z.infer<typeof modeBestSchema>;
 export type TopicProgress = z.infer<typeof topicProgressSchema>;

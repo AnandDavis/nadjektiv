@@ -78,3 +78,22 @@ export function isPerfect(answers: readonly AnswerRecord[]): boolean {
 export function xpForSession(result: SessionResult): number {
   return result.score + (isPerfect(result.answers) ? PERFECT_BONUS_XP : 0);
 }
+
+/**
+ * The questions that broke a run long enough to have raised the multiplier, in order.
+ * Mirrors the reducer: a right answer extends the run (a hinted one holds it), a wrong
+ * one ends it.
+ */
+export function runBreakers(answers: readonly AnswerRecord[]): string[] {
+  const breakers: string[] = [];
+  let run = 0;
+  for (const answer of answers) {
+    if (!answer.isCorrect) {
+      if (comboMultiplier(run) > 1) breakers.push(answer.questionId);
+      run = 0;
+    } else if (!answer.hinted) {
+      run += 1;
+    }
+  }
+  return breakers;
+}

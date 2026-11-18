@@ -1,26 +1,142 @@
 @import 'tailwindcss';
 
+/*
+ * Design tokens. Every colour the UI uses is defined here once, with light and dark
+ * values via light-dark(). Components use the semantic utilities (bg-surface,
+ * text-muted, bg-correct-soft …) — never raw hues or hex codes.
+ *
+ * Theme: follows the OS by default; data-theme on <html> forces light or dark.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light dark;
+
+  --canvas: light-dark(#faf7f2, #121117);
+  --surface: light-dark(#ffffff, #1c1b23);
+  --sunken: light-dark(#f2eee7, #25242e);
+  --line: light-dark(#e4ded3, #363442);
+  --ink: light-dark(#1c1b22, #f3f1ec);
+  --muted: light-dark(#625f6b, #a7a3b3);
+
+  --brand: light-dark(#e8a317, #f2b632);
+  --brand-strong: light-dark(#8a5d00, #f7c75a);
+  --on-brand: #1c1b22;
+  --focus: light-dark(#1c1b22, #f2b632);
+
+  --correct: light-dark(#13773e, #5ee08e);
+  --correct-soft: light-dark(#e3f5ea, #183424);
+  --wrong: light-dark(#b42318, #ff8a80);
+  --wrong-soft: light-dark(#fdebe9, #3a1d1c);
+
+  --der: light-dark(#1d4ed8, #7aa2ff);
+  --die: light-dark(#be185d, #f78fc0);
+  --das: light-dark(#0f766e, #4fd1c5);
+
+  --bronze: light-dark(#9a5b26, #d99a63);
+  --silver: light-dark(#5d6b7e, #b8c4d4);
+  --gold: light-dark(#8a6600, #f2c94c);
+  --mastered: light-dark(#6d28d9, #b794f6);
+  --tier-new: light-dark(#75727f, #8d8a98);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 16px rgb(0 0 0 / 0.04);
+  --shadow-raised: 0 3px 0 rgb(0 0 0 / 0.14);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-on-brand: var(--on-brand);
+  --color-focus: var(--focus);
+  --color-correct: var(--correct);
+  --color-correct-soft: var(--correct-soft);
+  --color-wrong: var(--wrong);
+  --color-wrong-soft: var(--wrong-soft);
+  --color-der: var(--der);
+  --color-die: var(--die);
+  --color-das: var(--das);
+  --color-bronze: var(--bronze);
+  --color-silver: var(--silver);
+  --color-gold: var(--gold);
+  --color-mastered: var(--mastered);
+  --color-tier-new: var(--tier-new);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+
+  --animate-pop: pop 180ms ease-out;
+  --animate-shake: shake 320ms ease-in-out;
+  --animate-rise: rise 240ms ease-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes pop {
+  0% {
+    transform: scale(0.96);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
 }

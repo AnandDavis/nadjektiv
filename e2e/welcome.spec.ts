@@ -62,6 +62,8 @@ test('About reopens the intro', async ({ page }) => {
 
 test('every step of the intro has no accessibility violations', async ({ page }) => {
   await page.goto('/welcome');
+  // Judge settled colours: a button's hover fade must not be measured halfway.
+  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; }' });
   for (let step = 0; step < 3; step++) {
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);

@@ -24,7 +24,7 @@ describe('combo multiplier', () => {
 });
 
 describe('session xp', () => {
-  const answer = (isCorrect: boolean) => ({ questionId: 'q', topicId: 't', isCorrect });
+  const answer = (isCorrect: boolean) => ({ questionId: 'q', topicId: 't', given: 'x', isCorrect });
 
   it('computes accuracy, with 0 for no answers', () => {
     expect(accuracy([answer(true), answer(false)])).toBe(0.5);

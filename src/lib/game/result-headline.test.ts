@@ -4,8 +4,18 @@ import { COPY } from '../i18n/copy';
 import { resultHeadline } from './result-headline';
 
 const answers = (right: number, wrong: number) => [
-  ...Array.from({ length: right }, () => ({ questionId: 'q', topicId: 't', isCorrect: true })),
-  ...Array.from({ length: wrong }, () => ({ questionId: 'q', topicId: 't', isCorrect: false })),
+  ...Array.from({ length: right }, () => ({
+    questionId: 'q',
+    topicId: 't',
+    given: 'x',
+    isCorrect: true,
+  })),
+  ...Array.from({ length: wrong }, () => ({
+    questionId: 'q',
+    topicId: 't',
+    given: 'x',
+    isCorrect: false,
+  })),
 ];
 
 describe('resultHeadline', () => {

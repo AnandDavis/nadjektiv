@@ -8,7 +8,10 @@ import { progressSchema, type Progress } from './types';
 type Migration = (data: Record<string, unknown>) => Record<string, unknown>;
 
 /** MIGRATIONS[n] upgrades version n to version n + 1. */
-const MIGRATIONS: Record<number, Migration> = {};
+const MIGRATIONS: Record<number, Migration> = {
+  // v2 adds the "to revise" list. Earlier misses weren't recorded, so it starts empty.
+  1: (data) => ({ ...data, version: 2, revise: {} }),
+};
 
 export class ProgressParseError extends Error {}
 

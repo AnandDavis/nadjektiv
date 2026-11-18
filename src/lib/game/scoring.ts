@@ -11,6 +11,8 @@ export const MAX_MULTIPLIER = 3;
 export const PERFECT_BONUS_XP = 50;
 
 export interface AnswerRecord {
+  /** What the learner chose: a bin, an option, or the built sentence. */
+  given: string;
   questionId: string;
   topicId: string;
   isCorrect: boolean;

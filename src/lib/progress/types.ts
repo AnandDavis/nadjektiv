@@ -5,7 +5,7 @@
 
 import { z } from 'zod';
 
-export const PROGRESS_VERSION = 1;
+export const PROGRESS_VERSION = 2;
 
 /** How many recent answers per topic feed the mastery accuracy. */
 export const RECENT_WINDOW = 40;
@@ -37,11 +37,24 @@ export const topicProgressSchema = z.object({
   }),
 });
 
+/** A question the learner got wrong and hasn't yet answered correctly since. */
+export const reviseEntrySchema = z.object({
+  topicId: z.string(),
+  /** The learner's most recent wrong answer. */
+  given: z.string(),
+  /** Times missed since it was last answered correctly. */
+  misses: count.min(1),
+  /** ISO timestamp of the latest miss. */
+  lastMissedAt: z.string(),
+});
+
 export const progressSchema = z.object({
   version: z.literal(PROGRESS_VERSION),
   xp: count,
   topics: z.record(z.string(), topicProgressSchema),
   questions: z.record(z.string(), questionStatsSchema),
+  /** The "to revise" list, keyed by question id. */
+  revise: z.record(z.string(), reviseEntrySchema),
   /** ISO timestamp of the first session. */
   startedAt: z.string().optional(),
 });
@@ -49,10 +62,11 @@ export const progressSchema = z.object({
 export type QuestionStats = z.infer<typeof questionStatsSchema>;
 export type ModeBest = z.infer<typeof modeBestSchema>;
 export type TopicProgress = z.infer<typeof topicProgressSchema>;
+export type ReviseEntry = z.infer<typeof reviseEntrySchema>;
 export type Progress = z.infer<typeof progressSchema>;
 
 export function createEmptyProgress(): Progress {
-  return { version: PROGRESS_VERSION, xp: 0, topics: {}, questions: {} };
+  return { version: PROGRESS_VERSION, xp: 0, topics: {}, questions: {}, revise: {} };
 }
 
 export function createEmptyTopicProgress(): TopicProgress {

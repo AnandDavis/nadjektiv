@@ -85,7 +85,7 @@ describe('gameReducer', () => {
     expect(toSessionResult(state, 'sort', 't')).toEqual({
       topicId: 't',
       mode: 'sort',
-      answers: [{ questionId: 't-gap-1', topicId: 't', isCorrect: true }],
+      answers: [{ questionId: 't-gap-1', topicId: 't', isCorrect: true, given: 'a' }],
       score: 10,
       bestCombo: 1,
     });

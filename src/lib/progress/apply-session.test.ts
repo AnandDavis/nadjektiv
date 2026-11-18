@@ -18,11 +18,13 @@ function result(
       questionId: `t-gap-${i}`,
       topicId: 't',
       isCorrect: true,
+      given: 'right',
     })),
     ...Array.from({ length: wrong }, (_, i) => ({
       questionId: `t-gap-w${i}`,
       topicId: 't',
       isCorrect: false,
+      given: 'wrong',
     })),
   ];
   return { topicId: 't', mode: 'gap', answers, score, bestCombo };
@@ -78,5 +80,35 @@ describe('applySessionResult', () => {
     const before = createEmptyProgress();
     applySessionResult(before, result(3, 0), modes, NOW);
     expect(before).toEqual(createEmptyProgress());
+  });
+
+  it('adds missed questions to the revise list', () => {
+    const outcome = applySessionResult(createEmptyProgress(), result(1, 2), modes, NOW);
+    expect(outcome.progress.revise).toEqual({
+      't-gap-w0': { topicId: 't', given: 'wrong', misses: 1, lastMissedAt: NOW },
+      't-gap-w1': { topicId: 't', given: 'wrong', misses: 1, lastMissedAt: NOW },
+    });
+    expect(outcome.addedToRevise).toBe(2);
+  });
+
+  it('counts repeat misses and clears an item once it is answered correctly', () => {
+    const missTwice = applySessionResult(
+      applySessionResult(createEmptyProgress(), result(0, 1), modes, NOW).progress,
+      result(0, 1),
+      modes,
+      NOW,
+    );
+    expect(missTwice.progress.revise['t-gap-w0'].misses).toBe(2);
+    expect(missTwice.addedToRevise).toBe(0);
+
+    const fixed: SessionResult = {
+      mode: 'review',
+      answers: [{ questionId: 't-gap-w0', topicId: 't', isCorrect: true, given: 'right' }],
+      score: 10,
+      bestCombo: 1,
+    };
+    const outcome = applySessionResult(missTwice.progress, fixed, modes, NOW);
+    expect(outcome.progress.revise).toEqual({});
+    expect(outcome.clearedFromRevise).toBe(1);
   });
 });

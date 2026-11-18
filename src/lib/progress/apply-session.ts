@@ -24,6 +24,10 @@ export interface SessionOutcome {
   newBests: BestKind[];
   levelUp?: { from: number; to: number };
   tierUps: Array<{ topicId: string; from: Tier; to: Tier }>;
+  /** Questions newly put on the "to revise" list by this round. */
+  addedToRevise: number;
+  /** Questions taken off the list because they were answered correctly. */
+  clearedFromRevise: number;
 }
 
 function updateTopic(topic: TopicProgress, results: readonly boolean[]): TopicProgress {
@@ -74,6 +78,9 @@ export function applySessionResult(
   const xpGained = xpForSession(result);
   const topics = { ...progress.topics };
   const questions = { ...progress.questions };
+  const revise = { ...progress.revise };
+  let addedToRevise = 0;
+  let clearedFromRevise = 0;
 
   const resultsByTopic = new Map<string, boolean[]>();
   for (const answer of result.answers) {
@@ -85,6 +92,23 @@ export function applySessionResult(
       seen: stats.seen + 1,
       correct: stats.correct + (answer.isCorrect ? 1 : 0),
     };
+
+    // A miss goes on the revise list; a correct answer later takes it off.
+    const entry = revise[answer.questionId];
+    if (answer.isCorrect) {
+      if (entry) {
+        delete revise[answer.questionId];
+        clearedFromRevise += 1;
+      }
+    } else {
+      if (!entry) addedToRevise += 1;
+      revise[answer.questionId] = {
+        topicId: answer.topicId,
+        given: answer.given,
+        misses: (entry?.misses ?? 0) + 1,
+        lastMissedAt: now,
+      };
+    }
   }
 
   let newBests: BestKind[] = [];
@@ -112,10 +136,12 @@ export function applySessionResult(
   const levelAfter = levelForXp(xp).level;
 
   return {
-    progress: { ...progress, xp, topics, questions, startedAt: progress.startedAt ?? now },
+    progress: { ...progress, xp, topics, questions, revise, startedAt: progress.startedAt ?? now },
     xpGained,
     newBests,
     levelUp: levelAfter > levelBefore ? { from: levelBefore, to: levelAfter } : undefined,
     tierUps,
+    addedToRevise,
+    clearedFromRevise,
   };
 }

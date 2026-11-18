@@ -69,7 +69,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         phase: 'feedback',
         answers: [
           ...state.answers,
-          { questionId: item.question.id, topicId: item.topicId, isCorrect: action.isCorrect },
+          {
+            questionId: item.question.id,
+            topicId: item.topicId,
+            isCorrect: action.isCorrect,
+            given: action.given,
+          },
         ],
         mistakes: action.isCorrect
           ? state.mistakes

@@ -149,6 +149,7 @@ Question banks live in `src/content/topics/<topic-id>.ts` and export a `Topic`.
 - Every question has a stable, unique `id` (`<topic>-<mode>-<n>`). Progress is keyed by it, so **never reuse or renumber IDs** — retire a question by deleting it, and give a new one a new number.
 - Every question has an English `explanation` that states the rule, not just the answer.
 - Sentence-builder questions list every acceptable word order in `accepted`.
+- Grid tables (`grids` on a topic) are stored by cell (`<grid-id>:<row>:<col>`) in learners' progress and revise lists, so never reorder or remove rows or columns. Only append, or add a new grid. Mark anchor cells `given`, and list other accepted spellings in `accepted`.
 - Use real umlauts and `ß` — never `ae`/`ss` substitutes.
 - The content-integrity test (`src/content/content.test.ts`) checks IDs, options and answers. Extend it when you add a new question shape.
 

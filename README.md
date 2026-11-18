@@ -6,7 +6,7 @@ A mobile-first progressive web app for learning **German A1–A2 grammar** throu
 
 ## What's inside
 
-**24 grammar topics, about 1,400 questions,** built from the A1 and A2 grammar syllabus:
+**24 grammar topics, about 1,400 questions and 15 tables to fill in,** built from the A1 and A2 grammar syllabus:
 
 | A1                                                                                                                                                                                                                  | A2                                                                                                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -17,6 +17,7 @@ Every topic has a **Die Regeln** card set summarising the rule, and one or more 
 - **Blitz** (rapid-fire sorter): 60 seconds to sort as many prompts as you can, such as der/die/das, Akkusativ/Dativ, haben/sein or Wo?/Wohin?. Runs of correct answers raise a combo multiplier. A wrong answer pauses the clock until you've read why.
 - **Lückentext** (fill the gap): 10 sentences. Pick the word or ending that fits, then see the rule explained.
 - **Satzbau** (sentence builder): 8 sentences. Tap word tiles into the right order. Every grammatically correct order is accepted, not just the textbook one.
+- **Tabelle** (grid fill): fill in a whole grammar table against the clock: articles, pronouns, verb endings, modal verbs, adjective endings, the Präteritum, comparatives and the 33 irregular verbs. Cells lock green as soon as they're right, an ä/ö/ü/ß key row is built in, missed cells go on the revise list, and each table keeps your best time.
 - **Zu wiederholen** (to revise): every question you get wrong, in any mode, lands on this list. Each card shows the correct answer, what you chose, why, other correct word orders, and more examples with the same answer. Answer it correctly later and it leaves the list. The bottom navigation shows how many are waiting.
 - **Gemischte Wiederholung** (mixed review): 12 questions that start with your "to revise" list, then fill up with the questions you miss most across every topic you've played.
 

@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Grid fill game mode
-
-**Why:** the Sporcle format that started this app. Fill a whole table against the clock (the article grid, pronouns, adjective endings, present-tense endings, the 33 irregular verbs). Seeing the whole pattern at once is how tables stick.
-
-**Notes:** a new `grid` mode with its own content shape (rows × columns of cells, some pre-filled). Cells are typed answers, accepted case-insensitively, umlaut-aware. The timer and personal best record the time to complete, plus how many cells were filled if time runs out. Missed cells go on the revise list. Needs its own ▲●■-style mode mark in DESIGN.md.
-
 ## Type the answer
 
 **Why:** recall is harder than recognition. A harder Lückentext where you type the word rather than pick it, for topics you've already earned a medal in.

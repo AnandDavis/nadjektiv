@@ -25,7 +25,7 @@ test('wrong answers are collected on the revise page with the answer and why', a
 
   await expect(page).toHaveURL(/\/revise$/);
   // Sorted by misses rather than grouped, so each card names its topic.
-  await expect(page.getByText('Die Artikeltabelle')).toHaveCount(10 - correct);
+  await expect(page.locator('p', { hasText: 'Die Artikeltabelle' })).toHaveCount(10 - correct);
   // One card per missed question; each shows what was chosen and why.
   await expect(page.getByText('Deine Wahl')).toHaveCount(10 - correct);
   await expect(page.getByText('Warum?')).toHaveCount(10 - correct);

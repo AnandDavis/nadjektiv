@@ -59,3 +59,8 @@ export function missedTimes(count: number): Bilingual {
 export function comboLine(multiplier: number): Bilingual {
   return { de: `Kombo ×${multiplier}!`, en: `Combo ×${multiplier}!` };
 }
+
+/** "„dem“ statt „den“" / "“dem”, not “den”": a mistake pattern, right answer first. */
+export function insteadOf(answer: string, given: string): Bilingual {
+  return { de: `„${answer}“ statt „${given}“`, en: `“${answer}”, not “${given}”` };
+}

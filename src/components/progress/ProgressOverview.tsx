@@ -10,7 +10,7 @@ import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
 
 import { HistoryCharts } from './HistoryCharts';
-import { TierBadge } from './TierBadge';
+import { TierBadge, TierSquare } from './TierBadge';
 import { TopicMap } from './TopicMap';
 import { COPY } from '@/lib/i18n/copy';
 import { TopicLink } from '../topics/TopicLink';
@@ -87,7 +87,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
                         <Ui de={topic.titleDe} en={topic.title} />{' '}
                         <span className="text-xs font-extrabold text-muted">{topic.level}</span>
                       </span>
-                      <TierBadge tier={mastery.tier} />
+                      <TierSquare tier={mastery.tier} className="size-6 shrink-0" />
                     </span>
                     {topicProgress && (
                       <>

@@ -1,7 +1,10 @@
+import { ViewTransition } from 'react';
+
 import { TierSquare } from '@/components/progress/TierBadge';
 import { Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { MasteryInfo } from '@/lib/progress/mastery';
+import { topicTitleTransition } from '@/lib/ui/transitions';
 
 import { TopicLink } from './TopicLink';
 
@@ -27,9 +30,11 @@ export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
         {String(index).padStart(2, '0')}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-lg leading-tight font-extrabold text-ink group-hover:text-on-yellow">
-          <Ui de={topic.titleDe} en={topic.title} />
-        </span>
+        <ViewTransition name={topicTitleTransition(topic.id)} share="morph" default="none">
+          <span className="block text-lg leading-tight font-extrabold text-ink group-hover:text-on-yellow">
+            <Ui de={topic.titleDe} en={topic.title} />
+          </span>
+        </ViewTransition>
         <span className="mt-0.5 line-clamp-2 block text-sm text-muted group-hover:text-on-yellow">
           {topic.tagline}
         </span>

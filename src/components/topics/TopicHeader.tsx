@@ -1,10 +1,12 @@
 'use client';
 
+import { ViewTransition } from 'react';
 import { TierBadge } from '@/components/progress/TierBadge';
 import { Badge, CheckIcon, Card, Ui } from '@/components/ui';
 import type { GameMode, Level } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
+import { topicTitleTransition } from '@/lib/ui/transitions';
 import { cn } from '@/lib/utils/cn';
 
 import { TopicBackLink } from './TopicBackLink';
@@ -31,9 +33,12 @@ export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: 
           <Badge>{level}</Badge>
           {mastery && <TierBadge tier={mastery.tier} />}
         </div>
-        <h1 className="mt-3 text-5xl leading-none font-black text-ink">
-          <Ui de={titleDe} en={title} />
-        </h1>
+        {/* The title morphs here from its row in the topic list. */}
+        <ViewTransition name={topicTitleTransition(topicId)} share="morph" default="none">
+          <h1 className="mt-3 text-5xl leading-none font-black text-ink">
+            <Ui de={titleDe} en={title} />
+          </h1>
+        </ViewTransition>
         <p className="mt-3 text-lg text-ink">{tagline}</p>
       </div>
       {mastery?.next && (

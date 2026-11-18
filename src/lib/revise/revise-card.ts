@@ -6,6 +6,7 @@
 import type { GapQuestion, GridPuzzle, Question, SortQuestion, Topic } from '@/content/types';
 
 import { formatSentence } from '../game/check-answer';
+import { correctSentences } from '../game/word-diff';
 import { parseCellId } from '../grid/grid-round';
 
 const MAX_EXAMPLES = 3;
@@ -28,6 +29,8 @@ export interface ReviseCard {
    * where the whole order is the answer and the words out of place are compared instead.
    */
   correctParts?: CorrectPart[];
+  /** Sentence builders: every correct order, to compare the learner's with the closest. */
+  correctOrders?: string[];
   /** English gloss or translation, when the question has one. */
   translation?: string;
   explanation: string;
@@ -124,6 +127,7 @@ export function buildReviseCard(topic: Topic, question: Question): ReviseCard {
       return {
         ...base,
         translation: question.translation,
+        correctOrders: correctSentences(question),
         alsoCorrect: (question.accepted ?? [])
           .slice(0, MAX_ALSO_CORRECT)
           .map((order) => formatSentence(order, question.punctuation)),

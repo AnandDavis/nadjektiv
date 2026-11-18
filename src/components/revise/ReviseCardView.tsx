@@ -1,6 +1,6 @@
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
-import { diffSentences } from '@/lib/game/word-diff';
+import { diffClosest } from '@/lib/game/word-diff';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
 
@@ -39,7 +39,7 @@ function CorrectForm({ card, given }: { card: ReviseCard; given: string }) {
   }
   return (
     <>
-      {diffSentences(given, card.correct).answer.map((word, i) => (
+      {diffClosest(given, card.correctOrders ?? [card.correct]).answer.map((word, i) => (
         <span key={i}>
           {i > 0 && ' '}
           <span className={word.isRight ? undefined : RIGHT_MARK}>{word.text}</span>

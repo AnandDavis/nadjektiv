@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Grammatik Games** — a mobile-first PWA for learning German A1–A2 grammar through short games. Progress lives in `localStorage` today; user accounts and server sync come later, so persistence must stay behind a port.
+**Nadjektiv** — a mobile-first PWA for learning German A1–A2 grammar through short games. Progress lives in `localStorage` today; user accounts and server sync come later, so persistence must stay behind a port.
 
 ## Critical Rules
 
@@ -20,6 +20,7 @@
 14. **Verify findings before acting on them** — when a review, doc or sub-agent claims something about the code or the German, open the file and read the line before acting. Docs describe what was true when written.
 15. **Interface labels are bilingual** — headings, buttons and other labels that have a German form live in `src/lib/i18n/copy.ts` and render through `<Ui {...COPY.x.y} />`, which shows German or English per the learner's setting (switched by CSS before paint, so no flash). Grammar content is always German and never goes through `COPY`.
 16. **A wrong answer is always explained before the game moves on** — every mode stops on a wrong answer, shows what was chosen, the right answer and the rule, and waits for the learner to continue (Blitz pauses its clock while it waits).
+17. **Names and tuning live in `src/config/`** — the app name, description and brand colours come from `APP_CONFIG`; round lengths, timers, points and XP from `GAME_CONFIG`. Don't hardcode them elsewhere. `STORAGE_CONFIG` holds identifiers baked into saved data (localStorage keys, export marker) and must not change without a migration.
 
 ---
 
@@ -41,6 +42,7 @@ src/
   components/ui/          design-system primitives (Button, Card, Badge, ProgressBar …)
   components/game/        game modes and the shared game shell
   components/progress/    mastery, XP and personal-best displays
+  config/                 app identity (app.ts) and gameplay tuning (game.ts)
   content/                grammar topics and question banks (data only)
   hooks/                  React hooks (useProgress, useGameSession …)
   lib/game/               pure game logic: session building, scoring, answer checking

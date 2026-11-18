@@ -1,6 +1,6 @@
 # Coding Standards
 
-Conventions for the Grammatik Games codebase. `CLAUDE.md` has the short list of critical rules; this document explains them.
+Conventions for the Nadjektiv codebase. `CLAUDE.md` has the short list of critical rules; this document explains them.
 
 ## File naming
 

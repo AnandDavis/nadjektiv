@@ -4,12 +4,14 @@
  * (see PREFERENCES_SCRIPT), which avoids a flash of the wrong theme or language.
  */
 
+import { STORAGE_CONFIG } from '@/config/app';
+
 export type ThemePreference = 'system' | 'light' | 'dark';
 /** Language of headings and labels. Grammar content is always German. */
 export type UiLanguage = 'de' | 'en';
 
-export const THEME_KEY = 'grammatik:theme';
-export const UI_LANGUAGE_KEY = 'grammatik:ui-language';
+export const THEME_KEY = `${STORAGE_CONFIG.keyPrefix}:theme`;
+export const UI_LANGUAGE_KEY = `${STORAGE_CONFIG.keyPrefix}:ui-language`;
 export const DEFAULT_UI_LANGUAGE: UiLanguage = 'de';
 
 /** Runs in <head> before paint; must stay dependency-free ES5. */

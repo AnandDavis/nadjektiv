@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 
 import { Button, Card } from '@/components/ui';
+import { APP_CONFIG } from '@/config/app';
 import { deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
 import { getSnapshot, resetProgress, updateProgress } from '@/lib/storage/progress-client';
 
@@ -26,7 +27,7 @@ export function DataSettings() {
   function handleExport() {
     const now = new Date().toISOString();
     downloadFile(
-      `grammatik-progress-${now.slice(0, 10)}.json`,
+      `${APP_CONFIG.exportFilePrefix}-${now.slice(0, 10)}.json`,
       serialiseProgress(getSnapshot(), now),
     );
     setStatus({ kind: 'ok', message: 'Progress exported.' });

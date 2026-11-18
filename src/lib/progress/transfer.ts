@@ -3,10 +3,12 @@
  * accounts exist (and so accounts can import it later).
  */
 
+import { APP_CONFIG, STORAGE_CONFIG } from '@/config/app';
+
 import { parseProgress } from './migrate';
 import type { Progress } from './types';
 
-const EXPORT_APP = 'grammatik-games';
+const EXPORT_APP = STORAGE_CONFIG.exportMarker;
 
 interface ProgressExport {
   app: typeof EXPORT_APP;
@@ -28,7 +30,7 @@ export function deserialiseProgress(text: string): Progress {
     throw new Error('That file isn’t valid JSON.');
   }
   if (typeof data !== 'object' || data === null || (data as { app?: unknown }).app !== EXPORT_APP) {
-    throw new Error('That file isn’t a Grammatik Games progress export.');
+    throw new Error(`That file isn’t a ${APP_CONFIG.name} progress export.`);
   }
   return parseProgress((data as { progress?: unknown }).progress);
 }

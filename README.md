@@ -1,4 +1,4 @@
-# Grammatik Games
+# Nadjektiv
 
 A mobile-first progressive web app for learning **German A1–A2 grammar** through short games instead of coursebook drills. Install it on your phone's home screen and it works offline.
 
@@ -65,11 +65,19 @@ npm run build && npm run start
 - **Vitest** with Testing Library, and **Playwright** with axe-core
 - A service worker generated from the topic registry (`src/app/sw.js/route.ts`) that precaches every route
 
+## Configuration
+
+- `src/config/app.ts`: the app's name, short name, description, export file name and brand colours. Rename the app here.
+- `src/config/game.ts`: round lengths, the Blitz timer, review length, points, combos and XP per level.
+
+`STORAGE_CONFIG` in `app.ts` holds the localStorage key prefix and the export-file marker. Those are baked into learners' saved data, so they stay fixed even when the app is renamed.
+
 ## Project structure
 
 ```
 src/
-  app/                 routes: home, topic, play, review, progress, settings, manifest, sw.js
+  app/                 routes: home, topic, play, revise, review, progress, settings, manifest, sw.js
+  config/              app identity and gameplay tuning
   components/          ui primitives, game modes, progress and topic views
   content/             topics and question banks (one file per topic) + integrity test
   hooks/               useProgress, useGameSession, useTheme

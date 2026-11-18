@@ -48,7 +48,7 @@ describe('progress transfer', () => {
   });
 
   it('rejects files from elsewhere', () => {
-    expect(() => deserialiseProgress('{"hello":1}')).toThrow(/isn’t a Grammatik Games/);
+    expect(() => deserialiseProgress('{"hello":1}')).toThrow(/isn’t a Nadjektiv progress export/);
     expect(() => deserialiseProgress('not json')).toThrow(/valid JSON/);
   });
 });

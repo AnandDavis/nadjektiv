@@ -1,19 +1,19 @@
 import type { MetadataRoute } from 'next';
 
-import { BRAND_COLORS } from '@/lib/pwa/brand';
+import { APP_CONFIG } from '@/config/app';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: '/',
-    name: 'Grammatik Games',
-    short_name: 'Grammatik',
-    description: 'Learn German A1–A2 grammar through quick games.',
+    name: APP_CONFIG.name,
+    short_name: APP_CONFIG.shortName,
+    description: APP_CONFIG.description,
     start_url: '/',
     scope: '/',
     display: 'standalone',
     orientation: 'portrait',
-    background_color: BRAND_COLORS.canvasLight,
-    theme_color: BRAND_COLORS.brand,
+    background_color: APP_CONFIG.colors.canvasLight,
+    theme_color: APP_CONFIG.colors.brand,
     lang: 'en',
     categories: ['education', 'games'],
     icons: [

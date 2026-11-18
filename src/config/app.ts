@@ -13,11 +13,14 @@ export const APP_CONFIG = {
   /** File name prefix for progress exports (safe to change). */
   exportFilePrefix: 'nadjektiv-progress',
   /**
-   * The page background (--canvas in src/app/globals.css) as literal colours, for places
-   * CSS variables can't reach: the manifest and <meta theme-color>, which colours the
-   * browser's address bar. A test keeps them in sync with the stylesheet.
+   * Literal colours for places CSS variables can't reach, kept in sync with
+   * src/app/globals.css by a test. The header colour (--ink) goes in <meta theme-color>,
+   * so the browser's address bar runs straight into the app header; the page colour
+   * (--canvas) is the splash-screen background when the installed app opens.
    */
   colors: {
+    headerLight: '#151515',
+    headerDark: '#efebe0',
     canvasLight: '#efebe0',
     canvasDark: '#141414',
   },

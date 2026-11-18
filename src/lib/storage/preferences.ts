@@ -14,10 +14,10 @@ export const THEME_KEY = `${STORAGE_CONFIG.keyPrefix}:theme`;
 export const UI_LANGUAGE_KEY = `${STORAGE_CONFIG.keyPrefix}:ui-language`;
 export const DEFAULT_UI_LANGUAGE: UiLanguage = 'de';
 
-/** Browser chrome colour for a forced theme: the page background, so the bar blends in. */
+/** Address-bar colour for a forced theme: the header's, so the two read as one block. */
 export const THEME_COLORS = {
-  light: APP_CONFIG.colors.canvasLight,
-  dark: APP_CONFIG.colors.canvasDark,
+  light: APP_CONFIG.colors.headerLight,
+  dark: APP_CONFIG.colors.headerDark,
 } as const;
 
 /**

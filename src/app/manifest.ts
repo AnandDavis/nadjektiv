@@ -13,7 +13,7 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'standalone',
     orientation: 'portrait',
     background_color: APP_CONFIG.colors.canvasLight,
-    theme_color: APP_CONFIG.colors.canvasLight,
+    theme_color: APP_CONFIG.colors.headerLight,
     lang: 'en',
     categories: ['education', 'games'],
     icons: [

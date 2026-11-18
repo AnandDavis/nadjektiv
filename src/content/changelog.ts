@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T23:30Z',
+    title: 'Easier typing in Tippen',
+    description:
+      'In Tippen the keyboard now stays at the bottom of the screen with the hint button above it, a × in the answer field clears what you typed, and a word that starts a sentence shows its capital letter as you type.',
+  },
+  {
     date: '2026-11-18T23:20Z',
     title: 'No tracking, just anonymous counts',
     description:

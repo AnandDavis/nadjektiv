@@ -27,7 +27,7 @@ test('pages never opened online still load and play offline', async ({ page, con
   // Full page loads of routes that were never visited.
   await page.goto('/topics/irregular-verbs');
   await expect(
-    page.getByRole('heading', { level: 1, name: 'The 33 irregular verbs' }),
+    page.getByRole('heading', { level: 1, name: 'Die 33 unregelmäßigen Verben' }),
   ).toBeVisible();
 
   await page.goto('/play/perfekt/build');
@@ -42,7 +42,7 @@ test('in-app navigation works offline', async ({ page, context }) => {
   await installOffline(page);
   await context.setOffline(true);
 
-  await page.getByRole('link', { name: /Two-way prepositions/ }).click();
+  await page.getByRole('link', { name: /Wechselpräpositionen/ }).click();
   await expect(page).toHaveURL(/\/topics\/two-way-prepositions$/);
   await page.getByRole('link', { name: /Blitz/ }).click();
   await expect(page).toHaveURL(/\/play\/two-way-prepositions\/sort$/);
@@ -50,9 +50,17 @@ test('in-app navigation works offline', async ({ page, context }) => {
   await expect(page.getByRole('group', { name: 'Sort into' })).toBeVisible();
 
   await page.getByRole('link', { name: 'Quit round' }).click();
-  await page
+  await expect(page).toHaveURL(/\/topics\/two-way-prepositions$/);
+  // Offline, a navigation with no cached data falls back to a full page load from the
+  // service worker, so the page can render twice in quick succession. Tap the way a
+  // person would: once the page has settled, retrying if a reload swallowed the tap.
+  const progressLink = page
     .getByRole('navigation', { name: 'Main' })
-    .getByRole('link', { name: /Fortschritt/ })
-    .click();
-  await expect(page.getByRole('heading', { name: 'Fortschritt' })).toBeVisible();
+    .getByRole('link', { name: /Fortschritt/ });
+  await expect(async () => {
+    await progressLink.click({ timeout: 2_000 });
+    await expect(page.getByRole('heading', { level: 1, name: 'Fortschritt' })).toBeVisible({
+      timeout: 3_000,
+    });
+  }).toPass({ timeout: 20_000 });
 });

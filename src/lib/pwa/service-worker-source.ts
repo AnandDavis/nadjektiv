@@ -8,9 +8,9 @@
  * Fetch:
  * - /_next/static and icons: cache-first (file names are content-hashed, never stale).
  * - Page loads: network-first, falling back to the cached page, then to the home page.
- * - RSC requests (client-side navigation data): network-first, falling back only to an
- *   exact cached match. Never answer them with HTML: when they fail, Next.js falls back
- *   to a full page load, which the cached page then serves.
+ * - RSC requests (client-side navigation data): network-first, falling back to an exact
+ *   cached match, else a plain 503. Never HTML and never a network error: a 503 makes
+ *   Next.js fall back to a full page load, which the cached page then serves.
  *
  * Both caches are versioned per build; activating a new worker deletes the old ones.
  */
@@ -69,6 +69,15 @@ async function cacheFirst(request) {
   return response;
 }
 
+// Offline with no exact cached payload: answer with a non-RSC 503 instead of a network
+// error. Next.js treats that as "load this URL as a full page", which the page cache
+// then serves. A rejected fetch can instead leave a soft navigation waiting.
+function offlineRsc(request) {
+  return async () =>
+    (await caches.match(request)) ||
+    new Response('', { status: 503, headers: { 'Content-Type': 'text/plain' } });
+}
+
 async function networkFirst(request, fallback) {
   try {
     const response = await fetch(request);
@@ -90,7 +99,7 @@ self.addEventListener('fetch', (event) => {
   if (isStatic(url)) {
     event.respondWith(cacheFirst(request));
   } else if (isRsc(request, url)) {
-    event.respondWith(networkFirst(request, () => caches.match(request)));
+    event.respondWith(networkFirst(request, offlineRsc(request)));
   } else if (request.mode === 'navigate') {
     event.respondWith(
       networkFirst(request, async () =>

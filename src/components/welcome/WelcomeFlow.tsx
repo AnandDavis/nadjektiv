@@ -41,6 +41,8 @@ export function WelcomeFlow({ topicCount }: { topicCount: number }) {
 
   const finish = () => {
     markWelcomeSeen();
+    // The page stays alive in the background, so start from step one next time.
+    setStep(0);
     router.replace('/');
   };
 

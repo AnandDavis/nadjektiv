@@ -491,12 +491,13 @@ export const nounGender: Topic = {
     {
       id: 'noun-gender-gap-17',
       kind: 'gap',
-      before: 'Die Tische sind neu. Der Plural von „Tisch“ hat den Artikel ',
-      after: '.',
-      options: ['der', 'die', 'das'],
-      answer: 'die',
-      translation: 'The tables are new. The plural of "Tisch" has the article die.',
-      explanation: 'The plural article is always die, whatever the singular gender.',
+      before: '',
+      after: ' Tische sind neu.',
+      options: ['Der', 'Die', 'Das'],
+      answer: 'Die',
+      translation: 'The tables are new.',
+      explanation:
+        'Tisch is masculine (der Tisch), but in the plural the article is always die: die Tische.',
     },
     {
       id: 'noun-gender-gap-18',

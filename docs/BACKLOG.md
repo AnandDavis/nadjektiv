@@ -72,7 +72,7 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Why:** game screens re-render on every answer. The compiler memoises components automatically.
 
-**Notes:** enable it in Next 16, check our hooks follow its rules (lint), and compare render counts and the JS budget before and after.
+**Tried (Nov 2026), not adopted:** with `reactCompiler: true` and `babel-plugin-react-compiler` 1.0, every hook passed lint and every test passed, but each page gained 12–17 KB of JavaScript (topic page 217.7 → 235.0 KB, over the 230 KB budget; home 214.4 → 229.3 KB). The game screens are small and already memoise their hot paths, so there was no slowness to win back. Revisit if a screen becomes measurably slow, or after splitting heavy screens frees budget.
 
 ## Speed Insights
 

@@ -4,13 +4,13 @@ Conventions for the Grammatik Games codebase. `CLAUDE.md` has the short list of 
 
 ## File naming
 
-| What | Convention | Example |
-|------|-----------|---------|
-| React components | PascalCase | `SorterGame.tsx`, `MasteryBadge.tsx` |
-| Classes (services, adapters) | PascalCase | `LocalStorageProgressStore.ts` |
+| What                               | Convention | Example                                                |
+| ---------------------------------- | ---------- | ------------------------------------------------------ |
+| React components                   | PascalCase | `SorterGame.tsx`, `MasteryBadge.tsx`                   |
+| Classes (services, adapters)       | PascalCase | `LocalStorageProgressStore.ts`                         |
 | Utilities, pure functions, content | kebab-case | `xp.ts`, `build-session.ts`, `two-way-prepositions.ts` |
-| Next.js conventions | lowercase | `page.tsx`, `layout.tsx`, `manifest.ts` |
-| Directories | kebab-case | `components/game/`, `lib/progress/` |
+| Next.js conventions                | lowercase  | `page.tsx`, `layout.tsx`, `manifest.ts`                |
+| Directories                        | kebab-case | `components/game/`, `lib/progress/`                    |
 
 ## Project structure
 
@@ -48,7 +48,7 @@ Scoring, mastery tiers, XP levels, question selection and answer checking are pu
 
 ```typescript
 // ✅ Good — randomness and stats are injected, so it's deterministic and testable
-export function buildSession(questions: Question[], stats: QuestionStatsMap, rng: Rng): Question[]
+export function buildSession(questions: Question[], stats: QuestionStatsMap, rng: Rng): Question[];
 
 // ❌ Bad — hidden Math.random() and storage reads
 export function buildSession(topicId: string) {
@@ -111,15 +111,15 @@ Prefer named exports for components and utilities. Pages, layouts and other Next
 
 All colours, radii and shadows come from the tokens in `src/app/globals.css`, exposed to Tailwind via `@theme`. Components use semantic utilities:
 
-| Purpose | Utility |
-|---------|---------|
-| Page background | `bg-canvas` |
-| Card / raised surface | `bg-surface`, `border-line` |
-| Primary text / secondary text | `text-ink`, `text-muted` |
-| Brand action | `bg-brand`, `text-on-brand` |
-| Correct / wrong feedback | `bg-correct-soft text-correct`, `bg-wrong-soft text-wrong` |
-| Grammatical gender | `text-der`, `text-die`, `text-das` |
-| Mastery tiers | `text-bronze`, `text-silver`, `text-gold`, `text-mastered` |
+| Purpose                       | Utility                                                    |
+| ----------------------------- | ---------------------------------------------------------- |
+| Page background               | `bg-canvas`                                                |
+| Card / raised surface         | `bg-surface`, `border-line`                                |
+| Primary text / secondary text | `text-ink`, `text-muted`                                   |
+| Brand action                  | `bg-brand`, `text-on-brand`                                |
+| Correct / wrong feedback      | `bg-correct-soft text-correct`, `bg-wrong-soft text-wrong` |
+| Grammatical gender            | `text-der`, `text-die`, `text-das`                         |
+| Mastery tiers                 | `text-bronze`, `text-silver`, `text-gold`, `text-mastered` |
 
 Dark mode is handled by redefining the tokens under `[data-theme='dark']` (and `prefers-color-scheme` when the learner hasn't chosen), so components don't need `dark:` variants for token colours. If you find yourself reaching for a raw `dark:` variant, the token set is missing something — add a token instead.
 
@@ -183,13 +183,13 @@ Order: React/Next → third-party → `@/components` → `@/lib`, `@/hooks`, `@/
 
 ## Testing
 
-| Layer | Tool | What |
-|-------|------|------|
-| Pure logic (`src/lib`) | Vitest | Scoring, XP, mastery, session building, answer checking, migrations |
-| Content | Vitest | Integrity of every question bank |
-| Components | Vitest + Testing Library | Game modes respond correctly to answers; feedback is announced |
-| Flows | Playwright | Play a session end to end; progress persists across reload |
-| Accessibility | Playwright + axe | Home, topic, game and progress screens in both themes |
+| Layer                  | Tool                     | What                                                                |
+| ---------------------- | ------------------------ | ------------------------------------------------------------------- |
+| Pure logic (`src/lib`) | Vitest                   | Scoring, XP, mastery, session building, answer checking, migrations |
+| Content                | Vitest                   | Integrity of every question bank                                    |
+| Components             | Vitest + Testing Library | Game modes respond correctly to answers; feedback is announced      |
+| Flows                  | Playwright               | Play a session end to end; progress persists across reload          |
+| Accessibility          | Playwright + axe         | Home, topic, game and progress screens in both themes               |
 
 Test behaviour, not implementation: query by role and label, not class names.
 

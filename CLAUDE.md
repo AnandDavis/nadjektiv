@@ -28,7 +28,7 @@
 - **State:** component-local state and reducers; progress via `useProgress()` (a `useSyncExternalStore` over the store)
 - **Persistence:** `ProgressStore` port → `LocalStorageProgressStore` adapter (Zod-validated, versioned)
 - **Testing:** Vitest + Testing Library (unit/component), Playwright + axe (end-to-end, accessibility)
-- **PWA:** `app/manifest.ts`, hand-written service worker in `public/sw.js`, installable and usable offline
+- **PWA:** `app/manifest.ts` and a service worker generated from the topic registry at `app/sw.js/route.ts` (precaches every route); installable and usable offline
 - **Hosting:** Vercel
 
 ### Layout
@@ -65,14 +65,14 @@ See [docs/CODING_STANDARDS.md](docs/CODING_STANDARDS.md) for the full standards.
 
 Responsibility trumps line count — a 250-line file with one concern beats a 180-line file with two.
 
-| File type | Target | Max |
-|-----------|--------|-----|
-| Pages | 50–150 | 200 |
-| Components | 100–250 | 300 |
-| Hooks | 50–150 | 200 |
-| Utilities / services | 50–200 | 300 |
-| Content (question banks) | one file per topic | — |
-| Type files | no limit | — |
+| File type                | Target             | Max |
+| ------------------------ | ------------------ | --- |
+| Pages                    | 50–150             | 200 |
+| Components               | 100–250            | 300 |
+| Hooks                    | 50–150             | 200 |
+| Utilities / services     | 50–200             | 300 |
+| Content (question banks) | one file per topic | —   |
+| Type files               | no limit           | —   |
 
 ### Always handle promise rejections
 

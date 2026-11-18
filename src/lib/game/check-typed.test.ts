@@ -24,6 +24,13 @@ describe('checkTyped', () => {
     expect(checkTyped(gap('es'), '-es')).toBe('correct');
   });
 
+  it('lets a noun pair be typed with or without its comma', () => {
+    const pair = gap('der Tisch, die Tische', ['der Tisch, die Tische', 'das Tisch, die Tische']);
+    expect(checkTyped(pair, 'der Tisch die Tische')).toBe('correct');
+    expect(checkTyped(pair, 'der Tisch,die Tische')).toBe('correct');
+    expect(checkTyped(pair, 'das Tisch, die Tische')).toBe('wrong');
+  });
+
   it('never accepts ae for ä or ss for ß, even as nearly', () => {
     expect(checkTyped(gap('Mädchen'), 'Maedchen')).toBe('wrong');
     expect(checkTyped(gap('groß'), 'gross')).toBe('wrong');

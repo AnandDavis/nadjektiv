@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Noun cards: gender and plural together
-
-**Why:** der/die/das and the plural are learned as a pair ("der Tisch, die Tische"), but they're practised in separate topics.
-
-**Notes:** a Blitz-style round showing a noun and asking for both gender and plural form. Needs a checked noun list with plurals (reuse noun-gender and plurals content where it overlaps, and check every plural against `docs/grammar/`). New question ids are permanent once shipped.
-
 ## Speed Insights
 
 **Why:** Lighthouse measures a lab machine. Speed Insights reports real Core Web Vitals from learners' phones.

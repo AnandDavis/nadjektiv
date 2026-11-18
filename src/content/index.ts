@@ -12,6 +12,7 @@ import { imperative } from './topics/imperative';
 import { irregularVerbs } from './topics/irregular-verbs';
 import { modalVerbs } from './topics/modal-verbs';
 import { negation } from './topics/negation';
+import { nounCards } from './topics/noun-cards';
 import { nounGender } from './topics/noun-gender';
 import { perfekt } from './topics/perfekt';
 import { plurals } from './topics/plurals';
@@ -32,6 +33,7 @@ export const TOPICS: readonly Topic[] = [
   // A1
   nounGender,
   plurals,
+  nounCards,
   articles,
   cases,
   pronouns,

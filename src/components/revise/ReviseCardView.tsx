@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import type { ReviseCard } from '@/lib/revise/revise-card';
 import { topicRulesHref } from '@/lib/routes';
 
@@ -9,11 +9,18 @@ interface ReviseCardViewProps {
   card: ReviseCard;
   given: string;
   misses: number;
+  /** Shown above the card, since the list is sorted by misses rather than grouped. */
+  topicTitle?: Bilingual;
 }
 
-export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
+export function ReviseCardView({ card, given, misses, topicTitle }: ReviseCardViewProps) {
   return (
     <Card className="flex flex-col gap-3">
+      {topicTitle && (
+        <p className="text-xs font-extrabold tracking-widest text-muted uppercase">
+          <Ui {...topicTitle} />
+        </p>
+      )}
       <div className="flex items-start gap-2">
         <CheckIcon className="mt-1 shrink-0 text-correct" />
         <div className="min-w-0 flex-1">
@@ -22,7 +29,7 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
           </p>
           {card.translation && <p className="text-sm text-muted">{card.translation}</p>}
         </div>
-        {misses > 1 && (
+        {misses > 0 && (
           <Badge className="shrink-0">
             {misses}× <Ui {...COPY.revise.missed} />
           </Badge>

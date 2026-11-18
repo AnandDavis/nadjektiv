@@ -66,7 +66,7 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'To revise',
     description:
-      'Every question you get wrong is collected with the answer, the rule and more examples. Answer it correctly later and it leaves the list.',
+      'Every question you get wrong is collected with the answer, the rule and more examples, the ones you’ve missed most at the top. Answer it correctly later and it leaves the list.',
   },
   {
     title: 'Mixed review',

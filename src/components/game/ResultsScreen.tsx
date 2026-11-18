@@ -76,13 +76,21 @@ export function ResultsScreen({
 
       {mistakes.length > 0 && <MistakeList mistakes={mistakes} />}
 
-      <div className="grid grid-cols-2 gap-3">
-        <ButtonLink href={exitHref} variant="secondary" size="lg">
-          {exitLabel}
-        </ButtonLink>
+      <div className="flex flex-col gap-3">
         <Button size="lg" onClick={onPlayAgain}>
           <Ui {...COPY.game.playAgain} />
         </Button>
+        <div className={exitHref === '/' ? 'grid' : 'grid grid-cols-2 gap-3'}>
+          <ButtonLink href={exitHref} variant="secondary" size="lg">
+            {exitLabel}
+          </ButtonLink>
+          {/* Rounds that leave to a topic also offer the way home. */}
+          {exitHref !== '/' && (
+            <ButtonLink href="/" variant="secondary" size="lg">
+              <Ui {...COPY.common.home} />
+            </ButtonLink>
+          )}
+        </div>
       </div>
     </div>
   );

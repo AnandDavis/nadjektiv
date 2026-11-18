@@ -82,7 +82,7 @@ export const COPY = {
       de: 'Die Grammatik ist immer auf Deutsch. Du kannst das später in den Einstellungen ändern.',
       en: 'The grammar is always in German. You can change this later in Settings.',
     },
-    games: { de: 'Vier Spiele', en: 'Four games' },
+    games: { de: 'Die Spiele', en: 'The games' },
     progress: { de: 'Dein Fortschritt', en: 'Your progress' },
     next: { de: 'Weiter', en: 'Next' },
     back: { de: 'Zurück', en: 'Back' },

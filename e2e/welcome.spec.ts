@@ -18,8 +18,8 @@ test('a first visit opens the intro, and finishing it lands on home for good', a
   await expect(page.getByRole('heading', { level: 1, name: 'Welcome to Nadjektiv' })).toBeVisible();
 
   await page.getByRole('button', { name: 'Next' }).click();
-  await expect(page.getByRole('heading', { level: 1, name: 'Four games' })).toBeFocused();
-  for (const game of ['Blitz', 'Lückentext', 'Satzbau', 'Tabelle']) {
+  await expect(page.getByRole('heading', { level: 1, name: 'The games' })).toBeFocused();
+  for (const game of ['Blitz', 'Lückentext', 'Tippen', 'Satzbau', 'Tabelle']) {
     await expect(page.getByText(game, { exact: true })).toBeVisible();
   }
 

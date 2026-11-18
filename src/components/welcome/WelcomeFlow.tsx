@@ -92,11 +92,12 @@ export function WelcomeFlow({ topicCount }: { topicCount: number }) {
           </Button>
         )}
         {step < last ? (
-          <Button size="lg" className="flex-1" onClick={() => setStep(step + 1)}>
+          <Button key="next" size="lg" className="flex-1" onClick={() => setStep(step + 1)}>
             <Ui {...COPY.welcome.next} />
           </Button>
         ) : (
-          <Button size="lg" variant="accent" className="flex-1" onClick={finish}>
+          // A separate element, so the switch from ink to yellow doesn't animate.
+          <Button key="start" size="lg" variant="accent" className="flex-1" onClick={finish}>
             <Ui {...COPY.welcome.start} />
           </Button>
         )}

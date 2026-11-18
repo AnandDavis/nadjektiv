@@ -194,6 +194,7 @@ export const COPY = {
     youChose: { de: 'Deine Wahl', en: 'You chose' },
     answer: { de: 'Richtig ist', en: 'Answer' },
     why: { de: 'Warum?', en: 'Why?' },
+    comboLost: { de: 'Kombo verloren', en: 'Combo lost' },
     timeUp: { de: 'Zeit ist um!', en: 'Time’s up!' },
     perfect: { de: 'Perfekt!', en: 'Perfect!' },
     wellDone: { de: 'Gut gemacht!', en: 'Well done!' },

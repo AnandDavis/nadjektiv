@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Combo feedback
-
-**Why:** the combo multiplier works, but it's easy to miss when it rises or breaks.
-
-**Notes:** a ×2 or ×3 badge that pops beside the score when the multiplier goes up, and a short "Kombo verloren" when a wrong answer breaks it. Announce both through the existing `aria-live` region, keep the text bilingual in `COPY`, and respect reduced motion (the phone's and the app's own setting).
-
 ## Best combo on the results screen
 
 **Why:** the best combo for each topic and mode is already saved, but barely shown.

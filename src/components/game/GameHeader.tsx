@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
-import { BoltIcon, CrossIcon, ProgressBar } from '@/components/ui';
-import { comboMultiplier } from '@/lib/game/scoring';
+import { BoltIcon, CrossIcon, ProgressBar, Ui } from '@/components/ui';
+import { comboMultiplier, type ComboChange } from '@/lib/game/scoring';
+import { COPY, comboLine } from '@/lib/i18n/copy';
 
 interface GameHeaderProps {
   exitHref: string;
@@ -11,9 +12,19 @@ interface GameHeaderProps {
   /** Untimed rounds show question progress; timed rounds pass their own timer. */
   progress?: { current: number; total: number };
   timer?: React.ReactNode;
+  /** What the last answer did to the combo, for a moment's call-out. */
+  comboChange?: ComboChange;
 }
 
-export function GameHeader({ exitHref, title, score, combo, progress, timer }: GameHeaderProps) {
+export function GameHeader({
+  exitHref,
+  title,
+  score,
+  combo,
+  progress,
+  timer,
+  comboChange,
+}: GameHeaderProps) {
   const multiplier = comboMultiplier(combo);
   return (
     <header className="flex flex-col gap-3">
@@ -29,9 +40,23 @@ export function GameHeader({ exitHref, title, score, combo, progress, timer }: G
           {title}
         </h1>
         <div className="flex items-stretch gap-1" aria-live="polite">
+          {comboChange?.kind === 'lost' && (
+            <span className="flex items-center bg-red px-2 text-xs font-black text-on-red uppercase motion-safe:animate-shake">
+              <Ui {...COPY.game.comboLost} />
+            </span>
+          )}
           {multiplier > 1 && (
-            <span className="flex items-center gap-0.5 bg-yellow px-2 text-sm font-black text-on-yellow motion-safe:animate-pop">
+            // Keyed by the multiplier so it pops again each time it rises.
+            <span
+              key={multiplier}
+              className="flex items-center gap-0.5 bg-yellow px-2 text-sm font-black text-on-yellow motion-safe:animate-pop"
+            >
               <BoltIcon />×{multiplier}
+              {comboChange?.kind === 'up' && (
+                <span className="sr-only">
+                  <Ui {...comboLine(multiplier)} />
+                </span>
+              )}
             </span>
           )}
           <span

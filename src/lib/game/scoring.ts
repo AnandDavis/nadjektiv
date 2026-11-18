@@ -44,6 +44,17 @@ export function comboMultiplier(combo: number): number {
   return Math.min(MAX_MULTIPLIER, 1 + Math.floor(combo / COMBO_STEP));
 }
 
+/** What an answer did to the combo multiplier: raised it, or broke a raised one. */
+export type ComboChange = { kind: 'up'; multiplier: number } | { kind: 'lost'; multiplier: number };
+
+export function comboChange(comboBefore: number, comboAfter: number): ComboChange | undefined {
+  const before = comboMultiplier(comboBefore);
+  const after = comboMultiplier(comboAfter);
+  if (after > before) return { kind: 'up', multiplier: after };
+  if (after < before) return { kind: 'lost', multiplier: before };
+  return undefined;
+}
+
 /** Points for a correct answer given the combo *before* this answer. */
 export function pointsForCorrect(comboBefore: number): number {
   return POINTS_PER_CORRECT * comboMultiplier(comboBefore + 1);

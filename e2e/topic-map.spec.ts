@@ -1,4 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
+import { TOPICS } from '../src/content';
 import { expect, test } from '@playwright/test';
 
 test('the topic map shows every topic with its medal, and opens it', async ({ page }) => {
@@ -11,7 +12,7 @@ test('the topic map shows every topic with its medal, and opens it', async ({ pa
 
   await page.goto('/progress');
   const map = page.getByRole('region', { name: 'Themenkarte' });
-  await expect(map.getByRole('link')).toHaveCount(24);
+  await expect(map.getByRole('link')).toHaveCount(TOPICS.length);
   // Each square says which topic and which medal, not just a colour.
   const articles = map.getByRole('link', { name: /^\d{2} Die Artikeltabelle: / });
   await expect(articles).toBeVisible();

@@ -1,4 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
+import { TOPICS } from '../src/content';
 import { expect, test, type Page } from '@playwright/test';
 
 const topicLinks = (page: Page) => page.getByRole('main').getByRole('link', { name: /^\d{2} / });
@@ -7,7 +8,7 @@ test('search filters the topic index in place', async ({ page }) => {
   await page.goto('/');
   const search = page.getByRole('searchbox', { name: 'Themen suchen' });
   const total = await topicLinks(page).count();
-  expect(total).toBe(24);
+  expect(total).toBe(TOPICS.length);
 
   await search.fill('wechsel');
   await expect(topicLinks(page)).toHaveCount(1);
@@ -15,7 +16,8 @@ test('search filters the topic index in place', async ({ page }) => {
   await expect(page.getByText('1 Thema')).toBeVisible();
   // The A1 section has no match, so it disappears; topics keep their index number.
   await expect(page.getByRole('heading', { name: 'A1', exact: true })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: /^17 / })).toBeVisible();
+  const index = String(TOPICS.findIndex((t) => t.id === 'two-way-prepositions') + 1);
+  await expect(page.getByRole('link', { name: new RegExp(`^${index} `) })).toBeVisible();
 
   await search.fill('prateritum');
   await expect(page.getByRole('link', { name: /Präteritum/ }).first()).toBeVisible();
@@ -34,7 +36,7 @@ test('search shows an empty state that clears back to every topic', async ({ pag
   expect(results.violations.map((v) => v.id)).toEqual([]);
 
   await page.getByRole('button', { name: 'Alle Themen zeigen' }).click();
-  await expect(topicLinks(page)).toHaveCount(24);
+  await expect(topicLinks(page)).toHaveCount(TOPICS.length);
 });
 
 test('"See the rules" opens the topic at its rules, below the header', async ({ page }) => {
@@ -69,5 +71,5 @@ test('opening a topic from a search clears the search for when you come back', a
   await expect(page).toHaveURL(/\/topics\//);
   await page.goBack();
   await expect(search).toHaveValue('');
-  await expect(topicLinks(page)).toHaveCount(24);
+  await expect(topicLinks(page)).toHaveCount(TOPICS.length);
 });

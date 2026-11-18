@@ -46,15 +46,30 @@ function lcs(a: readonly string[], b: readonly string[]): { inA: Set<number>; in
 
 const words = (text: string) => text.split(/\s+/).filter(Boolean);
 
-/** Compare a learner's sentence with one correct sentence, word by word. */
-export function diffSentences(given: string, correct: string): WordDiff {
+/**
+ * Compare a learner's sentence with whichever of the correct sentences it is closest
+ * to (the most words already in order), word by word.
+ */
+export function diffClosest(given: string, corrects: readonly string[]): WordDiff {
   const a = words(given);
-  const b = words(correct);
-  const { inA, inB } = lcs(a, b);
+  let best: { b: string[]; inA: Set<number>; inB: Set<number> } | undefined;
+  for (const correct of corrects) {
+    const b = words(correct);
+    const candidate = { b, ...lcs(a, b) };
+    if (!best || candidate.inA.size > best.inA.size) best = candidate;
+  }
+  const { b = [], inA = new Set<number>(), inB = new Set<number>() } = best ?? {};
   return {
     given: a.map((text, i) => ({ text, isRight: inA.has(i) })),
     answer: b.map((text, j) => ({ text, isRight: inB.has(j) })),
   };
+}
+
+/** Every correct way to say a built sentence, as shown: the canonical order first. */
+export function correctSentences(question: BuildQuestion): string[] {
+  return [question.tiles, ...(question.accepted ?? [])].map((order) =>
+    formatSentence(order, question.punctuation),
+  );
 }
 
 /**
@@ -62,17 +77,5 @@ export function diffSentences(given: string, correct: string): WordDiff {
  * correct order it is closest to, word by word.
  */
 export function diffBuiltSentence(question: BuildQuestion, given: string): WordDiff {
-  const givenWords = words(given);
-  const orders = [question.tiles, ...(question.accepted ?? [])].map((order) =>
-    words(formatSentence(order, question.punctuation)),
-  );
-  let best = { order: orders[0], ...lcs(givenWords, orders[0]) };
-  for (const order of orders.slice(1)) {
-    const candidate = { order, ...lcs(givenWords, order) };
-    if (candidate.inA.size > best.inA.size) best = candidate;
-  }
-  return {
-    given: givenWords.map((text, i) => ({ text, isRight: best.inA.has(i) })),
-    answer: best.order.map((text, j) => ({ text, isRight: best.inB.has(j) })),
-  };
+  return diffClosest(given, correctSentences(question));
 }

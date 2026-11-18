@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { BuildQuestion } from '@/content/types';
 
-import { diffBuiltSentence, diffSentences } from './word-diff';
+import { diffBuiltSentence, diffClosest } from './word-diff';
 
 const question: BuildQuestion = {
   id: 'b',
@@ -38,10 +38,23 @@ describe('diffBuiltSentence', () => {
   });
 });
 
-describe('diffSentences', () => {
+describe('diffClosest', () => {
   it('marks the words outside the longest shared run', () => {
-    const diff = diffSentences('Ich bin heute müde.', 'Heute bin ich müde.');
+    const diff = diffClosest('Ich bin heute müde.', ['Heute bin ich müde.']);
     expect(diff.answer.filter((w) => !w.isRight).map((w) => w.text)).toHaveLength(2);
     expect(diff.given.at(-1)).toEqual({ text: 'müde.', isRight: true });
+  });
+});
+
+describe('diffClosest with nothing to compare', () => {
+  it('marks every given word as out of place', () => {
+    expect(diffClosest('Ich bin müde.', [])).toEqual({
+      given: [
+        { text: 'Ich', isRight: false },
+        { text: 'bin', isRight: false },
+        { text: 'müde.', isRight: false },
+      ],
+      answer: [],
+    });
   });
 });

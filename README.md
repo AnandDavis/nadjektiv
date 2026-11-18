@@ -50,16 +50,25 @@ npm run build && npm run start
 
 ## Scripts
 
-| Command                       | What it does                                                                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run dev`                 | Development server                                                                                                              |
-| `npm run build` / `npm start` | Production build and server                                                                                                     |
-| `npm run lint`                | ESLint, zero warnings allowed                                                                                                   |
-| `npm run type-check`          | Route type generation and TypeScript                                                                                            |
-| `npm test`                    | Vitest: logic, components and content-integrity tests                                                                           |
-| `npm run test:e2e`            | Playwright end-to-end and axe accessibility tests (builds and serves the app; run `npx playwright install chromium` once first) |
-| `npm run format`              | Prettier                                                                                                                        |
-| `npm run icons`               | Regenerate PWA icons from `scripts/icon.svg`                                                                                    |
+| Command                       | What it does                                                                                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run dev`                 | Development server                                                                                                                                                             |
+| `npm run build` / `npm start` | Production build and server                                                                                                                                                    |
+| `npm run lint`                | ESLint, zero warnings allowed                                                                                                                                                  |
+| `npm run type-check`          | Route type generation and TypeScript                                                                                                                                           |
+| `npm test`                    | Vitest: logic, content integrity and the German spellcheck                                                                                                                     |
+| `npm run test:coverage`       | Vitest with coverage; fails below 95% lines and 90% branches in `src/lib`, `src/content` and `src/config`                                                                      |
+| `npm run test:e2e`            | Playwright: end to end, accessibility, offline, visual regression, JS budgets and installability (builds and serves the app; run `npx playwright install chromium` once first) |
+| `npm run test:lighthouse`     | Lighthouse (mobile) on key pages; fails below the score budgets in `scripts/lighthouse-budget.mjs`                                                                             |
+| `npm run format`              | Prettier                                                                                                                                                                       |
+| `npm run icons`               | Regenerate PWA icons from `scripts/icon.svg`                                                                                                                                   |
+
+## Quality checks
+
+- **German spellcheck:** `src/content/spelling.test.ts` checks every correct German sentence, prompt and example against a Hunspell German dictionary, splitting compound nouns automatically. Distractors are deliberately wrong, so they're skipped. Names and the occasional missing word go in `src/content/spelling-allowlist.ts`, with a reason. The dictionary (`dictionary-de`) is GPL-licensed. It's a dev-only dependency used in tests and is never shipped in the app.
+- **Content rules:** `src/content/content.test.ts` checks IDs, answer keys, accepted word orders, real umlauts and ß, whitespace, and that every filled-in gap is a capitalised, punctuated sentence.
+- **Visual regression:** `e2e/visual.spec.ts` compares the key screens in light and dark against the baselines in `e2e/visual.spec.ts-snapshots/`. After an intended design change, review the diff and update them with `npx playwright test visual --update-snapshots`. Baselines are per platform (`-darwin`, `-linux`), so CI on Linux needs its own set, generated there.
+- **Budgets:** `e2e/budgets.spec.ts` caps the compressed JavaScript each page downloads and checks the app stays installable (manifest, icons, service worker). Lighthouse budgets live in `scripts/lighthouse-budget.mjs`. Raise a budget only deliberately, in the commit that needs it.
 
 ## Tech
 

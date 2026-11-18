@@ -13,7 +13,7 @@
 7. **Dark mode and mobile first** — every screen must work at 360 px wide, with touch targets ≥ 44 px, in both light and dark themes. Tokens handle the theme; check both.
 8. **Accessible by default** — semantic elements, visible focus rings, `aria-live` for game feedback, and no information conveyed by colour alone. The Playwright a11y spec must stay green.
 9. **Keep files small** — see [File Size Guidelines](#file-size-guidelines).
-10. **Write lint-clean code** — ESLint runs with `--max-warnings=0`; `npm run type-check` and `npm test` must pass before a commit.
+10. **Write lint-clean code, and keep every check green** — ESLint runs with `--max-warnings=0`; `npm run type-check`, `npm run test:coverage` and `npm run test:e2e` must pass before a commit. New logic in `src/lib` comes with tests (coverage thresholds enforce it). An intended visual change updates the screenshot baselines in the same commit; a deliberate budget increase (JS size, Lighthouse) is explained in the commit message.
 11. **Domain logic lives in `src/lib`, not components** — scoring, mastery, question selection and answer checking are pure, unit-tested functions. Components wire state to JSX.
 12. **Zero is not null** — store `0` for a measured zero (score, combo, attempts). Reserve `undefined` for "never played".
 13. **Never give time estimates, and never cut corners based on perceived effort** — no "quick fix", "an hour's work" or similar, anywhere. Defer work only on its merits (scope, risk, value, missing information), never on the clock.
@@ -98,8 +98,10 @@ npm run dev            # Dev server
 npm run build          # Production build
 npm run lint           # ESLint (zero warnings)
 npm run type-check     # TypeScript
-npm test               # Vitest unit, component and content-integrity tests
-npm run test:e2e       # Playwright end-to-end + a11y (builds and serves the app)
+npm test               # Vitest: logic, content integrity, German spellcheck
+npm run test:coverage  # Vitest with coverage thresholds (95% lines, 90% branches)
+npm run test:e2e       # Playwright: flows, a11y, offline, visual regression, budgets
+npm run test:lighthouse # Lighthouse score budgets on the production build
 npm run format         # Prettier
 ```
 

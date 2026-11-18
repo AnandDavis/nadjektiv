@@ -185,13 +185,16 @@ Order: React/Next → third-party → `@/components` → `@/lib`, `@/hooks`, `@/
 
 ## Testing
 
-| Layer                  | Tool                     | What                                                                |
-| ---------------------- | ------------------------ | ------------------------------------------------------------------- |
-| Pure logic (`src/lib`) | Vitest                   | Scoring, XP, mastery, session building, answer checking, migrations |
-| Content                | Vitest                   | Integrity of every question bank                                    |
-| Components             | Vitest + Testing Library | Game modes respond correctly to answers; feedback is announced      |
-| Flows                  | Playwright               | Play a session end to end; progress persists across reload          |
-| Accessibility          | Playwright + axe         | Home, topic, game and progress screens in both themes               |
+| Layer                  | Tool                    | What                                                                                                               |
+| ---------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Pure logic (`src/lib`) | Vitest                  | Scoring, XP, mastery, sessions, answer checking, storage, migrations. Coverage thresholds: 95% lines, 90% branches |
+| Content                | Vitest                  | Integrity of every question bank, plus a Hunspell German spellcheck of all correct text                            |
+| Flows                  | Playwright              | Sessions end to end, progress persistence, revise list, offline, header and menu                                   |
+| Accessibility          | Playwright + axe        | Every main screen in both themes, plus the open menu and a game in play                                            |
+| Visual                 | Playwright screenshots  | Key screens in light and dark; update baselines only for intended changes                                          |
+| Budgets                | Playwright + Lighthouse | Compressed JS per page, installability, Lighthouse category scores                                                 |
+
+Exhaustive `switch` defaults that the type system proves unreachable may be marked `/* v8 ignore next */` with a reason; don't use it to hide untested behaviour.
 
 Test behaviour, not implementation: query by role and label, not class names.
 

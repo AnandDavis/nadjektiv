@@ -217,3 +217,23 @@ summary::-webkit-details-marker {
 :root[data-translations='hidden'] .translation {
   display: none;
 }
+
+/* View transitions between screens (React <ViewTransition>): short, and none at all
+   for reduced motion, whether set on the phone or in Settings. */
+::view-transition-group(*) {
+  animation-duration: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+:root[data-motion='reduce']::view-transition-group(*),
+:root[data-motion='reduce']::view-transition-old(*),
+:root[data-motion='reduce']::view-transition-new(*) {
+  animation: none !important;
+}

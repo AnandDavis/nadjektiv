@@ -44,12 +44,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** when a new service worker is waiting, show a small "Neue Version: neu laden" bar; tapping it activates the new worker and reloads. Never interrupt a round in progress: show it on the next non-game screen. Bilingual label in `COPY`.
 
-## View transitions between screens
-
-**Why:** moving between screens is an instant swap. Animated transitions (a topic sliding into its game, a topic-map square growing into the topic header) would make the app feel native.
-
-**Notes:** React 19 and Next 16 support the View Transitions API. Respect the reduced-motion setting (`data-motion` and `prefers-reduced-motion`), keep transitions short, and check they don't clash with the service worker's offline navigation fallback.
-
 ## Install prompt
 
 **Why:** few learners know the app can be installed. Android only offers it from the browser menu, and iPhone never prompts.

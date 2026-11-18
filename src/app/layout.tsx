@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { ViewTransition } from 'react';
 import { Archivo } from 'next/font/google';
 
 import { ServiceWorkerRegistration } from '@/components/pwa/ServiceWorkerRegistration';
@@ -44,7 +45,8 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
         <link rel="manifest" href="/manifest.webmanifest" crossOrigin="use-credentials" />
       </head>
       <body className="min-h-dvh bg-canvas font-sans text-ink antialiased">
-        {children}
+        {/* Navigations cross-fade (short, and off with reduced motion: globals.css). */}
+        <ViewTransition>{children}</ViewTransition>
         <ServiceWorkerRegistration />
       </body>
     </html>

@@ -40,7 +40,7 @@ test('game and results labels follow the interface language', async ({ page }) =
   await expect(page.getByRole('heading', { level: 1, name: 'The article grid' })).toBeVisible();
 });
 
-test('the browser bar matches the page, following the in-app theme', async ({ page }) => {
+test('the browser bar matches the app header, following the in-app theme', async ({ page }) => {
   const errors: string[] = [];
   page.on('console', (message) => {
     if (message.type() === 'error') errors.push(message.text());
@@ -51,25 +51,27 @@ test('the browser bar matches the page, following the in-app theme', async ({ pa
       const metas = [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
       return metas.find((m) => !m.media || matchMedia(m.media).matches)?.content;
     });
-  const canvas = () =>
+  const headerColour = () =>
     page.evaluate(() => {
-      const [r, g, b] = getComputedStyle(document.body).backgroundColor.match(/\d+/g)!.map(Number);
+      const header = document.querySelector('header')!;
+      const [r, g, b] = getComputedStyle(header).backgroundColor.match(/\d+/g)!.map(Number);
       return '#' + [r, g, b].map((n) => n.toString(16).padStart(2, '0')).join('');
     });
 
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto('/settings');
-  expect(await barColour()).toBe(await canvas());
+  expect(await barColour()).toBe(await headerColour());
+  expect(await headerColour()).toBe('#151515');
 
   await page.getByText('Dunkel', { exact: true }).filter({ visible: true }).click();
-  expect(await barColour()).toBe(await canvas());
-  expect(await canvas()).toBe('#141414');
+  expect(await barColour()).toBe(await headerColour());
+  expect(await headerColour()).toBe('#efebe0');
 
   // Applied before paint on the next visit, with nothing for React to complain about.
   await page.reload();
-  expect(await barColour()).toBe('#141414');
+  expect(await barColour()).toBe('#efebe0');
   await page.getByText('System', { exact: true }).filter({ visible: true }).click();
-  expect(await barColour()).toBe(await canvas());
-  expect(await canvas()).toBe('#efebe0');
+  expect(await barColour()).toBe(await headerColour());
+  expect(await headerColour()).toBe('#151515');
   expect(errors).toEqual([]);
 });

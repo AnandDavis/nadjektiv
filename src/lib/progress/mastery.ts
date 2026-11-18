@@ -36,7 +36,7 @@ export const TIER_LABELS: Record<Tier, Bilingual> = {
 };
 
 export interface Requirement {
-  label: string;
+  label: Bilingual;
   isMet: boolean;
 }
 
@@ -63,18 +63,25 @@ function requirementsFor(
   const acc = recentAccuracy(progress);
   const requirements: Requirement[] = [
     {
-      label: `Answer ${rule.minAnswered} questions (${answered} so far)`,
+      label: {
+        de: `${rule.minAnswered} Fragen beantworten (bisher ${answered})`,
+        en: `Answer ${rule.minAnswered} questions (${answered} so far)`,
+      },
       isMet: answered >= rule.minAnswered,
     },
     {
-      label: `${Math.round(rule.minAccuracy * 100)}% correct over your last ${RECENT_WINDOW} answers (now ${Math.round(acc * 100)}%)`,
+      label: {
+        // German puts a (no-break) space before %.
+        de: `${Math.round(rule.minAccuracy * 100)}\u00a0% richtig bei deinen letzten ${RECENT_WINDOW} Antworten (jetzt ${Math.round(acc * 100)}\u00a0%)`,
+        en: `${Math.round(rule.minAccuracy * 100)}% correct over your last ${RECENT_WINDOW} answers (now ${Math.round(acc * 100)}%)`,
+      },
       isMet: answered > 0 && acc >= rule.minAccuracy,
     },
   ];
   if (rule.needsAllModes && modes.length > 1) {
     for (const mode of modes) {
       requirements.push({
-        label: `Play ${MODE_NAMES[mode]}`,
+        label: { de: `${MODE_NAMES[mode]} spielen`, en: `Play ${MODE_NAMES[mode]}` },
         isMet: Boolean(progress?.modes[mode]),
       });
     }

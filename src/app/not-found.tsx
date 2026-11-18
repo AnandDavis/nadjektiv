@@ -11,7 +11,9 @@ export default function NotFound() {
         <h1 className="text-4xl leading-none font-black text-ink">
           <Ui {...COPY.notFound.heading} />
         </h1>
-        <ButtonLink href="/">Back to the topics</ButtonLink>
+        <ButtonLink href="/">
+          <Ui {...COPY.common.backToTopics} />
+        </ButtonLink>
       </main>
     </div>
   );

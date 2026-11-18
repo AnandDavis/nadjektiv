@@ -36,10 +36,10 @@ interface GameScreenProps {
   /** One topic for a topic round; every topic for a mixed review. */
   topics: Topic[];
   title: ReactNode;
-  modeName: string;
+  modeName: ReactNode;
   description: string;
   exitHref: string;
-  exitLabel: string;
+  exitLabel: ReactNode;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
   topicTitles: Readonly<Record<string, string>>;
 }

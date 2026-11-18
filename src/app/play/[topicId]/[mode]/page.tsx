@@ -6,6 +6,8 @@ import { TOPICS, getTopic, isGameMode } from '@/content';
 import { getTopicSummaries, modesByTopic, topicTitles } from '@/content/summaries';
 import { MODE_INFO } from '@/lib/game/modes';
 import { availableModes } from '@/lib/game/session';
+import { Ui } from '@/components/ui';
+import { COPY } from '@/lib/i18n/copy';
 
 export function generateStaticParams() {
   return TOPICS.flatMap((topic) =>
@@ -37,7 +39,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
       modeName={`${info.name} · ${info.english}`}
       description={info.description}
       exitHref={`/topics/${topic.id}`}
-      exitLabel="Topic"
+      exitLabel={<Ui {...COPY.common.topic} />}
       modesByTopic={modesByTopic(summaries)}
       topicTitles={topicTitles(summaries)}
     />

@@ -3,10 +3,11 @@
 import type { ComponentProps } from 'react';
 
 import { AppHeader } from '@/components/layout/AppHeader';
-import { ButtonLink } from '@/components/ui';
+import { ButtonLink, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 
 import { GameScreen } from './GameScreen';
+import { COPY } from '@/lib/i18n/copy';
 
 type ReviewScreenProps = Omit<ComponentProps<typeof GameScreen>, 'mode'>;
 
@@ -18,11 +19,15 @@ export function ReviewScreen(props: ReviewScreenProps) {
       <div className="flex min-h-dvh flex-col">
         <AppHeader />
         <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
-          <h1 className="text-4xl leading-none font-black text-ink">Nothing to review yet</h1>
+          <h1 className="text-4xl leading-none font-black text-ink">
+            <Ui {...COPY.game.nothingToReview} />
+          </h1>
           <p className="text-muted">
-            Play a topic first — review then mixes in the questions you find hardest.
+            <Ui {...COPY.game.nothingToReviewHint} />
           </p>
-          <ButtonLink href="/">Choose a topic</ButtonLink>
+          <ButtonLink href="/">
+            <Ui {...COPY.game.chooseTopic} />
+          </ButtonLink>
         </main>
       </div>
     );

@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from 'react';
 
-import { Button } from '@/components/ui';
+import { Button, Ui } from '@/components/ui';
 import type { BuildQuestion } from '@/content/types';
 import { formatSentence, isCorrectOrder, matchingOrder, wordsOf } from '@/lib/game/check-answer';
 import type { LastAnswer } from '@/lib/game/game-reducer';
 import { createRng, shuffle } from '@/lib/game/rng';
 import { cn } from '@/lib/utils/cn';
+import { COPY } from '@/lib/i18n/copy';
 
 interface BuildQuestionViewProps {
   question: BuildQuestion;
@@ -61,7 +62,9 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
   return (
     <div className="flex flex-col gap-5">
       <div>
-        <p className="text-xs font-extrabold tracking-widest text-muted uppercase">Say in German</p>
+        <p className="text-xs font-extrabold tracking-widest text-muted uppercase">
+          <Ui {...COPY.game.sayInGerman} />
+        </p>
         <p className="mt-1 text-2xl leading-snug font-extrabold text-ink">{question.translation}</p>
       </div>
 
@@ -75,7 +78,9 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
         )}
       >
         {chosenTiles.length === 0 && (
-          <p className="p-2 text-sm font-bold text-muted">Tap the words below in order</p>
+          <p className="p-2 text-sm font-bold text-muted">
+            <Ui {...COPY.game.tapWords} />
+          </p>
         )}
         {chosenTiles.map((tile, i) => (
           <button
@@ -115,10 +120,10 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
               onClick={() => setChosen([])}
               disabled={chosen.length === 0}
             >
-              Clear
+              <Ui {...COPY.game.clear} />
             </Button>
             <Button size="lg" onClick={check} disabled={!isComplete}>
-              Check
+              <Ui {...COPY.game.check} />
             </Button>
           </div>
         </>

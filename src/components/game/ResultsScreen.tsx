@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 
 import { Button, ButtonLink, Card, RepeatIcon, TrophyIcon, Ui } from '@/components/ui';
 import { TierBadge } from '@/components/progress/TierBadge';
@@ -9,7 +9,7 @@ import type { Mistake } from '@/lib/game/game-reducer';
 import { resultHeadline } from '@/lib/game/result-headline';
 import { accuracy, type AnswerRecord } from '@/lib/game/scoring';
 import type { BestKind, SessionOutcome } from '@/lib/progress/apply-session';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, correctCount, levelUpLine, type Bilingual } from '@/lib/i18n/copy';
 import { levelForXp } from '@/lib/progress/level';
 import { cn } from '@/lib/utils/cn';
 
@@ -21,15 +21,15 @@ interface ResultsScreenProps {
   mistakes: Mistake[];
   outcome: SessionOutcome | null;
   exitHref: string;
-  exitLabel: string;
+  exitLabel: ReactNode;
   topicTitles: Readonly<Record<string, string>>;
   onPlayAgain: () => void;
 }
 
-const BEST_LABELS: Record<BestKind, string> = {
-  score: 'New best score!',
-  accuracy: 'New best accuracy!',
-  combo: 'New best combo!',
+const BEST_LABELS: Record<BestKind, Bilingual> = {
+  score: COPY.game.newBestScore,
+  accuracy: COPY.game.newBestAccuracy,
+  combo: COPY.game.newBestCombo,
 };
 
 export function ResultsScreen({
@@ -65,13 +65,13 @@ export function ResultsScreen({
           <Ui {...resultHeadline(answers)} />
         </h2>
         <p className="mt-2 text-sm font-extrabold tracking-widest text-muted uppercase">
-          {correct} of {answers.length} correct
+          <Ui {...correctCount(correct, answers.length)} />
         </p>
       </div>
 
       <div className="grid grid-cols-3 border-2 border-ink">
-        <ResultStat label="Correct" value={`${percent}%`} />
-        <ResultStat label="Points" value={String(score)} />
+        <ResultStat label={<Ui {...COPY.common.correct} />} value={`${percent}%`} />
+        <ResultStat label={<Ui {...COPY.common.points} />} value={String(score)} />
         <ResultStat
           label="XP"
           value={`+${outcome?.xpGained ?? 0}`}
@@ -90,7 +90,7 @@ export function ResultsScreen({
           {exitLabel}
         </ButtonLink>
         <Button size="lg" onClick={onPlayAgain}>
-          Play again
+          <Ui {...COPY.game.playAgain} />
         </Button>
       </div>
     </div>
@@ -135,21 +135,25 @@ function Celebrations({
     const { level, title } = levelForXp(outcome.progress.xp);
     items.push(
       <li key="level">
-        Level up! You’re now level {level},{' '}
+        <Ui {...levelUpLine(level)} />{' '}
         <strong>
           <Ui {...title} />
         </strong>
-        .
       </li>,
     );
   }
   for (const kind of outcome.newBests) {
-    items.push(<li key={kind}>{BEST_LABELS[kind]}</li>);
+    items.push(
+      <li key={kind}>
+        <Ui {...BEST_LABELS[kind]} />
+      </li>,
+    );
   }
   for (const up of outcome.tierUps) {
     items.push(
       <li key={up.topicId} className="flex flex-wrap items-center gap-2">
-        {topicTitles[up.topicId] ?? up.topicId} reached <TierBadge tier={up.to} />
+        {topicTitles[up.topicId] ?? up.topicId} <Ui {...COPY.game.reached} />{' '}
+        <TierBadge tier={up.to} />
       </li>,
     );
   }
@@ -169,7 +173,7 @@ function ResultStat({
   value,
   className,
 }: {
-  label: string;
+  label: ReactNode;
   value: string;
   className?: string;
 }) {

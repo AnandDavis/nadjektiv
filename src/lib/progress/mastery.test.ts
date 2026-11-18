@@ -51,6 +51,7 @@ describe('masteryFor', () => {
     const info = masteryFor(progress(12, 10, 12), ['gap']);
     expect(info.tier).toBe('bronze');
     expect(info.next?.tier).toBe('silver');
-    expect(info.next?.requirements.find((r) => !r.isMet)?.label).toMatch(/Answer 30/);
+    expect(info.next?.requirements.find((r) => !r.isMet)?.label.en).toMatch(/Answer 30/);
+    expect(info.next?.requirements.find((r) => !r.isMet)?.label.de).toMatch(/30 Fragen/);
   });
 });

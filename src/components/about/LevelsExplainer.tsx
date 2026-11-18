@@ -17,7 +17,9 @@ export function LevelsExplainer() {
       </SectionHeading>
 
       <Card>
-        <h3 className="text-lg leading-tight font-black text-ink uppercase">Earning XP</h3>
+        <h3 className="text-lg leading-tight font-black text-ink uppercase">
+          <Ui {...COPY.about.earningXp} />
+        </h3>
         <ul className="mt-2 flex list-disc flex-col gap-1 pl-5 text-sm text-ink">
           <li>
             Every right answer earns {steps[0].pointsPerAnswer} XP. Wrong answers never cost XP.
@@ -35,7 +37,9 @@ export function LevelsExplainer() {
       </Card>
 
       <Card>
-        <h3 className="text-lg leading-tight font-black text-ink uppercase">Levels</h3>
+        <h3 className="text-lg leading-tight font-black text-ink uppercase">
+          <Ui {...COPY.about.levelsTable} />
+        </h3>
         <p className="mt-1 text-sm text-ink">
           Each level needs {third.stepXp - second.stepXp} XP more than the one before:{' '}
           {second.stepXp} XP to reach level 2, then {third.stepXp} more for level 3, and so on. New
@@ -51,16 +55,16 @@ export function LevelsExplainer() {
             <thead>
               <tr className="bg-ink text-canvas">
                 <th scope="col" className={CELL}>
-                  Level
+                  <Ui {...COPY.common.level} />
                 </th>
                 <th scope="col" className={CELL}>
-                  XP for this level
+                  <Ui {...COPY.about.xpForLevel} />
                 </th>
                 <th scope="col" className={CELL}>
-                  Total XP
+                  <Ui {...COPY.about.totalXp} />
                 </th>
                 <th scope="col" className={CELL}>
-                  Title
+                  <Ui {...COPY.about.title} />
                 </th>
               </tr>
             </thead>

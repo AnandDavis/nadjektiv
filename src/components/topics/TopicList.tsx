@@ -2,17 +2,26 @@
 
 import { useMemo } from 'react';
 
+import { Ui } from '@/components/ui';
+
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
+import type { Bilingual } from '@/lib/i18n/copy';
 import { useProgress } from '@/hooks/useProgress';
 import { masteryFor, type MasteryInfo } from '@/lib/progress/mastery';
 
 import { groupTopics } from './group-order';
 import { TopicCard } from './TopicCard';
 
-const LEVEL_INTROS: Record<Level, string> = {
-  A1: 'The foundations: articles, cases, the present and the Perfekt.',
-  A2: 'Building on A1: endings, the past, and longer sentences.',
+const LEVEL_INTROS: Record<Level, Bilingual> = {
+  A1: {
+    de: 'Die Grundlagen: Artikel, Fälle, Präsens und Perfekt.',
+    en: 'The foundations: articles, cases, the present and the Perfekt.',
+  },
+  A2: {
+    de: 'Aufbauend auf A1: Endungen, Vergangenheit und längere Sätze.',
+    en: 'Building on A1: endings, the past, and longer sentences.',
+  },
 };
 
 export function TopicList({ topics }: { topics: TopicSummary[] }) {
@@ -39,12 +48,14 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
               >
                 {level}
               </h2>
-              <p className="pb-1 text-sm leading-snug text-muted">{LEVEL_INTROS[level]}</p>
+              <p className="pb-1 text-sm leading-snug text-muted">
+                <Ui {...LEVEL_INTROS[level]} />
+              </p>
             </div>
             {groupTopics(levelTopics).map(({ group, label, items }) => (
               <div key={group}>
                 <h3 className="mt-5 mb-1 text-xs font-extrabold tracking-widest text-muted uppercase">
-                  {label}
+                  <Ui {...label} />
                 </h3>
                 <ul className="border-t-2 border-ink">
                   {items.map((topic) => (

@@ -1,10 +1,11 @@
 import { GROUP_LABELS } from '@/content/groups';
 import type { TopicSummary } from '@/content/summaries';
 import type { TopicGroup } from '@/content/types';
+import type { Bilingual } from '@/lib/i18n/copy';
 
 interface GroupedTopics {
   group: TopicGroup;
-  label: string;
+  label: Bilingual;
   items: TopicSummary[];
 }
 

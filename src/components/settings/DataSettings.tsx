@@ -2,13 +2,14 @@
 
 import { useRef, useState } from 'react';
 
-import { Button, Card } from '@/components/ui';
+import { Button, Card, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
 import { getSnapshot, resetProgress, updateProgress } from '@/lib/storage/progress-client';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 
 type Status =
-  { kind: 'idle' } | { kind: 'ok'; message: string } | { kind: 'error'; message: string };
+  { kind: 'idle' } | { kind: 'ok'; message: Bilingual } | { kind: 'error'; message: string };
 
 function downloadFile(name: string, contents: string): void {
   const url = URL.createObjectURL(new Blob([contents], { type: 'application/json' }));
@@ -30,14 +31,14 @@ export function DataSettings() {
       `${APP_CONFIG.exportFilePrefix}-${now.slice(0, 10)}.json`,
       serialiseProgress(getSnapshot(), now),
     );
-    setStatus({ kind: 'ok', message: 'Progress exported.' });
+    setStatus({ kind: 'ok', message: COPY.settings.exported });
   }
 
   async function handleImport(file: File) {
     try {
       const imported = deserialiseProgress(await file.text());
       updateProgress(() => imported);
-      setStatus({ kind: 'ok', message: 'Progress imported.' });
+      setStatus({ kind: 'ok', message: COPY.settings.imported });
     } catch (error) {
       setStatus({
         kind: 'error',
@@ -51,24 +52,25 @@ export function DataSettings() {
   function handleReset() {
     resetProgress();
     setIsConfirmingReset(false);
-    setStatus({ kind: 'ok', message: 'Progress reset.' });
+    setStatus({ kind: 'ok', message: COPY.settings.resetDone });
   }
 
   return (
     <Card className="flex flex-col gap-4">
       <div>
-        <h2 className="text-xs font-extrabold tracking-widest text-ink uppercase">Your progress</h2>
+        <h2 className="text-xs font-extrabold tracking-widest text-ink uppercase">
+          <Ui {...COPY.settings.yourProgress} />
+        </h2>
         <p className="mt-1 text-sm text-muted">
-          Progress is saved on this device only. Export it to keep a backup or move to another
-          device.
+          <Ui {...COPY.settings.progressHint} />
         </p>
       </div>
       <div className="grid grid-cols-2 gap-2">
         <Button variant="secondary" onClick={handleExport}>
-          Export
+          <Ui {...COPY.settings.export} />
         </Button>
         <Button variant="secondary" onClick={() => fileInput.current?.click()}>
-          Import
+          <Ui {...COPY.settings.import} />
         </Button>
         <input
           ref={fileInput}
@@ -86,25 +88,28 @@ export function DataSettings() {
       {isConfirmingReset ? (
         <div className="border-2 border-wrong bg-wrong-soft p-3">
           <p className="font-semibold text-ink">
-            Delete all progress on this device? This can’t be undone.
+            <Ui {...COPY.settings.confirmReset} />
           </p>
           <div className="mt-3 grid grid-cols-2 gap-2">
             <Button variant="secondary" onClick={() => setIsConfirmingReset(false)}>
-              Cancel
+              <Ui {...COPY.settings.cancel} />
             </Button>
-            <Button onClick={handleReset}>Yes, reset</Button>
+            <Button onClick={handleReset}>
+              <Ui {...COPY.settings.confirmResetButton} />
+            </Button>
           </div>
         </div>
       ) : (
         <Button variant="ghost" className="text-wrong" onClick={() => setIsConfirmingReset(true)}>
-          Reset progress
+          <Ui {...COPY.settings.reset} />
         </Button>
       )}
       <p
         role="status"
         className={status.kind === 'error' ? 'text-sm text-wrong' : 'text-sm text-correct'}
       >
-        {status.kind === 'idle' ? '' : status.message}
+        {status.kind === 'ok' && <Ui {...status.message} />}
+        {status.kind === 'error' && status.message}
       </p>
     </Card>
   );

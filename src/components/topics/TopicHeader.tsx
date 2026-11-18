@@ -28,7 +28,7 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
         href="/"
         className="-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas"
       >
-        <ArrowLeftIcon /> All topics
+        <ArrowLeftIcon /> <Ui {...COPY.common.allTopics} />
       </Link>
       <div>
         <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
           <ul className="flex flex-col gap-1 p-3">
             {mastery.next.requirements.map((req) => (
               <li
-                key={req.label}
+                key={req.label.en}
                 className={cn(
                   'flex items-start gap-2 text-sm',
                   req.isMet ? 'text-correct' : 'text-muted',
@@ -56,7 +56,7 @@ export function TopicHeader({ topicId, title, level, tagline, modes }: TopicHead
                   {req.isMet ? <CheckIcon /> : '○'}
                 </span>
                 <span>
-                  {req.label}
+                  <Ui {...req.label} />
                   {req.isMet && <span className="sr-only"> (done)</span>}
                 </span>
               </li>

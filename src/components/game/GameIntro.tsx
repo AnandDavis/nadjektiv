@@ -8,7 +8,7 @@ import type { ShapeSpec } from '@/lib/ui/shapes';
 
 interface GameIntroProps {
   title: ReactNode;
-  modeName: string;
+  modeName: ReactNode;
   description: string;
   best?: ModeBest;
   isReady: boolean;
@@ -49,9 +49,12 @@ export function GameIntro({
         </div>
         {best && (
           <div className="grid grid-cols-3 border-2 border-ink">
-            <Stat label="Best score" value={String(best.bestScore)} />
-            <Stat label="Best accuracy" value={`${Math.round(best.bestAccuracy * 100)}%`} />
-            <Stat label="Best combo" value={String(best.bestCombo)} />
+            <Stat label={<Ui {...COPY.game.bestScore} />} value={String(best.bestScore)} />
+            <Stat
+              label={<Ui {...COPY.game.bestAccuracy} />}
+              value={`${Math.round(best.bestAccuracy * 100)}%`}
+            />
+            <Stat label={<Ui {...COPY.game.bestCombo} />} value={String(best.bestCombo)} />
           </div>
         )}
         <Button size="lg" onClick={onStart} disabled={!isReady} className="w-full">
@@ -62,7 +65,7 @@ export function GameIntro({
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({ label, value }: { label: ReactNode; value: string }) {
   return (
     <div className="border-l-2 border-ink p-2 first:border-l-0">
       <p className="text-2xl leading-none font-black text-ink tabular-nums">{value}</p>

@@ -22,6 +22,11 @@ export const COPY = {
     about: { de: 'Über die App', en: 'About' },
   },
   about: {
+    earningXp: { de: 'XP sammeln', en: 'Earning XP' },
+    levelsTable: { de: 'Level', en: 'Levels' },
+    xpForLevel: { de: 'XP für dieses Level', en: 'XP for this level' },
+    totalXp: { de: 'XP gesamt', en: 'Total XP' },
+    title: { de: 'Titel', en: 'Title' },
     features: { de: 'Was die App kann', en: 'What you can do' },
     levels: { de: 'Level und XP', en: 'Levels and XP' },
     tiers: { de: 'Medaillen pro Thema', en: 'Medals for each topic' },
@@ -37,7 +42,40 @@ export const COPY = {
     rules: { de: 'Die Regeln', en: 'The rules' },
     next: { de: 'Nächstes Ziel', en: 'Next' },
   },
+  common: {
+    level: { de: 'Level', en: 'Level' },
+    points: { de: 'Punkte', en: 'Points' },
+    correct: { de: 'Richtig', en: 'Correct' },
+    answers: { de: 'Antworten', en: 'Answers' },
+    topics: { de: 'Themen', en: 'Topics' },
+    answered: { de: 'beantwortet', en: 'answered' },
+    best: { de: 'Rekord', en: 'Best' },
+    allTopics: { de: 'Alle Themen', en: 'All topics' },
+    backToTopics: { de: 'Zurück zu den Themen', en: 'Back to the topics' },
+    home: { de: 'Start', en: 'Home' },
+    topic: { de: 'Thema', en: 'Topic' },
+  },
   game: {
+    bestScore: { de: 'Bestwert', en: 'Best score' },
+    bestAccuracy: { de: 'Beste Quote', en: 'Best accuracy' },
+    bestCombo: { de: 'Beste Serie', en: 'Best combo' },
+    playAgain: { de: 'Nochmal', en: 'Play again' },
+    mistakes: { de: 'Deine Fehler', en: 'Review your mistakes' },
+    sayInGerman: { de: 'Auf Deutsch', en: 'Say in German' },
+    tapWords: { de: 'Tippe die Wörter der Reihe nach an', en: 'Tap the words below in order' },
+    clear: { de: 'Löschen', en: 'Clear' },
+    check: { de: 'Prüfen', en: 'Check' },
+    newBestScore: { de: 'Neuer Bestwert!', en: 'New best score!' },
+    newBestAccuracy: { de: 'Neue beste Quote!', en: 'New best accuracy!' },
+    newBestCombo: { de: 'Neue beste Serie!', en: 'New best combo!' },
+    reached: { de: 'erreicht', en: 'reached' },
+    mixedReview: { de: 'Gemischte Wiederholung', en: 'Mixed review' },
+    nothingToReview: { de: 'Noch nichts zu wiederholen', en: 'Nothing to review yet' },
+    nothingToReviewHint: {
+      de: 'Spiel zuerst ein Thema. Dann mischt die Wiederholung die Fragen, die dir am schwersten fallen.',
+      en: 'Play a topic first. Review then mixes in the questions you find hardest.',
+    },
+    chooseTopic: { de: 'Thema wählen', en: 'Choose a topic' },
     start: { de: 'Los geht’s!', en: 'Let’s go!' },
     correct: { de: 'Richtig!', en: 'Correct!' },
     wrong: { de: 'Nicht ganz', en: 'Not quite' },
@@ -80,6 +118,23 @@ export const COPY = {
     cleared: { de: 'von der Liste erledigt', en: 'cleared from your revise list' },
   },
   settings: {
+    yourProgress: { de: 'Dein Fortschritt', en: 'Your progress' },
+    progressHint: {
+      de: 'Dein Fortschritt ist nur auf diesem Gerät gespeichert. Exportiere ihn als Sicherung oder für ein anderes Gerät.',
+      en: 'Progress is saved on this device only. Export it to keep a backup or move to another device.',
+    },
+    export: { de: 'Exportieren', en: 'Export' },
+    import: { de: 'Importieren', en: 'Import' },
+    reset: { de: 'Fortschritt löschen', en: 'Reset progress' },
+    confirmReset: {
+      de: 'Allen Fortschritt auf diesem Gerät löschen? Das lässt sich nicht rückgängig machen.',
+      en: 'Delete all progress on this device? This can’t be undone.',
+    },
+    cancel: { de: 'Abbrechen', en: 'Cancel' },
+    confirmResetButton: { de: 'Ja, löschen', en: 'Yes, reset' },
+    exported: { de: 'Fortschritt exportiert.', en: 'Progress exported.' },
+    imported: { de: 'Fortschritt importiert.', en: 'Progress imported.' },
+    resetDone: { de: 'Fortschritt gelöscht.', en: 'Progress reset.' },
     theme: { de: 'Design', en: 'Theme' },
     themeSystem: { de: 'System', en: 'System' },
     themeLight: { de: 'Hell', en: 'Light' },
@@ -94,3 +149,16 @@ export const COPY = {
     heading: { de: 'Diese Seite gibt es nicht.', en: 'That page doesn’t exist.' },
   },
 } as const satisfies Record<string, Record<string, Bilingual>>;
+
+/** "3 von 10 richtig" / "3 of 10 correct" */
+export function correctCount(correct: number, total: number): Bilingual {
+  return { de: `${correct} von ${total} richtig`, en: `${correct} of ${total} correct` };
+}
+
+/** "Level up! Du bist jetzt Level 3:" / "Level up! You’re now level 3:" */
+export function levelUpLine(level: number): Bilingual {
+  return {
+    de: `Level up! Du bist jetzt Level ${level}:`,
+    en: `Level up! You’re now level ${level}:`,
+  };
+}

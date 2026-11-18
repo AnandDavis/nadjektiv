@@ -1,6 +1,8 @@
 import type { Question } from '@/content/types';
 import { formatSentence } from '@/lib/game/check-answer';
 import type { Mistake } from '@/lib/game/game-reducer';
+import { Ui } from '@/components/ui';
+import { COPY } from '@/lib/i18n/copy';
 
 function correctText(question: Question): string {
   switch (question.kind) {
@@ -28,7 +30,7 @@ export function MistakeList({ mistakes }: { mistakes: Mistake[] }) {
         id="mistakes-heading"
         className="mb-2 border-b-4 border-ink pb-1 text-lg font-black text-ink uppercase"
       >
-        Review your mistakes
+        <Ui {...COPY.game.mistakes} />
       </h3>
       <ul>
         {unique.map(({ item, given }) => (

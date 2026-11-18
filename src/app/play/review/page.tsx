@@ -15,10 +15,10 @@ export default function ReviewPage() {
     <ReviewScreen
       topics={[...TOPICS]}
       title={<Ui {...COPY.home.review} />}
-      modeName="Mixed review"
+      modeName={<Ui {...COPY.game.mixedReview} />}
       description={`${REVIEW_LENGTH} questions from the topics you've played, weighted towards the ones you miss.`}
       exitHref="/"
-      exitLabel="Home"
+      exitLabel={<Ui {...COPY.common.home} />}
       modesByTopic={modesByTopic(summaries)}
       topicTitles={topicTitles(summaries)}
     />

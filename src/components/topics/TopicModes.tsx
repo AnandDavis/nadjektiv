@@ -42,7 +42,7 @@ export function TopicModes({ topicId, modes }: { topicId: string; modes: GameMod
                 {best && (
                   <span className="shrink-0 border-2 border-ink bg-surface px-2 py-1 text-center">
                     <span className="block text-xs font-extrabold tracking-widest text-muted uppercase">
-                      Best
+                      <Ui {...COPY.common.best} />
                     </span>
                     <span className="block text-xl leading-none font-black text-ink tabular-nums">
                       {best.bestScore}

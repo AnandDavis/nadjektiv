@@ -3,6 +3,7 @@
 import { ProgressBar, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { levelForXp } from '@/lib/progress/level';
+import { COPY } from '@/lib/i18n/copy';
 
 /** Level as a big numeral block, with the XP bar to the next level. */
 export function LevelCard() {
@@ -13,7 +14,9 @@ export function LevelCard() {
   return (
     <div className="flex items-stretch border-2 border-ink">
       <div className="flex w-24 shrink-0 flex-col justify-between bg-blue px-3 py-2 text-on-blue">
-        <span className="text-xs font-extrabold tracking-widest uppercase">Level</span>
+        <span className="text-xs font-extrabold tracking-widest uppercase">
+          <Ui {...COPY.common.level} />
+        </span>
         <span className="text-5xl leading-none font-black tracking-tighter tabular-nums">
           {String(info.level).padStart(2, '0')}
         </span>

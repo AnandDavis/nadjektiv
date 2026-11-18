@@ -32,6 +32,8 @@ test('the menu opens Settings and About, and closes with Escape', async ({ page 
   await expect(page.getByRole('menu')).toBeVisible();
   await expect(page.getByRole('menuitem', { name: 'Einstellungen' })).toBeFocused();
   await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('menuitem', { name: 'Glossar' })).toBeFocused();
+  await page.keyboard.press('ArrowDown');
   await expect(page.getByRole('menuitem', { name: 'Über die App' })).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('menu')).toBeHidden();

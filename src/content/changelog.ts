@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T22:00Z',
+    title: 'Glossary',
+    description:
+      'Not sure what Dativ, Nebensatz or Partizip II means? The new glossary, in the menu, explains 33 grammar terms in plain English, each with a German example and links to the topics where you can practise it.',
+  },
+  {
     date: '2026-11-18T21:00Z',
     title: 'More settings',
     description:

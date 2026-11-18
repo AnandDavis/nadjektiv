@@ -129,6 +129,11 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await snap(page, `welcome-progress-${colorScheme}`);
     });
 
+    test('glossary', async ({ page }) => {
+      await page.goto('/glossary');
+      await snap(page, `glossary-${colorScheme}`);
+    });
+
     test('about', async ({ page }) => {
       await page.goto('/about');
       await snap(page, `about-${colorScheme}`, true);

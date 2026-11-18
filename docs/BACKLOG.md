@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Glossary of grammar terms
-
-**Why:** explanations and rules use terms like Dativ, Akkusativ, Imperativ, Präteritum, trennbare Verben or Nebensatz, and a learner meeting one for the first time has nowhere to look it up.
-
-**Notes:** a glossary page (e.g. `/glossary`, linked from the menu and About) with one entry per term: the German name, the English name, a one-line plain explanation, an example sentence, and links to the topics that teach it. Where a term appears in a rule card or explanation, it could link to its entry. Terms are content, so they live in `src/content/` with tests (every entry has an example, every linked topic exists) and pass the German spellcheck. Keep the explanations in plain English, the examples in German, and check every example against `docs/grammar/`.
-
 ## Audio
 
 **Why:** the app is silent. Hearing each sentence helps with listening and pronunciation, which are both on the A1/A2 sheets.

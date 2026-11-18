@@ -71,6 +71,15 @@ export const COPY = {
     menu: { de: 'Menü', en: 'Menu' },
     about: { de: 'Über die App', en: 'About' },
   },
+  glossary: {
+    title: { de: 'Glossar', en: 'Glossary' },
+    intro: {
+      de: 'Die Grammatikbegriffe in dieser App, einfach erklärt, mit einem Beispiel und den passenden Themen.',
+      en: 'The grammar terms used in this app, explained simply, with an example and the topics that teach them.',
+    },
+    example: { de: 'Beispiel', en: 'Example' },
+    topics: { de: 'Üben in', en: 'Practise in' },
+  },
   welcome: {
     heading: { de: 'Willkommen bei Nadjektiv', en: 'Welcome to Nadjektiv' },
     language: { de: 'Überschriften und Knöpfe auf', en: 'Headings and buttons in' },

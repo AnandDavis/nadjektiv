@@ -1,26 +1,48 @@
 /**
  * Source of the service worker served at /sw.js.
  *
- * Strategy:
- * - /_next/static, icons: cache-first (file names are content-hashed, so never stale).
- * - Pages and RSC payloads: network-first, falling back to cache, so updates arrive
- *   when online and everything already cached keeps working offline.
- * - On install, every app route is fetched so the whole app works offline after
- *   the first visit.
+ * Install: fetch every app route, then every /_next/static file (JS, CSS, fonts) those
+ * pages reference, so the whole app works offline after one online visit, including
+ * pages the learner has never opened.
+ *
+ * Fetch:
+ * - /_next/static and icons: cache-first (file names are content-hashed, never stale).
+ * - Page loads: network-first, falling back to the cached page, then to the home page.
+ * - RSC requests (client-side navigation data): network-first, falling back only to an
+ *   exact cached match. Never answer them with HTML: when they fail, Next.js falls back
+ *   to a full page load, which the cached page then serves.
+ *
+ * Both caches are versioned per build; activating a new worker deletes the old ones.
  */
 export function serviceWorkerSource(version: string, precache: readonly string[]): string {
   return `
 const VERSION = ${JSON.stringify(version)};
 const PAGES = 'pages-' + VERSION;
-const STATIC = 'static-v1';
+const STATIC = 'static-' + VERSION;
 const PRECACHE = ${JSON.stringify(precache)};
+const STATIC_REF = /\\/_next\\/static\\/[^"'\\\\\\s)<>]+/g;
+
+async function precachePages() {
+  const pages = await caches.open(PAGES);
+  const assets = new Set();
+  await Promise.allSettled(
+    PRECACHE.map(async (url) => {
+      const response = await fetch(new Request(url, { cache: 'reload' }));
+      if (!response.ok) return;
+      const type = response.headers.get('content-type') || '';
+      if (type.includes('text/html')) {
+        const html = await response.clone().text();
+        for (const ref of html.match(STATIC_REF) || []) assets.add(ref);
+      }
+      await pages.put(url, response);
+    }),
+  );
+  const statics = await caches.open(STATIC);
+  await Promise.allSettled([...assets].map((url) => statics.add(new Request(url, { cache: 'reload' }))));
+}
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(PAGES).then((cache) =>
-      Promise.allSettled(PRECACHE.map((url) => cache.add(new Request(url, { cache: 'reload' })))),
-    ).then(() => self.skipWaiting()),
-  );
+  event.waitUntil(precachePages().then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (event) => {
@@ -35,6 +57,10 @@ function isStatic(url) {
   return url.pathname.startsWith('/_next/static/') || url.pathname.startsWith('/icons/');
 }
 
+function isRsc(request, url) {
+  return request.headers.get('RSC') === '1' || url.searchParams.has('_rsc');
+}
+
 async function cacheFirst(request) {
   const cached = await caches.match(request);
   if (cached) return cached;
@@ -43,18 +69,14 @@ async function cacheFirst(request) {
   return response;
 }
 
-async function networkFirst(request, fallbackUrl) {
+async function networkFirst(request, fallback) {
   try {
     const response = await fetch(request);
     if (response.ok) (await caches.open(PAGES)).put(request, response.clone());
     return response;
   } catch (error) {
-    const cached = (await caches.match(request)) || (await caches.match(request, { ignoreSearch: true }));
+    const cached = await fallback();
     if (cached) return cached;
-    if (fallbackUrl) {
-      const fallback = await caches.match(fallbackUrl);
-      if (fallback) return fallback;
-    }
     throw error;
   }
 }
@@ -64,12 +86,20 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
   if (isStatic(url)) {
     event.respondWith(cacheFirst(request));
+  } else if (isRsc(request, url)) {
+    event.respondWith(networkFirst(request, () => caches.match(request)));
   } else if (request.mode === 'navigate') {
-    event.respondWith(networkFirst(request, '/'));
+    event.respondWith(
+      networkFirst(request, async () =>
+        (await caches.match(url.pathname, { ignoreVary: true })) ||
+        (await caches.match('/', { ignoreVary: true })),
+      ),
+    );
   } else {
-    event.respondWith(networkFirst(request));
+    event.respondWith(networkFirst(request, () => caches.match(request)));
   }
 });
 `;

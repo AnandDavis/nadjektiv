@@ -9,7 +9,7 @@
 3. **German content must be correct** — every question carries an `explanation`, and every sentence must be grammatical, natural A1/A2 German. Check articles, case endings, umlauts and `ß` against `docs/grammar/` before adding content. A wrong answer key teaches the wrong thing — treat it as a bug, not a typo. `npm test` runs content-integrity checks; keep them green.
 4. **Persistence goes through the progress store** — never touch `localStorage` directly outside `src/lib/storage/`. UI reads progress through `useProgress()`; writes go through `ProgressService` pure functions and the `ProgressStore` port. This is the seam that lets us swap in a server-backed store when logins arrive.
 5. **Persisted data is versioned and validated** — every stored shape has a Zod schema and a `version`. Bump the version and add a migration when the shape changes; never silently discard a learner's progress.
-6. **No magic colours or numbers** — colours, radii and shadows come from the design tokens in `src/app/globals.css` (`bg-surface`, `text-muted`, `bg-correct` …). Raw Tailwind hues (`bg-red-500`), hex codes and arbitrary values (`w-[13px]`) don't belong in components.
+6. **No magic colours or numbers, and follow the design system** — colours come from the design tokens in `src/app/globals.css` (`bg-surface`, `text-muted`, `bg-blue` …). Raw Tailwind hues (`bg-red-500`), hex codes and arbitrary values (`w-[13px]`) don't belong in components. The visual language is Bauhaus: no rounded corners, no shadows, no one-sided accent borders, rules instead of stacked cards, and the ■ ● ▲ shape system for der/die/das and game modes. Read [docs/DESIGN.md](docs/DESIGN.md) before building UI.
 7. **Dark mode and mobile first** — every screen must work at 360 px wide, with touch targets ≥ 44 px, in both light and dark themes. Tokens handle the theme; check both.
 8. **Accessible by default** — semantic elements, visible focus rings, `aria-live` for game feedback, and no information conveyed by colour alone. The Playwright a11y spec must stay green.
 9. **Keep files small** — see [File Size Guidelines](#file-size-guidelines).
@@ -28,7 +28,7 @@
 ## Architecture
 
 - **Framework:** Next.js 16 (App Router, `cacheComponents`) + React 19 + TypeScript (strict)
-- **Styling:** Tailwind CSS v4 with CSS-variable design tokens (`src/app/globals.css`), dark mode via `data-theme` on `<html>`
+- **Styling:** Tailwind CSS v4 with CSS-variable design tokens (`src/app/globals.css`), dark mode via `data-theme` on `<html>`; Bauhaus visual language in [docs/DESIGN.md](docs/DESIGN.md)
 - **State:** component-local state and reducers; progress via `useProgress()` (a `useSyncExternalStore` over the store)
 - **Persistence:** `ProgressStore` port → `LocalStorageProgressStore` adapter (Zod-validated, versioned)
 - **Testing:** Vitest + Testing Library (unit/component), Playwright + axe (end-to-end, accessibility)

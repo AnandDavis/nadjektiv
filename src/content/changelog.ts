@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T13:30Z',
+    title: 'A bold new look',
+    description:
+      'A new Bauhaus-inspired design: big type, flat colour blocks, and shapes that mean something. der is always a blue square, die a red circle and das a yellow triangle, and each game has its own shape too.',
+  },
+  {
     date: '2026-11-18T13:02Z',
     title: 'Works fully offline',
     description:

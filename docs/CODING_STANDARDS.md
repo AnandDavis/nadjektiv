@@ -109,17 +109,19 @@ Prefer named exports for components and utilities. Pages, layouts and other Next
 
 ## Styling and design tokens
 
-All colours, radii and shadows come from the tokens in `src/app/globals.css`, exposed to Tailwind via `@theme`. Components use semantic utilities:
+All colours come from the tokens in `src/app/globals.css`, exposed to Tailwind via `@theme`. The full visual language (shapes, rules, type, what to avoid) is in [DESIGN.md](DESIGN.md). Components use semantic utilities:
 
-| Purpose                       | Utility                                                    |
-| ----------------------------- | ---------------------------------------------------------- |
-| Page background               | `bg-canvas`                                                |
-| Card / raised surface         | `bg-surface`, `border-line`                                |
-| Primary text / secondary text | `text-ink`, `text-muted`                                   |
-| Brand action                  | `bg-brand`, `text-on-brand`                                |
-| Correct / wrong feedback      | `bg-correct-soft text-correct`, `bg-wrong-soft text-wrong` |
-| Grammatical gender            | `text-der`, `text-die`, `text-das`                         |
-| Mastery tiers                 | `text-bronze`, `text-silver`, `text-gold`, `text-mastered` |
+| Purpose                       | Utility                                                                        |
+| ----------------------------- | ------------------------------------------------------------------------------ |
+| Page / raised surface / inset | `bg-canvas`, `bg-surface`, `bg-sunken`                                         |
+| Primary text / secondary text | `text-ink`, `text-muted`                                                       |
+| Rules / hairlines             | `border-ink`, `border-line`                                                    |
+| Primary blocks                | `bg-blue text-on-blue`, `bg-red text-on-red`, `bg-yellow text-on-yellow`       |
+| Correct / wrong feedback      | `bg-correct`, `bg-correct-soft`, `text-correct`, `text-wrong`, `bg-wrong-soft` |
+| Grammatical gender            | `text-der`, `text-die`, `text-das`                                             |
+| Mastery tiers                 | `text-bronze`, `text-silver`, `text-gold`, `text-mastered`                     |
+
+No rounded corners and no shadows: ESLint rejects `rounded-*` and `shadow-*` classes in components.
 
 Dark mode is handled by redefining the tokens under `[data-theme='dark']` (and `prefers-color-scheme` when the learner hasn't chosen), so components don't need `dark:` variants for token colours. If you find yourself reaching for a raw `dark:` variant, the token set is missing something — add a token instead.
 

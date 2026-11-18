@@ -41,6 +41,10 @@ const eslintConfig = defineConfig([
             'Use a design token utility (bg-surface, text-muted …) instead of a raw Tailwind hue.',
         },
         {
+          selector: 'Literal[value=/(^|\\s)(rounded|shadow)(-[a-z0-9]+)?($|\\s)/]',
+          message: 'No rounded corners or shadows: the design is flat and square (docs/DESIGN.md).',
+        },
+        {
           selector: 'Literal[value=/#[0-9a-fA-F]{6}\\b/]',
           message: 'No hex colours in components — add a token to globals.css.',
         },

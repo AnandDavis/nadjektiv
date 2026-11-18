@@ -108,9 +108,14 @@ export function GridResults({
           <Ui {...COPY.game.playAgain} />
         </Button>
       </div>
-      <ButtonLink href={exitHref} variant="ghost">
-        {exitLabel}
-      </ButtonLink>
+      <div className="grid grid-cols-2 gap-3">
+        <ButtonLink href={exitHref} variant="ghost">
+          {exitLabel}
+        </ButtonLink>
+        <ButtonLink href="/" variant="ghost">
+          <Ui {...COPY.common.home} />
+        </ButtonLink>
+      </div>
     </div>
   );
 }

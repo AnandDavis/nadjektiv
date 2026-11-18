@@ -16,12 +16,16 @@ Every topic has a **Die Regeln** card set summarising the rule, and one or more 
 
 - **Blitz** (rapid-fire sorter): 60 seconds to sort as many prompts as you can, such as der/die/das, Akkusativ/Dativ, haben/sein or Wo?/Wohin?. Runs of correct answers raise a combo multiplier. A wrong answer pauses the clock until you've read why.
 - **Lückentext** (fill the gap): 10 sentences. Pick the word or ending that fits, then see the rule explained.
-- **Satzbau** (sentence builder): 8 sentences. Tap word tiles into the right order. Every grammatically correct order is accepted, not just the textbook one.
+- **Tippen** (type the answer): the Lückentext sentences again, but you type the missing word with nothing to pick from. Unlocks once the topic has a medal. Case and spacing are forgiven, spelling isn't ("ae" never counts for "ä"), and a one-letter slip is flagged as nearly right.
+- **Satzbau** (sentence builder): 8 sentences. Tap word tiles into the right order. Every grammatically correct order is accepted, not just the textbook one. A wrong order marks only the words out of place.
 - **Tabelle** (grid fill): fill in a whole grammar table against the clock: articles, pronouns, verb endings, modal verbs, adjective endings, the Präteritum, comparatives and the 33 irregular verbs. Cells lock green as soon as they're right, an ä/ö/ü/ß key row is built in, missed cells go on the revise list, and each table keeps your best time.
-- **Zu wiederholen** (to revise): every question you get wrong, in any mode, lands on this list. Each card shows the correct answer, what you chose, why, other correct word orders, and more examples with the same answer. Answer it correctly later and it leaves the list. The bottom navigation shows how many are waiting.
+- **Tagesmix** (daily mix): 10 questions a day from your revise list and your weakest topics, the same all day and marked done once played. No streak.
+- **Zu wiederholen** (to revise): every question you get wrong, in any mode, lands on this list, most-missed first. Each card shows the correct answer, what you chose, why, other correct word orders, and more examples with the same answer. Answer it correctly later and it leaves the list. The bottom navigation shows how many are waiting.
 - **Gemischte Wiederholung** (mixed review): 12 questions that start with your "to revise" list, then fill up with the questions you miss most across every topic you've played.
 
-Every wrong answer, in every mode, shows what you chose, the right answer and the rule before you continue.
+Every wrong answer, in every mode, shows the rule first, then what you chose and the right answer, before you continue. Outside Blitz, a **hint** shows the rule with the answer blanked, for half points.
+
+**First open:** a three-step intro explains the games and how progress is saved, and lets you pick German or English headings. See it again from About.
 
 **Interface language:** headings and buttons are in German by default for extra immersion. Switch them to English in Settings. Grammar questions are always German.
 
@@ -29,9 +33,10 @@ Every wrong answer, in every mode, shows what you chose, the right answer and th
 
 ## Gamification (no streaks)
 
-- **Mastery tiers per topic:** Bronze → Silber → Gold → Gemeistert. A tier depends on how many questions you've answered and your accuracy over your last 40 answers. Gold and above also require playing every mode. Time away never costs you a tier; only getting things wrong does.
+- **Mastery tiers per topic:** Bronze → Silber → Gold → Gemeistert. A tier depends on how many questions you've answered and your accuracy over your last 40 answers. Gold and above also require playing every mode (Tabelle and Tippen are bonuses and never required). Only answers without a hint count. Time away never costs you a tier; only getting things wrong does.
 - **XP and levels:** every correct answer earns XP, multiplied by your combo, with a bonus for a perfect round. Levels come with titles (Anfänger, Lernender, Entdecker … Grammatik-Profi).
 - **Personal bests:** best score, accuracy and combo for each topic and mode, with "new best" call-outs, Sporcle-style.
+- **Topic map:** the Progress page shows every topic as a square, filled in with its medal.
 - **Smart practice:** every round favours questions you haven't seen or tend to miss.
 
 ## Getting started

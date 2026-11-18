@@ -31,6 +31,13 @@ export const WELCOME_GAMES: ReadonlyArray<{ mode: GameMode; line: Bilingual }> =
     },
   },
   {
+    mode: 'type',
+    line: {
+      de: 'Tippe das fehlende Wort selbst ein. Freigeschaltet, sobald du in einem Thema eine Medaille hast.',
+      en: 'Type the missing word yourself. Unlocks once you have a medal in a topic.',
+    },
+  },
+  {
     mode: 'build',
     line: {
       de: 'Tippe die Wörter in die richtige Reihenfolge.',
@@ -52,8 +59,13 @@ export const WELCOME_GENDERS: Bilingual = {
 };
 
 export const WELCOME_MISTAKES: Bilingual = {
-  de: 'Jede falsche Antwort wird erklärt, bevor es weitergeht, und landet auf deiner Liste zum Wiederholen.',
-  en: 'Every wrong answer is explained before you move on, and goes on your list to revise.',
+  de: 'Jede falsche Antwort wird erklärt, bevor es weitergeht, und landet auf deiner Liste zum Wiederholen. Hängst du fest? Ein Hinweis zeigt dir die Regel, für halbe Punkte.',
+  en: 'Every wrong answer is explained before you move on, and goes on your list to revise. Stuck? A hint shows you the rule, for half the points.',
+};
+
+export const WELCOME_DAILY: Bilingual = {
+  de: `Jeden Tag wartet ein Tagesmix: ${GAME_CONFIG.dailyLength} Fragen aus deiner Wiederholungsliste und deinen schwächsten Themen.`,
+  en: `Every day there's a daily mix: ${GAME_CONFIG.dailyLength} questions from your revise list and your weakest topics.`,
 };
 
 export const WELCOME_PROGRESS: readonly Bilingual[] = [

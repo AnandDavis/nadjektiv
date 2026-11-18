@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 
 import { SegmentedControl, Shape, Ui } from '@/components/ui';
 import {
+  WELCOME_DAILY,
   WELCOME_GAMES,
   WELCOME_GENDERS,
   WELCOME_MISTAKES,
@@ -67,6 +68,9 @@ export function GamesStep() {
           <Shape kind="triangle" color="yellow" />
         </span>
         <Ui {...WELCOME_GENDERS} />
+      </p>
+      <p className="bg-blue px-3 py-2 text-sm font-bold text-on-blue">
+        <Ui {...WELCOME_DAILY} />
       </p>
       <p className="text-sm text-ink">
         <Ui {...WELCOME_MISTAKES} />

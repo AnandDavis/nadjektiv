@@ -145,6 +145,15 @@
     color: var(--ink);
   }
 
+  /* Long German compounds (Wechselpräpositionen) in big type must never widen the
+     page: hyphenate by each span's lang, and break mid-word as a last resort. */
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
   :focus-visible {
     outline: 3px solid var(--focus);
     outline-offset: 2px;

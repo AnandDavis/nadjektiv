@@ -12,6 +12,8 @@ const PAGES = [
   '/topics/sentence-middle',
   '/play/two-way-prepositions/sort',
   '/play/irregular-verbs/gap',
+  '/play/irregular-verbs/grid',
+  '/play/present-tense/grid',
   '/revise',
   '/progress',
   '/settings',

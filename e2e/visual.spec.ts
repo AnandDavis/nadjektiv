@@ -91,6 +91,15 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await snap(page, `progress-${colorScheme}`);
     });
 
+    test('grid fill', async ({ page }) => {
+      await page.goto('/play/articles/grid');
+      await snap(page, `grid-picker-${colorScheme}`);
+      await page.getByRole('button', { name: /Der bestimmte Artikel/ }).click();
+      await page.getByRole('textbox', { name: 'Akk M' }).fill('den');
+      await page.getByRole('textbox', { name: 'Akk F' }).fill('der');
+      await snap(page, `grid-playing-${colorScheme}`);
+    });
+
     test('about', async ({ page }) => {
       await page.goto('/about');
       await snap(page, `about-${colorScheme}`, true);

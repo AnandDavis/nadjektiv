@@ -40,7 +40,9 @@ export function MistakeList({ mistakes }: { mistakes: Mistake[] }) {
                 {correctText(item.question)}
               </p>
               <p className="mt-1 text-sm font-bold text-wrong">
-                <span className="line-through decoration-4">{given}</span>
+                <span className="underline decoration-wrong decoration-4 underline-offset-4">
+                  {given}
+                </span>
               </p>
               <p className="mt-1 text-sm text-ink">{item.question.explanation}</p>
             </div>

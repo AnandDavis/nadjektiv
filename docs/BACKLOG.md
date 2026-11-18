@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Best combo on the results screen
-
-**Why:** the best combo for each topic and mode is already saved, but barely shown.
-
-**Notes:** on the results screen, show this round's best run next to the all-time best for that topic and mode, with the existing "new best" call-out when it's beaten.
-
 ## Combo-aware daily mix
 
 **Why:** where a run breaks is a clue to a rule that isn't solid yet.

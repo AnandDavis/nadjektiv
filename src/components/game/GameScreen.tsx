@@ -219,6 +219,13 @@ export function GameScreen(props: GameScreenProps) {
             answers={state.answers}
             mistakes={state.mistakes}
             outcome={outcome}
+            bestCombo={state.bestCombo}
+            recordCombo={
+              topicId && !isMixedMode(mode)
+                ? outcome?.progress.topics[topicId]?.modes[untimed ? 'sortUntimed' : mode]
+                    ?.bestCombo
+                : undefined
+            }
             exitHref={exitHref}
             exitLabel={exitLabel}
             topicTitles={props.topicTitles}

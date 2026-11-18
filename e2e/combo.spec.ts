@@ -27,3 +27,14 @@ test('the combo badge rises with a run, and a wrong answer says it was lost', as
   await expect(page.getByText('Kombo verloren')).toBeVisible();
   await expect(page.getByText('×2')).toHaveCount(0);
 });
+
+test('the results show this round’s longest run beside the best for the game', async ({ page }) => {
+  await page.goto('/play/articles/gap');
+  await page.getByRole('button', { name: /Los geht/ }).click();
+  for (let i = 0; i < 10; i++) {
+    await page.getByRole('group', { name: 'Answer options' }).getByRole('button').first().click();
+    await page.getByRole('button', { name: 'Weiter' }).click();
+  }
+  await expect(page.getByText('Längste Serie', { exact: true })).toBeVisible();
+  await expect(page.getByText('Rekord', { exact: true }).last()).toBeVisible();
+});

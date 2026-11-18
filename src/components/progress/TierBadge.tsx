@@ -50,16 +50,28 @@ export function TierBadge({ tier, className }: { tier: Tier; className?: string 
  * A tier as a fixed-size square showing only its mark, so a column of them lines up.
  * The tier's name is read out, so it never relies on colour or shape alone.
  */
-export function TierSquare({ tier, className }: { tier: Tier; className?: string }) {
+export function TierSquare({
+  tier,
+  caption,
+  className,
+}: {
+  tier: Tier;
+  /** Shown under the mark, e.g. the topic's recent accuracy. */
+  caption?: string;
+  className?: string;
+}) {
   return (
     <span
       className={cn(
-        'flex size-9 items-center justify-center border-2 text-base font-black',
+        'flex size-12 flex-col items-center justify-center border-2 font-black',
         TIER_FILLS[tier],
         className,
       )}
     >
-      <span aria-hidden="true">{TIER_MARKS[tier]}</span>
+      <span aria-hidden="true" className="text-base leading-none">
+        {TIER_MARKS[tier]}
+      </span>
+      {caption && <span className="mt-0.5 text-xs leading-none tabular-nums">{caption}</span>}
       <span className="sr-only">
         <Ui {...TIER_LABELS[tier]} />
       </span>

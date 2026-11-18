@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## Mistake patterns
-
-**Why:** the revise list shows single questions, but mistakes often share a cause across topics, such as picking Akkusativ after mit.
-
-**Notes:** group revise entries and recent misses by the rule behind them (topic, and for gap/sort questions the chosen vs right answer, e.g. den → dem). Show the top patterns on the revise page with a link to the rule card that explains them. Pure analysis in `src/lib/revise/`, with tests; no new content needed.
-
 ## Noun cards: gender and plural together
 
 **Why:** der/die/das and the plural are learned as a pair ("der Tisch, die Tische"), but they're practised in separate topics.

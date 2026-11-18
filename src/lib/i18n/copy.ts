@@ -226,6 +226,13 @@ export const COPY = {
     medals: { de: 'Medaillen', en: 'Medals' },
     map: { de: 'Themenkarte', en: 'Topic map' },
   },
+  patterns: {
+    title: { de: 'Häufige Fehler', en: 'Common mistakes' },
+    hint: {
+      de: 'Diese Verwechslungen kommen bei dir öfter vor. Die Regel dazu hilft gegen alle auf einmal.',
+      en: 'You make these mix-ups more than once. Their rule fixes them all at once.',
+    },
+  },
   revise: {
     title: { de: 'Zu wiederholen', en: 'To revise' },
     navLabel: { de: 'Wiederholen', en: 'Revise' },

@@ -6,8 +6,10 @@ import { ButtonLink, Card, ShuffleIcon, Ui } from '@/components/ui';
 import type { Topic } from '@/content/types';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { mistakePatterns } from '@/lib/revise/patterns';
 import { reviseList } from '@/lib/revise/revise-list';
 
+import { MistakePatterns } from './MistakePatterns';
 import { ReviseCardView } from './ReviseCardView';
 
 interface ReviseViewProps {
@@ -22,6 +24,10 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
     [progress, topics],
   );
   const total = items?.length ?? 0;
+  const patterns = useMemo(
+    () => (progress ? mistakePatterns(topics, progress.revise) : []),
+    [progress, topics],
+  );
   const hasPlayed = progress ? Object.keys(progress.topics).length > 0 : false;
 
   return (
@@ -73,6 +79,8 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
           )}
         </Card>
       )}
+
+      <MistakePatterns patterns={patterns} topicTitles={topicTitles} />
 
       {items && total > 0 && (
         <ul className="flex flex-col gap-3">

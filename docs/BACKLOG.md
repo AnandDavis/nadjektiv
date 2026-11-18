@@ -2,18 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## More settings
-
-**Why:** Settings today covers only language, theme and progress. These let learners tune the games to how they learn. Each goes in `src/lib/storage/preferences.ts` (display preferences, not progress), is applied before paint where it affects layout, and has a bilingual label in `COPY`.
-
-- **Blitz without the clock:** an untimed Blitz for learners who find the 60 seconds stressful. Untimed rounds keep their own bests, separate from timed ones.
-- **Hints: show by default, or hide:** show the hint up front while learning a topic, or hide the hint button entirely so it isn't tempting. A hint shown by default still halves the points and doesn't count towards medals.
-- **Move on after a right answer:** skip the Weiter pause after a right answer in Lückentext, Tippen and Satzbau. A wrong answer always still stops and explains (CLAUDE.md rule 16).
-- **Reduce motion:** turn off the shake, pop-in and rise animations in this app only, on top of following the phone's own setting.
-- **Text size:** Normal, Large, Larger. Check every screen at 360 px with long German compounds at the largest size, and keep the visual baselines at Normal.
-- **Hide English translations:** hide the English lines under questions for extra immersion. Rule cards and explanations stay in English.
-- **Empty the revise list:** clear the "To revise" list without resetting the rest of progress, with a confirm step. This one is a progress write, so it goes through `ProgressService` and the store, not preferences.
-
 ## Glossary of grammar terms
 
 **Why:** explanations and rules use terms like Dativ, Akkusativ, Imperativ, Präteritum, trennbare Verben or Nebensatz, and a learner meeting one for the first time has nowhere to look it up.

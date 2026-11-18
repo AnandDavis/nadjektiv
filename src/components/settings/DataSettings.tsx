@@ -5,8 +5,11 @@ import { useRef, useState } from 'react';
 import { Button, Card, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
 import { deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
+import { clearReviseList } from '@/lib/progress/clear-revise';
 import { getSnapshot, resetProgress, updateProgress } from '@/lib/storage/progress-client';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
+
+import { ConfirmAction } from './ConfirmAction';
 
 type Status =
   { kind: 'idle' } | { kind: 'ok'; message: Bilingual } | { kind: 'error'; message: string };
@@ -23,7 +26,6 @@ function downloadFile(name: string, contents: string): void {
 export function DataSettings() {
   const fileInput = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<Status>({ kind: 'idle' });
-  const [isConfirmingReset, setIsConfirmingReset] = useState(false);
 
   function handleExport() {
     const now = new Date().toISOString();
@@ -51,8 +53,12 @@ export function DataSettings() {
 
   function handleReset() {
     resetProgress();
-    setIsConfirmingReset(false);
     setStatus({ kind: 'ok', message: COPY.settings.resetDone });
+  }
+
+  function handleClearRevise() {
+    updateProgress(clearReviseList);
+    setStatus({ kind: 'ok', message: COPY.settings.reviseCleared });
   }
 
   return (
@@ -85,25 +91,18 @@ export function DataSettings() {
           }}
         />
       </div>
-      {isConfirmingReset ? (
-        <div className="border-2 border-wrong bg-wrong-soft p-3">
-          <p className="font-semibold text-ink">
-            <Ui {...COPY.settings.confirmReset} />
-          </p>
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            <Button variant="secondary" onClick={() => setIsConfirmingReset(false)}>
-              <Ui {...COPY.settings.cancel} />
-            </Button>
-            <Button onClick={handleReset}>
-              <Ui {...COPY.settings.confirmResetButton} />
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <Button variant="ghost" className="text-wrong" onClick={() => setIsConfirmingReset(true)}>
-          <Ui {...COPY.settings.reset} />
-        </Button>
-      )}
+      <ConfirmAction
+        label={COPY.settings.clearRevise}
+        question={COPY.settings.confirmClearRevise}
+        confirmLabel={COPY.settings.confirmClearReviseButton}
+        onConfirm={handleClearRevise}
+      />
+      <ConfirmAction
+        label={COPY.settings.reset}
+        question={COPY.settings.confirmReset}
+        confirmLabel={COPY.settings.confirmResetButton}
+        onConfirm={handleReset}
+      />
       <p
         role="status"
         className={status.kind === 'error' ? 'text-sm text-wrong' : 'text-sm text-correct'}

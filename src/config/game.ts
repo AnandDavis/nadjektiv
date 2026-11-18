@@ -7,6 +7,10 @@ export const GAME_CONFIG = {
   sessionLength: { sort: 60, gap: 10, build: 8, type: 10 },
   /** Length of a Blitz round. */
   sortRoundSeconds: 60,
+  /** Prompts in an untimed Blitz round (an option in Settings), each asked once. */
+  untimedSortLength: 20,
+  /** With "move on after a right answer", how long the right answer shows first. */
+  autoAdvanceMs: 900,
   /** Questions in a mixed review round. */
   reviewLength: 12,
   /** Questions in the daily mix. */

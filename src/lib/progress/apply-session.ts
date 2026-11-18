@@ -155,8 +155,9 @@ export function applySessionResult(
     const before = topics[topicId] ?? createEmptyTopicProgress();
     let after = updateTopic(before, resultsByTopic.get(topicId) ?? []);
     if (result.topicId === topicId && !isMixedMode(result.mode)) {
-      const { best, newBests: bests } = updateBest(before.modes[result.mode], result);
-      after = { ...after, modes: { ...after.modes, [result.mode]: best } };
+      const key = result.mode === 'sort' && result.untimed ? 'sortUntimed' : result.mode;
+      const { best, newBests: bests } = updateBest(before.modes[key], result);
+      after = { ...after, modes: { ...after.modes, [key]: best } };
       newBests = bests;
     }
     if (result.topicId === topicId && result.mode === 'grid' && result.gridId) {

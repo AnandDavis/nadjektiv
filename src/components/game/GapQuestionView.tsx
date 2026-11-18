@@ -51,7 +51,7 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
           </span>
           {question.after}
         </p>
-        <p className="mt-2 text-sm text-muted">{question.translation}</p>
+        <p className="translation mt-2 text-sm text-muted">{question.translation}</p>
       </div>
       <div className="flex flex-col gap-2" role="group" aria-label="Answer options">
         {options.map((option, index) => {

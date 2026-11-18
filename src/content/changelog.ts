@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-18T21:00Z',
+    title: 'More settings',
+    description:
+      'Settings now let you play Blitz without the clock (with its own bests), always show hints or turn them off, move straight on after a right answer, choose a larger text size, turn off the app’s movement, hide the English translations under questions, and empty your revise list without losing anything else.',
+  },
+  {
     date: '2026-11-18T19:40Z',
     title: 'Topic map',
     description:

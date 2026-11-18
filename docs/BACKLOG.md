@@ -2,12 +2,6 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
-## "See the rules" opens the topic at its rules
-
-**Why:** the "Regeln ansehen / See the rules" link on a revise card opens the topic page at the top, so you have to scroll past the medal goals and game list to reach the rules you wanted.
-
-**Notes:** link to `/topics/<id>#rules-heading` (the rules section already has that id) so the browser scrolls there on load. Keep the sticky app header from covering the heading (`scroll-margin-top` on section headings), and check it also works for offline full-page loads served by the service worker.
-
 ## Grid fill game mode
 
 **Why:** the Sporcle format that started this app. Fill a whole table against the clock (the article grid, pronouns, adjective endings, present-tense endings, the 33 irregular verbs). Seeing the whole pattern at once is how tables stick.
@@ -43,17 +37,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 **Why:** a visual sense of progress across the whole syllabus.
 
 **Notes:** a Bauhaus poster on the home or progress page: one shape per topic, coloured and filled in by medal tier (empty → bronze → … → mastered), grouped by level and topic group. Tapping a shape opens the topic. Shape and colour can't be the only signal, so add text labels or a list view for accessibility.
-
-## Search topics on the home page
-
-**Why:** with 24 topics in a long index, finding "two-way prepositions" or "Präteritum" means scrolling. A search box at the top of the home page would get there in a couple of keystrokes.
-
-**Notes:**
-
-- Match topic titles and taglines, plus useful keywords such as example words (`dem`, `weil`, `gegangen`) and German or English names for each topic (`Dativ`, `past tense`). Add a `keywords` field to each topic rather than searching the question banks, which would be slow and noisy.
-- Ignore case and umlauts, so `prateritum` finds Präteritum and `fur` finds für.
-- Filter the numbered index in place, keeping the A1/A2 and group headings for any matches. Show an empty state with a way to clear the search.
-- Pure matching logic in `src/lib` with unit tests; works offline, because the topic list is already on the device.
 
 ## Transfer progress to another device with a QR code
 

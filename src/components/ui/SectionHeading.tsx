@@ -16,7 +16,8 @@ export function SectionHeading({ id, children, mark, className }: SectionHeading
     <h2
       id={id}
       className={cn(
-        'mb-3 flex items-center gap-2 border-b-4 border-ink pb-1 text-2xl font-black tracking-wide text-ink uppercase',
+        // scroll-mt clears the sticky app header when a link targets this heading.
+        'mb-3 flex scroll-mt-20 items-center gap-2 border-b-4 border-ink pb-1 text-2xl font-black tracking-wide text-ink uppercase',
         className,
       )}
     >

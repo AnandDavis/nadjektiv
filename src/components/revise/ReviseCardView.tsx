@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Badge, Card, CheckIcon, CrossIcon, Ui } from '@/components/ui';
 import { COPY } from '@/lib/i18n/copy';
 import type { ReviseCard } from '@/lib/revise/revise-card';
+import { topicRulesHref } from '@/lib/routes';
 
 interface ReviseCardViewProps {
   card: ReviseCard;
@@ -53,7 +54,7 @@ export function ReviseCardView({ card, given, misses }: ReviseCardViewProps) {
       )}
 
       <Link
-        href={`/topics/${card.topicId}`}
+        href={topicRulesHref(card.topicId)}
         className="min-h-11 w-fit content-center text-sm font-semibold text-brand-strong underline-offset-4 hover:underline"
       >
         <Ui {...COPY.revise.seeRules} /> →

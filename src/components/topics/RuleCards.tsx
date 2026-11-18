@@ -1,11 +1,12 @@
 import { BookIcon, Card, SectionHeading, Ui } from '@/components/ui';
 import type { RuleCard } from '@/content/types';
 import { COPY } from '@/lib/i18n/copy';
+import { RULES_HEADING_ID } from '@/lib/routes';
 
 export function RuleCards({ rules }: { rules: RuleCard[] }) {
   return (
-    <section aria-labelledby="rules-heading">
-      <SectionHeading id="rules-heading" mark={<BookIcon />}>
+    <section aria-labelledby={RULES_HEADING_ID}>
+      <SectionHeading id={RULES_HEADING_ID} mark={<BookIcon />}>
         <Ui {...COPY.topic.rules} />
       </SectionHeading>
       <div className="flex flex-col gap-4">

@@ -2,6 +2,54 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## Spaced repetition for the revise list
+
+**Why:** a missed question comes back whenever the learner opens the list, not when it would help memory most.
+
+**Notes:** schedule each revise entry to return after 1, 3, then 7 days, resetting on a miss. Mixed review and the daily mix draw "due" entries first. Needs a `dueAt` on revise entries, so a schema change with a migration.
+
+## Gender reveal on new nouns
+
+**Why:** meeting a noun for the first time in a quiz means guessing its gender.
+
+**Notes:** the first time a noun appears, show it briefly with its ■ ● ▲ shape, article and plural before asking. Track "seen" per noun in progress.
+
+## Topic tests (Prüfung)
+
+**Why:** a way to check a whole level, like a mock exam.
+
+**Notes:** a mixed round across every A1 or A2 topic, ending with a grade and the weakest topics to go back to. No hints. Keep the best grade per level.
+
+## Verb lookup
+
+**Why:** learners often want one verb's forms at a glance.
+
+**Notes:** search a verb and see its present-tense forms, Präteritum and Perfekt (with haben or sein) together, linking to the topics. Built from the existing irregular-verb content; check every form against `docs/grammar/`.
+
+## Stats over time
+
+**Why:** a sense of improvement, without streak pressure.
+
+**Notes:** on the Progress page, a simple chart of answers per day and accuracy per week. Needs a small daily history in progress (schema change). No streaks or "days in a row".
+
+## Links into the glossary
+
+**Why:** rule cards and explanations use grammar terms a learner may not know.
+
+**Notes:** link known glossary terms in rule cards and explanations to `/glossary#id`. Match whole words only, and link each term once per card.
+
+## Content review tooling
+
+**Why:** German correctness matters most, and proofreading 1,400 questions in code is hard.
+
+**Notes:** a script that exports every correct sentence per topic (gap, build, sort, examples, glossary) to a readable file a native speaker can review and annotate.
+
+## Analytics without tracking
+
+**Why:** knowing which topics get played would guide new content.
+
+**Notes:** anonymous, cookieless counts only (e.g. Vercel Analytics): page views and rounds per topic and mode. No personal data, no consent banner needed; mention it on the About page.
+
 ## Audio
 
 **Why:** the app is silent. Hearing each sentence helps with listening and pronunciation, which are both on the A1/A2 sheets.

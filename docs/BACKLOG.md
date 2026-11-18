@@ -14,12 +14,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** a speaker button on German sentences, rule examples and revise cards, using the browser's speech synthesis with a `de-DE` voice. It's free and works offline where the device has a German voice. Hide the button when no German voice is available. Add a setting to auto-play after each answer.
 
-## Topic map
-
-**Why:** a visual sense of progress across the whole syllabus.
-
-**Notes:** a Bauhaus poster on the home or progress page: one shape per topic, coloured and filled in by medal tier (empty → bronze → … → mastered), grouped by level and topic group. Tapping a shape opens the topic. Shape and colour can't be the only signal, so add text labels or a list view for accessibility.
-
 ## Transfer progress to another device with a QR code
 
 **Why:** moving to a new phone today means exporting a file and importing it on the other device. Scanning a QR code from the old device would be much quicker.

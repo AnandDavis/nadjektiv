@@ -163,6 +163,11 @@ export const COPY = {
   },
   progress: {
     medals: { de: 'Medaillen', en: 'Medals' },
+    map: { de: 'Themenkarte', en: 'Topic map' },
+    mapHint: {
+      de: 'Jedes Feld ist ein Thema. Je voller und kräftiger, desto höher die Medaille.',
+      en: 'Each square is a topic. The fuller and bolder, the higher the medal.',
+    },
   },
   revise: {
     title: { de: 'Zu wiederholen', en: 'To revise' },

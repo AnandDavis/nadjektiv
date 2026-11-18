@@ -11,6 +11,7 @@ import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
 
 import { TierBadge } from './TierBadge';
+import { TopicMap } from './TopicMap';
 import { COPY } from '@/lib/i18n/copy';
 
 export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
@@ -54,6 +55,8 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
           ))}
         </ul>
       </section>
+
+      <TopicMap topics={topics} progress={progress} />
 
       <section aria-labelledby="topics-heading">
         <SectionHeading id="topics-heading">

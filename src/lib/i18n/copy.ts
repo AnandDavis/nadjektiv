@@ -3,10 +3,11 @@
  * one they see in Settings; grammar content is always German.
  */
 
-export interface Bilingual {
-  de: string;
-  en: string;
-}
+import type { Bilingual } from './bilingual';
+import { SETTINGS_COPY } from './copy-settings';
+
+export type { Bilingual } from './bilingual';
+export * from './copy-lines';
 
 export const COPY = {
   daily: {
@@ -196,124 +197,8 @@ export const COPY = {
     added: { de: 'neu auf deiner Wiederholungsliste', en: 'added to your revise list' },
     cleared: { de: 'von der Liste erledigt', en: 'cleared from your revise list' },
   },
-  settings: {
-    yourProgress: { de: 'Dein Fortschritt', en: 'Your progress' },
-    progressHint: {
-      de: 'Dein Fortschritt ist nur auf diesem Gerät gespeichert. Exportiere ihn als Sicherung oder für ein anderes Gerät.',
-      en: 'Progress is saved on this device only. Export it to keep a backup or move to another device.',
-    },
-    export: { de: 'Exportieren', en: 'Export' },
-    import: { de: 'Importieren', en: 'Import' },
-    reset: { de: 'Fortschritt löschen', en: 'Reset progress' },
-    confirmReset: {
-      de: 'Allen Fortschritt auf diesem Gerät löschen? Das lässt sich nicht rückgängig machen.',
-      en: 'Delete all progress on this device? This can’t be undone.',
-    },
-    cancel: { de: 'Abbrechen', en: 'Cancel' },
-    confirmResetButton: { de: 'Ja, löschen', en: 'Yes, reset' },
-    exported: { de: 'Fortschritt exportiert.', en: 'Progress exported.' },
-    imported: { de: 'Fortschritt importiert.', en: 'Progress imported.' },
-    resetDone: { de: 'Fortschritt gelöscht.', en: 'Progress reset.' },
-    theme: { de: 'Design', en: 'Theme' },
-    themeSystem: { de: 'System', en: 'System' },
-    themeLight: { de: 'Hell', en: 'Light' },
-    themeDark: { de: 'Dunkel', en: 'Dark' },
-    playing: { de: 'Spielen', en: 'Playing' },
-    blitzClock: { de: 'Blitz-Uhr', en: 'Blitz clock' },
-    blitzTimed: { de: 'Mit Uhr', en: 'Timed' },
-    blitzUntimed: { de: 'Ohne Uhr', en: 'Untimed' },
-    hints: { de: 'Hinweise', en: 'Hints' },
-    hintsButton: { de: 'Auf Knopfdruck', en: 'On request' },
-    hintsShown: { de: 'Immer zeigen', en: 'Always show' },
-    hintsHidden: { de: 'Aus', en: 'Off' },
-    hintsHint: {
-      de: 'Ein Hinweis halbiert die Punkte und zählt nicht für Medaillen.',
-      en: 'A hint halves the points and doesn’t count towards medals.',
-    },
-    autoAdvance: { de: 'Nach einer richtigen Antwort', en: 'After a right answer' },
-    autoAdvanceOff: { de: 'Warten', en: 'Wait' },
-    autoAdvanceOn: { de: 'Weitergehen', en: 'Move on' },
-    autoAdvanceHint: {
-      de: 'Falsche Antworten werden immer erklärt, bevor es weitergeht.',
-      en: 'Wrong answers are always explained before you move on.',
-    },
-    textSize: { de: 'Textgröße', en: 'Text size' },
-    textNormal: { de: 'Normal', en: 'Normal' },
-    textLarge: { de: 'Groß', en: 'Large' },
-    textLarger: { de: 'Größer', en: 'Larger' },
-    motion: { de: 'Bewegung', en: 'Motion' },
-    motionSystem: { de: 'Wie das Gerät', en: 'Like my device' },
-    motionReduce: { de: 'Reduziert', en: 'Reduced' },
-    translations: { de: 'Englische Übersetzungen', en: 'English translations' },
-    translationsShown: { de: 'Zeigen', en: 'Show' },
-    translationsHidden: { de: 'Ausblenden', en: 'Hide' },
-    translationsHint: {
-      de: 'Ohne Englisch übst du noch mehr Deutsch. Regeln und Erklärungen bleiben auf Englisch.',
-      en: 'Without English you practise even more German. Rules and explanations stay in English.',
-    },
-    clearRevise: { de: 'Wiederholungsliste leeren', en: 'Empty the revise list' },
-    confirmClearRevise: {
-      de: 'Alle Fragen von der Wiederholungsliste entfernen? Dein übriger Fortschritt bleibt.',
-      en: 'Remove every question from the revise list? The rest of your progress stays.',
-    },
-    confirmClearReviseButton: { de: 'Ja, leeren', en: 'Yes, empty it' },
-    reviseCleared: { de: 'Wiederholungsliste geleert.', en: 'Revise list emptied.' },
-    language: { de: 'Sprache der Oberfläche', en: 'Interface language' },
-    languageHint: {
-      de: 'Überschriften und Knöpfe. Die Grammatik bleibt auf Deutsch.',
-      en: 'Headings and buttons. Grammar questions stay in German.',
-    },
-  },
+  settings: SETTINGS_COPY,
   notFound: {
     heading: { de: 'Diese Seite gibt es nicht.', en: 'That page doesn’t exist.' },
   },
 } as const satisfies Record<string, Record<string, Bilingual>>;
-
-/** "3 von 10 richtig" / "3 of 10 correct" */
-export function correctCount(correct: number, total: number): Bilingual {
-  return { de: `${correct} von ${total} richtig`, en: `${correct} of ${total} correct` };
-}
-
-/** "Level up! Du bist jetzt Level 3:" / "Level up! You’re now level 3:" */
-export function levelUpLine(level: number): Bilingual {
-  return {
-    de: `Level up! Du bist jetzt Level ${level}:`,
-    en: `Level up! You’re now level ${level}:`,
-  };
-}
-
-/** "3 Themen" / "3 topics" */
-export function topicCount(count: number): Bilingual {
-  return {
-    de: `${count} ${count === 1 ? 'Thema' : 'Themen'}`,
-    en: `${count} ${count === 1 ? 'topic' : 'topics'}`,
-  };
-}
-
-/** "Schritt 2 von 3" / "Step 2 of 3" */
-export function stepOf(step: number, total: number): Bilingual {
-  return { de: `Schritt ${step} von ${total}`, en: `Step ${step} of ${total}` };
-}
-
-/** The daily mix's line on the home page, for a learner with or without progress. */
-export function dailyHint(length: number, hasProgress: boolean): Bilingual {
-  return hasProgress
-    ? {
-        de: `${length} Fragen aus deiner Wiederholungsliste und deinen schwächsten Themen`,
-        en: `${length} questions from your revise list and your weakest topics`,
-      }
-    : { de: `${length} Fragen zum Einstieg`, en: `${length} questions to get you started` };
-}
-
-/** "Gebaut von Nad in London" / "Built by Nad in London" */
-export function builtBy(name: string, place: string): Bilingual {
-  return { de: `Gebaut von ${name} in ${place}`, en: `Built by ${name} in ${place}` };
-}
-
-/** "Ohne Uhr hat Blitz 20 Wörter …" with the configured round length. */
-export function untimedBlitzHint(length: number): Bilingual {
-  return {
-    de: `Ohne Uhr hat Blitz ${length} Wörter und eigene Rekorde.`,
-    en: `Untimed Blitz has ${length} words and its own bests.`,
-  };
-}

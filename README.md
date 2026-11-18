@@ -36,7 +36,7 @@ Every wrong answer, in every mode, shows what you chose, the right answer and th
 
 ## Getting started
 
-Requires Node.js 22 (22.12 or later recommended; `.nvmrc` pins the major version).
+Requires Node.js 22.12 or later (`.nvmrc` pins Node 22; `nvm install` picks it up).
 
 ```bash
 npm install

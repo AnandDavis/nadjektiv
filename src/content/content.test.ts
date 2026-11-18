@@ -111,6 +111,52 @@ describe.each(TOPICS.map((t) => [t.id, t]))('%s', (_, topic) => {
   }
 });
 
+describe('grid tables', () => {
+  const grids = TOPICS.flatMap((topic) => (topic.grids ?? []).map((grid) => ({ topic, grid })));
+
+  it('exist for the topics with tables on the cheat sheets', () => {
+    expect(grids.length).toBeGreaterThanOrEqual(10);
+  });
+
+  it('have unique, stable ids', () => {
+    const ids = grids.map(({ grid }) => grid.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    const bad = grids.filter(
+      ({ topic, grid }) => !new RegExp(`^${topic.id}-grid-\\d+$`).test(grid.id),
+    );
+    expect(bad.map(({ grid }) => grid.id)).toEqual([]);
+  });
+
+  it('are rectangular, with something to type and a sensible time limit', () => {
+    const bad = grids.filter(({ grid }) => {
+      const blanks = grid.rows.flatMap((row) => row.cells).filter((cell) => !cell.given);
+      return (
+        grid.rows.length === 0 ||
+        grid.rows.some((row) => row.cells.length !== grid.columns.length || !row.label.trim()) ||
+        blanks.length === 0 ||
+        grid.seconds < 30 ||
+        grid.seconds > 600 ||
+        grid.explanation.trim().length < 10 ||
+        !grid.titleDe.trim()
+      );
+    });
+    expect(bad.map(({ grid }) => grid.id)).toEqual([]);
+  });
+
+  it('has a non-empty answer for every cell, and alternatives that differ from it', () => {
+    const bad = grids.filter(({ grid }) =>
+      grid.rows.some((row) =>
+        row.cells.some(
+          (cell) =>
+            !cell.answer.trim() ||
+            (cell.accepted ?? []).some((alt) => alt === cell.answer || !alt.trim()),
+        ),
+      ),
+    );
+    expect(bad.map(({ grid }) => grid.id)).toEqual([]);
+  });
+});
+
 describe('German text', () => {
   const SUBSTITUTES =
     /\b(fuer|ueber|Ueber|Maedchen|Baecker|schoen|Gruesse|gruessen|koennen|kann't|muessen|duerfen|moechte|moegen|waere|haette|hoeren|Aerztin|Kaese|Strasse|gross|grosse|heisst|Fuss|Fruehstueck|Muenchen|Koeln|Tuer|Schluessel|Buero|Zuerich|spaet|frueh|natuerlich)\b/;

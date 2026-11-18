@@ -558,4 +558,195 @@ export const adjectiveEndings: Topic = {
         'Comparatives take endings like any adjective: neuter accusative after ein, ein besseres Angebot.',
     },
   ],
+  grids: [
+    {
+      id: 'adjective-endings-grid-1',
+      title: 'After der, die, das',
+      titleDe: 'Nach der, die, das',
+      rowHeader: 'Fall',
+      columns: ['M', 'F', 'N', 'Pl'],
+      seconds: 90,
+      explanation:
+        'After the definite article: five -e (nominative singular, and feminine and neuter accusative), everything else -en.',
+      rows: [
+        {
+          label: 'Nom',
+          cells: [
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+        {
+          label: 'Akk',
+          cells: [
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+        {
+          label: 'Dat',
+          cells: [
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'adjective-endings-grid-2',
+      title: 'After ein, kein, mein',
+      titleDe: 'Nach ein, kein, mein',
+      rowHeader: 'Fall',
+      columns: ['M', 'F', 'N', 'Pl'],
+      seconds: 90,
+      explanation:
+        'The adjective shows what ein can’t: -er for masculine nominative, -es for neuter nominative and accusative. The rest match the der-table.',
+      rows: [
+        {
+          label: 'Nom',
+          cells: [
+            {
+              answer: '-er',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-es',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+        {
+          label: 'Akk',
+          cells: [
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-es',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+        {
+          label: 'Dat',
+          cells: [
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'adjective-endings-grid-3',
+      title: 'No article',
+      titleDe: 'Ohne Artikel',
+      rowHeader: 'Fall',
+      columns: ['M', 'F', 'N', 'Pl'],
+      seconds: 90,
+      explanation:
+        'With no article, the adjective takes the ending der/die/das would have: guter Kaffee, mit gutem Kaffee, gute Leute.',
+      rows: [
+        {
+          label: 'Nom',
+          cells: [
+            {
+              answer: '-er',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-es',
+            },
+            {
+              answer: '-e',
+            },
+          ],
+        },
+        {
+          label: 'Akk',
+          cells: [
+            {
+              answer: '-en',
+            },
+            {
+              answer: '-e',
+            },
+            {
+              answer: '-es',
+            },
+            {
+              answer: '-e',
+            },
+          ],
+        },
+        {
+          label: 'Dat',
+          cells: [
+            {
+              answer: '-em',
+            },
+            {
+              answer: '-er',
+            },
+            {
+              answer: '-em',
+            },
+            {
+              answer: '-en',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

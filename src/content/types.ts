@@ -7,7 +7,11 @@
 
 export type Level = 'A1' | 'A2';
 
-export type GameMode = 'sort' | 'gap' | 'build';
+/** Modes that ask one question at a time. */
+export type QuestionMode = 'sort' | 'gap' | 'build';
+
+/** Every game mode: the question modes plus grid fill, which shows a whole table. */
+export type GameMode = QuestionMode | 'grid';
 
 export type TopicGroup = 'nouns' | 'cases' | 'verbs' | 'sentences' | 'prepositions' | 'adjectives';
 
@@ -75,6 +79,42 @@ export interface BuildQuestion extends QuestionBase {
 
 export type Question = SortQuestion | GapQuestion | BuildQuestion;
 
+/**
+ * One cell of a grid. `answer` is shown once solved; `accepted` lists other spellings
+ * that count (e.g. "kleinsten" for "am kleinsten"). Endings may be written with or
+ * without their hyphen ("-en" or "en"). Case is ignored; umlauts and ß are not.
+ */
+export interface GridCell {
+  answer: string;
+  accepted?: string[];
+  /** Pre-filled as an anchor; not typed and not scored. */
+  given?: boolean;
+}
+
+export interface GridRow {
+  label: string;
+  cells: GridCell[];
+}
+
+/**
+ * A table to fill in against the clock (grid fill mode).
+ * Cell ids (`<id>:<row>:<col>`) are stored in progress: never reorder rows or columns.
+ */
+export interface GridPuzzle {
+  /** `<topic-id>-grid-<n>`, stable. */
+  id: string;
+  title: string;
+  titleDe: string;
+  /** Heading above the row labels, e.g. "Fall" or "Person". */
+  rowHeader: string;
+  columns: string[];
+  rows: GridRow[];
+  /** Time limit for the round. */
+  seconds: number;
+  /** The rule the table shows, in English; used on results and revise cards. */
+  explanation: string;
+}
+
 export interface RuleTable {
   head: string[];
   rows: string[][];
@@ -109,4 +149,5 @@ export interface Topic {
   sort?: SortDeck;
   gap?: GapQuestion[];
   build?: BuildQuestion[];
+  grids?: GridPuzzle[];
 }

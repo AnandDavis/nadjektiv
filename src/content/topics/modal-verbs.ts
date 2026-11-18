@@ -502,4 +502,128 @@ export const modalVerbs: Topic = {
       explanation: 'Yes/no question: modal first, infinitive last.',
     },
   ],
+  grids: [
+    {
+      id: 'modal-verbs-grid-1',
+      title: 'Modal verbs',
+      titleDe: 'Modalverben',
+      rowHeader: 'Person',
+      columns: ['können', 'müssen', 'wollen', 'dürfen'],
+      seconds: 180,
+      explanation:
+        'ich and er/sie/es are the same and have no ending (ich kann, er kann). The umlaut disappears in the singular: können → ich kann.',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'kann',
+            },
+            {
+              answer: 'muss',
+            },
+            {
+              answer: 'will',
+            },
+            {
+              answer: 'darf',
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'kannst',
+            },
+            {
+              answer: 'musst',
+            },
+            {
+              answer: 'willst',
+            },
+            {
+              answer: 'darfst',
+            },
+          ],
+        },
+        {
+          label: 'er/sie/es',
+          cells: [
+            {
+              answer: 'kann',
+            },
+            {
+              answer: 'muss',
+            },
+            {
+              answer: 'will',
+            },
+            {
+              answer: 'darf',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'können',
+              given: true,
+            },
+            {
+              answer: 'müssen',
+              given: true,
+            },
+            {
+              answer: 'wollen',
+              given: true,
+            },
+            {
+              answer: 'dürfen',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'ihr',
+          cells: [
+            {
+              answer: 'könnt',
+            },
+            {
+              answer: 'müsst',
+            },
+            {
+              answer: 'wollt',
+            },
+            {
+              answer: 'dürft',
+            },
+          ],
+        },
+        {
+          label: 'sie/Sie',
+          cells: [
+            {
+              answer: 'können',
+              given: true,
+            },
+            {
+              answer: 'müssen',
+              given: true,
+            },
+            {
+              answer: 'wollen',
+              given: true,
+            },
+            {
+              answer: 'dürfen',
+              given: true,
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -474,4 +474,303 @@ export const presentTense: Topic = {
       explanation: 'einladen changes a → ä for du and er: er lädt … ein.',
     },
   ],
+  grids: [
+    {
+      id: 'present-tense-grid-1',
+      title: 'Regular verbs',
+      titleDe: 'Regelmäßige Verben',
+      rowHeader: 'Person',
+      columns: ['machen', 'arbeiten', 'heißen'],
+      seconds: 150,
+      explanation:
+        'Endings -e, -st, -t, -en, -t, -en. Stems in -t/-d keep an e (du arbeitest); stems in -s/-ß/-z drop the s of -st (du heißt).',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'mache',
+              given: true,
+            },
+            {
+              answer: 'arbeite',
+              given: true,
+            },
+            {
+              answer: 'heiße',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'machst',
+            },
+            {
+              answer: 'arbeitest',
+            },
+            {
+              answer: 'heißt',
+            },
+          ],
+        },
+        {
+          label: 'er/sie/es',
+          cells: [
+            {
+              answer: 'macht',
+            },
+            {
+              answer: 'arbeitet',
+            },
+            {
+              answer: 'heißt',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'machen',
+            },
+            {
+              answer: 'arbeiten',
+            },
+            {
+              answer: 'heißen',
+            },
+          ],
+        },
+        {
+          label: 'ihr',
+          cells: [
+            {
+              answer: 'macht',
+            },
+            {
+              answer: 'arbeitet',
+            },
+            {
+              answer: 'heißt',
+            },
+          ],
+        },
+        {
+          label: 'sie/Sie',
+          cells: [
+            {
+              answer: 'machen',
+            },
+            {
+              answer: 'arbeiten',
+            },
+            {
+              answer: 'heißen',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'present-tense-grid-2',
+      title: 'sein, haben, wissen',
+      titleDe: 'sein, haben, wissen',
+      rowHeader: 'Person',
+      columns: ['sein', 'haben', 'wissen'],
+      seconds: 150,
+      explanation:
+        'sein and haben are irregular and used constantly. wissen has no ending in ich and er/sie/es: ich weiß, er weiß.',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'bin',
+            },
+            {
+              answer: 'habe',
+            },
+            {
+              answer: 'weiß',
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'bist',
+            },
+            {
+              answer: 'hast',
+            },
+            {
+              answer: 'weißt',
+            },
+          ],
+        },
+        {
+          label: 'er/sie/es',
+          cells: [
+            {
+              answer: 'ist',
+            },
+            {
+              answer: 'hat',
+            },
+            {
+              answer: 'weiß',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'sind',
+            },
+            {
+              answer: 'haben',
+            },
+            {
+              answer: 'wissen',
+            },
+          ],
+        },
+        {
+          label: 'ihr',
+          cells: [
+            {
+              answer: 'seid',
+            },
+            {
+              answer: 'habt',
+            },
+            {
+              answer: 'wisst',
+            },
+          ],
+        },
+        {
+          label: 'sie/Sie',
+          cells: [
+            {
+              answer: 'sind',
+            },
+            {
+              answer: 'haben',
+            },
+            {
+              answer: 'wissen',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'present-tense-grid-3',
+      title: 'Stem changes',
+      titleDe: 'Vokalwechsel',
+      rowHeader: 'Person',
+      columns: ['sprechen', 'sehen', 'fahren', 'nehmen', 'laufen'],
+      seconds: 120,
+      explanation:
+        'The vowel changes only for du and er/sie/es: e → i, e → ie, a → ä, au → äu. ich and wir keep the infinitive vowel.',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'spreche',
+              given: true,
+            },
+            {
+              answer: 'sehe',
+              given: true,
+            },
+            {
+              answer: 'fahre',
+              given: true,
+            },
+            {
+              answer: 'nehme',
+              given: true,
+            },
+            {
+              answer: 'laufe',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'sprichst',
+            },
+            {
+              answer: 'siehst',
+            },
+            {
+              answer: 'fährst',
+            },
+            {
+              answer: 'nimmst',
+            },
+            {
+              answer: 'läufst',
+            },
+          ],
+        },
+        {
+          label: 'er/sie/es',
+          cells: [
+            {
+              answer: 'spricht',
+            },
+            {
+              answer: 'sieht',
+            },
+            {
+              answer: 'fährt',
+            },
+            {
+              answer: 'nimmt',
+            },
+            {
+              answer: 'läuft',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'sprechen',
+              given: true,
+            },
+            {
+              answer: 'sehen',
+              given: true,
+            },
+            {
+              answer: 'fahren',
+              given: true,
+            },
+            {
+              answer: 'nehmen',
+              given: true,
+            },
+            {
+              answer: 'laufen',
+              given: true,
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

@@ -58,6 +58,14 @@ function unknownWords(text: string): string[] {
 function correctTexts(): Array<{ id: string; text: string }> {
   return TOPICS.flatMap((topic) => [
     { id: `${topic.id} title`, text: topic.titleDe },
+    ...(topic.grids ?? []).flatMap((grid) => [
+      { id: grid.id, text: grid.titleDe },
+      ...grid.rows.flatMap((row) =>
+        row.cells.flatMap((cell) =>
+          [cell.answer, ...(cell.accepted ?? [])].map((text) => ({ id: grid.id, text })),
+        ),
+      ),
+    ]),
     ...(topic.sort?.questions ?? []).map((q) => ({
       id: q.id,
       text: q.prompt.replace('___', q.answer),

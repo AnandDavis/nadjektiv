@@ -803,4 +803,124 @@ export const praeteritum: Topic = {
       },
     ],
   },
+  grids: [
+    {
+      id: 'praeteritum-grid-1',
+      title: 'sein, haben and modals',
+      titleDe: 'sein, haben und Modalverben',
+      rowHeader: 'Person',
+      columns: ['sein', 'haben', 'können', 'müssen'],
+      seconds: 180,
+      explanation:
+        'ich and er/sie/es are the same (ich war, er war). Modals lose their umlaut in the Präteritum: können → konnte.',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'war',
+              given: true,
+            },
+            {
+              answer: 'hatte',
+              given: true,
+            },
+            {
+              answer: 'konnte',
+              given: true,
+            },
+            {
+              answer: 'musste',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'warst',
+            },
+            {
+              answer: 'hattest',
+            },
+            {
+              answer: 'konntest',
+            },
+            {
+              answer: 'musstest',
+            },
+          ],
+        },
+        {
+          label: 'er/sie/es',
+          cells: [
+            {
+              answer: 'war',
+            },
+            {
+              answer: 'hatte',
+            },
+            {
+              answer: 'konnte',
+            },
+            {
+              answer: 'musste',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'waren',
+            },
+            {
+              answer: 'hatten',
+            },
+            {
+              answer: 'konnten',
+            },
+            {
+              answer: 'mussten',
+            },
+          ],
+        },
+        {
+          label: 'ihr',
+          cells: [
+            {
+              answer: 'wart',
+            },
+            {
+              answer: 'hattet',
+            },
+            {
+              answer: 'konntet',
+            },
+            {
+              answer: 'musstet',
+            },
+          ],
+        },
+        {
+          label: 'sie/Sie',
+          cells: [
+            {
+              answer: 'waren',
+            },
+            {
+              answer: 'hatten',
+            },
+            {
+              answer: 'konnten',
+            },
+            {
+              answer: 'mussten',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

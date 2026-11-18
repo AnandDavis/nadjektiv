@@ -353,4 +353,138 @@ export const comparatives: Topic = {
         'A comparative before a noun takes endings: eine größere Wohnung (feminine accusative).',
     },
   ],
+  grids: [
+    {
+      id: 'comparatives-grid-1',
+      title: 'Comparative and superlative',
+      titleDe: 'Komparativ und Superlativ',
+      rowHeader: 'Positiv',
+      columns: ['Komparativ', 'Superlativ (am …)'],
+      seconds: 180,
+      explanation:
+        'Add -er and am …-sten; short adjectives with a, o, u usually take an umlaut. gut, viel, gern, hoch and nah are irregular.',
+      rows: [
+        {
+          label: 'klein',
+          cells: [
+            {
+              answer: 'kleiner',
+            },
+            {
+              answer: 'am kleinsten',
+              accepted: ['kleinsten'],
+            },
+          ],
+        },
+        {
+          label: 'alt',
+          cells: [
+            {
+              answer: 'älter',
+            },
+            {
+              answer: 'am ältesten',
+              accepted: ['ältesten'],
+            },
+          ],
+        },
+        {
+          label: 'groß',
+          cells: [
+            {
+              answer: 'größer',
+            },
+            {
+              answer: 'am größten',
+              accepted: ['größten'],
+            },
+          ],
+        },
+        {
+          label: 'jung',
+          cells: [
+            {
+              answer: 'jünger',
+            },
+            {
+              answer: 'am jüngsten',
+              accepted: ['jüngsten'],
+            },
+          ],
+        },
+        {
+          label: 'teuer',
+          cells: [
+            {
+              answer: 'teurer',
+            },
+            {
+              answer: 'am teuersten',
+              accepted: ['teuersten'],
+            },
+          ],
+        },
+        {
+          label: 'gut',
+          cells: [
+            {
+              answer: 'besser',
+            },
+            {
+              answer: 'am besten',
+              accepted: ['besten'],
+            },
+          ],
+        },
+        {
+          label: 'viel',
+          cells: [
+            {
+              answer: 'mehr',
+            },
+            {
+              answer: 'am meisten',
+              accepted: ['meisten'],
+            },
+          ],
+        },
+        {
+          label: 'gern',
+          cells: [
+            {
+              answer: 'lieber',
+            },
+            {
+              answer: 'am liebsten',
+              accepted: ['liebsten'],
+            },
+          ],
+        },
+        {
+          label: 'hoch',
+          cells: [
+            {
+              answer: 'höher',
+            },
+            {
+              answer: 'am höchsten',
+              accepted: ['höchsten'],
+            },
+          ],
+        },
+        {
+          label: 'nah',
+          cells: [
+            {
+              answer: 'näher',
+            },
+            {
+              answer: 'am nächsten',
+              accepted: ['nächsten'],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

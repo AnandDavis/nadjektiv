@@ -391,4 +391,153 @@ export const pronouns: Topic = {
       explanation: 'für takes the accusative, so er becomes ihn.',
     },
   ],
+  grids: [
+    {
+      id: 'pronouns-grid-1',
+      title: 'Personal pronouns',
+      titleDe: 'Personalpronomen',
+      rowHeader: 'Person',
+      columns: ['Nom', 'Akk', 'Dat'],
+      seconds: 150,
+      explanation:
+        'Accusative and dative differ only for ich, du, er/es, sie (she), sie (they) and Sie. Formal Sie, Sie, Ihnen is always capitalised.',
+      rows: [
+        {
+          label: 'ich',
+          cells: [
+            {
+              answer: 'ich',
+              given: true,
+            },
+            {
+              answer: 'mich',
+            },
+            {
+              answer: 'mir',
+            },
+          ],
+        },
+        {
+          label: 'du',
+          cells: [
+            {
+              answer: 'du',
+              given: true,
+            },
+            {
+              answer: 'dich',
+            },
+            {
+              answer: 'dir',
+            },
+          ],
+        },
+        {
+          label: 'er',
+          cells: [
+            {
+              answer: 'er',
+              given: true,
+            },
+            {
+              answer: 'ihn',
+            },
+            {
+              answer: 'ihm',
+            },
+          ],
+        },
+        {
+          label: 'sie (Sg.)',
+          cells: [
+            {
+              answer: 'sie',
+              given: true,
+            },
+            {
+              answer: 'sie',
+            },
+            {
+              answer: 'ihr',
+            },
+          ],
+        },
+        {
+          label: 'es',
+          cells: [
+            {
+              answer: 'es',
+              given: true,
+            },
+            {
+              answer: 'es',
+            },
+            {
+              answer: 'ihm',
+            },
+          ],
+        },
+        {
+          label: 'wir',
+          cells: [
+            {
+              answer: 'wir',
+              given: true,
+            },
+            {
+              answer: 'uns',
+            },
+            {
+              answer: 'uns',
+            },
+          ],
+        },
+        {
+          label: 'ihr',
+          cells: [
+            {
+              answer: 'ihr',
+              given: true,
+            },
+            {
+              answer: 'euch',
+            },
+            {
+              answer: 'euch',
+            },
+          ],
+        },
+        {
+          label: 'sie (Pl.)',
+          cells: [
+            {
+              answer: 'sie',
+              given: true,
+            },
+            {
+              answer: 'sie',
+            },
+            {
+              answer: 'ihnen',
+            },
+          ],
+        },
+        {
+          label: 'Sie',
+          cells: [
+            {
+              answer: 'Sie',
+              given: true,
+            },
+            {
+              answer: 'Sie',
+            },
+            {
+              answer: 'Ihnen',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

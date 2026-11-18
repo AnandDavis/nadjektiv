@@ -983,4 +983,513 @@ export const irregularVerbs: Topic = {
       },
     ],
   },
+  grids: [
+    {
+      id: 'irregular-verbs-grid-1',
+      title: 'Irregular verbs: sein to sehen',
+      titleDe: 'Unregelmäßige Verben: sein bis sehen',
+      rowHeader: 'Infinitiv',
+      columns: ['er/sie/es', 'Präteritum', 'Partizip II'],
+      seconds: 240,
+      explanation:
+        'Learn the three forms together. Verbs of movement or change take ist in the Perfekt (ist gegangen); a prefixed verb follows its base verb.',
+      rows: [
+        {
+          label: 'sein',
+          cells: [
+            {
+              answer: 'ist',
+            },
+            {
+              answer: 'war',
+            },
+            {
+              answer: 'ist gewesen',
+              accepted: ['gewesen'],
+            },
+          ],
+        },
+        {
+          label: 'haben',
+          cells: [
+            {
+              answer: 'hat',
+            },
+            {
+              answer: 'hatte',
+            },
+            {
+              answer: 'gehabt',
+            },
+          ],
+        },
+        {
+          label: 'werden',
+          cells: [
+            {
+              answer: 'wird',
+            },
+            {
+              answer: 'wurde',
+            },
+            {
+              answer: 'ist geworden',
+              accepted: ['geworden'],
+            },
+          ],
+        },
+        {
+          label: 'gehen',
+          cells: [
+            {
+              answer: 'geht',
+            },
+            {
+              answer: 'ging',
+            },
+            {
+              answer: 'ist gegangen',
+              accepted: ['gegangen'],
+            },
+          ],
+        },
+        {
+          label: 'kommen',
+          cells: [
+            {
+              answer: 'kommt',
+            },
+            {
+              answer: 'kam',
+            },
+            {
+              answer: 'ist gekommen',
+              accepted: ['gekommen'],
+            },
+          ],
+        },
+        {
+          label: 'fahren',
+          cells: [
+            {
+              answer: 'fährt',
+            },
+            {
+              answer: 'fuhr',
+            },
+            {
+              answer: 'ist gefahren',
+              accepted: ['gefahren'],
+            },
+          ],
+        },
+        {
+          label: 'bleiben',
+          cells: [
+            {
+              answer: 'bleibt',
+            },
+            {
+              answer: 'blieb',
+            },
+            {
+              answer: 'ist geblieben',
+              accepted: ['geblieben'],
+            },
+          ],
+        },
+        {
+          label: 'laufen',
+          cells: [
+            {
+              answer: 'läuft',
+            },
+            {
+              answer: 'lief',
+            },
+            {
+              answer: 'ist gelaufen',
+              accepted: ['gelaufen'],
+            },
+          ],
+        },
+        {
+          label: 'fliegen',
+          cells: [
+            {
+              answer: 'fliegt',
+            },
+            {
+              answer: 'flog',
+            },
+            {
+              answer: 'ist geflogen',
+              accepted: ['geflogen'],
+            },
+          ],
+        },
+        {
+          label: 'aufstehen',
+          cells: [
+            {
+              answer: 'steht auf',
+            },
+            {
+              answer: 'stand auf',
+            },
+            {
+              answer: 'ist aufgestanden',
+              accepted: ['aufgestanden'],
+            },
+          ],
+        },
+        {
+          label: 'sehen',
+          cells: [
+            {
+              answer: 'sieht',
+            },
+            {
+              answer: 'sah',
+            },
+            {
+              answer: 'gesehen',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'irregular-verbs-grid-2',
+      title: 'Irregular verbs: geben to schlafen',
+      titleDe: 'Unregelmäßige Verben: geben bis schlafen',
+      rowHeader: 'Infinitiv',
+      columns: ['er/sie/es', 'Präteritum', 'Partizip II'],
+      seconds: 240,
+      explanation:
+        'Learn the three forms together. Verbs of movement or change take ist in the Perfekt (ist gegangen); a prefixed verb follows its base verb.',
+      rows: [
+        {
+          label: 'geben',
+          cells: [
+            {
+              answer: 'gibt',
+            },
+            {
+              answer: 'gab',
+            },
+            {
+              answer: 'gegeben',
+            },
+          ],
+        },
+        {
+          label: 'nehmen',
+          cells: [
+            {
+              answer: 'nimmt',
+            },
+            {
+              answer: 'nahm',
+            },
+            {
+              answer: 'genommen',
+            },
+          ],
+        },
+        {
+          label: 'essen',
+          cells: [
+            {
+              answer: 'isst',
+            },
+            {
+              answer: 'aß',
+            },
+            {
+              answer: 'gegessen',
+            },
+          ],
+        },
+        {
+          label: 'trinken',
+          cells: [
+            {
+              answer: 'trinkt',
+            },
+            {
+              answer: 'trank',
+            },
+            {
+              answer: 'getrunken',
+            },
+          ],
+        },
+        {
+          label: 'sprechen',
+          cells: [
+            {
+              answer: 'spricht',
+            },
+            {
+              answer: 'sprach',
+            },
+            {
+              answer: 'gesprochen',
+            },
+          ],
+        },
+        {
+          label: 'lesen',
+          cells: [
+            {
+              answer: 'liest',
+            },
+            {
+              answer: 'las',
+            },
+            {
+              answer: 'gelesen',
+            },
+          ],
+        },
+        {
+          label: 'schreiben',
+          cells: [
+            {
+              answer: 'schreibt',
+            },
+            {
+              answer: 'schrieb',
+            },
+            {
+              answer: 'geschrieben',
+            },
+          ],
+        },
+        {
+          label: 'finden',
+          cells: [
+            {
+              answer: 'findet',
+            },
+            {
+              answer: 'fand',
+            },
+            {
+              answer: 'gefunden',
+            },
+          ],
+        },
+        {
+          label: 'helfen',
+          cells: [
+            {
+              answer: 'hilft',
+            },
+            {
+              answer: 'half',
+            },
+            {
+              answer: 'geholfen',
+            },
+          ],
+        },
+        {
+          label: 'treffen',
+          cells: [
+            {
+              answer: 'trifft',
+            },
+            {
+              answer: 'traf',
+            },
+            {
+              answer: 'getroffen',
+            },
+          ],
+        },
+        {
+          label: 'schlafen',
+          cells: [
+            {
+              answer: 'schläft',
+            },
+            {
+              answer: 'schlief',
+            },
+            {
+              answer: 'geschlafen',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'irregular-verbs-grid-3',
+      title: 'Irregular verbs: wissen to einladen',
+      titleDe: 'Unregelmäßige Verben: wissen bis einladen',
+      rowHeader: 'Infinitiv',
+      columns: ['er/sie/es', 'Präteritum', 'Partizip II'],
+      seconds: 240,
+      explanation:
+        'Learn the three forms together. Verbs of movement or change take ist in the Perfekt (ist gegangen); a prefixed verb follows its base verb.',
+      rows: [
+        {
+          label: 'wissen',
+          cells: [
+            {
+              answer: 'weiß',
+            },
+            {
+              answer: 'wusste',
+            },
+            {
+              answer: 'gewusst',
+            },
+          ],
+        },
+        {
+          label: 'denken',
+          cells: [
+            {
+              answer: 'denkt',
+            },
+            {
+              answer: 'dachte',
+            },
+            {
+              answer: 'gedacht',
+            },
+          ],
+        },
+        {
+          label: 'kennen',
+          cells: [
+            {
+              answer: 'kennt',
+            },
+            {
+              answer: 'kannte',
+            },
+            {
+              answer: 'gekannt',
+            },
+          ],
+        },
+        {
+          label: 'bringen',
+          cells: [
+            {
+              answer: 'bringt',
+            },
+            {
+              answer: 'brachte',
+            },
+            {
+              answer: 'gebracht',
+            },
+          ],
+        },
+        {
+          label: 'beginnen',
+          cells: [
+            {
+              answer: 'beginnt',
+            },
+            {
+              answer: 'begann',
+            },
+            {
+              answer: 'begonnen',
+            },
+          ],
+        },
+        {
+          label: 'verstehen',
+          cells: [
+            {
+              answer: 'versteht',
+            },
+            {
+              answer: 'verstand',
+            },
+            {
+              answer: 'verstanden',
+            },
+          ],
+        },
+        {
+          label: 'bekommen',
+          cells: [
+            {
+              answer: 'bekommt',
+            },
+            {
+              answer: 'bekam',
+            },
+            {
+              answer: 'bekommen',
+            },
+          ],
+        },
+        {
+          label: 'vergessen',
+          cells: [
+            {
+              answer: 'vergisst',
+            },
+            {
+              answer: 'vergaß',
+            },
+            {
+              answer: 'vergessen',
+            },
+          ],
+        },
+        {
+          label: 'anfangen',
+          cells: [
+            {
+              answer: 'fängt an',
+            },
+            {
+              answer: 'fing an',
+            },
+            {
+              answer: 'angefangen',
+            },
+          ],
+        },
+        {
+          label: 'anrufen',
+          cells: [
+            {
+              answer: 'ruft an',
+            },
+            {
+              answer: 'rief an',
+            },
+            {
+              answer: 'angerufen',
+            },
+          ],
+        },
+        {
+          label: 'einladen',
+          cells: [
+            {
+              answer: 'lädt ein',
+            },
+            {
+              answer: 'lud ein',
+            },
+            {
+              answer: 'eingeladen',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

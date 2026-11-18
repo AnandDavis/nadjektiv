@@ -687,4 +687,140 @@ export const articles: Topic = {
       explanation: 'es gibt always takes the accusative, so masculine ein becomes einen.',
     },
   ],
+  grids: [
+    {
+      id: 'articles-grid-1',
+      title: 'The definite article',
+      titleDe: 'Der bestimmte Artikel',
+      rowHeader: 'Fall',
+      columns: ['M', 'F', 'N', 'Pl'],
+      seconds: 90,
+      explanation:
+        'Only the masculine changes in the accusative (der → den). In the dative the plural adds -n to the noun: den Kindern.',
+      rows: [
+        {
+          label: 'Nom',
+          cells: [
+            {
+              answer: 'der',
+              given: true,
+            },
+            {
+              answer: 'die',
+              given: true,
+            },
+            {
+              answer: 'das',
+              given: true,
+            },
+            {
+              answer: 'die',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'Akk',
+          cells: [
+            {
+              answer: 'den',
+            },
+            {
+              answer: 'die',
+            },
+            {
+              answer: 'das',
+            },
+            {
+              answer: 'die',
+            },
+          ],
+        },
+        {
+          label: 'Dat',
+          cells: [
+            {
+              answer: 'dem',
+            },
+            {
+              answer: 'der',
+            },
+            {
+              answer: 'dem',
+            },
+            {
+              answer: 'den',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'articles-grid-2',
+      title: 'ein, kein and mein',
+      titleDe: 'ein, kein und mein',
+      rowHeader: 'Fall',
+      columns: ['M', 'F', 'N', 'Pl (kein)'],
+      seconds: 90,
+      explanation:
+        'ein, kein and the possessives share these endings. There is no plural of ein, so the plural column uses kein.',
+      rows: [
+        {
+          label: 'Nom',
+          cells: [
+            {
+              answer: 'ein',
+              given: true,
+            },
+            {
+              answer: 'eine',
+              given: true,
+            },
+            {
+              answer: 'ein',
+              given: true,
+            },
+            {
+              answer: 'keine',
+              given: true,
+            },
+          ],
+        },
+        {
+          label: 'Akk',
+          cells: [
+            {
+              answer: 'einen',
+            },
+            {
+              answer: 'eine',
+            },
+            {
+              answer: 'ein',
+            },
+            {
+              answer: 'keine',
+            },
+          ],
+        },
+        {
+          label: 'Dat',
+          cells: [
+            {
+              answer: 'einem',
+            },
+            {
+              answer: 'einer',
+            },
+            {
+              answer: 'einem',
+            },
+            {
+              answer: 'keinen',
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

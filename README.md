@@ -2,6 +2,8 @@
 
 A mobile-first progressive web app for learning **German A1–A2 grammar** through short games instead of coursebook drills. Install it on your phone's home screen and it works offline.
 
+**Offline:** open the deployed app once while online. Its service worker then downloads every page and the code each page needs, and from then on the whole app works without a connection, including topics you've never opened. Progress is stored on the device, so nothing needs a server. Offline support is only in production builds (`npm run build && npm run start`); `npm run dev` deliberately runs without the service worker.
+
 ## What's inside
 
 **24 grammar topics, about 1,400 questions,** built from the A1 and A2 grammar syllabus:

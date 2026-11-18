@@ -55,6 +55,16 @@ export function missedTimes(count: number): Bilingual {
   return { de: `${count}× falsch`, en: `missed ${count}×` };
 }
 
+/** When a revise entry comes back, and how many right answers it still needs. */
+export function dueLine(days: number, left: number): Bilingual {
+  const de = days === 0 ? 'Heute fällig' : days === 1 ? 'Morgen fällig' : `Fällig in ${days} Tagen`;
+  const en = days === 0 ? 'Due today' : days === 1 ? 'Due tomorrow' : `Due in ${days} days`;
+  return {
+    de: `${de} · noch ${left}× richtig`,
+    en: `${en} · ${left} more right ${left === 1 ? 'answer' : 'answers'}`,
+  };
+}
+
 /** "Kombo ×2!" / "Combo ×2!", announced when the multiplier rises. */
 export function comboLine(multiplier: number): Bilingual {
   return { de: `Kombo ×${multiplier}!`, en: `Combo ×${multiplier}!` };

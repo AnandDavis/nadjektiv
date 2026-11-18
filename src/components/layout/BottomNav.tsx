@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation';
 import { ChartIcon, HomeIcon, RepeatIcon, Ui } from '@/components/ui';
 import { useProgress } from '@/hooks/useProgress';
 import { COPY } from '@/lib/i18n/copy';
-import { reviseCount } from '@/lib/revise/revise-list';
+import { dueCount } from '@/lib/revise/schedule';
+import { dailyKey } from '@/lib/utils/day';
 import { cn } from '@/lib/utils/cn';
 
 const LINKS = [
@@ -24,7 +25,7 @@ function isActive(pathname: string, href: string): boolean {
 export function BottomNav() {
   const pathname = usePathname();
   const progress = useProgress();
-  const toRevise = progress ? reviseCount(progress.revise) : 0;
+  const toRevise = progress ? dueCount(progress.revise, dailyKey(new Date())) : 0;
   return (
     <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-10 bg-ink pb-safe text-canvas">
       <ul className="mx-auto grid max-w-xl grid-cols-3">
@@ -46,7 +47,7 @@ export function BottomNav() {
                   {count > 0 && (
                     <span className="absolute -top-1.5 left-3.5 min-w-5 bg-yellow px-1 text-center text-xs leading-5 font-black text-on-yellow tabular-nums">
                       {count}
-                      <span className="sr-only"> to revise</span>
+                      <span className="sr-only"> due to revise</span>
                     </span>
                   )}
                 </span>

@@ -85,13 +85,27 @@ describe('applySessionResult', () => {
   it('adds missed questions to the revise list', () => {
     const outcome = applySessionResult(createEmptyProgress(), result(1, 2), modes, NOW);
     expect(outcome.progress.revise).toEqual({
-      't-gap-w0': { topicId: 't', given: 'wrong', misses: 1, lastMissedAt: NOW },
-      't-gap-w1': { topicId: 't', given: 'wrong', misses: 1, lastMissedAt: NOW },
+      't-gap-w0': {
+        topicId: 't',
+        given: 'wrong',
+        misses: 1,
+        lastMissedAt: NOW,
+        step: 0,
+        dueOn: '2026-11-19',
+      },
+      't-gap-w1': {
+        topicId: 't',
+        given: 'wrong',
+        misses: 1,
+        lastMissedAt: NOW,
+        step: 0,
+        dueOn: '2026-11-19',
+      },
     });
     expect(outcome.addedToRevise).toBe(2);
   });
 
-  it('counts repeat misses and clears an item once it is answered correctly', () => {
+  it('counts repeat misses and clears an item after right answers on each due day', () => {
     const missTwice = applySessionResult(
       applySessionResult(createEmptyProgress(), result(0, 1), modes, NOW).progress,
       result(0, 1),
@@ -107,9 +121,37 @@ describe('applySessionResult', () => {
       score: 10,
       bestCombo: 1,
     };
-    const outcome = applySessionResult(missTwice.progress, fixed, modes, NOW);
-    expect(outcome.progress.revise).toEqual({});
-    expect(outcome.clearedFromRevise).toBe(1);
+    const at = (day: string) => `${day}T12:00:00.000Z`;
+    // Before it's due, a right answer changes nothing.
+    const early = applySessionResult(missTwice.progress, fixed, modes, NOW);
+    expect(early.progress.revise['t-gap-w0'].dueOn).toBe('2026-11-19');
+    // Due after 1 day, then 3, then 7; the last right answer takes it off.
+    const first = applySessionResult(early.progress, fixed, modes, at('2026-11-19'));
+    expect(first.progress.revise['t-gap-w0']).toMatchObject({ step: 1, dueOn: '2026-11-22' });
+    const second = applySessionResult(first.progress, fixed, modes, at('2026-11-23'));
+    expect(second.progress.revise['t-gap-w0']).toMatchObject({ step: 2, dueOn: '2026-11-30' });
+    expect(second.clearedFromRevise).toBe(0);
+    const last = applySessionResult(second.progress, fixed, modes, at('2026-11-30'));
+    expect(last.progress.revise).toEqual({});
+    expect(last.clearedFromRevise).toBe(1);
+  });
+
+  it('starts the schedule again on a miss', () => {
+    const progress = createEmptyProgress();
+    progress.revise['t-gap-w0'] = {
+      topicId: 't',
+      given: 'old',
+      misses: 1,
+      lastMissedAt: NOW,
+      step: 2,
+      dueOn: '2026-11-18',
+    };
+    const outcome = applySessionResult(progress, result(0, 1), modes, NOW);
+    expect(outcome.progress.revise['t-gap-w0']).toMatchObject({
+      misses: 2,
+      step: 0,
+      dueOn: '2026-11-19',
+    });
   });
 });
 

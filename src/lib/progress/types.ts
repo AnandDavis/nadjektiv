@@ -55,6 +55,13 @@ export const reviseEntrySchema = z.object({
   misses: z.int().check(z.gte(1)),
   /** ISO timestamp of the latest miss. */
   lastMissedAt: z.string(),
+  /**
+   * Spaced repetition: right answers given since the last miss, each on a day it was
+   * due. Added without a version bump (optional): older entries count as step 0, due now.
+   */
+  step: z.optional(count),
+  /** The learner's day ("2026-11-18") the entry is next due. Added without a version bump. */
+  dueOn: z.optional(z.string()),
 });
 
 /** Personal bests for one grid-fill table. */

@@ -9,6 +9,7 @@ import { GAME_CONFIG } from '@/config/game';
 import type { GameMode, Question, QuestionMode, Topic } from '@/content/types';
 
 import type { QuestionStats } from '../progress/types';
+import { isDue } from '../revise/schedule';
 import { isTypeable } from './check-typed';
 import type { Rng } from './rng';
 
@@ -138,29 +139,46 @@ export function buildTopicSession(
 
 /**
  * Mixed review across topics the learner has started. Questions on the "to revise"
- * list come first (most-missed first); the rest of the round is the questions they
- * miss most. Sort questions are included with their deck's bins.
+ * list come first: those due today, then the rest (most-missed first within each);
+ * the rest of the round is the questions they miss most. Sort questions are included
+ * with their deck's bins.
  *
- * @param revise question id → times missed, from the learner's revise list
+ * @param revise question id → times missed and day due, from the learner's revise list
+ * @param today the learner's day key; without it every revise entry counts as due
  */
+/**
+ * Up to `count` revise-list questions from `pool`: due ones first, then the others,
+ * weighted by misses within each group.
+ */
+export function pickRevise(
+  pool: readonly SessionItem[],
+  revise: Readonly<Record<string, { misses: number; dueOn?: string }>>,
+  count: number,
+  rng: Rng,
+  today?: string,
+): SessionItem[] {
+  const listed = pool.filter((item) => revise[item.question.id]);
+  const due = listed.filter((item) => !today || isDue(revise[item.question.id], today));
+  const later = listed.filter((item) => !due.includes(item));
+  const weight = (item: SessionItem) => revise[item.question.id].misses;
+  const first = pickWeighted(due, Math.min(count, due.length), weight, rng);
+  const second = pickWeighted(later, Math.min(count - first.length, later.length), weight, rng);
+  return [...first, ...second];
+}
+
 export function buildReviewSession(
   topics: readonly Topic[],
   startedTopicIds: ReadonlySet<string>,
   stats: Readonly<Record<string, QuestionStats>>,
-  revise: Readonly<Record<string, { misses: number }>>,
+  revise: Readonly<Record<string, { misses: number; dueOn?: string }>>,
   rng: Rng,
+  today?: string,
 ): SessionItem[] {
   const pool = topics
     .filter((topic) => startedTopicIds.has(topic.id))
     .flatMap((topic) => questionModes(topic).flatMap((mode) => topicItems(topic, mode)));
 
-  const toRevise = pool.filter((item) => revise[item.question.id]);
-  const picked = pickWeighted(
-    toRevise,
-    Math.min(REVIEW_LENGTH, toRevise.length),
-    (item) => revise[item.question.id].misses,
-    rng,
-  );
+  const picked = pickRevise(pool, revise, REVIEW_LENGTH, rng, today);
   if (picked.length >= REVIEW_LENGTH) return picked;
 
   const rest = pool.filter((item) => !revise[item.question.id]);

@@ -3,11 +3,17 @@
  * one they see in Settings; grammar content is always German.
  */
 
+import { GAME_CONFIG } from '@/config/game';
+
 import type { Bilingual } from './bilingual';
 import { SETTINGS_COPY } from './copy-settings';
 
 export type { Bilingual } from './bilingual';
 export * from './copy-lines';
+
+const GAPS = GAME_CONFIG.reviseIntervalsDays;
+const GAPS_DE = `${GAPS.slice(0, -1).join(', ')} und ${GAPS.at(-1)}`;
+const GAPS_EN = `${GAPS.slice(0, -1).join(', ')} and ${GAPS.at(-1)}`;
 
 export const COPY = {
   app: {
@@ -237,13 +243,13 @@ export const COPY = {
     title: { de: 'Zu wiederholen', en: 'To revise' },
     navLabel: { de: 'Wiederholen', en: 'Revise' },
     intro: {
-      de: 'Alles, was du falsch hattest – mit der richtigen Antwort und dem Warum. Beantworte es später richtig, dann verschwindet es von der Liste.',
-      en: 'Everything you got wrong, with the right answer and why. Answer it correctly later and it leaves the list.',
+      de: `Alles, was du falsch hattest – mit der richtigen Antwort und dem Warum. Jede Frage kommt nach ${GAPS_DE} Tagen wieder. Beantworte sie jedes Mal richtig, dann verschwindet sie von der Liste.`,
+      en: `Everything you got wrong, with the right answer and why. Each question comes back after ${GAPS_EN} days. Answer it correctly each time and it leaves the list.`,
     },
     practise: { de: 'Jetzt üben', en: 'Practise these' },
     practiseHint: {
-      de: 'Gemischte Wiederholung: zuerst diese Fragen, dann deine schwächsten.',
-      en: 'Mixed review: these questions first, then your weakest ones.',
+      de: 'Gemischte Wiederholung: zuerst die heute fälligen Fragen, dann deine schwächsten.',
+      en: 'Mixed review: the questions due today first, then your weakest ones.',
     },
     empty: { de: 'Nichts zu wiederholen', en: 'Nothing to revise' },
     emptyHint: {

@@ -105,6 +105,9 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
                         topic={topic}
                         index={topics.indexOf(topic) + 1}
                         mastery={mastery?.get(topic.id)}
+                        // The home page stays alive in the background, so without this
+                        // the search would still be filtering when the learner returns.
+                        onOpen={() => setQuery('')}
                       />
                     </li>
                   ))}

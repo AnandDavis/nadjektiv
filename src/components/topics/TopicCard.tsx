@@ -11,13 +11,16 @@ interface TopicCardProps {
   index: number;
   /** Undefined while progress is loading. */
   mastery?: MasteryInfo;
+  /** Called as the topic opens, e.g. to clear the search that found it. */
+  onOpen?: () => void;
 }
 
 /** One row of the topic index. */
-export function TopicCard({ topic, index, mastery }: TopicCardProps) {
+export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
   return (
     <Link
       href={`/topics/${topic.id}`}
+      onClick={onOpen}
       className="group flex min-h-20 items-start gap-3 py-3 transition-colors hover:bg-yellow hover:text-on-yellow"
     >
       <span className="w-9 shrink-0 pt-0.5 text-right text-lg font-black text-muted tabular-nums group-hover:text-on-yellow">

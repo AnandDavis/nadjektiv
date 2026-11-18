@@ -2,6 +2,12 @@
 
 Ideas agreed but not yet built. Newest first. Move an item into a spec or plan when work starts.
 
+## "See the rules" opens the topic at its rules
+
+**Why:** the "Regeln ansehen / See the rules" link on a revise card opens the topic page at the top, so you have to scroll past the medal goals and game list to reach the rules you wanted.
+
+**Notes:** link to `/topics/<id>#rules-heading` (the rules section already has that id) so the browser scrolls there on load. Keep the sticky app header from covering the heading (`scroll-margin-top` on section headings), and check it also works for offline full-page loads served by the service worker.
+
 ## Grid fill game mode
 
 **Why:** the Sporcle format that started this app. Fill a whole table against the clock (the article grid, pronouns, adjective endings, present-tense endings, the 33 irregular verbs). Seeing the whole pattern at once is how tables stick.

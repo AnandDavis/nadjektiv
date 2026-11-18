@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 
 import type { GapQuestion } from '@/content/types';
+import { isEndingGap } from '@/lib/game/gap';
 import { createRng, shuffle } from '@/lib/game/rng';
 import { Shape } from '@/components/ui';
 import { genderShape } from '@/lib/ui/shapes';
@@ -15,11 +16,6 @@ interface GapQuestionViewProps {
   question: GapQuestion;
   last?: LastAnswer;
   onAnswer: (isCorrect: boolean, given: string) => void;
-}
-
-/** Ending gaps (no space before the gap) show options as "-es". */
-function isEndingGap(question: GapQuestion): boolean {
-  return question.before.length > 0 && !/\s$/.test(question.before);
 }
 
 function hashSeed(id: string): number {

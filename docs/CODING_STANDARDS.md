@@ -163,7 +163,7 @@ Question banks live in `src/content/topics/<topic-id>.ts` and export a `Topic`.
 
 ## Persistence
 
-- Every persisted shape has a Zod schema and a `version` field.
+- Every persisted shape has a Zod schema and a `version` field. Bump it with a migration when existing saves no longer fit; a new optional field needs no bump (see CLAUDE.md rule 5).
 - On load: parse → migrate older versions → validate. If the data is corrupt, keep a backup copy under a separate key before falling back to defaults — never silently drop a learner's progress.
 - Writes go through `ProgressStore.save`. Components never call `localStorage`.
 - Store `0` for measured zeros; `undefined` means "never played".

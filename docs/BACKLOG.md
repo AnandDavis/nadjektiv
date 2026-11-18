@@ -56,18 +56,6 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 
 **Notes:** on Android, capture `beforeinstallprompt` and show our own "Installieren" button (e.g. in Settings or once on home). On iPhone, show a one-time hint: Share → Add to Home Screen. Never show either once installed (`display-mode: standalone`). Bilingual labels in `COPY`.
 
-## Prerender the next page (Speculation Rules)
-
-**Why:** topic → game navigation could be instant on Chromium browsers.
-
-**Notes:** add Speculation Rules (prerender on hover or tap for `/topics/*` and `/play/*`), checking how they interact with Next's own prefetching and with the service worker. Measure before and after.
-
-## React Compiler
-
-**Why:** game screens re-render on every answer. The compiler memoises components automatically.
-
-**Tried (Nov 2026), not adopted:** with `reactCompiler: true` and `babel-plugin-react-compiler` 1.0, every hook passed lint and every test passed, but each page gained 12–17 KB of JavaScript (topic page 217.7 → 235.0 KB, over the 230 KB budget; home 214.4 → 229.3 KB). The game screens are small and already memoise their hot paths, so there was no slowness to win back. Revisit if a screen becomes measurably slow, or after splitting heavy screens frees budget.
-
 ## Speed Insights
 
 **Why:** Lighthouse measures a lab machine. Speed Insights reports real Core Web Vitals from learners' phones.
@@ -139,3 +127,19 @@ Ideas agreed but not yet built. Newest first. Move an item into a spec or plan w
 - **Short-lived relay:** the old device uploads an encrypted blob to a tiny server endpoint, and the QR code holds only a one-time ID plus the decryption key. Simplest to scan, but it needs a backend, which fits in with the planned accounts work.
 
 **Pieces either way:** a camera-based scanner (`BarcodeDetector` where supported, with a JS fallback), a merge-or-replace choice on import (reusing `deserialiseProgress`), and a test that a round-trip through the encoding loses nothing.
+
+---
+
+# Decided against
+
+Tried or looked into, with the reason, so they aren't reopened without new evidence.
+
+## React Compiler
+
+**Why:** game screens re-render on every answer. The compiler memoises components automatically.
+
+**Tried (Nov 2026), not adopted:** with `reactCompiler: true` and `babel-plugin-react-compiler` 1.0, every hook passed lint and every test passed, but each page gained 12–17 KB of JavaScript (topic page 217.7 → 235.0 KB, over the 230 KB budget; home 214.4 → 229.3 KB). The game screens are small and already memoise their hot paths, so there was no slowness to win back. Revisit if a screen becomes measurably slow, or after splitting heavy screens frees budget.
+
+## Prerender the next page (Speculation Rules)
+
+**Looked into (Nov 2026), not adopted:** Speculation Rules prerender whole documents, which a browser only uses for a full page load. Every link in the app is a Next.js `<Link>`, which navigates client-side without loading a new document, and Next already prefetches those routes (with `partialPrefetching`). A prerendered document would never be shown, so the rules would only download pages twice. Revisit only if some navigation becomes a full page load.

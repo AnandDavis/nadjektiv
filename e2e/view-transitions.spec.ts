@@ -1,7 +1,7 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 /** Count view transitions the page starts (Chromium supports the API). */
-async function countTransitions(page: import('@playwright/test').Page) {
+async function countTransitions(page: Page) {
   await page.addInitScript(() => {
     const start = document.startViewTransition?.bind(document);
     if (!start) return;

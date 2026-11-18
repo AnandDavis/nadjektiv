@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { Button } from '@/components/ui';
 import type { BuildQuestion } from '@/content/types';
-import { formatSentence, isCorrectOrder } from '@/lib/game/check-answer';
+import { formatSentence, isCorrectOrder, matchingOrder, wordsOf } from '@/lib/game/check-answer';
 import type { LastAnswer } from '@/lib/game/game-reducer';
 import { createRng, shuffle } from '@/lib/game/rng';
 import { cn } from '@/lib/utils/cn';
@@ -24,9 +24,9 @@ function seedFor(id: string): number {
   return [...id].reduce((h, c) => (h * 33 + c.charCodeAt(0)) >>> 0, 11);
 }
 
-/** Shuffle, but never hand out the tiles already in the right order. */
+/** Shuffle the placeable tiles (commas excluded), never handing them out already in order. */
 function shuffledTiles(question: BuildQuestion): Tile[] {
-  const tiles = question.tiles.map((text, key) => ({ key, text }));
+  const tiles = wordsOf(question.tiles).map((text, key) => ({ key, text }));
   const rng = createRng(seedFor(question.id));
   for (let attempt = 0; attempt < 10; attempt++) {
     const candidate = shuffle(tiles, rng);
@@ -53,7 +53,9 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
 
   function check() {
     const order = chosenTiles.map((t) => t.text);
-    onAnswer(isCorrectOrder(question, order), formatSentence(order, question.punctuation));
+    // A correct answer is shown with the commas of the order it matched.
+    const matched = matchingOrder(question, order);
+    onAnswer(matched !== undefined, formatSentence(matched ?? order, question.punctuation));
   }
 
   return (

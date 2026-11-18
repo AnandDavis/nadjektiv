@@ -58,14 +58,17 @@ export interface GapQuestion extends QuestionBase {
 /**
  * Sentence builder: put the tiles in order.
  * `tiles` is one correct order. Write tiles as they appear mid-sentence
- * (lowercase `ich`, `heute`); the UI capitalises the first word. Attach commas
- * to the preceding tile (`Hause,`). Terminal punctuation goes in `punctuation`.
+ * (lowercase `ich`, `heute`); the UI capitalises the first word. Commas are their
+ * own `','` entries: they are never tiles to place, so a clause can move without
+ * changing the tile set (`['ich', 'koche', ',', 'wenn', …]` and
+ * `['wenn', …, ',', 'koche', 'ich']`). Each order carries its own commas for display.
+ * Terminal punctuation goes in `punctuation`.
  */
 export interface BuildQuestion extends QuestionBase {
   kind: 'build';
   translation: string;
   tiles: string[];
-  /** Other correct orders, each a permutation of `tiles`. */
+  /** Other correct orders: the same words as `tiles` (commas may sit elsewhere). */
   accepted?: string[][];
   punctuation: '.' | '?' | '!';
 }

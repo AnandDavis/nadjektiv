@@ -5,18 +5,18 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { isCorrectOrder } from '@/lib/game/check-answer';
+import { COMMA, isCorrectOrder, wordsOf } from '@/lib/game/check-answer';
 import { availableModes } from '@/lib/game/session';
 
 import { TOPICS } from './index';
-import type { Question, Topic } from './types';
+import type { BuildQuestion, Question, Topic } from './types';
 
 function questionsOf(topic: Topic): Question[] {
   return [...(topic.sort?.questions ?? []), ...(topic.gap ?? []), ...(topic.build ?? [])];
 }
 
 const ALL_QUESTIONS = TOPICS.flatMap((topic) => questionsOf(topic).map((q) => ({ topic, q })));
-const sorted = (tiles: readonly string[]) => [...tiles].sort().join('|');
+const sorted = (tiles: readonly string[]) => [...wordsOf(tiles)].sort().join('|');
 
 describe('topic registry', () => {
   it('has unique kebab-case topic ids', () => {
@@ -86,16 +86,25 @@ describe.each(TOPICS.map((t) => [t.id, t]))('%s', (_, topic) => {
     it('build questions have 3–9 tiles and accepted orders reuse the same tiles', () => {
       const bad = topic.build!.filter(
         (q) =>
-          q.tiles.length < 3 ||
-          q.tiles.length > 9 ||
+          wordsOf(q.tiles).length < 3 ||
+          wordsOf(q.tiles).length > 9 ||
           (q.accepted ?? []).some((order) => sorted(order) !== sorted(q.tiles)) ||
           !isCorrectOrder(q, q.tiles),
       );
       expect(bad.map((q) => q.id)).toEqual([]);
     });
 
-    it('build tiles have no terminal punctuation (it lives in `punctuation`)', () => {
-      const bad = topic.build!.filter((q) => /[.?!]$/.test(q.tiles[q.tiles.length - 1]));
+    it('build tiles have no punctuation glued on; commas are their own entries', () => {
+      const orders = (q: BuildQuestion) => [q.tiles, ...(q.accepted ?? [])];
+      const bad = topic.build!.filter((q) =>
+        orders(q).some(
+          (order) =>
+            order[0] === COMMA ||
+            order[order.length - 1] === COMMA ||
+            order.some((tile, i) => tile === COMMA && order[i + 1] === COMMA) ||
+            wordsOf(order).some((tile) => /[.,?!]$/.test(tile)),
+        ),
+      );
       expect(bad.map((q) => q.id)).toEqual([]);
     });
   }

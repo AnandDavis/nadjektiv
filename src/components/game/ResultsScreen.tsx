@@ -57,6 +57,7 @@ export function ResultsScreen({
 
   const correct = answers.filter((a) => a.isCorrect).length;
   const percent = Math.round(accuracy(answers) * 100);
+  const xp = outcome?.xpGained ?? 0;
 
   return (
     <div className="flex flex-col gap-5 motion-safe:animate-rise">
@@ -74,11 +75,20 @@ export function ResultsScreen({
       </div>
 
       <div className="grid grid-cols-3 border-2 border-ink">
-        <ResultStat label={<Ui {...COPY.common.correct} />} value={`${percent}%`} />
-        <ResultStat label={<Ui {...COPY.common.points} />} value={String(score)} />
+        <ResultStat
+          label={<Ui {...COPY.common.correct} />}
+          value={`${percent}%`}
+          count={{ to: percent, format: (n) => `${n}%`, order: 0 }}
+        />
+        <ResultStat
+          label={<Ui {...COPY.common.points} />}
+          value={String(score)}
+          count={{ to: score, order: 1 }}
+        />
         <ResultStat
           label="XP"
-          value={`+${outcome?.xpGained ?? 0}`}
+          value={`+${xp}`}
+          count={{ to: xp, format: (n) => `+${n}`, order: 2 }}
           className="bg-yellow text-on-yellow"
         />
       </div>

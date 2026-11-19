@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 import { cn } from '@/lib/utils/cn';
 import type { ShapeColor, ShapeKind } from '@/lib/ui/shapes';
 
@@ -23,10 +25,12 @@ interface ShapeProps {
   kind: ShapeKind;
   color: ShapeColor;
   className?: string;
+  /** For animation timing, e.g. a staggered delay. */
+  style?: CSSProperties;
 }
 
 /** The Bauhaus marks: ■ ● ▲, and the ink ▦ for grid fill. Decorative; pair with text so meaning never relies on shape alone. */
-export function Shape({ kind, color, className }: ShapeProps) {
+export function Shape({ kind, color, className, style }: ShapeProps) {
   return (
     <svg
       viewBox="0 0 20 20"
@@ -34,6 +38,7 @@ export function Shape({ kind, color, className }: ShapeProps) {
       width="1em"
       height="1em"
       className={cn('inline-block shrink-0', FILL[color], className)}
+      style={style}
     >
       {kind === 'square' && <rect x="2" y="2" width="16" height="16" />}
       {kind === 'circle' && <circle cx="10" cy="10" r="8.5" />}

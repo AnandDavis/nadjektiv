@@ -2,12 +2,13 @@
 
 import { useMemo } from 'react';
 
-import { Card, ProgressBar, SectionHeading, Ui } from '@/components/ui';
+import { Card, ProgressBar, SectionHeading, Shape, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import { useProgress } from '@/hooks/useProgress';
 import { MODE_INFO } from '@/lib/game/modes';
 import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
+import { MODE_SHAPES } from '@/lib/ui/shapes';
 
 import { HistoryCharts } from './HistoryCharts';
 import { TierBadge, TierSquare } from './TierBadge';
@@ -97,16 +98,22 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
                           label={`${topic.title} recent accuracy`}
                           fillClassName="bg-correct"
                         />
-                        <span className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold text-muted uppercase">
-                          <span>
-                            {topicProgress.answered} <Ui {...COPY.common.answered} />
-                          </span>
+                        {/* Hidden until a game has a best, so it adds no space under the bar. */}
+                        <span className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold empty:hidden">
                           {topic.modes.map((mode) => {
                             const best = topicProgress.modes[mode];
+                            const shape = MODE_SHAPES[mode];
                             return best ? (
-                              <span key={mode}>
-                                {MODE_INFO[mode].name} <Ui {...COPY.common.best} />{' '}
-                                <strong className="text-ink">{best.bestScore}</strong>
+                              <span
+                                key={mode}
+                                className="inline-flex items-center gap-1.5"
+                                title={MODE_INFO[mode].name}
+                              >
+                                <Shape kind={shape.kind} color={shape.color} />
+                                <span className="sr-only">
+                                  {MODE_INFO[mode].name} <Ui {...COPY.common.best} />
+                                </span>
+                                <strong className="text-ink tabular-nums">{best.bestScore}</strong>
                               </span>
                             ) : null;
                           })}

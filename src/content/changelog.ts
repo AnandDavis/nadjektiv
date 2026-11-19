@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-19T09:50Z',
+    title: 'More German, clearer round reviews',
+    description:
+      'With the app in German, topic descriptions and game intros are now in German too. At the end of a round, each mistake shows the right word underlined in the sentence with your answer underneath, and on a phone the buttons stay at the bottom of the screen. Topics are numbered in the order you see them, rule tables fit on a phone screen, and the records page labels its columns.',
+  },
+  {
     date: '2026-11-19T09:30Z',
     title: 'Search the glossary, and articles always in order',
     description:

@@ -34,6 +34,7 @@ export const nounCards: Topic = {
   titleDe: 'Artikel und Plural',
   keywords: ['Nomen', 'noun', 'Artikel', 'article', 'Plural', 'Vokabeln', 'vocabulary', 'Karten'],
   tagline: 'der Tisch, die Tische: learn each noun with both.',
+  taglineDe: 'der Tisch, die Tische: jedes Nomen mit Artikel und Plural lernen.',
   rules: [
     {
       heading: 'Learn the noun as a pair',

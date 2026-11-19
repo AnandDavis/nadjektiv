@@ -22,6 +22,7 @@ export const tellingTime: Topic = {
     'price',
   ],
   tagline: 'halb acht is 7:30, einundzwanzig is 21, am dritten Mai.',
+  taglineDe: 'halb acht ist 7:30, einundzwanzig ist 21, am dritten Mai.',
   rules: [
     {
       heading: 'Wie spät ist es?',

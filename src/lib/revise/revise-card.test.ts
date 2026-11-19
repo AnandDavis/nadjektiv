@@ -13,6 +13,7 @@ const topic: Topic = {
   titleDe: 'T',
   keywords: [],
   tagline: '',
+  taglineDe: '',
   rules: [],
   sort: {
     instruction: '',

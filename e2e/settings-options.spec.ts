@@ -30,7 +30,7 @@ test('untimed Blitz has no clock, a set length and its own bests', async ({ page
   await page.goto('/settings');
   await choose(page, 'Ohne Uhr');
   await page.goto('/play/noun-gender/sort');
-  await expect(page.getByText(/20 prompts and no clock/)).toBeVisible();
+  await expect(page.getByText(/20 Wörter ohne Uhr/)).toBeVisible();
   await page.getByRole('button', { name: /Los geht/ }).click();
   await expect(page.getByText('60s')).toHaveCount(0);
   for (let i = 0; i < 20; i++) {

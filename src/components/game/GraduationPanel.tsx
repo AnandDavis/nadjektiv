@@ -8,7 +8,7 @@ import { TIER_MARKS } from '../progress/TierBadge';
 
 /** What the play page knows about its topic, for the celebration. */
 export interface GraduationInfo {
-  tagline: string;
+  tagline: Bilingual;
   /** The next topic in the syllabus, to suggest. */
   next?: { id: string; title: Bilingual };
 }
@@ -46,7 +46,11 @@ export function GraduationPanel({ outcome, topicTitles, info }: GraduationPanelP
             <p className="text-lg font-extrabold">
               {topicTitles[topicId] ? <Ui {...topicTitles[topicId]} /> : topicId}
             </p>
-            {info && <p className="text-sm">{info.tagline}</p>}
+            {info && (
+              <p className="text-sm">
+                <Ui {...info.tagline} />
+              </p>
+            )}
             {topic && (
               <p className="flex gap-6 text-sm font-bold tabular-nums">
                 <span>

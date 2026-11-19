@@ -36,10 +36,12 @@ export function GridPicker({ title, grids, bests, exitHref, onStart }: GridPicke
       <div className="motion-safe:animate-rise">
         <Shape kind={shape.kind} color={shape.color} className="text-6xl" />
         <p className="mt-4 text-xs font-extrabold tracking-widest text-muted uppercase">
-          {info.name} · {info.english}
+          {info.name} · <Ui {...info.subtitle} />
         </p>
         <h1 className="mt-1 text-display leading-none font-black text-ink">{title}</h1>
-        <p className="mt-4 text-ink">{info.description}</p>
+        <p className="mt-4 text-ink">
+          <Ui {...info.description} />
+        </p>
       </div>
 
       <section aria-labelledby="tables-heading">

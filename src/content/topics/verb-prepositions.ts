@@ -8,6 +8,7 @@ export const verbPrepositions: Topic = {
   titleDe: 'Verben mit Präposition',
   keywords: ['Präposition', 'preposition', 'warten auf', 'denken an', 'sich freuen', 'Angst vor'],
   tagline: 'warten auf, denken an: learn the preposition and its case with the verb.',
+  taglineDe: 'warten auf, denken an: die Präposition und ihren Fall mit dem Verb lernen.',
   rules: [
     {
       heading: 'Learn verb, preposition and case together',

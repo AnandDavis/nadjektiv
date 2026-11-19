@@ -25,7 +25,7 @@ import {
   buildTopicSession,
   type SessionItem,
 } from '@/lib/game/session';
-import { COPY, type Bilingual } from '@/lib/i18n/copy';
+import { COPY, untimedIntro, type Bilingual } from '@/lib/i18n/copy';
 import { nounToReveal, withSeenNoun } from '@/lib/nouns/reveal';
 import { MODE_SHAPES } from '@/lib/ui/shapes';
 import type { Progress } from '@/lib/progress/types';
@@ -52,7 +52,7 @@ interface GameScreenProps {
   topics: Topic[];
   title: ReactNode;
   modeName: ReactNode;
-  description: string;
+  description: Bilingual;
   exitHref: string;
   exitLabel: ReactNode;
   modesByTopic: Readonly<Record<string, readonly GameMode[]>>;
@@ -171,11 +171,7 @@ export function GameScreen(props: GameScreenProps) {
           <GameIntro
             title={title}
             modeName={modeName}
-            description={
-              untimed
-                ? `${GAME_CONFIG.untimedSortLength} prompts and no clock: take your time over each one.`
-                : description
-            }
+            description={untimed ? untimedIntro(GAME_CONFIG.untimedSortLength) : description}
             best={
               topicId && !isMixedMode(mode)
                 ? progress?.topics[topicId]?.modes[untimed ? 'sortUntimed' : mode]

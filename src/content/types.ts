@@ -154,6 +154,8 @@ export interface Topic {
   keywords: string[];
   /** One-line description shown on the topic card. */
   tagline: string;
+  /** The tagline in German, shown when the interface is set to German. */
+  taglineDe: string;
   rules: RuleCard[];
   sort?: SortDeck;
   gap?: GapQuestion[];

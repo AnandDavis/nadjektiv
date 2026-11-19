@@ -18,6 +18,7 @@ export const dativeVerbs: Topic = {
     'indirect object',
   ],
   tagline: 'Ich helfe dir, nicht dich. And which object goes first.',
+  taglineDe: 'Ich helfe dir, nicht dich. Und welches Objekt zuerst kommt.',
   rules: [
     {
       heading: 'Verbs that take the dative',

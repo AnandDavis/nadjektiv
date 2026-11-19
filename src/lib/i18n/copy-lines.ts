@@ -87,3 +87,36 @@ export function comboLine(multiplier: number): Bilingual {
 export function insteadOf(answer: string, given: string): Bilingual {
   return { de: `„${answer}“ statt „${given}“`, en: `“${answer}”, not “${given}”` };
 }
+
+/** The untimed Blitz intro, with the configured round length. */
+export function untimedIntro(length: number): Bilingual {
+  return {
+    de: `${length} Wörter ohne Uhr: Nimm dir für jedes Zeit.`,
+    en: `${length} prompts and no clock: take your time over each one.`,
+  };
+}
+
+/** The daily mix intro. */
+export function dailyIntro(length: number): Bilingual {
+  return {
+    de: `${length} Fragen aus deiner Wiederholungsliste und deinen schwächsten Themen. Den ganzen Tag derselbe Mix, morgen ein neuer.`,
+    en: `${length} questions from your revise list and your weakest topics. The same mix all day, and a new one tomorrow.`,
+  };
+}
+
+/** The mixed review intro. */
+export function reviewIntro(length: number): Bilingual {
+  return {
+    de: `${length} Fragen aus den Themen, die du gespielt hast, vor allem aus denen, die du oft falsch hast.`,
+    en: `${length} questions from the topics you’ve played, weighted towards the ones you miss.`,
+  };
+}
+
+/** The About page intro: what the app is, naming every game. */
+export function aboutIntro(appName: string, games: readonly string[]): Bilingual {
+  const list = (and: string) => `${games.slice(0, -1).join(', ')} ${and} ${games.at(-1)}`;
+  return {
+    de: `${appName} übt deutsche Grammatik für A1 und A2 in ${games.length} kurzen Spielen: ${list('und')}.`,
+    en: `${appName} teaches German A1–A2 grammar through ${games.length} short games: ${list('and')}.`,
+  };
+}

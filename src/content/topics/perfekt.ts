@@ -17,6 +17,7 @@ export const perfekt: Topic = {
     'gegangen',
   ],
   tagline: 'Talking about yesterday: haben or sein, and the participle at the end.',
+  taglineDe: 'Über gestern sprechen: haben oder sein, und das Partizip am Ende.',
   rules: [
     {
       heading: 'haben or sein in position two, participle last',

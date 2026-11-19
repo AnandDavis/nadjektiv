@@ -34,7 +34,7 @@ export function TopicModes({ topicId, modes }: { topicId: string; modes: GameMod
                     {info.name}
                   </span>
                   <span className="block text-xs font-extrabold tracking-widest text-muted uppercase">
-                    {info.english}
+                    <Ui {...info.subtitle} />
                   </span>
                   <span className="mt-1 block text-sm text-ink">
                     <Ui {...COPY.typed.locked} />
@@ -55,10 +55,10 @@ export function TopicModes({ topicId, modes }: { topicId: string; modes: GameMod
                     {info.name}
                   </span>
                   <span className="block text-xs font-extrabold tracking-widest text-muted uppercase group-hover:text-on-yellow">
-                    {info.english}
+                    <Ui {...info.subtitle} />
                   </span>
                   <span className="mt-1 block text-sm text-ink group-hover:text-on-yellow">
-                    {info.description}
+                    <Ui {...info.description} />
                   </span>
                 </span>
                 {best && (

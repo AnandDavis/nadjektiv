@@ -8,7 +8,9 @@ import { MedalsExplainer } from '@/components/about/MedalsExplainer';
 import { ShortcutList } from '@/components/about/ShortcutList';
 import { ButtonLink, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
-import { COPY, builtBy } from '@/lib/i18n/copy';
+import { GAME_MODES } from '@/content';
+import { MODE_INFO } from '@/lib/game/modes';
+import { COPY, aboutIntro, builtBy } from '@/lib/i18n/copy';
 
 export const metadata: Metadata = { title: 'About' };
 
@@ -20,7 +22,12 @@ export default function AboutPage() {
           <Ui {...COPY.header.about} />
         </h1>
         <p className="mt-1 text-muted">
-          {APP_CONFIG.name}: {APP_CONFIG.description}
+          <Ui
+            {...aboutIntro(
+              APP_CONFIG.name,
+              GAME_MODES.map((mode) => MODE_INFO[mode].name),
+            )}
+          />
         </p>
         <AppVersion />
         <div className="mt-4 flex flex-wrap gap-2">

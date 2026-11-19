@@ -17,6 +17,7 @@ export const praeteritum: Topic = {
     'es gab',
   ],
   tagline: 'war, hatte, konnte, es gab, and the -te forms you meet in stories.',
+  taglineDe: 'war, hatte, konnte, es gab und die -te-Formen aus Geschichten.',
   rules: [
     {
       heading: 'sein, haben and the modals',

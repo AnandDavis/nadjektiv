@@ -18,6 +18,7 @@ export const comparatives: Topic = {
     'besser',
   ],
   tagline: 'größer als, so groß wie, am größten.',
+  taglineDe: 'größer als, so groß wie, am größten.',
   rules: [
     {
       heading: 'Comparative and superlative',

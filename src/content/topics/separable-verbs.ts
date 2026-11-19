@@ -17,6 +17,7 @@ export const separableVerbs: Topic = {
     'inseparable',
   ],
   tagline: 'aufstehen, anrufen, einkaufen: the prefix jumps to the end.',
+  taglineDe: 'aufstehen, anrufen, einkaufen: Die Vorsilbe springt ans Ende.',
   rules: [
     {
       heading: 'The prefix goes last',

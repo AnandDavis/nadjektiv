@@ -21,6 +21,7 @@ function makeTopic(id: string, sortCount: number, gapCount: number): Topic {
     titleDe: id,
     keywords: [],
     tagline: '',
+    taglineDe: '',
     rules: [],
     sort: {
       instruction: 'Sort',

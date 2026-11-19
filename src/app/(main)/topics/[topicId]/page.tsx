@@ -32,7 +32,7 @@ export default async function TopicPage({ params }: PageProps<'/topics/[topicId]
         title={topic.title}
         titleDe={topic.titleDe}
         level={topic.level}
-        tagline={topic.tagline}
+        tagline={{ de: topic.taglineDe, en: topic.tagline }}
         modes={modes}
       />
       <TopicModes topicId={topic.id} modes={modes} />

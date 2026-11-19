@@ -33,7 +33,7 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
   const info = MODE_INFO[mode];
   const next = TOPICS[TOPICS.indexOf(topic) + 1];
   const graduation = {
-    tagline: topic.tagline,
+    tagline: { de: topic.taglineDe, en: topic.tagline },
     next: next ? { id: next.id, title: { de: next.titleDe, en: next.title } } : undefined,
   };
 
@@ -59,7 +59,11 @@ export default async function PlayPage({ params }: PageProps<'/play/[topicId]/[m
         mode,
         topics: [topic],
         title: <Ui de={topic.titleDe} en={topic.title} />,
-        modeName: `${info.name} · ${info.english}`,
+        modeName: (
+          <>
+            {info.name} · <Ui {...info.subtitle} />
+          </>
+        ),
         description: info.description,
         exitHref: topicHref(topic.id),
         exitLabel: <Ui {...COPY.common.topic} />,

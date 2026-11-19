@@ -19,6 +19,7 @@ export const pronouns: Topic = {
     'possessive',
   ],
   tagline: 'mich or mir, ihn or ihm: pronouns in all three cases.',
+  taglineDe: 'mich oder mir, ihn oder ihm: Pronomen in allen drei Fällen.',
   rules: [
     {
       heading: 'Personal pronouns and possessives',

@@ -8,6 +8,7 @@ export const weakNouns: Topic = {
   titleDe: 'n-Deklination',
   keywords: ['n-Deklination', 'weak nouns', 'Herr', 'Kollege', 'Student', 'Akkusativ', 'Dativ'],
   tagline: 'der Kollege, den Kollegen: masculine nouns that add -n.',
+  taglineDe: 'der Kollege, den Kollegen: maskuline Nomen mit -n.',
   rules: [
     {
       heading: 'Which nouns are weak',

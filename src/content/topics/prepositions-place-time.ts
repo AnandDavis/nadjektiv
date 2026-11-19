@@ -21,6 +21,7 @@ export const prepositionsPlaceTime: Topic = {
     'seit',
   ],
   tagline: 'nach Berlin or zu Anna? am Montag, im Mai, um 8 Uhr.',
+  taglineDe: 'nach Berlin oder zu Anna? am Montag, im Mai, um 8 Uhr.',
   rules: [
     {
       heading: 'Place: where you go, where you are',

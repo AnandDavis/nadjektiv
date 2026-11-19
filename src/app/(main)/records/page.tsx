@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { RecordsView, type GridLabel } from '@/components/progress/RecordsView';
-import { Ui } from '@/components/ui';
+import { BackLink, Ui } from '@/components/ui';
 import { TOPICS } from '@/content';
 import { getTopicSummaries, topicTitles } from '@/content/summaries';
 import { blankCells } from '@/lib/grid/grid-round';
@@ -21,13 +21,18 @@ export default function RecordsPage() {
   );
   return (
     <div className="flex flex-col gap-6">
-      <header>
-        <h1 className="text-4xl leading-none font-black text-ink">
-          <Ui {...COPY.records.title} />
-        </h1>
-        <p className="mt-1 text-muted">
-          <Ui {...COPY.records.intro} />
-        </p>
+      <header className="flex flex-col gap-3">
+        <BackLink href="/progress">
+          <Ui {...COPY.nav.progress} />
+        </BackLink>
+        <div>
+          <h1 className="text-4xl leading-none font-black text-ink">
+            <Ui {...COPY.records.title} />
+          </h1>
+          <p className="mt-1 text-muted">
+            <Ui {...COPY.records.intro} />
+          </p>
+        </div>
       </header>
       <RecordsView
         topicIds={summaries.map((t) => t.id)}

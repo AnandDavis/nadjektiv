@@ -4,7 +4,8 @@ import { useMemo } from 'react';
 
 import type { GapQuestion } from '@/content/types';
 import { isEndingGap } from '@/lib/game/gap';
-import { createRng, shuffle } from '@/lib/game/rng';
+import { orderOptions } from '@/lib/game/option-order';
+import { createRng } from '@/lib/game/rng';
 import { Shape } from '@/components/ui';
 import { genderShape } from '@/lib/ui/shapes';
 import { cn } from '@/lib/utils/cn';
@@ -24,7 +25,7 @@ function hashSeed(id: string): number {
 
 export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewProps) {
   const options = useMemo(
-    () => shuffle(question.options, createRng(hashSeed(question.id))),
+    () => orderOptions(question.options, createRng(hashSeed(question.id))),
     [question],
   );
   const ending = isEndingGap(question);

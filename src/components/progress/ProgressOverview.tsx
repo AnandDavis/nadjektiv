@@ -2,19 +2,17 @@
 
 import { useMemo } from 'react';
 
-import { Card, ProgressBar, SectionHeading, Shape, Ui } from '@/components/ui';
+import { Card, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import { useProgress } from '@/hooks/useProgress';
-import { MODE_INFO } from '@/lib/game/modes';
-import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
+import { COPY } from '@/lib/i18n/copy';
+import { TIERS, TIER_LABELS } from '@/lib/progress/mastery';
 import { summariseProgress } from '@/lib/progress/summary';
-import { MODE_SHAPES } from '@/lib/ui/shapes';
 
 import { HistoryCharts } from './HistoryCharts';
-import { TierBadge, TierSquare } from './TierBadge';
+import { ProgressTopicList } from './ProgressTopicList';
+import { TierBadge } from './TierBadge';
 import { TopicMap } from './TopicMap';
-import { COPY } from '@/lib/i18n/copy';
-import { TopicLink } from '../topics/TopicLink';
 
 export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
   const progress = useProgress();
@@ -29,7 +27,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
     // One gap between every block, matching the page's own (see the progress page).
     <div className="flex flex-col gap-6">
       <div className="grid grid-cols-3 border-2 border-ink bg-surface">
-        <Stat label={<Ui {...COPY.common.answers} />} value={String(summary.answered)} />
+        <Stat label={<Ui {...COPY.revise.title} />} value={String(summary.toRevise)} />
         <Stat
           label={<Ui {...COPY.common.correct} />}
           value={`${Math.round(summary.accuracy * 100)}%`}
@@ -64,69 +62,7 @@ export function ProgressOverview({ topics }: { topics: TopicSummary[] }) {
 
       <TopicMap topics={topics} progress={progress} />
 
-      <section aria-labelledby="topics-heading">
-        <SectionHeading id="topics-heading">
-          <Ui {...COPY.common.topics} />
-        </SectionHeading>
-        <ul>
-          {topics.map((topic, index) => {
-            const topicProgress = progress.topics[topic.id];
-            const mastery = masteryFor(topicProgress, topic.modes);
-            return (
-              <li key={topic.id} className="border-b-2 border-ink">
-                <TopicLink
-                  topicId={topic.id}
-                  origin="progress"
-                  className="flex gap-3 py-3 transition-colors hover:bg-sunken"
-                >
-                  <span className="w-7 shrink-0 text-right font-black text-muted tabular-nums">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex items-center justify-between gap-2">
-                      <span className="font-extrabold text-ink">
-                        <Ui de={topic.titleDe} en={topic.title} />{' '}
-                        <span className="text-xs font-extrabold text-muted">{topic.level}</span>
-                      </span>
-                      <TierSquare tier={mastery.tier} className="size-6 shrink-0" />
-                    </span>
-                    {topicProgress && (
-                      <>
-                        <ProgressBar
-                          className="mt-2"
-                          value={mastery.recentAccuracy}
-                          label={`${topic.title} recent accuracy`}
-                          fillClassName="bg-correct"
-                        />
-                        {/* Hidden until a game has a best, so it adds no space under the bar. */}
-                        <span className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm font-bold empty:hidden">
-                          {topic.modes.map((mode) => {
-                            const best = topicProgress.modes[mode];
-                            const shape = MODE_SHAPES[mode];
-                            return best ? (
-                              <span
-                                key={mode}
-                                className="inline-flex items-center gap-1.5"
-                                title={MODE_INFO[mode].name}
-                              >
-                                <Shape kind={shape.kind} color={shape.color} />
-                                <span className="sr-only">
-                                  {MODE_INFO[mode].name} <Ui {...COPY.common.best} />
-                                </span>
-                                <strong className="text-ink tabular-nums">{best.bestScore}</strong>
-                              </span>
-                            ) : null;
-                          })}
-                        </span>
-                      </>
-                    )}
-                  </span>
-                </TopicLink>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+      <ProgressTopicList topics={topics} progress={progress} />
     </div>
   );
 }

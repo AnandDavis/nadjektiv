@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { personalRecords } from './records';
+import { fastestGridMs, personalRecords } from './records';
 import { createEmptyProgress, createEmptyTopicProgress, type ModeBest } from './types';
 
 const best = (bestScore: number, bestCombo: number): ModeBest => ({
@@ -39,5 +39,22 @@ describe('personalRecords', () => {
       ['b', ['sort', 'sortUntimed']],
     ]);
     expect(records.grids.map((g) => g.gridId)).toEqual(['g1', 'g2', 'g3']);
+  });
+});
+
+describe('fastestGridMs', () => {
+  it('picks the fastest finished table of the topic only', () => {
+    const progress = createEmptyProgress();
+    progress.grids['articles-grid-1'] = { plays: 1, bestCells: 16, bestTimeMs: 61_000 };
+    progress.grids['articles-grid-2'] = { plays: 1, bestCells: 16, bestTimeMs: 48_000 };
+    progress.grids['articles-grid-3'] = { plays: 1, bestCells: 5 };
+    progress.grids['pronouns-grid-1'] = { plays: 1, bestCells: 9, bestTimeMs: 20_000 };
+    expect(fastestGridMs(progress, 'articles')).toBe(48_000);
+  });
+
+  it('is undefined when no table of the topic was finished', () => {
+    const progress = createEmptyProgress();
+    progress.grids['articles-grid-1'] = { plays: 1, bestCells: 5 };
+    expect(fastestGridMs(progress, 'articles')).toBeUndefined();
   });
 });

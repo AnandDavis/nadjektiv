@@ -21,6 +21,7 @@ export const articles: Topic = {
     'possessive',
   ],
   tagline: 'der, den, dem: one grid for the, a, kein and mein.',
+  taglineDe: 'der, den, dem: eine Tabelle für der, ein, kein und mein.',
   rules: [
     {
       heading: 'Definite article (the)',

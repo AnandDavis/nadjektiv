@@ -17,6 +17,7 @@ export const wordOrder: Topic = {
     'dass',
   ],
   tagline: 'The verb is always second. Almost everything else follows from that.',
+  taglineDe: 'Das Verb steht immer an zweiter Stelle. Fast alles andere folgt daraus.',
   rules: [
     {
       heading: 'The verb is in position 2',

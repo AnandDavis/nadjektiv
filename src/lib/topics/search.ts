@@ -1,6 +1,6 @@
 /**
  * Topic search for the home page. Every word the learner types must be the start of
- * some word in the topic's titles, tagline, keywords or id. Case is ignored and
+ * some word in the topic's titles, taglines, keywords or id. Case is ignored and
  * umlauts match both ways: "prateritum", "praeteritum" and "Präteritum" all find
  * Präteritum, and "strasse" finds Straße.
  */
@@ -11,6 +11,7 @@ export interface SearchableTopic {
   title: string;
   titleDe: string;
   tagline: string;
+  taglineDe: string;
   keywords: readonly string[];
 }
 
@@ -32,7 +33,15 @@ function wordsOf(text: string): string[] {
 }
 
 function searchWords(topic: SearchableTopic): string[] {
-  return [topic.id, topic.level, topic.title, topic.titleDe, topic.tagline, ...topic.keywords];
+  return [
+    topic.id,
+    topic.level,
+    topic.title,
+    topic.titleDe,
+    topic.tagline,
+    topic.taglineDe,
+    ...topic.keywords,
+  ];
 }
 
 /**

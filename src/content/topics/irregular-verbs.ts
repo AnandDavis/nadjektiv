@@ -17,6 +17,7 @@ export const irregularVerbs: Topic = {
     'Stammformen',
   ],
   tagline: 'er-form, Präteritum and Partizip II for the verbs A2 asks.',
+  taglineDe: 'er-Form, Präteritum und Partizip II der Verben für A2.',
   rules: [
     {
       heading: 'The 33 irregular verbs',

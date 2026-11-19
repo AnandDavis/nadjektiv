@@ -16,6 +16,7 @@ export const sentenceMiddle: Topic = {
     'Reihenfolge',
   ],
   tagline: 'Te-Ka-Mo-Lo, two objects, and where nicht goes.',
+  taglineDe: 'Te-Ka-Mo-Lo, zwei Objekte und wo nicht steht.',
   rules: [
     {
       heading: 'Te-Ka-Mo-Lo',

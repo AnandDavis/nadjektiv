@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-import { Button, CrossIcon, Shape, Ui } from '@/components/ui';
-import { COPY } from '@/lib/i18n/copy';
+import { Button, CrossIcon, PinnedActions, Shape, Ui } from '@/components/ui';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import type { ModeBest } from '@/lib/progress/types';
 import type { ShapeSpec } from '@/lib/ui/shapes';
 
 interface GameIntroProps {
   title: ReactNode;
   modeName: ReactNode;
-  description: string;
+  description: Bilingual;
   best?: ModeBest;
   isReady: boolean;
   /** The mode's shape mark, shown large above the title. */
@@ -45,7 +45,9 @@ export function GameIntro({
             {modeName}
           </p>
           <h1 className="mt-1 text-display leading-none font-black text-ink">{title}</h1>
-          <p className="mt-4 text-ink">{description}</p>
+          <p className="mt-4 text-ink">
+            <Ui {...description} />
+          </p>
         </div>
         {best && (
           <div className="grid grid-cols-3 border-2 border-ink">
@@ -57,6 +59,8 @@ export function GameIntro({
             <Stat label={<Ui {...COPY.game.bestCombo} />} value={String(best.bestCombo)} />
           </div>
         )}
+      </div>
+      <PinnedActions atScreenEnd>
         <Button
           size="lg"
           onClick={onStart}
@@ -66,7 +70,7 @@ export function GameIntro({
         >
           <Ui {...COPY.game.start} />
         </Button>
-      </div>
+      </PinnedActions>
     </div>
   );
 }

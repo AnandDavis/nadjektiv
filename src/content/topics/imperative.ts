@@ -8,6 +8,7 @@ export const imperative: Topic = {
   titleDe: 'Imperativ',
   keywords: ['Imperativ', 'command', 'Befehl', 'Aufforderung', 'request', 'bitte'],
   tagline: 'Komm! Kommt! Kommen Sie! Giving instructions and asking politely.',
+  taglineDe: 'Komm! Kommt! Kommen Sie! Anweisungen geben und höflich bitten.',
   rules: [
     {
       heading: 'Three forms: du, ihr, Sie',

@@ -31,6 +31,7 @@ describe('topic registry', () => {
     expect(topic.title.trim()).not.toBe('');
     expect(topic.titleDe.trim()).not.toBe('');
     expect(topic.tagline.trim()).not.toBe('');
+    expect(topic.taglineDe.trim()).not.toBe('');
   });
 });
 

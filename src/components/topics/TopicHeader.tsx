@@ -10,14 +10,14 @@ import { topicTitleTransition } from '@/lib/ui/transitions';
 import { cn } from '@/lib/utils/cn';
 
 import { TopicBackLink } from './TopicBackLink';
-import { COPY } from '@/lib/i18n/copy';
+import { COPY, type Bilingual } from '@/lib/i18n/copy';
 
 interface TopicHeaderProps {
   topicId: string;
   title: string;
   titleDe: string;
   level: Level;
-  tagline: string;
+  tagline: Bilingual;
   modes: GameMode[];
 }
 
@@ -39,7 +39,9 @@ export function TopicHeader({ topicId, title, titleDe, level, tagline, modes }: 
             <Ui de={titleDe} en={title} />
           </h1>
         </ViewTransition>
-        <p className="mt-3 text-lg text-ink">{tagline}</p>
+        <p className="mt-3 text-lg text-ink">
+          <Ui {...tagline} />
+        </p>
       </div>
       {mastery?.next && (
         <Card className="p-0">

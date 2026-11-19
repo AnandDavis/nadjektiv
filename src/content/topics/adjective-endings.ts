@@ -8,6 +8,7 @@ export const adjectiveEndings: Topic = {
   titleDe: 'Adjektivendungen',
   keywords: ['Adjektiv', 'adjective', 'Endung', 'ending', 'Adjektivdeklination', 'declension'],
   tagline: 'der gute Mann, ein guter Mann, guter Kaffee: three situations, one habit.',
+  taglineDe: 'der gute Mann, ein guter Mann, guter Kaffee: drei Situationen, ein Muster.',
   rules: [
     {
       heading: 'The habit',

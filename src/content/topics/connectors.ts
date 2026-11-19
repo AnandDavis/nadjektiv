@@ -21,6 +21,7 @@ export const connectors: Topic = {
     'trotzdem',
   ],
   tagline: 'weil, deshalb, denn: what each one does to the verb.',
+  taglineDe: 'weil, deshalb, denn: Was jedes Wort mit dem Verb macht.',
   rules: [
     {
       heading: 'Three groups, three verb positions',

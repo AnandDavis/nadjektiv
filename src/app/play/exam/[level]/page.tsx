@@ -32,7 +32,7 @@ export default async function ExamPage({ params }: PageProps<'/play/exam/[level]
         topics: TOPICS.filter((topic) => topic.level === level),
         title: <Ui {...title} />,
         modeName: <Ui {...title} />,
-        description: examHint(level, EXAM_LENGTH).en,
+        description: examHint(level, EXAM_LENGTH),
         exitHref: '/',
         exitLabel: <Ui {...COPY.common.home} />,
         modesByTopic: modesByTopic(summaries),

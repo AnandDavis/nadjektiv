@@ -8,6 +8,7 @@ export const negation: Topic = {
   titleDe: 'kein oder nicht',
   keywords: ['Negation', 'Verneinung', 'kein', 'nicht', 'doch', 'negative'],
   tagline: 'kein for nouns, nicht for everything else, and Doch!',
+  taglineDe: 'kein für Nomen, nicht für alles andere, und Doch!',
   rules: [
     {
       heading: 'kein: a noun with ein, or with no article',

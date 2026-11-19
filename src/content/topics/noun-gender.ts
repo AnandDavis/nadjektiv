@@ -8,6 +8,7 @@ export const nounGender: Topic = {
   titleDe: 'der, die oder das?',
   keywords: ['Genus', 'gender', 'Artikel', 'article', 'der', 'die', 'das', 'Nomen', 'noun'],
   tagline: 'der, die or das? The endings that give it away.',
+  taglineDe: 'der, die oder das? Die Endungen verraten es.',
   rules: [
     {
       heading: 'Endings that predict the gender',

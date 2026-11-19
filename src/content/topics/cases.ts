@@ -18,6 +18,7 @@ export const cases: Topic = {
     'dative',
   ],
   tagline: 'Nominativ, Akkusativ or Dativ: who does what to whom.',
+  taglineDe: 'Nominativ, Akkusativ oder Dativ: Wer macht was mit wem?',
   rules: [
     {
       heading: 'The job decides the case',

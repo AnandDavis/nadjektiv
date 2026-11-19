@@ -18,6 +18,7 @@ export const presentTense: Topic = {
     'haben',
   ],
   tagline: 'Six endings, two helpers, and the verbs that change their vowel.',
+  taglineDe: 'Sechs Endungen, zwei Hilfsverben und die Verben, die ihren Vokal ändern.',
   rules: [
     {
       heading: 'Six endings, two helpers',

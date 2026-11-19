@@ -18,6 +18,7 @@ export const modalVerbs: Topic = {
     'möchten',
   ],
   tagline: 'can, must, want to: the modal in position two, the infinitive at the end.',
+  taglineDe: 'können, müssen, wollen: das Modalverb auf Position zwei, der Infinitiv am Ende.',
   rules: [
     {
       heading: 'The seven modals',

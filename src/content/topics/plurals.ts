@@ -8,6 +8,7 @@ export const plurals: Topic = {
   titleDe: 'Plural',
   keywords: ['Plural', 'Mehrzahl', 'plural endings', 'Endungen'],
   tagline: 'Tische, Frauen, Kinder, Autos: the five plural patterns.',
+  taglineDe: 'Tische, Frauen, Kinder, Autos: die fünf Pluralmuster.',
   rules: [
     {
       heading: 'The five plural patterns',

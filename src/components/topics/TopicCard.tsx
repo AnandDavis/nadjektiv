@@ -36,7 +36,7 @@ export function TopicCard({ topic, index, mastery, onOpen }: TopicCardProps) {
           </span>
         </ViewTransition>
         <span className="mt-0.5 line-clamp-2 block text-sm text-muted group-hover:text-on-yellow">
-          {topic.tagline}
+          <Ui de={topic.taglineDe} en={topic.tagline} />
         </span>
       </span>
       <span className="shrink-0 pr-1">

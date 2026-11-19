@@ -19,6 +19,7 @@ export const twoWayPrepositions: Topic = {
     'stellen',
   ],
   tagline: 'Wo? takes the dative, Wohin? the accusative.',
+  taglineDe: 'Wo? mit Dativ, Wohin? mit Akkusativ.',
   rules: [
     {
       heading: 'Nine prepositions, two cases',

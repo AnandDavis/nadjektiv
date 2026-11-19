@@ -13,8 +13,10 @@ describe('labels', () => {
   it('describes every game mode', () => {
     for (const mode of GAME_MODES) {
       expect(MODE_INFO[mode].name).toBeTruthy();
-      expect(MODE_INFO[mode].english).toBeTruthy();
-      expect(MODE_INFO[mode].description.length).toBeGreaterThan(10);
+      for (const lang of ['de', 'en'] as const) {
+        expect(MODE_INFO[mode].subtitle[lang]).toBeTruthy();
+        expect(MODE_INFO[mode].description[lang].length).toBeGreaterThan(10);
+      }
     }
   });
 });

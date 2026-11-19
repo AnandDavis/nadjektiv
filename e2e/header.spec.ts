@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 const appHeader = (page: Page) =>
   page.getByRole('banner').filter({ has: page.getByRole('link', { name: 'Nadjektiv' }) });
 
@@ -64,6 +66,7 @@ test('the open menu and the About page have no accessibility violations', async 
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/about');
   await page.getByRole('button', { name: 'Menu' }).click();
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(
     results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target).join(', ')}`),

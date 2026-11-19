@@ -2,6 +2,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { TOPICS } from '../src/content';
 import { expect, test, type Page } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 const topicLinks = (page: Page) => page.getByRole('main').getByRole('link', { name: /^\d{2} / });
 
 test('search filters the topic index in place', async ({ page }) => {
@@ -32,6 +34,7 @@ test('search shows an empty state that clears back to every topic', async ({ pag
   await expect(page.getByText('Kein Thema gefunden')).toBeVisible();
   await expect(topicLinks(page)).toHaveCount(0);
 
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 

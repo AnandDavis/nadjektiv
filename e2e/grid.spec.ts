@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 const ARTICLE_ANSWERS: Record<string, string> = {
   'Akk M': 'den',
   'Akk F': 'die',
@@ -77,10 +79,12 @@ test('the app keyboard types ä into the focused cell', async ({ page }, info) =
 test('grid fill has no accessibility violations in play or on the results', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await openArticleGrid(page);
+  await settleMotion(page);
   const playing = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(playing.violations.map((v) => v.id)).toEqual([]);
   await page.getByRole('button', { name: 'Fertig' }).click();
   await expect(page.getByRole('heading', { name: 'Die Lösung' })).toBeVisible();
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 });

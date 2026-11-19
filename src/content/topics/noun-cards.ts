@@ -13,7 +13,8 @@ function cardQuestion(noun: NounCard, index: number): GapQuestion {
     id: `noun-cards-gap-${index + 1}`,
     kind: 'gap',
     before: `${word} → `,
-    after: '.',
+    // No full stop: the answer is a pair, not the end of a sentence.
+    after: '',
     options: [
       nounPair(gender, word, plural),
       nounPair(wrongGender, word, plural),

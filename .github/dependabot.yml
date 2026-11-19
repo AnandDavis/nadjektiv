@@ -8,7 +8,11 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+  # Actions are pinned to commit SHAs; Dependabot moves the pin and its version comment.
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: monthly
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']

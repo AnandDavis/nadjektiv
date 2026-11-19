@@ -8,6 +8,8 @@ export interface ProgressSummary {
   /** 0–1 over all answers ever given. */
   accuracy: number;
   started: number;
+  /** Questions on the "to revise" list. */
+  toRevise: number;
   tierCounts: Record<Tier, number>;
 }
 
@@ -29,5 +31,11 @@ export function summariseProgress(
     }
     tierCounts[masteryFor(tp, topic.modes).tier] += 1;
   }
-  return { answered, accuracy: answered > 0 ? correct / answered : 0, started, tierCounts };
+  return {
+    answered,
+    accuracy: answered > 0 ? correct / answered : 0,
+    started,
+    toRevise: Object.keys(progress.revise).length,
+    tierCounts,
+  };
 }

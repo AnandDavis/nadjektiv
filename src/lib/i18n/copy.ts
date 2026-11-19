@@ -182,6 +182,7 @@ export const COPY = {
   common: {
     level: { de: 'Level', en: 'Level' },
     points: { de: 'Punkte', en: 'Points' },
+    pointsShort: { de: 'Pkt.', en: 'pts' },
     correct: { de: 'Richtig', en: 'Correct' },
     answers: { de: 'Antworten', en: 'Answers' },
     topics: { de: 'Themen', en: 'Topics' },

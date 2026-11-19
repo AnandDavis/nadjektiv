@@ -60,3 +60,14 @@ export function personalRecords(
   }
   return records;
 }
+
+/**
+ * The fastest finished Tabelle across a topic's tables, in ms. Table ids are
+ * `<topic-id>-grid-<n>` (see GridPuzzle), so they are found by prefix.
+ */
+export function fastestGridMs(progress: Progress, topicId: string): number | undefined {
+  const times = Object.entries(progress.grids).flatMap(([gridId, best]) =>
+    gridId.startsWith(`${topicId}-grid-`) && best.bestTimeMs !== undefined ? [best.bestTimeMs] : [],
+  );
+  return times.length > 0 ? Math.min(...times) : undefined;
+}

@@ -185,13 +185,16 @@ describe('German text', () => {
     expect(bad.map(({ q }) => q.id)).toEqual([]);
   });
 
-  it('fills every gap into a complete, capitalised, punctuated sentence', () => {
+  it('fills every gap into a complete, capitalised, punctuated sentence (noun cards: no full stop)', () => {
     const bad = TOPICS.flatMap((topic) => topic.gap ?? []).filter((q) => {
       const sentence = `${q.before}${q.answer}${q.after}`.trim();
       const spacingOk =
         (q.before === '' || /\s$/.test(q.before) || /\p{L}$/u.test(q.before)) &&
         (q.after === '' || /^[\s.,;:?!…)]/.test(q.after));
-      return !/^[\p{Lu}0-9„"]/u.test(sentence) || !/[.?!…]["“”)]?$/.test(sentence) || !spacingOk;
+      // Noun cards ("Tisch → der Tisch, die Tische") are word pairs, not sentences.
+      const isCard = q.id.startsWith('noun-cards-');
+      const endOk = isCard || /[.?!…]["“”)]?$/.test(sentence);
+      return !/^[\p{Lu}0-9„"]/u.test(sentence) || !endOk || !spacingOk;
     });
     expect(bad.map((q) => q.id)).toEqual([]);
   });

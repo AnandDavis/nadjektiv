@@ -23,6 +23,7 @@ The pairings are fixed so learners connect der with a blue square everywhere. Ti
 5. **Colour as blocks.** Use the primaries as solid fills (`bg-blue`, `bg-red`, `bg-yellow`) with their `text-on-*` pair, not as tints. Yellow is the hover and highlight colour. Ink-filled bars (`bg-ink text-canvas`) frame the app (header, bottom nav, table heads).
 6. **Feedback is functional, not decorative.** Correct is green (`bg-correct`), wrong is red with a strikethrough, and both always come with an icon or words.
 7. **Section titles use `SectionHeading`** (heavy uppercase on a 4 px rule). Page titles: `text-4xl leading-none font-black tracking-tight`.
+8. **Buttons that end a screen are pinned on a phone.** Wrap them in `PinnedActions`: below `md` they stay at the bottom of the screen while the page scrolls under them, then settle in after the last line, so no text is hidden. A 2 px ink rule separates them from the page, not a shadow.
 
 ## Tokens
 

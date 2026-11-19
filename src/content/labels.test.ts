@@ -6,6 +6,13 @@ import { GROUP_LABELS } from './groups';
 import { GAME_MODES, TOPICS, getTopic, isGameMode } from './index';
 
 describe('labels', () => {
+  it('keeps each level’s groups together, so topic numbers count up down the home page', () => {
+    const runs = TOPICS.map((t) => `${t.level}/${t.group}`).filter(
+      (key, i, keys) => i === 0 || keys[i - 1] !== key,
+    );
+    expect(new Set(runs).size).toBe(runs.length);
+  });
+
   it('has a group label for every topic group in use', () => {
     for (const topic of TOPICS) expect(GROUP_LABELS[topic.group]).toBeTruthy();
   });

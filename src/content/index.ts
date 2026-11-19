@@ -32,6 +32,9 @@ import { zuInfinitive } from './topics/zu-infinitive';
 import type { GameMode, Level, Topic } from './types';
 
 export const TOPICS: readonly Topic[] = [
+  // Learning order, and the order the home page lists them in: each level's topics
+  // stay together by group, so the numbers count up 01, 02, 03 down the page. Only
+  // ids are stored in progress, so reordering here is safe.
   // A1
   nounGender,
   plurals,
@@ -40,20 +43,20 @@ export const TOPICS: readonly Topic[] = [
   cases,
   pronouns,
   presentTense,
-  wordOrder,
-  negation,
   modalVerbs,
   separableVerbs,
   perfekt,
   imperative,
+  wordOrder,
+  negation,
   prepositionsPlaceTime,
   tellingTime,
   // A2
   weakNouns,
   adjectiveEndings,
+  comparatives,
   dativeVerbs,
   twoWayPrepositions,
-  comparatives,
   praeteritum,
   irregularVerbs,
   reflexiveVerbs,

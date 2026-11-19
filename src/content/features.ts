@@ -57,7 +57,7 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'Your progress',
     description:
-      'The Progress page maps every topic as a square that fills in as you earn medals, lists your best in each game by its shape, and charts your answers on each of the last 14 days and the share right in each of the last 8 weeks. The records page gathers your bests: top Blitz score, longest run, fastest table, and your best in every game of every topic.',
+      'The Progress page maps every topic as a square that fills in as you earn medals, counts the questions you have to revise, lists your best in each game under each topic, and charts your answers on each of the last 14 days and the share right in each of the last 8 weeks. The records page gathers your bests: top Blitz score, longest run, fastest table, and your best in every game of every topic.',
   },
   {
     title: 'Glossary',

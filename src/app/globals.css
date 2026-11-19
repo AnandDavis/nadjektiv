@@ -113,7 +113,94 @@
 
   --animate-pop: pop 160ms ease-out;
   --animate-shake: shake 320ms ease-in-out;
-  --animate-rise: rise 200ms ease-out;
+  --animate-rise: rise 200ms ease-out both;
+  /* A right answer's shape lands with a small bounce. */
+  --animate-drop: drop 240ms ease-out;
+  /* The black gap in a sentence wipes away to show the chosen word. */
+  --animate-wipe: wipe 200ms ease-in-out both;
+  /* The score block flashes yellow when the combo rises. */
+  --animate-flash: flash 240ms ease-out;
+  /* An underline draws from left to right. */
+  --animate-draw: draw 240ms ease-out both;
+  /* The header shapes hop once when a round ends. */
+  --animate-nudge: nudge 240ms ease-out both;
+  /* A Satzbau word travels up from the pool into the sentence. */
+  --animate-place: place 200ms ease-out;
+  /* A square fades in, for staggered ripples. */
+  --animate-appear: appear 200ms ease-out both;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(8%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Animates `scale`, not `transform`: the overlay rests at scale-x-0 (Tailwind's scale
+   property), so with reduced motion it is simply hidden. */
+@keyframes wipe {
+  from {
+    scale: 1 1;
+  }
+  to {
+    scale: 0 1;
+  }
+}
+
+@keyframes flash {
+  from {
+    background-color: var(--yellow);
+    color: var(--on-yellow);
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(-35%);
+  }
+}
+
+@keyframes place {
+  from {
+    transform: translateY(120%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes pop {
@@ -250,6 +337,22 @@ summary::-webkit-details-marker {
    for reduced motion, whether set on the phone or in Settings. */
 ::view-transition-group(*) {
   animation-duration: 200ms;
+}
+
+/* The header and bottom nav are the fixed frame: only the page between them fades. */
+::view-transition-group(app-header),
+::view-transition-group(bottom-nav),
+::view-transition-new(app-header),
+::view-transition-new(bottom-nav) {
+  animation: none;
+}
+::view-transition-group(app-header),
+::view-transition-group(bottom-nav) {
+  z-index: 10;
+}
+::view-transition-old(app-header),
+::view-transition-old(bottom-nav) {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

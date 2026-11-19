@@ -251,6 +251,10 @@ export const COPY = {
     longestCombo: { de: 'Längste Serie', en: 'Longest run' },
     fastestTable: { de: 'Schnellste Tabelle', en: 'Fastest table' },
     tables: { de: 'Tabellen', en: 'Tables' },
+    best: { de: 'Rekord', en: 'Best' },
+    run: { de: 'Serie', en: 'Run' },
+    cells: { de: 'Felder', en: 'Cells' },
+    time: { de: 'Zeit', en: 'Time' },
     untimed: { de: 'ohne Uhr', en: 'untimed' },
     none: {
       de: 'Noch keine Rekorde. Spiel eine Runde, dann stehen sie hier.',

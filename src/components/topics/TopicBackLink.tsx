@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
 
-import { ArrowLeftIcon, Ui } from '@/components/ui';
+import { BackLink, Ui } from '@/components/ui';
 import { COPY, type Bilingual } from '@/lib/i18n/copy';
 import {
   ORIGIN_HREFS,
@@ -27,11 +26,8 @@ export function TopicBackLink({ topicId }: { topicId: string }) {
     () => null,
   );
   return (
-    <Link
-      href={origin ? ORIGIN_HREFS[origin] : '/'}
-      className="-ml-2 flex min-h-11 w-fit items-center gap-1 px-2 text-xs font-extrabold tracking-widest text-ink uppercase hover:bg-ink hover:text-canvas"
-    >
-      <ArrowLeftIcon /> <Ui {...(origin ? LABELS[origin] : COPY.common.allTopics)} />
-    </Link>
+    <BackLink href={origin ? ORIGIN_HREFS[origin] : '/'}>
+      <Ui {...(origin ? LABELS[origin] : COPY.common.allTopics)} />
+    </BackLink>
   );
 }

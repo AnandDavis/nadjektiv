@@ -16,10 +16,15 @@ const LINKS = [
   { href: '/progress', label: COPY.nav.progress, icon: ChartIcon },
 ] as const;
 
+/** Pages that belong under a tab without sharing its path: records sit under Progress. */
+const SUB_PAGES: Readonly<Record<string, readonly string[]>> = {
+  '/': ['/topics'],
+  '/progress': ['/records'],
+};
+
 function isActive(pathname: string, href: string): boolean {
-  return href === '/'
-    ? pathname === '/' || pathname.startsWith('/topics')
-    : pathname.startsWith(href);
+  const own = href === '/' ? pathname === '/' : pathname.startsWith(href);
+  return own || (SUB_PAGES[href] ?? []).some((prefix) => pathname.startsWith(prefix));
 }
 
 export function BottomNav() {

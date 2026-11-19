@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 
 import { BoltIcon, CrossIcon, ProgressBar, Ui } from '@/components/ui';
+import { useCountUp } from '@/hooks/useCountUp';
 import { comboMultiplier, type ComboChange } from '@/lib/game/scoring';
+import { cn } from '@/lib/utils/cn';
 import { COPY, comboLine } from '@/lib/i18n/copy';
 
 interface GameHeaderProps {
@@ -26,6 +30,8 @@ export function GameHeader({
   comboChange,
 }: GameHeaderProps) {
   const multiplier = comboMultiplier(combo);
+  // The score ticks up to each new total; screen readers get the real one.
+  const shownScore = useCountUp(score);
   return (
     <header className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
@@ -60,10 +66,16 @@ export function GameHeader({
             </span>
           )}
           <span
-            className="bg-ink px-2.5 py-1 text-lg font-black text-canvas tabular-nums"
+            // Keyed by the multiplier so it flashes yellow again each time it rises (a
+            // key of its own: the badge beside it is keyed by the multiplier too).
+            key={`score-${multiplier}`}
+            className={cn(
+              'bg-ink px-2.5 py-1 text-lg font-black text-canvas tabular-nums',
+              comboChange?.kind === 'up' && 'motion-safe:animate-flash',
+            )}
             aria-label={`Score ${score}`}
           >
-            {score}
+            {shownScore}
           </span>
         </div>
       </div>

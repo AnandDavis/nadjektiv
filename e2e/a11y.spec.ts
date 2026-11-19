@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 const PAGES = [
   '/',
   '/revise',
@@ -21,6 +23,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
       await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
       await page.goto(path);
       await page.waitForLoadState('networkidle');
+      await settleMotion(page);
       const results = await new AxeBuilder({ page })
         .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
         .analyze();
@@ -36,6 +39,7 @@ test('game screen in play has no accessibility violations', async ({ page }) => 
   await page.goto('/play/articles/gap');
   await page.getByRole('button', { name: /Los geht/ }).click();
   await page.getByRole('group', { name: 'Answer options' }).getByRole('button').first().click();
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 });

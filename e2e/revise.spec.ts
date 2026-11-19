@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 /** Play a gap round choosing the first option each time, so some answers are wrong. */
 async function playGapRound(page: Page, path: string) {
   await page.goto(path);
@@ -37,6 +39,7 @@ test('wrong answers are collected on the revise page with the answer and why', a
 
   // After a client-side navigation the <title> streams in with the page metadata.
   await expect(page).toHaveTitle(/To revise/);
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 

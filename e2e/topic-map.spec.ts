@@ -2,6 +2,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { TOPICS } from '../src/content';
 import { expect, test } from '@playwright/test';
 
+import { settleMotion } from './motion';
+
 test('the topic map shows every topic with its medal, and opens it', async ({ page }) => {
   await page.goto('/play/articles/gap');
   await page.getByRole('button', { name: /Los geht/ }).click();
@@ -26,6 +28,7 @@ test('the progress page, with its topic map, has no accessibility violations', a
   await page.goto('/progress');
   await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; }' });
   await expect(page.getByRole('region', { name: 'Themenkarte' })).toBeVisible();
+  await settleMotion(page);
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze();
   expect(results.violations).toEqual([]);
 });

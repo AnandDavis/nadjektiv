@@ -1,22 +1,35 @@
-import type { Question } from '@/content/types';
-import { formatSentence } from '@/lib/game/check-answer';
-import type { Mistake } from '@/lib/game/game-reducer';
 import { Ui } from '@/components/ui';
+import { answerInContext } from '@/lib/game/answer-in-context';
+import type { Mistake } from '@/lib/game/game-reducer';
 import { COPY } from '@/lib/i18n/copy';
 
-function correctText(question: Question): string {
-  switch (question.kind) {
-    case 'sort':
-      return `${question.prompt.replace('___', '…')} → ${question.answer}`;
-    case 'gap':
-      return `${question.before}${question.answer}${question.after}`;
-    case 'build':
-      return formatSentence(question.tiles, question.punctuation);
-    default: {
-      const exhaustive: never = question;
-      return String(exhaustive);
-    }
-  }
+/**
+ * The sentence with the right answer underlined in green, and the learner's answer
+ * stacked directly beneath it, struck through in red.
+ */
+function AnswerLine({ mistake }: { mistake: Mistake }) {
+  const { before, answer, after } = answerInContext(mistake.item.question);
+  return (
+    <p lang="de" className="text-lg leading-relaxed font-extrabold text-ink">
+      {before}
+      <span className="inline-flex flex-col items-start align-top">
+        <span className="underline decoration-correct decoration-4 underline-offset-4">
+          <span className="sr-only">
+            <Ui {...COPY.game.answer} />:{' '}
+          </span>
+          {answer}
+        </span>
+        <span className="text-sm font-bold text-wrong line-through decoration-2">
+          <span className="sr-only">
+            {' '}
+            (<Ui {...COPY.game.youChose} />: {mistake.given})
+          </span>
+          <span aria-hidden="true">{mistake.given}</span>
+        </span>
+      </span>
+      {after}
+    </p>
+  );
 }
 
 /** Every mistake from the round, with the right answer and the rule. */
@@ -33,18 +46,11 @@ export function MistakeList({ mistakes }: { mistakes: Mistake[] }) {
         <Ui {...COPY.game.mistakes} />
       </h3>
       <ul>
-        {unique.map(({ item, given }) => (
-          <li key={item.question.id}>
+        {unique.map((mistake) => (
+          <li key={mistake.item.question.id}>
             <div className="border-b-2 border-ink py-3">
-              <p lang="de" className="text-lg font-extrabold text-ink">
-                {correctText(item.question)}
-              </p>
-              <p className="mt-1 text-sm font-bold text-wrong">
-                <span className="underline decoration-wrong decoration-4 underline-offset-4">
-                  {given}
-                </span>
-              </p>
-              <p className="mt-1 text-sm text-ink">{item.question.explanation}</p>
+              <AnswerLine mistake={mistake} />
+              <p className="mt-1 text-sm text-ink">{mistake.item.question.explanation}</p>
             </div>
           </li>
         ))}

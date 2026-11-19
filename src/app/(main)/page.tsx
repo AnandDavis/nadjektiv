@@ -20,6 +20,8 @@ export default function HomePage() {
       <LevelCard />
       <InstallHint />
       <ReviewCallout />
+      {/* Once today's mix is done it shrinks to a line above the search, out of the way. */}
+      <DailyCallout show="done" />
       <TopicList topics={topics} />
     </div>
   );

@@ -4,7 +4,7 @@ const ARTICLE_FILL: Record<string, string> = {
   die: 'bg-red text-on-red',
   das: 'bg-yellow text-on-yellow',
   // The case forms get colours of their own, so no two article bins look alike.
-  den: 'bg-ink text-canvas',
+  den: 'bg-den text-on-den',
   dem: 'bg-orange text-on-orange',
 };
 

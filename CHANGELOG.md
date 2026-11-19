@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/AnandDavis/nadjektiv/compare/v0.2.0...v0.3.0) (2026-11-19)
+
+
+### Features
+
+* **security:** send a content security policy and security headers ([2aeab6e](https://github.com/AnandDavis/nadjektiv/commit/2aeab6e17829c10d11ca9ca7e493742c74819df3))
+
+
+### Bug Fixes
+
+* **settings:** refuse progress imports larger than 5 mb ([764b74c](https://github.com/AnandDavis/nadjektiv/commit/764b74c604f17460e2cdee8dc812ee8f5a71c940))
+
 ## [0.2.0](https://github.com/AnandDavis/nadjektiv/compare/v0.1.0...v0.2.0) (2026-11-19)
 
 

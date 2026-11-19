@@ -134,3 +134,10 @@ export const SearchIcon = (p: IconProps) => (
     <path d="M20 20l-4-4" />
   </Svg>
 );
+
+/** A conjugation table: persons on the left, forms on the right. */
+export const VerbIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3 6h4M3 12h4M3 18h4M11 6h10M11 12h10M11 18h10" />
+  </Svg>
+);

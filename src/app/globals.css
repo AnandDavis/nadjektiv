@@ -212,7 +212,7 @@
   padding-top: env(safe-area-inset-top);
 }
 
-/* Safari still draws its own triangle on <summary>; ours is the ink ▲ (AboutSection). */
+/* Safari still draws its own triangle on <summary>; ours is the ink ▲ (FoldSection). */
 summary::-webkit-details-marker {
   display: none;
 }

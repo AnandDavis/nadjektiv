@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, type ReactNode } from 'react';
 
-import { Shape } from '@/components/ui';
+import { Shape } from './Shape';
 
-interface AboutSectionProps {
+interface FoldSectionProps {
   /** Also the URL fragment that opens it: /about#changelog. */
   id: string;
   title: ReactNode;
@@ -12,10 +12,10 @@ interface AboutSectionProps {
 }
 
 /**
- * One collapsible part of the About page: a native <details>, so it works without
- * script and with the keyboard. A link to /about#id opens it.
+ * A section that folds away under its heading: a native <details>, so it works without
+ * script and with the keyboard. A link to its #id opens it.
  */
-export function AboutSection({ id, title, children }: AboutSectionProps) {
+export function FoldSection({ id, title, children }: FoldSectionProps) {
   const details = useRef<HTMLDetailsElement>(null);
 
   useEffect(() => {

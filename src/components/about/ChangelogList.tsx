@@ -1,15 +1,13 @@
-import { Ui } from '@/components/ui';
+import { FoldSection, Ui } from '@/components/ui';
 import { CHANGELOG } from '@/content/changelog';
 import { changelogDays } from '@/lib/about/changelog-days';
 import { COPY } from '@/lib/i18n/copy';
 import { formatUtcDate } from '@/lib/utils/format-date';
 
-import { AboutSection } from './AboutSection';
-
 /** What's new, newest first, one date per day with everything that shipped that day. */
 export function ChangelogList() {
   return (
-    <AboutSection id="changelog" title={<Ui {...COPY.about.changelog} />}>
+    <FoldSection id="changelog" title={<Ui {...COPY.about.changelog} />}>
       <ol>
         {changelogDays(CHANGELOG).map(({ day, entries }) => (
           <li
@@ -33,6 +31,6 @@ export function ChangelogList() {
           </li>
         ))}
       </ol>
-    </AboutSection>
+    </FoldSection>
   );
 }

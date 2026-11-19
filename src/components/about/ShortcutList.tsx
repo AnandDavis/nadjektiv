@@ -1,13 +1,11 @@
-import { Ui } from '@/components/ui';
+import { FoldSection, Ui } from '@/components/ui';
 import { SHORTCUT_LIST } from '@/lib/game/shortcuts';
 import { COPY } from '@/lib/i18n/copy';
-
-import { AboutSection } from './AboutSection';
 
 /** The game keyboard shortcuts, for learners on a computer. */
 export function ShortcutList() {
   return (
-    <AboutSection id="shortcuts" title={<Ui {...COPY.about.shortcuts} />}>
+    <FoldSection id="shortcuts" title={<Ui {...COPY.about.shortcuts} />}>
       <p className="text-sm text-ink">
         <Ui {...COPY.about.shortcutsHint} />
       </p>
@@ -23,6 +21,6 @@ export function ShortcutList() {
           </div>
         ))}
       </dl>
-    </AboutSection>
+    </FoldSection>
   );
 }

@@ -1,4 +1,4 @@
-import { Card, Ui } from '@/components/ui';
+import { Card, FoldSection, Ui } from '@/components/ui';
 import {
   HINT_XP_PERCENT,
   LAST_TITLE_LEVEL,
@@ -9,8 +9,6 @@ import {
 import { COPY } from '@/lib/i18n/copy';
 import { cn } from '@/lib/utils/cn';
 
-import { AboutSection } from './AboutSection';
-
 const CELL = 'px-2 py-1.5';
 
 export function LevelsExplainer() {
@@ -19,7 +17,7 @@ export function LevelsExplainer() {
   const [, second, third] = rows;
 
   return (
-    <AboutSection id="levels" title={<Ui {...COPY.about.levels} />}>
+    <FoldSection id="levels" title={<Ui {...COPY.about.levels} />}>
       <Card>
         <h3 className="text-lg leading-tight font-black text-ink uppercase">
           <Ui {...COPY.about.earningXp} />
@@ -104,6 +102,6 @@ export function LevelsExplainer() {
           more than the last.
         </p>
       </Card>
-    </AboutSection>
+    </FoldSection>
   );
 }

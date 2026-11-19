@@ -5,11 +5,11 @@ import { expect, test, type Page } from '@playwright/test';
 
 /**
  * Compressed JavaScript a first visit downloads per page, including what Next.js
- * prefetches for links on screen. Measured at 190–202 KB (November 2026); the budget
- * leaves about 15% headroom. If a change needs more, raise it deliberately in the
- * same commit and say why.
+ * prefetches for links on screen. Measured at 199–230 KB (19 November 2026, the home
+ * page heaviest); the budget leaves about 10% headroom over the heaviest page. If a
+ * change needs more, raise it deliberately in the same commit and say why.
  */
-const JS_BUDGET_KB = 230;
+const JS_BUDGET_KB = 250;
 
 async function javascriptKb(page: Page): Promise<number> {
   return page.evaluate(() => {

@@ -21,6 +21,19 @@ export function serialiseProgress(progress: Progress, exportedAt: string): strin
   return JSON.stringify(payload, null, 2);
 }
 
+/**
+ * The largest progress file accepted. A heavy learner's export is tens of KB, so this
+ * leaves ample room while refusing a file big enough to stall or crash the tab.
+ */
+export const MAX_IMPORT_BYTES = 5 * 1024 * 1024;
+
+/** Throws with a readable message if a file is too big to be a progress export. */
+export function assertImportSize(bytes: number): void {
+  if (bytes > MAX_IMPORT_BYTES) {
+    throw new Error(`That file is too big to be a ${APP_CONFIG.name} progress export.`);
+  }
+}
+
 /** Throws with a readable message if the file isn't a valid export. */
 export function deserialiseProgress(text: string): Progress {
   let data: unknown;

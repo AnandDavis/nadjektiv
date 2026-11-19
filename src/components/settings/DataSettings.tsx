@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 
 import { Button, Card, Ui } from '@/components/ui';
 import { APP_CONFIG } from '@/config/app';
-import { deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
+import { assertImportSize, deserialiseProgress, serialiseProgress } from '@/lib/progress/transfer';
 import { usePersistence } from '@/hooks/usePersistence';
 import { clearReviseList } from '@/lib/progress/clear-revise';
 import { getSnapshot, resetProgress, updateProgress } from '@/lib/storage/progress-client';
@@ -40,6 +40,7 @@ export function DataSettings() {
 
   async function handleImport(file: File) {
     try {
+      assertImportSize(file.size);
       const imported = deserialiseProgress(await file.text());
       updateProgress(() => imported);
       setStatus({ kind: 'ok', message: COPY.settings.imported });

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from 'react';
 
-import { DailyCallout } from '@/components/progress/DailyCallout';
 import { Button, SearchField, Ui } from '@/components/ui';
 import type { TopicSummary } from '@/content/summaries';
 import type { Level } from '@/content/types';
@@ -49,24 +48,20 @@ export function TopicList({ topics }: { topics: TopicSummary[] }) {
 
   return (
     <div className="flex flex-col gap-10">
-      <div className="flex flex-col gap-4">
-        {/* Once today's mix is done it shrinks to a line here, out of the way. */}
-        <DailyCallout show="done" />
-        <div role="search">
-          <SearchField
-            value={query}
-            onChange={setQuery}
-            label={COPY.search.label[language]}
-            placeholder={COPY.search.placeholder[language]}
-            clearLabel={COPY.search.clear[language]}
-          />
-          <p
-            aria-live="polite"
-            className="mt-2 text-xs font-extrabold tracking-widest text-muted uppercase"
-          >
-            {isSearching && <Ui {...topicCount(matches.length)} />}
-          </p>
-        </div>
+      <div role="search">
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          label={COPY.search.label[language]}
+          placeholder={COPY.search.placeholder[language]}
+          clearLabel={COPY.search.clear[language]}
+        />
+        <p
+          aria-live="polite"
+          className="mt-2 text-xs font-extrabold tracking-widest text-muted uppercase"
+        >
+          {isSearching && <Ui {...topicCount(matches.length)} />}
+        </p>
       </div>
 
       {isSearching && matches.length === 0 && (

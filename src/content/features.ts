@@ -32,7 +32,7 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'Five games',
     description:
-      'Blitz: sort as many prompts as you can in 60 seconds, with runs of right answers multiplying your points. Lückentext: pick the word that fills the gap. Satzbau: tap words into the right order. Tippen: once you have a medal, type the answer yourself on a German keyboard. Tabelle: fill in a whole table against the clock. And when you’re stuck, one hint per question shows the rule with the answer blanked out.',
+      'Blitz: sort as many prompts as you can in 60 seconds into bins with a colour for each article, with runs of right answers multiplying your points. Lückentext: pick the word that fills the gap, with articles always in der, die, das order. Satzbau: tap words into the right order. Tippen: once you have a medal, type the answer yourself on a German keyboard. Tabelle: fill in a whole table against the clock. And when you’re stuck, one hint per question shows the rule with the answer blanked out.',
   },
   {
     title: 'Every mistake explained',
@@ -57,12 +57,12 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'Your progress',
     description:
-      'The Progress page maps every topic as a square that fills in as you earn medals, and charts your answers on each of the last 14 days and the share right in each of the last 8 weeks. The records page gathers your bests: top Blitz score, longest run, fastest table, and your best in every game of every topic.',
+      'The Progress page maps every topic as a square that fills in as you earn medals, lists your best in each game by its shape, and charts your answers on each of the last 14 days and the share right in each of the last 8 weeks. The records page gathers your bests: top Blitz score, longest run, fastest table, and your best in every game of every topic.',
   },
   {
     title: 'Glossary',
     description:
-      'Every grammar term the app uses, from Akkusativ to Wechselpräposition, explained in plain English with a German example and links to the topics that teach it.',
+      'Every grammar term the app uses, from Akkusativ to Wechselpräposition, explained in plain English with a German example and links to the topics that teach it. Search it in German or English.',
   },
   {
     title: 'Works offline',

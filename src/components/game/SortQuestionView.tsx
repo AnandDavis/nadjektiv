@@ -100,7 +100,17 @@ export function SortQuestionView({
                 last && isAnswer && 'outline-4 outline-offset-2 outline-correct',
               )}
             >
-              {shape && <Shape kind={shape.kind} color="ink" className="text-lg opacity-80" />}
+              {shape && (
+                <Shape
+                  kind={shape.kind}
+                  color="ink"
+                  className={cn(
+                    'text-lg opacity-80',
+                    // The right bin's shape lands once the answer is in.
+                    last?.isCorrect && isAnswer && 'motion-safe:animate-drop',
+                  )}
+                />
+              )}
               <span lang="de">{bin}</span>
             </button>
           );

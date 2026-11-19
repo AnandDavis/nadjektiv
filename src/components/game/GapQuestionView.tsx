@@ -38,13 +38,21 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
           {question.before}
           <span
             className={cn(
-              'mx-1 inline-block min-w-20 px-2 text-center align-baseline',
+              'relative mx-1 inline-block min-w-20 px-2 text-center align-baseline',
               !last && 'bg-ink text-ink',
               last?.isCorrect && 'bg-correct text-canvas',
               last && !last.isCorrect && 'bg-red text-on-red line-through decoration-4',
             )}
           >
             {filled ?? '\u00a0'}
+            {/* The black gap wipes away to show the word. It rests hidden (scale 0), so
+                with reduced motion the word simply appears. */}
+            {last && (
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 origin-right scale-x-0 bg-ink motion-safe:animate-wipe"
+              />
+            )}
           </span>
           {question.after}
         </p>
@@ -78,7 +86,16 @@ export function GapQuestionView({ question, last, onAnswer }: GapQuestionViewPro
                 last && !isAnswer && !isChosen && 'bg-surface text-ink opacity-40',
               )}
             >
-              {shape && <Shape kind={shape.kind} color={shape.color} className="text-base" />}
+              {shape && (
+                <Shape
+                  kind={shape.kind}
+                  color={shape.color}
+                  className={cn(
+                    'text-base',
+                    last?.isCorrect && isAnswer && 'motion-safe:animate-drop',
+                  )}
+                />
+              )}
               <span lang="de" className="flex-1">
                 {ending ? `-${option}` : option}
               </span>

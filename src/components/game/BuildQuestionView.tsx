@@ -88,7 +88,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
             type="button"
             disabled={Boolean(last)}
             onClick={() => setChosen((keys) => keys.filter((k) => k !== tile.key))}
-            className={cn(TILE_CLASS, 'motion-safe:animate-pop')}
+            className={cn(TILE_CLASS, 'motion-safe:animate-place')}
             aria-label={`Remove ${tile.text}`}
             data-shortcut="undo"
           >

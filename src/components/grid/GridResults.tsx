@@ -3,7 +3,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 import { Celebrations, ResultStat, ReviseNote } from '@/components/game/RoundOutcome';
-import { Button, ButtonLink, Ui } from '@/components/ui';
+import { Button, ButtonLink, PinnedActions, Ui } from '@/components/ui';
 import type { GridPuzzle } from '@/content/types';
 import { resultHeadline } from '@/lib/game/result-headline';
 import type { AnswerRecord } from '@/lib/game/scoring';
@@ -106,22 +106,24 @@ export function GridResults({
         </p>
       </section>
 
-      <div className="grid grid-cols-2 gap-3">
-        <Button variant="secondary" size="lg" onClick={onOtherTable}>
-          <Ui {...COPY.grid.otherTable} />
-        </Button>
-        <Button size="lg" onClick={onPlayAgain}>
-          <Ui {...COPY.game.playAgain} />
-        </Button>
-      </div>
-      <div className="grid grid-cols-2 gap-3">
-        <ButtonLink href={exitHref} variant="ghost">
-          {exitLabel}
-        </ButtonLink>
-        <ButtonLink href="/" variant="ghost">
-          <Ui {...COPY.common.home} />
-        </ButtonLink>
-      </div>
+      <PinnedActions atScreenEnd>
+        <div className="grid grid-cols-2 gap-3">
+          <Button variant="secondary" size="lg" onClick={onOtherTable}>
+            <Ui {...COPY.grid.otherTable} />
+          </Button>
+          <Button size="lg" onClick={onPlayAgain}>
+            <Ui {...COPY.game.playAgain} />
+          </Button>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <ButtonLink href={exitHref} variant="ghost">
+            {exitLabel}
+          </ButtonLink>
+          <ButtonLink href="/" variant="ghost">
+            <Ui {...COPY.common.home} />
+          </ButtonLink>
+        </div>
+      </PinnedActions>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { Button, Ui } from '@/components/ui';
+import { Button, PinnedActions, Ui } from '@/components/ui';
 import type { BuildQuestion } from '@/content/types';
 import { formatSentence, isCorrectOrder, matchingOrder, wordsOf } from '@/lib/game/check-answer';
 import type { LastAnswer } from '@/lib/game/game-reducer';
@@ -114,7 +114,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
               </button>
             ))}
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <PinnedActions className="grid grid-cols-2">
             <Button
               variant="secondary"
               size="lg"
@@ -126,7 +126,7 @@ export function BuildQuestionView({ question, last, onAnswer }: BuildQuestionVie
             <Button size="lg" onClick={check} disabled={!isComplete} data-shortcut="confirm">
               <Ui {...COPY.game.check} />
             </Button>
-          </div>
+          </PinnedActions>
         </>
       )}
     </div>

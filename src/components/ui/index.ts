@@ -4,6 +4,7 @@ export { ButtonLink } from './ButtonLink';
 export { Card } from './Card';
 export { OnScreenKeyboard } from './OnScreenKeyboard';
 export { ProgressBar } from './ProgressBar';
+export { PinnedActions } from './PinnedActions';
 export * from './icons';
 export { Ui } from './Ui';
 export { SegmentedControl } from './SegmentedControl';

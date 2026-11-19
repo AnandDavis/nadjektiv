@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from 'react';
 
-import { Button, ButtonLink, Ui } from '@/components/ui';
+import { Button, ButtonLink, PinnedActions, Ui } from '@/components/ui';
 import type { Mistake } from '@/lib/game/game-reducer';
 import { resultHeadline } from '@/lib/game/result-headline';
 import { accuracy, type AnswerRecord } from '@/lib/game/scoring';
@@ -107,7 +107,7 @@ export function ResultsScreen({
 
       {mistakes.length > 0 && <MistakeList mistakes={mistakes} />}
 
-      <div className="flex flex-col gap-3">
+      <PinnedActions atScreenEnd>
         <Button size="lg" onClick={onPlayAgain}>
           <Ui {...COPY.game.playAgain} />
         </Button>
@@ -122,7 +122,7 @@ export function ResultsScreen({
             </ButtonLink>
           )}
         </div>
-      </div>
+      </PinnedActions>
     </div>
   );
 }

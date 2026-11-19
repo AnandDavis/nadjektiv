@@ -29,7 +29,8 @@ export function LevelCard() {
           <ProgressBar
             value={info.fraction}
             label={`Progress to level ${info.level + 1}`}
-            fillClassName="bg-ink"
+            // Fills from the left as the card arrives.
+            fillClassName="origin-left bg-ink motion-safe:animate-draw"
           />
           <p className="mt-1 text-xs font-bold text-muted tabular-nums">
             {progress.xp - info.floorXp} / {info.nextXp - info.floorXp} XP

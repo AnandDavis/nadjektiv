@@ -6,6 +6,7 @@ import type { Level } from '@/content/types';
 import { TIERS, TIER_LABELS, masteryFor } from '@/lib/progress/mastery';
 import type { Progress } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
+import { MOTION, staggerDelay } from '@/lib/ui/motion';
 import { cn } from '@/lib/utils/cn';
 
 import { TIER_FILLS, TIER_MARKS } from './TierBadge';
@@ -40,7 +41,14 @@ export function TopicMap({ topics, progress }: TopicMapProps) {
                 const tier = masteryFor(progress.topics[topic.id], topic.modes).tier;
                 const number = String(topics.indexOf(topic) + 1).padStart(2, '0');
                 return (
-                  <li key={topic.id}>
+                  <li
+                    key={topic.id}
+                    // The squares ripple in, in topic order.
+                    className="motion-safe:animate-appear"
+                    style={{
+                      animationDelay: `${staggerDelay(topics.indexOf(topic), MOTION.rippleStepMs)}ms`,
+                    }}
+                  >
                     <TopicLink
                       topicId={topic.id}
                       origin="progress"

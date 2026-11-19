@@ -31,7 +31,10 @@
   --on-blue: light-dark(#ffffff, #141414);
   --on-red: light-dark(#ffffff, #141414);
   --on-yellow: #151515;
-  /* A secondary for the Blitz case bins only: den is ink, dem is orange. */
+  /* The Blitz case bins only: den is black (slate in dark mode, so it never reads as
+     plain paper), dem is orange. */
+  --den: light-dark(#151515, #5c6470);
+  --on-den: #efebe0;
   --orange: light-dark(#d9661a, #ff8a3d);
   --on-orange: #151515;
 
@@ -84,6 +87,8 @@
   --color-on-blue: var(--on-blue);
   --color-on-red: var(--on-red);
   --color-on-yellow: var(--on-yellow);
+  --color-den: var(--den);
+  --color-on-den: var(--on-den);
   --color-orange: var(--orange);
   --color-on-orange: var(--on-orange);
   --color-brand: var(--brand);

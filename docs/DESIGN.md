@@ -34,7 +34,7 @@ Defined once in `src/app/globals.css` with `light-dark()`; dark mode inverts pap
 | Text / secondary text         | `text-ink`, `text-muted`                                                       |
 | Structural rules / hairlines  | `border-ink`, `border-line`                                                    |
 | Primary blocks                | `bg-blue text-on-blue`, `bg-red text-on-red`, `bg-yellow text-on-yellow`       |
-| Blitz case bins (den / dem)   | `bg-ink text-canvas`, `bg-orange text-on-orange`                               |
+| Blitz case bins (den / dem)   | `bg-den text-on-den`, `bg-orange text-on-orange`                               |
 | Gender as text                | `text-der`, `text-die`, `text-das`                                             |
 | Feedback                      | `bg-correct`, `bg-correct-soft`, `text-correct`, `text-wrong`, `bg-wrong-soft` |
 | Medals                        | `text-bronze`, `text-silver`, `text-gold`, `text-mastered`, `text-tier-new`    |

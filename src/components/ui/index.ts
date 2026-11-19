@@ -11,3 +11,4 @@ export { DropdownMenu, type DropdownMenuItem } from './DropdownMenu';
 export { Shape } from './Shape';
 export { SectionHeading } from './SectionHeading';
 export { SearchField } from './SearchField';
+export { FoldSection } from './FoldSection';

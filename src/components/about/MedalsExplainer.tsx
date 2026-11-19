@@ -1,14 +1,12 @@
 import { TierBadge } from '@/components/progress/TierBadge';
-import { Card, Ui } from '@/components/ui';
+import { Card, FoldSection, Ui } from '@/components/ui';
 import { MEDAL_RULES } from '@/lib/about/levels';
 import { RECENT_WINDOW } from '@/lib/progress/types';
 import { COPY } from '@/lib/i18n/copy';
 
-import { AboutSection } from './AboutSection';
-
 export function MedalsExplainer() {
   return (
-    <AboutSection id="medals" title={<Ui {...COPY.about.tiers} />}>
+    <FoldSection id="medals" title={<Ui {...COPY.about.tiers} />}>
       <Card>
         <p className="text-sm text-ink">
           Each topic earns its own medal from your accuracy over your last {RECENT_WINDOW} answers
@@ -28,6 +26,6 @@ export function MedalsExplainer() {
           ))}
         </ul>
       </Card>
-    </AboutSection>
+    </FoldSection>
   );
 }

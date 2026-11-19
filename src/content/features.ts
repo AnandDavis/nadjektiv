@@ -37,7 +37,7 @@ export const FEATURES: readonly Feature[] = [
   {
     title: 'Every mistake explained',
     description:
-      'A wrong answer always stops to show what you chose, the right answer and why, before you carry on.',
+      'A wrong answer always stops to show what you chose, the right answer and why, before you carry on. At the end of a round, each sentence you missed shows the right word underlined, with yours underneath.',
   },
   {
     title: 'To revise',

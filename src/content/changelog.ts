@@ -16,6 +16,12 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: readonly ChangelogEntry[] = [
   {
+    date: '2026-11-19T11:00Z',
+    title: 'Small animations',
+    description:
+      'Answers feel livelier: the gap in a sentence wipes open to show your word, a right answer’s shape drops into place, your score ticks up and flashes when a run grows, and Satzbau words slide into the sentence. At the end of a round the results count up and your mistakes rise in with the right word underlined. The topic map ripples in, the XP bar fills, folded sections slide open and pages fade between the tabs. Turn it all off in Settings under Bewegung.',
+  },
+  {
     date: '2026-11-19T09:50Z',
     title: 'More German, clearer round reviews',
     description:

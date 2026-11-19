@@ -69,7 +69,7 @@ export function ReviseView({ topics, topicTitles }: ReviseViewProps) {
       )}
 
       {items && total === 0 && (
-        <Card className="flex flex-col items-center gap-3 py-8 text-center">
+        <Card className="flex flex-col items-start gap-3 py-6">
           <p className="text-2xl font-black text-ink uppercase">
             <Ui {...COPY.revise.empty} />
           </p>

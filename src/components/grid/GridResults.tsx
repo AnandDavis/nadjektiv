@@ -81,6 +81,7 @@ export function GridResults({
         <ResultStat
           label="XP"
           value={`+${outcome?.xpGained ?? 0}`}
+          count={{ to: outcome?.xpGained ?? 0, format: (n) => `+${n}`, order: 0 }}
           className="bg-yellow text-on-yellow"
         />
       </div>

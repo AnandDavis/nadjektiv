@@ -75,10 +75,10 @@ function Verb({
           {verb.infinitive}
         </h2>
         <p className="text-sm font-extrabold tracking-wide text-muted uppercase">{verb.gloss}</p>
-        <p className="mt-1 flex flex-wrap gap-x-2 text-xs font-bold text-muted">
+        <p className="mt-1 text-xs font-bold text-muted">
           {kinds(verb).map((kind, i) => (
             <span key={i}>
-              {i > 0 && '· '}
+              {i > 0 && ' · '}
               <Ui {...kind} />
             </span>
           ))}

@@ -18,7 +18,7 @@ export function ReviewScreen(props: ReviewScreenProps) {
     return (
       <div className="flex min-h-dvh flex-col">
         <AppHeader />
-        <main className="mx-auto flex max-w-xl flex-1 flex-col items-center justify-center gap-4 px-4 text-center">
+        <main className="mx-auto flex w-full max-w-xl flex-1 flex-col items-start justify-center gap-4 px-4">
           <h1 className="text-4xl leading-none font-black text-ink">
             <Ui {...COPY.game.nothingToReview} />
           </h1>

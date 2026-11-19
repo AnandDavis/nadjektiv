@@ -31,23 +31,24 @@ function wordsOf(text: string): string[] {
   return foldings(text).flatMap((folded) => folded.split(/[^a-z0-9]+/).filter(Boolean));
 }
 
-function searchWords(topic: SearchableTopic): Set<string> {
-  return new Set(
-    [topic.id, topic.level, topic.title, topic.titleDe, topic.tagline, ...topic.keywords].flatMap(
-      wordsOf,
-    ),
+function searchWords(topic: SearchableTopic): string[] {
+  return [topic.id, topic.level, topic.title, topic.titleDe, topic.tagline, ...topic.keywords];
+}
+
+/**
+ * Whether every word of the query starts some word in `fields`, ignoring case and
+ * umlaut spelling. An empty query matches.
+ */
+export function matchesQuery(fields: readonly string[], query: string): boolean {
+  const terms = query.trim().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return true;
+  const words = [...new Set(fields.flatMap(wordsOf))];
+  return terms.every((term) =>
+    wordsOf(term).some((variant) => words.some((word) => word.startsWith(variant))),
   );
 }
 
 /** Topics matching the query, in their original order. An empty query matches all. */
 export function searchTopics<T extends SearchableTopic>(topics: readonly T[], query: string): T[] {
-  const terms = query.trim().split(/\s+/).filter(Boolean);
-  if (terms.length === 0) return [...topics];
-  const termFoldings = terms.map((term) => wordsOf(term));
-  return topics.filter((topic) => {
-    const words = [...searchWords(topic)];
-    return termFoldings.every((variants) =>
-      variants.some((variant) => words.some((word) => word.startsWith(variant))),
-    );
-  });
+  return topics.filter((topic) => matchesQuery(searchWords(topic), query));
 }

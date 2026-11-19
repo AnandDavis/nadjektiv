@@ -115,6 +115,9 @@ export const COPY = {
     },
     example: { de: 'Beispiel', en: 'Example' },
     topics: { de: 'Üben in', en: 'Practise in' },
+    searchLabel: { de: 'Glossar durchsuchen', en: 'Search the glossary' },
+    searchPlaceholder: { de: 'z. B. Dativ, gender', en: 'e.g. Dativ, gender' },
+    noResults: { de: 'Kein Begriff gefunden', en: 'No term found' },
   },
   verbs: {
     title: { de: 'Verben', en: 'Verbs' },

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { GlossaryList } from '@/components/glossary/GlossaryList';
+import { GlossaryLookup } from '@/components/glossary/GlossaryLookup';
 import { Ui } from '@/components/ui';
 import { GLOSSARY } from '@/content/glossary';
 import { getTopicSummaries, topicTitles } from '@/content/summaries';
@@ -19,7 +19,7 @@ export default function GlossaryPage() {
           <Ui {...COPY.glossary.intro} />
         </p>
       </header>
-      <GlossaryList entries={GLOSSARY} topicTitles={topicTitles(getTopicSummaries())} />
+      <GlossaryLookup entries={GLOSSARY} topicTitles={topicTitles(getTopicSummaries())} />
     </div>
   );
 }

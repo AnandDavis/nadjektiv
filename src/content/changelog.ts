@@ -19,7 +19,7 @@ export const CHANGELOG: readonly ChangelogEntry[] = [
     date: '2026-11-19T09:30Z',
     title: 'Search the glossary, and articles always in order',
     description:
-      'The glossary has a search box: type a term in German or English to find it. Article choices now always read der, die, das (then den, dem) so each one is in the same place every time, and in Blitz den and dem have colours of their own. On the Progress page, each topic shows your best in every game by the game’s shape.',
+      'The glossary has a search box: type a term in German or English to find it. Article choices now always read der, die, das (then den, dem) so each one is in the same place every time, and in Blitz den and dem have colours of their own. The Progress page now counts the questions you have to revise, and its topic list folds away under the map; open it to see your best in every game, in points or, for Tabelle, your fastest time.',
   },
   {
     date: '2026-11-18T23:40Z',

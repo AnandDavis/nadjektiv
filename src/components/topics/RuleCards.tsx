@@ -1,4 +1,4 @@
-import { BookIcon, Card, SectionHeading, Ui } from '@/components/ui';
+import { BookIcon, SectionHeading, Ui } from '@/components/ui';
 import type { RuleCard } from '@/content/types';
 import { COPY } from '@/lib/i18n/copy';
 import { RULES_HEADING_ID } from '@/lib/routes';
@@ -11,9 +11,10 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
       <SectionHeading id={RULES_HEADING_ID} mark={<BookIcon />}>
         <Ui {...COPY.topic.rules} />
       </SectionHeading>
-      <div className="flex flex-col gap-4">
+      {/* Rows divided by rules, not a stack of cards (see docs/DESIGN.md). */}
+      <ol>
         {rules.map((rule, index) => (
-          <Card key={rule.heading}>
+          <li key={rule.heading} className="border-b-2 border-ink py-5 first:pt-2 last:border-b-0">
             <h3 className="flex items-baseline gap-2 text-lg leading-tight font-black text-ink">
               <span className="text-sm text-muted tabular-nums">
                 {String(index + 1).padStart(2, '0')}
@@ -27,19 +28,19 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
             )}
             {rule.table && (
               <div
-                className="-mx-1 mt-3 overflow-x-auto"
+                className="mt-3 overflow-x-auto"
                 role="region"
                 aria-label={`${rule.heading} (table)`}
                 tabIndex={0}
               >
-                <table className="w-full border-collapse text-left text-sm">
+                <table className="w-full border-collapse text-left text-sm hyphens-auto">
                   <thead>
                     <tr>
                       {rule.table.head.map((cell, i) => (
                         <th
                           key={i}
                           scope="col"
-                          className="bg-ink px-2 py-1.5 text-xs font-extrabold tracking-wider text-canvas uppercase"
+                          className="bg-ink px-1 py-1.5 text-xs font-extrabold text-canvas uppercase"
                         >
                           {cell}
                         </th>
@@ -51,11 +52,11 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
                       <tr key={r} className="border-b-2 border-ink last:border-0">
                         {row.map((cell, c) =>
                           c === 0 ? (
-                            <th key={c} scope="row" className="px-2 py-1.5 font-extrabold text-ink">
+                            <th key={c} scope="row" className="px-1 py-1.5 font-extrabold text-ink">
                               {cell}
                             </th>
                           ) : (
-                            <td key={c} className="px-2 py-1.5 text-ink">
+                            <td key={c} className="px-1 py-1.5 text-ink">
                               {cell}
                             </td>
                           ),
@@ -78,9 +79,9 @@ export function RuleCards({ rules }: { rules: RuleCard[] }) {
                 ))}
               </ul>
             )}
-          </Card>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }

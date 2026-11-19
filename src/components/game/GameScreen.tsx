@@ -165,7 +165,7 @@ export function GameScreen(props: GameScreenProps) {
   return (
     <div className="flex min-h-dvh flex-col">
       {/* The quiz intro is a focused start screen; every other phase keeps the app header. */}
-      {state.phase !== 'intro' && <AppHeader />}
+      {state.phase !== 'intro' && <AppHeader celebrate={state.phase === 'finished'} />}
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-5 px-4 pt-4 pb-8">
         {state.phase === 'intro' && (
           <GameIntro

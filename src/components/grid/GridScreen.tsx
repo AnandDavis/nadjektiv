@@ -136,7 +136,7 @@ export function GridScreen({
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <AppHeader />
+      <AppHeader celebrate={state.phase !== 'playing'} />
       <main className="mx-auto flex w-full max-w-xl flex-1 flex-col gap-4 px-4 pt-4 pb-8">
         {state.phase === 'playing' ? (
           <>

@@ -40,7 +40,8 @@ export function FoldSection({ id, title, children }: FoldSectionProps) {
           className="shrink-0 rotate-90 text-lg transition-transform group-open:rotate-180"
         />
       </summary>
-      <div className="flex flex-col gap-3 px-1 pt-2 pb-10">{children}</div>
+      {/* Rises in each time it opens (closed content isn't rendered, so it replays). */}
+      <div className="flex flex-col gap-3 px-1 pt-2 pb-10 motion-safe:animate-rise">{children}</div>
     </details>
   );
 }

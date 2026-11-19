@@ -24,13 +24,15 @@ test('wrong answers are collected on the revise page with the answer and why', a
   await page.getByRole('link', { name: /neu auf deiner Wiederholungsliste/ }).click();
 
   await expect(page).toHaveURL(/\/revise$/);
+  // The round's results stay mounted (hidden) behind this page, so count in view only.
+  const main = page.getByRole('main');
   // Sorted by misses rather than grouped, so each card names its topic.
-  await expect(page.locator('p', { hasText: 'Die Artikeltabelle' })).toHaveCount(10 - correct);
+  await expect(main.locator('p', { hasText: 'Die Artikeltabelle' })).toHaveCount(10 - correct);
   // One card per missed question; each shows what was chosen and why.
-  await expect(page.getByText('Deine Wahl')).toHaveCount(10 - correct);
-  await expect(page.getByText('Warum?')).toHaveCount(10 - correct);
+  await expect(main.getByText('Deine Wahl')).toHaveCount(10 - correct);
+  await expect(main.getByText('Warum?')).toHaveCount(10 - correct);
   // Spaced repetition: a miss comes back tomorrow, so nothing is due yet.
-  await expect(page.getByText(/Morgen fällig · noch 3× richtig/)).toHaveCount(10 - correct);
+  await expect(main.getByText(/Morgen fällig · noch 3× richtig/)).toHaveCount(10 - correct);
   await expect(page.getByRole('navigation', { name: 'Main' })).not.toContainText(/\d/);
 
   // After a client-side navigation the <title> streams in with the page metadata.
